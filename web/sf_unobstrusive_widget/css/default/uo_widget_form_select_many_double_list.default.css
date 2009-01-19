@@ -1,0 +1,20 @@
+.uo_widget_form_select_many_double_list_ON {
+  position: absolute;
+  left: -9999px;
+}
+.uo_widget_form_select_many_double_list_container {
+  padding: 0;
+  margin: 0;
+}
+.uo_widget_form_select_many_double_list_container .left,
+.uo_widget_form_select_many_double_list_container .button_container {
+  float: left;
+  display: block;
+}
+.uo_widget_form_select_many_double_list_container .button_container {
+  margin: 0 5px;
+}
+.uo_widget_form_select_many_double_list_container .button_container input {
+  display: block;
+  margin: 5px 0;
+}
