@@ -45,7 +45,7 @@ jquery:
     asm:
       js_files:
         - jquery/uo_widget_form_select_many_asm.jquery.js
-        - jquery/vendor/asmselect.jquery.js
+        - jquery/vendor/asmselect/jquery.asmselect.js
       css_files:
         default:
           - default/uo_widget_form_select_many_asm.default.css

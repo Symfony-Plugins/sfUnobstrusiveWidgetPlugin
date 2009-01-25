@@ -1,7 +1,9 @@
-v 1.0.1 - 2009-01-18
+v 1.1.0 - 2009-01-24
 --------------------
 
  * Francois Béliveau : add documentation
+ * Francois Béliveau : refactoring javascript
+ * Francois Béliveau : fix "multiple" option in sfUoWidgetFormSelect class
 
 v 1.0.0 - 2009-01-18
 --------------------

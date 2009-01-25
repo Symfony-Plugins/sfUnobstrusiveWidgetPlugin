@@ -33,7 +33,7 @@ class sfUoWidgetFormSelectMany extends sfUoWidgetFormSelect
   protected function configure($options = array(), $attributes = array())
   {
     parent::configure($options, $attributes);
-    
+
     $this->setOption('multiple', true);
   }
   

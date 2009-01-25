@@ -50,6 +50,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
    */
   protected function doRender()
   {
+    $attributes = $this->getRenderAttributes();
     if ($this->getOption('multiple'))
     {
       $attributes['multiple'] = 'multiple';
@@ -65,7 +66,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
       $choices = $choices->call();
     }
 
-    return $this->renderContentTag('select', "\n".implode("\n", $this->getOptionsForSelect($this->getRenderValue(), $choices))."\n", array_merge(array('name' => $this->getRenderName()), $this->getRenderAttributes()));
+    return $this->renderContentTag('select', "\n".implode("\n", $this->getOptionsForSelect($this->getRenderValue(), $choices))."\n", array_merge(array('name' => $this->getRenderName()), $attributes));
   }
   
   /**

@@ -1,46 +1,66 @@
 /**
- * Initialize an unobstrusive asm list widget using jQuery.
- * Match all SELECT with "uo_widget_form_select_many_asm" class.
+ * Unobstrusive asm widget using jQuery.
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
 var uo_widget_form_select_many_asm_config = {};
-jQuery('document').ready(function(){
-    $('select.uo_widget_form_select_many_asm').each(function()
+(function($) {
+
+  $.fn.uoWidgetFormSelectManyAsm = function(customConfiguration)
   {
-    if ($(this).hasClass('uo_widget_form_select_many_asm_ON'))
+    // default configuration
+    var configuration = {};
+
+    // merge default and custom configuration
+    $.extend(true, configuration, customConfiguration);
+
+    return this.each(function(index)
     {
-      return $(this);
-    }
-  
-    var params  = {};
-    var id      = $(this).attr('id');
-    if (undefined != uo_widget_form_select_many_asm_config[id])
-    {
-      params = uo_widget_form_select_many_asm_config[id];
-    }
-    
-    // optgroup not working for now ... remove them
-    if ($('optgroup', this).length > 0)
-    {
-      var options = new Array();
-      $('option', this).each(function(){
-        options.push({value: $(this).attr('value'), text: $(this).text()})
-      });
-      
-      var html = '';
-      for (var i=0; i<options.length; i++)
+      var $widget = $(this);
+
+      /**
+       * Initialize widget
+       */
+      function init()
       {
-        html += '<option value="'+options[i].value+'">'+options[i].text+'</option>';
+        // prevent initialize twice
+        if ($widget.hasClass('uo_widget_form_select_many_asm_ON'))
+        {
+          return $widget;
+        }
+
+        // optgroup not working for now ... remove them
+        if ($('optgroup', $widget).length > 0)
+        {
+          $('option', $widget).prependTo($widget);
+          $('optgroup', $widget).remove();
+        }
+
+        $widget.removeClass('uo_widget_form_select_many_asm');
+        $widget.addClass('uo_widget_form_select_many_asm_ON');
+        $widget.asmSelect(getConfiguration());
       }
       
-      $(this).html(html);
-    }
+      /**
+       * Return widget's specific configuration
+       */
+      function getConfiguration()
+      {
+        return uo_widget_form_select_many_asm_config[$widget.attr('id')] || {};
+      }
 
-    $(this).removeClass('uo_widget_form_select_many_asm');
-    $(this).addClass('uo_widget_form_select_many_asm_ON');
+      init();
+    });
 
-    $(this).asmSelect(params);
+  };
 
-  });
+})(jQuery);
+
+/**
+ * Initialize widget.
+ * Match all SELECT with "uo_widget_form_select_many_asm" class.
+ */
+jQuery(document).ready(function()
+{
+  $('select.uo_widget_form_select_many_asm').uoWidgetFormSelectManyAsm({})
 });

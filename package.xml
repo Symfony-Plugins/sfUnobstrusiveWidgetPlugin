@@ -13,8 +13,8 @@
  <date>2009-01-18</date>
  <time>15:00:00</time>
  <version>
-  <release>1.0.0</release>
-  <api>1.0.0</api>
+  <release>1.1.0</release>
+  <api>1.1.0</api>
  </version>
  <stability>
   <release>stable</release>
@@ -258,11 +258,14 @@
           </dir>
           <dir name="vendor">
             <file role="data" name="accessibleUISlider.jQuery.js" />
-            <file role="data" name="asmselect.jquery.js" />
             <file role="data" name="ddsmoothmenu.js" />
             <file role="data" name="jquery.simple.tree.js" />
             <file role="data" name="jquery.treeview.js" />
             <file role="data" name="selso.jquery.js" />
+            <dir name="asmselect">
+              <file role="data" name="jquery.asmselect.js" />
+              <file role="data" name="README.txt" />
+            </dir>
           </dir>
         </dir>
       </dir>
@@ -290,9 +293,27 @@
  <phprelease />
  <changelog>
    <release>
+      <version>
+        <release>1.1.0</release>
+        <api>1.1.0</api>
+      </version>
+      <stability>
+       <release>stable</release>
+       <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2009-01-24</date>
+      <license>MIT</license>
+      <notes>
+        * François Béliveau: add documentation
+        * François Béliveau: refactoring javascript
+        * Francois Béliveau : fix "multiple" option in sfUoWidgetFormSelect class
+      </notes>
+    </release>
+   <release>
      <version>
        <release>1.0.0</release>
-       <api>1.1.0</api>
+       <api>1.0.0</api>
      </version>
      <stability>
       <release>stable</release>
