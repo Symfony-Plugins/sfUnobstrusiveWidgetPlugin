@@ -1,207 +1,280 @@
 /**
- * Initialize an unobstrusive spinner widget using jQuery.
- * Match all SELECT with "uo_widget_form_date_picker" class.
+ * Unobstrusive date picker widget using jQuery.
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
 var uo_widget_form_date_picker_config = {};
-jQuery('document').ready(function(){
-  
-  // default params
-  var defaultParams = {
-    beforeShow:           uo_widget_form_date_read_linked,
-    onSelect:             uo_widget_form_date_update_linked,
-    showOn:               'button',
-    buttonImageOnly:      true,
-    buttonImage:          '/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/calendar.gif',
-    changeFirstDay:       false
-  };
+(function($) {
 
-  $('.uo_widget_form_date_picker').each(function()
+  $.fn.uoWidgetFormDatePicker = function(customConfiguration)
   {
-    if ($(this).hasClass('uo_widget_form_date_picker_ON'))
+    // default configuration
+    var configuration = {
+      showOn:          'button',
+      buttonImageOnly: true,
+      buttonImage:     '/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/calendar.gif',
+      changeFirstDay:  false
+    };
+
+    // merge default and custom configuration
+    $.extend(true, configuration, customConfiguration);
+
+    return this.each(function(index)
     {
-      return $(this);
-    }
-    
-    // settings
-    var params  = defaultParams;
-    var id      = $(this).attr('id');
-    if (undefined != uo_widget_form_date_picker_config[id])
-    {
-      $.extend(params, uo_widget_form_date_picker_config[id]);
-    }
-    
-    // detect if it's a simple or a range widget
-    var selectIds = [];
-    var isRange   = false;
-    selectIds.push(id);
-    if ($(this).attr('name').lastIndexOf('[from]') > 0)
-    {
-      var idLastIndexOfFrom = $(this).attr('id').lastIndexOf('_from');
-      if (idLastIndexOfFrom > 0)
+      var $widget       = $(this);
+      var $rangeWidget  = false;
+      var $baseId       = '';
+      var $baseRangeId  = '';
+      var $widgets      = {};
+      var $rangeWidgets = {};
+
+      /**
+       * Initialize widget
+       */
+      function init()
       {
-        var id = $(this).attr('id').substr(0, idLastIndexOfFrom)+'_to';
-        if ($('#'+id))
+        // prevent initialize twice
+        if ($widget.hasClass('uo_widget_form_date_picker_ON'))
         {
-          isRange = true;
-          selectIds.push(id);
-        }
-      }
-    }
-    if(selectIds.length > 2)
-    {
-      return $(this);
-    }
-
-    $(selectIds).each(function(i){
-      // detect day, month and year controls
-      var id            = selectIds[i];
-      var idLastIndexOf = id.lastIndexOf('_');
-      var idDay         = false;
-      var idMonth       = false;
-      var idYear        = false;
-
-      if (idLastIndexOf > 0)
-      {
-        var baseId = id.substr(0, idLastIndexOf);
-        if ($('#' + baseId + '_day'))
-        {
-          idDay = baseId + '_day';
-        }
-        if ($('#' + baseId + '_month'))
-        {
-          idMonth = baseId + '_month';
-        }
-        if ($('#' + baseId + '_year'))
-        {
-          idYear = baseId + '_year';
-        }
-      }
-
-      if (idDay && idMonth && idYear)
-      {
-        $('#' + id).after('<input type="hidden" id="' + baseId  +'" />');
-        $('#'+idMonth + ', #' + idYear).change(uo_widget_form_date_check_linked_days);
-        if (isRange)
-        {
-          $('#'+idDay + ', #'+idMonth + ', #' + idYear).change(uo_widget_form_date_update);
+          return $widget;
         }
 
-        // add min and max date (from year select)
-        var options = $('#' + idYear).find('option');
-        if (options.length > 0)
+        var id   = $widget.attr('id') || '';
+        $baseId  =  id.substr(0, id.lastIndexOf('_'));
+        $widgets = initWidgets($widget, $baseId);
+        initRange();
+        
+        if ($rangeWidget.length > 0)
         {
-          if (params.minDate == undefined)
+          for (var property in $widgets)
           {
-            if (uo_widget_form_date_picker_config[baseId] == undefined)
-            {
-              uo_widget_form_date_picker_config[baseId] = {};
-            }
-            uo_widget_form_date_picker_config[baseId].minDate = new Date((options.eq(0).attr('value') != '') ? options.eq(0).attr('value') : options.eq(1).attr('value'), 1 - 1, 1);
+            $widgets[property].change(dateUpdate);
           }
           
-          if (params.maxDate == undefined)
+          for (var property in $rangeWidgets)
           {
-            if (uo_widget_form_date_picker_config[baseId] == undefined)
-            {
-              uo_widget_form_date_picker_config[baseId] = {};
-            }
-            uo_widget_form_date_picker_config[baseId].maxDate = new Date(options.eq(options.length - 1).attr('value'), 12 - 1, 31);
+            $rangeWidgets[property].change(dateUpdate);
+          }
+        }
+
+        $widget.removeClass('uo_widget_form_date_picker');
+        $widget.addClass('uo_widget_form_date_picker_ON');
+        $('#' + $baseId).datepicker(getConfiguration());
+
+        if ($rangeWidget)
+        {
+          $rangeWidget.removeClass('uo_widget_form_date_picker');
+          $rangeWidget.addClass('uo_widget_form_date_picker_ON');
+          $('#' + $baseId.replace('_from', '_to')).datepicker(getConfiguration());
+        }
+      }
+
+      /**
+       * Return widget's specific configuration
+       */
+      function getConfiguration()
+      {
+        var result = configuration;
+        var config = uo_widget_form_date_picker_config[$widget.attr('id')] || uo_widget_form_date_picker_config[$baseId] || {};
+
+        if (undefined == config.beforeShow)
+        {
+          config.beforeShow = readLinked;
+        }
+
+        if (undefined == config.onSelect)
+        {
+          config.onSelect = updateLinked;
+        }
+
+        return $.extend(result, config);
+      }
+
+      /**
+       * Initialize range
+       */
+      function initRange()
+      {
+        var id   = $widget.attr('id') || '';
+        var name = $widget.attr('name') || '';
+
+        if (name.lastIndexOf('[from]') > 0)
+        {
+          $rangeWidget = $('#' + id.replace('_from', '_to'));
+          if ($rangeWidget.length < 1)
+          {
+            $rangeWidget = false;
+          }
+          else
+          {
+            $baseRangeId  = $baseId.replace('_from', '_to');
+            $rangeWidgets = initWidgets($rangeWidget, $baseRangeId);
           }
         }
       }
 
-      // change class to "uo_widget_form_date_ON"
-      $(this).removeClass('uo_widget_form_date_picker');
-      $(this).addClass('uo_widget_form_date_picker_ON');
+      /**
+       * Initialize widgets
+       */
+      function initWidgets(elm, baseId)
+      {
+        var result   = {};
+        var id       = elm.attr('id') || '';
+        if (id == baseId)
+        {
+          return result;
+        }
 
-      // create date picker
-      $('#' + baseId).datepicker(params);
+        var day   = $('#' + baseId + '_day');
+        var month = $('#' + baseId + '_month');
+        var year  = $('#' + baseId + '_year');
+
+        if (day.length > 0 && month.length > 0 && year.length > 0)
+        {
+          result.day   = day;
+          result.month = month;
+          result.year  = year;
+
+          elm.after('<input type="hidden" id="' + baseId  +'" />');
+          result.month.change(checkLinkedDays);
+          result.year.change(checkLinkedDays);
+        }
+
+        return result;
+      }
+
+      /**
+       * Prepare to show a date picker linked to 3 controls
+       */
+      function readLinked()
+      {
+        var objects = false;
+        var minDate = null;
+        var maxDate = null;
+        if ($(this).attr('id') == $baseId)
+        {
+          objects = $widgets;
+        }
+        else if ($(this).attr('id') == $baseRangeId)
+        {
+          objects = $rangeWidgets;
+        }
+
+        if (objects)
+        {
+          $(this).val(objects.month.val() + '/' + objects.day.val() + '/' + objects.year.val());
+
+          if ($('option', objects.year).length > 0)
+          {
+            minDate = new Date(($('option:eq(0)', objects.year).attr('value') != '') ? $('option:eq(0)', objects.year).attr('value') : $('option:eq(1)', objects.year).attr('value'), 1 - 1, 1);
+            maxDate = new Date($('option:last', objects.year).attr('value'), 12 - 1, 31);
+          }
+
+          if ($rangeWidget)
+          {
+            if ($(this).attr('id') == $baseRangeId && $('#' + $baseId).datepicker("getDate") != null)
+            {
+              minDate = $('#' + $baseId).datepicker("getDate");
+            }
+            if ($(this).attr('id') == $baseId && $('#' + $baseRangeId).datepicker("getDate") != null)
+            {
+              maxDate = $('#' + $baseRangeId).datepicker("getDate");
+            }
+          }
+        }
+
+        return { minDate: minDate, maxDate: maxDate };
+      }
+
+      /**
+       * Update 3 controls to match a date picker selection
+       */
+      function updateLinked(date)
+      {
+        var objects = false;
+        if ($(this).attr('id') == $baseId)
+        {
+          objects = $widgets;
+        }
+        else if ($(this).attr('id') == $baseRangeId)
+        {
+          objects = $rangeWidgets;
+        }
+
+        if (objects)
+        {
+          objects.month.val(date.substring(0, 2)); 
+          objects.day.val(date.substring(3, 5)); 
+          objects.year.val(date.substring(6, 10));
+        }
+      }
+
+      /**
+       * Update date picker date (for date range)
+       */
+      function dateUpdate()
+      {
+        var id      = $(this).attr('id') || '';
+        var baseId  = id.substr(0, id.lastIndexOf('_'));
+        var objects = false;
+        if (baseId == $baseId)
+        {
+          objects = $widgets;
+        }
+        else if (baseId == $baseRangeId)
+        {
+          objects = $rangeWidgets;
+        }
+
+        $('#'+baseId).val(objects.month.val() + '/' + objects.day.val() + '/' + objects.year.val());
+      }
+
+      /**
+       * Prevent selection of invalid dates through the controls
+       */
+      function checkLinkedDays()
+      { 
+        var id      = $(this).attr('id') || '';
+        var baseId  = id.substr(0, id.lastIndexOf('_'));
+        var objects = false;
+        if (baseId == $baseId)
+        {
+          objects = $widgets;
+        }
+        else if (baseId == $baseRangeId)
+        {
+          objects = $rangeWidgets;
+        }
+
+        var daysInMonth = 32 - new Date(objects.year.val(), objects.month.val() - 1, 32).getDate();
+
+        $('option', objects.day).removeAttr('disabled');
+        var daysInMonthIndex = daysInMonth;
+        if ('' != $('option:first-child', objects.day).val())
+        {
+          daysInMonthIndex--;
+        }
+        $('option:gt(' + daysInMonthIndex + ')', objects.day).attr("disabled", "disabled");
+
+
+        if (objects.day.val() > daysInMonth)
+        { 
+          objects.day.val(daysInMonth); 
+        } 
+      }
+
+      init();
     });
-  });
-});
 
-// Prepare to show a date picker linked to three select controls 
-function uo_widget_form_date_read_linked()
-{
-  var id = $(this).attr('id');
-  $(this).val($('#'+id+'_month').val() + '/' + $('#' + id + '_day').val() + '/' + $('#' + id + '_year').val());
-
-  var id = $(this).attr('id');
-  var idLastIndexOf = id.lastIndexOf('_');
-  var baseId        = id.substr(0, idLastIndexOf);
-  
-  var minDate = null;
-  var maxDate = null;
-  
-  if (uo_widget_form_date_picker_config[id] != undefined)
-  {
-    minDate = uo_widget_form_date_picker_config[id].minDate != undefined ? uo_widget_form_date_picker_config[id].minDate : null;
-    maxDate = uo_widget_form_date_picker_config[id].maxDate != undefined ? uo_widget_form_date_picker_config[id].maxDate : null;
-  }
-  
-  if (idLastIndexOf && $('#' + baseId + '_from') && $('#' + baseId + '_to'))
-  {
-    if (id == baseId + '_to' && $('#' + baseId + '_from').datepicker("getDate") != null)
-    {
-      minDate = $('#' + baseId + '_from').datepicker("getDate");
-    }
-    if (id == baseId + '_from' && $('#' + baseId + '_to').datepicker("getDate") != null)
-    {
-      maxDate = $('#' + baseId + '_to').datepicker("getDate");
-    }
-  }
-  
-  return {
-    minDate: minDate, 
-    maxDate: maxDate
   };
-}
- 
-// Update three select controls to match a date picker selection 
-function uo_widget_form_date_update_linked(date)
+
+})(jQuery);
+
+/**
+ * Initialize widget.
+ * Match all SELECT and INPUT with "uo_widget_form_date_picker" class.
+ */
+jQuery(document).ready(function()
 {
-  var id = $(this).attr('id');
-  $('#'+id+'_month').val(date.substring(0, 2)); 
-  $('#'+id+'_day').val(date.substring(3, 5)); 
-  $('#'+id+'_year').val(date.substring(6, 10)); 
-}
-
-// Update date picker date (for date range)
-function uo_widget_form_date_update()
-{
-  var id = $(this).attr('id');
-  var idLastIndexOf = id.lastIndexOf('_');
-  var baseId        = id.substr(0, idLastIndexOf);
-  $('#'+baseId).val($('#'+baseId+'_month').val() + '/' + $('#'+baseId+'_day').val() + '/' + $('#'+baseId+'_year').val());
-  
-}
- 
-// Prevent selection of invalid dates through the select controls 
-function uo_widget_form_date_check_linked_days()
-{ 
-  var id = $(this).attr('id');
-  var idLastIndexOf = id.lastIndexOf('_');
-  if (!idLastIndexOf)
-  {
-    return false;
-  }
-  
-  var baseId      = id.substr(0, idLastIndexOf);
-  var daysInMonth = 32 - new Date($('#' + baseId + '_year').val(), $('#' + baseId+'_month').val() - 1, 32).getDate();
-
-  $('#' + baseId + '_day option').removeAttr('disabled');
-  var daysInMonthIndex = daysInMonth;
-  if ('' != $('#' + baseId + '_day option:first-child').val())
-  {
-    daysInMonthIndex--;
-  }
-  $('#' + baseId + '_day option:gt(' + daysInMonthIndex + ')').attr("disabled", "disabled");
-   
-
-  if ($('#'+baseId+'_day').val() > daysInMonth)
-  { 
-    $('#'+baseId+'_day').val(daysInMonth); 
-   } 
-}
+  $('select.uo_widget_form_date_picker, :text.uo_widget_form_date_picker').uoWidgetFormDatePicker({})
+});
