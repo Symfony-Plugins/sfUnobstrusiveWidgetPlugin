@@ -1,29 +1,59 @@
 /**
- * Initialize an unobstrusive wym editor widget using jQuery.
- * Match all TEXTAREA with "uo_widget_form_textarea_wym_editor" class.
+ * Unobstrusive wym editor widget using jQuery.
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-
 var uo_widget_form_textarea_wym_editor_config = {};
-jQuery('document').ready(function(){
-  $('textarea.uo_widget_form_textarea_wym_editor').each(function()
+(function($) {
+
+  $.fn.uoWidgetFormTextareaWymEditor = function(customConfiguration)
   {
-    if ($(this).hasClass('uo_widget_form_textarea_wym_editor_ON'))
+    // default configuration
+    var configuration = {};
+
+    // merge default and custom configuration
+    $.extend(true, configuration, customConfiguration);
+
+    return this.each(function(index)
     {
-      return $(this);
-    }
+      var $widget = $(this);
 
-    var params  = {};
-    var id      = $(this).attr('id');
-    if (undefined != uo_widget_form_textarea_wym_editor_config[id])
-    {
-      params = uo_widget_form_textarea_wym_editor_config[id];
-    }
+      /**
+       * Initialize widget
+       */
+      function init()
+      {
+        // prevent initialize twice
+        if ($widget.hasClass('uo_widget_form_textarea_wym_editor_ON'))
+        {
+          return $widget;
+        }
 
-    $(this).removeClass('uo_widget_form_textarea_wym_editor');
-    $(this).addClass('uo_widget_form_textarea_wym_editor_ON');
+        $widget.removeClass('uo_widget_form_textarea_wym_editor');
+        $widget.addClass('uo_widget_form_textarea_wym_editor_ON');
+        $widget.wymeditor(getConfiguration());
+      }
+      
+      /**
+       * Return widget's specific configuration
+       */
+      function getConfiguration()
+      {
+        return uo_widget_form_textarea_wym_editor_config[$widget.attr('id')] || {};
+      }
 
-    $(this).wymeditor(params);
-  });
+      init();
+    });
+
+  };
+
+})(jQuery);
+
+/**
+ * Initialize widget.
+ * Match all TEXTAREA with "uo_widget_form_textarea_wym_editor" class.
+ */
+jQuery(document).ready(function()
+{
+  $('textarea.uo_widget_form_textarea_wym_editor').uoWidgetFormTextareaWymEditor({})
 });
