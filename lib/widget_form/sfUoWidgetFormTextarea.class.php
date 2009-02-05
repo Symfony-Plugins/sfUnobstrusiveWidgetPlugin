@@ -24,7 +24,17 @@ class sfUoWidgetFormTextarea extends sfUoWidget
    */
   protected function doRender()
   {
-    return $this->renderContentTag('textarea', $this->getRenderValue(), array_merge(array('name' => $this->getRenderName()), $this->getRenderAttributes()));
+    $attributes = $this->getRenderAttributes();
+    if (!isset($attributes['rows']))
+    {
+      $attributes['rows'] = 2;
+    }
+    if (!isset($attributes['cols']))
+    {
+      $attributes['cols'] = 2;
+    }
+  
+    return $this->renderContentTag('textarea', $this->getRenderValue(), array_merge(array('name' => $this->getRenderName()), $attributes));
   }
   
   /**
