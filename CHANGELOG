@@ -1,3 +1,10 @@
+v 1.1.1 - 2009-02-05
+--------------------
+
+ * Francois Béliveau : refactoring javascript
+ * Francois Béliveau : add default "rows" and "cols" attribute for textarea widget
+ * Francois Béliveau : add "js_lazy" option
+
 v 1.1.0 - 2009-01-24
 --------------------
 
