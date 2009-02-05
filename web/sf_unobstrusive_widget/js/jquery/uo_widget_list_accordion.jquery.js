@@ -9,7 +9,10 @@ var uo_widget_list_accordion_config = {};
   $.fn.uoWidgetListAccordion = function(customConfiguration)
   {
     // default configuration
-    var configuration = {};
+    var configuration = {
+      active: '.uo_widget_accordion_active',
+      header: '.uo_widget_accordion_title'
+    };
 
     // merge default and custom configuration
     $.extend(true, configuration, customConfiguration);
@@ -50,11 +53,8 @@ var uo_widget_list_accordion_config = {};
        */
       function getConfiguration()
       {
-        var config    = uo_widget_list_accordion_config[$widget.attr('id')] || {};
-        config.active = '.uo_widget_accordion_active';
-        config.header = '.uo_widget_accordion_title';
-        
-        return config;
+        var result    = uo_widget_list_accordion_config[$widget.attr('id')] || {};
+        return $.extend(true, configuration, result);
       }
 
       init();

@@ -39,7 +39,8 @@ var uo_widget_form_input_text_spinner_config = {};
        */
       function getConfiguration()
       {
-        return uo_widget_form_input_text_spinner_config[$widget.attr('id')] || {};
+        var result = uo_widget_form_input_text_spinner_config[$widget.attr('id')] || {};
+        return $.extend(true, configuration, result);
       }
       
       init();

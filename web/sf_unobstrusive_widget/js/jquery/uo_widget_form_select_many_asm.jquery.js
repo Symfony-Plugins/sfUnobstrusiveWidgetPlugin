@@ -46,7 +46,8 @@ var uo_widget_form_select_many_asm_config = {};
        */
       function getConfiguration()
       {
-        return uo_widget_form_select_many_asm_config[$widget.attr('id')] || {};
+        var result = uo_widget_form_select_many_asm_config[$widget.attr('id')] || {};
+        return $.extend(true, configuration, result);
       }
 
       init();

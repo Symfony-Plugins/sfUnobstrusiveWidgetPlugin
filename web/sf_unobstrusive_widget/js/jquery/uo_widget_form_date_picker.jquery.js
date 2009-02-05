@@ -74,20 +74,19 @@ var uo_widget_form_date_picker_config = {};
        */
       function getConfiguration()
       {
-        var result = configuration;
-        var config = uo_widget_form_date_picker_config[$widget.attr('id')] || uo_widget_form_date_picker_config[$baseId] || {};
+        var result = uo_widget_form_date_picker_config[$widget.attr('id')] || uo_widget_form_date_picker_config[$baseId] || {};
 
-        if (undefined == config.beforeShow)
+        if (undefined == result.beforeShow)
         {
-          config.beforeShow = readLinked;
+          result.beforeShow = readLinked;
         }
 
-        if (undefined == config.onSelect)
+        if (undefined == result.onSelect)
         {
-          config.onSelect = updateLinked;
+          result.onSelect = updateLinked;
         }
 
-        return $.extend(result, config);
+        return $.extend(true, configuration, result);
       }
 
       /**
