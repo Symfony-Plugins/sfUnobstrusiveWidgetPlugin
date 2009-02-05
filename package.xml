@@ -10,11 +10,11 @@
     <email>francois.beliveau@my-labz.com</email>
     <active>yes</active>
   </lead>
-  <date>2009-01-18</date>
-  <time>15:00:00</time>
+  <date>2009-02-06</date>
+  <time>00:30:00</time>
   <version>
-    <release>1.1.0</release>
-    <api>1.1.0</api>
+    <release>1.0.2</release>
+    <api>1.0.2</api>
   </version>
   <stability>
     <release>stable</release>
@@ -38,17 +38,17 @@
         <file role="data" name="sfUoWidget.yml" />
       </dir>
 
+      <dir name="doc">
+        <file role="data" name="installation.txt" />
+        <file role="data" name="configuration.txt" />
+        <file role="data" name="extending.txt" />
+      </dir>
+
       <dir name="lib">
 
         <dir name="config">
           <file role="data" name="sfUoAdminMenuConfigHandler.class.php" />
           <file role="data" name="sfUoWidgetConfigHandler.class.php" />
-        </dir>
-     
-        <dir name="doc">
-          <file role="data" name="installation.txt" />
-          <file role="data" name="configuration.txt" />
-          <file role="data" name="extending.txt" />
         </dir>
 
         <dir name="helper">
@@ -291,8 +291,8 @@
   <changelog>
     <release>
       <version>
-        <release>1.1.1</release>
-        <api>1.1.1</api>
+        <release>1.0.2</release>
+        <api>1.0.2</api>
       </version>
       <stability>
         <release>stable</release>
@@ -309,8 +309,8 @@
     </release>
     <release>
       <version>
-        <release>1.1.0</release>
-        <api>1.1.0</api>
+        <release>1.0.1</release>
+        <api>1.0.1</api>
       </version>
       <stability>
         <release>stable</release>
