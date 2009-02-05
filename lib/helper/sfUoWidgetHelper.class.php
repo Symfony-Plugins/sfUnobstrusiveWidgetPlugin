@@ -22,6 +22,13 @@ class sfUoWidgetHelper
     $configManager          = null,
     $adminMenuConfigManager = null;
 
+  /**
+   * Return config manager
+   *
+   * @param  mixte
+   *
+   * @return sfUoWidgetConfigManager
+   */
   static public function getConfigManager($context=null)
   {
     if (is_null(self::$configManager))
@@ -32,6 +39,13 @@ class sfUoWidgetHelper
     return self::$configManager;
   }
 
+  /**
+   * Return Admin menu config manager
+   *
+   * @param  mixte
+   *
+   * @return sfUoAdminMenuConfigManager
+   */
   static public function getAdminMenuConfigManager($context=null)
   {
     if (is_null(self::$adminMenuConfigManager))
@@ -42,21 +56,41 @@ class sfUoWidgetHelper
     return self::$adminMenuConfigManager;
   }
 
+  /**
+   * Return plugin's web path
+   *
+   * @return string
+   */
   static public function getWebPath()
   {
     return sfConfig::get('app_sfUoWidgetPlugin_js_path', '/sf_unobstrusive_widget');
   }
   
+  /**
+   * Return plugin's web js path
+   *
+   * @return string
+   */
   static public function getWebJsPath()
   {
     return self::getWebPath().'/js';
   }
   
+  /**
+   * Return plugin's web css path
+   *
+   * @return string
+   */
   static public function getWebCssPath()
   {
     return self::getWebPath().'/css';
   }
 
+  /**
+   * Add javascripts to response
+   *
+   * @param Array $values
+   */
   static public function addJavascript(Array $values)
   {
     $response = sfContext::getInstance()->getResponse();
@@ -70,6 +104,11 @@ class sfUoWidgetHelper
     }
   }
 
+  /**
+   * Add stylesheets to response
+   *
+   * @param Array $values
+   */
   static public function addStylesheet(Array $values)
   {
     $response = sfContext::getInstance()->getResponse();
@@ -81,5 +120,18 @@ class sfUoWidgetHelper
       }
       $response->addStylesheet($css, 'last', array('media'=>$media));
     }
+  }
+  
+  /**
+   * Return a camelized string with first letter in lowercase
+   *
+   * @param string $value
+   *
+   * @return string
+   */
+  static public function camelizeLcFirst($value)
+  {
+    $result = sfInflector::camelize($value);
+    return strtolower(substr($result, 0, 1)).substr($result, 1);
   }
 }

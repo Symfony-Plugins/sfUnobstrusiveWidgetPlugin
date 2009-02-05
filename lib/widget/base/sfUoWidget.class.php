@@ -18,6 +18,8 @@
  */
 abstract class sfUoWidget extends sfWidgetForm
 {
+  const INIT_TEMPLATE_JQUERY = '$("#%1$s").%2$s({});';
+
   protected
     $renderAttributes = array(),
     $renderName       = '',
@@ -44,6 +46,28 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     $transformer = $this->getOption('js_transformer');
     return !empty($transformer);
+  }
+  
+  /**
+   * Is in "lazy" mode ?
+   *
+   * @return boolean
+   */
+  public function isLazy()
+  {
+    $result = $this->getOption('js_lazy');
+    return is_null($result) ? sfConfig::get('app_sfUoWidgetPlugin_lazy', true) : $result;
+  }
+  
+  /**
+   * Return init template
+   *
+   * @return string
+   */
+  public function getInitTemplate()
+  {
+    $result = $this->getOption('js_init_template');
+    return is_null($result) ? sfConfig::get('app_sfUoWidgetPlugin_init_template', self::INIT_TEMPLATE_JQUERY) : $result;
   }
   
   /**
@@ -383,6 +407,11 @@ abstract class sfUoWidget extends sfWidgetForm
       if (isset($config[$transformer]))
       {
         $result[] = $jsSelector.'_'.$transformer.'_config.'.$id.'={'.implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($config[$transformer]), array_values($config[$transformer]))).'};';
+      }
+      
+      if (!$this->isLazy())
+      {
+        $result[] = sprintf($this->getInitTemplate(), $id, sfUoWidgetHelper::camelizeLcFirst($jsSelector.'_'.$transformer));
       }
     }
     
