@@ -52,7 +52,6 @@ jquery:
     double_list:
       js_files:
         - jquery/uo_widget_form_select_many_double_list.jquery.js
-        - jquery/lib/uo_widget_form_select_many_double_liste.jquery.js
       css_files:
         default:
           - default/uo_widget_form_select_many_double_list.default.css

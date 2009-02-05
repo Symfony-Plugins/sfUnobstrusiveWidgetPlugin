@@ -253,9 +253,6 @@
               <file role="data" name="uo_widget_list_dropdown.jquery.js" />
               <file role="data" name="uo_widget_list_treeview_admin.jquery.js" />
               <file role="data" name="uo_widget_list_treeview.jquery.js" />
-              <dir name="lib">
-                <file role="data" name="uo_widget_form_select_many_double_liste.jquery.js" />
-              </dir>
               <dir name="vendor">
                 <file role="data" name="accessibleUISlider.jQuery.js" />
                 <file role="data" name="ddsmoothmenu.js" />
