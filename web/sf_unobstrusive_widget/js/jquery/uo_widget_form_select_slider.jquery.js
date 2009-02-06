@@ -1,63 +1,98 @@
 /**
- * Initialize an unobstrusive slider widget using jQuery.
- * Match all SELECT with "uo_widget_form_select_slider" class.
+ * Unobstrusive  slider widget using jQuery.
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
 var uo_widget_form_select_slider_config = {};
-jQuery('document').ready(function(){
-  $('.uo_widget_form_select_slider').each(function()
-  {
-    if ($(this).hasClass('uo_widget_form_select_slider_ON'))
-    {
-      return $(this);
-    }
-  
-    // detect if it's a simple or a range slider
-    var selectIds   = [];
-    var id          = $(this).attr('id');
-    var selector    = '';
-    var params      = {};
+(function($) {
 
-    selectIds.push(id);
-    if ($(this).attr('name').lastIndexOf('[from]') > 0)
+  $.fn.uoWidgetFormSelectSlider = function(customConfiguration)
+  {
+    // default configuration
+    var configuration = {};
+
+    // merge default and custom configuration
+    $.extend(true, configuration, customConfiguration);
+
+    return this.each(function(index)
     {
-      var idLastIndexOfFrom = $(this).attr('id').lastIndexOf('_from');
-      if (idLastIndexOfFrom > 0)
+      var $widget       = $(this);
+      var $rangeWidget  = false;
+      var $baseId       = '';
+
+      /**
+       * Initialize widget
+       */
+      function init()
       {
-        var idTo = $(this).attr('id').substr(0, idLastIndexOfFrom)+'_to';
-        if ($('#'+idTo))
+        // prevent initialize twice
+        if ($widget.hasClass('uo_widget_form_select_slider_ON'))
         {
-          selectIds.push(idTo);
+          return $widget;
         }
 
-        $('#'+id).prevAll('span.from:first').hide();
-        $('#'+idTo).prevAll('span.to:first').hide();
+        $widget.removeClass('uo_widget_form_select_slider');
+        $widget.addClass('uo_widget_form_select_slider_ON');
+        
+        var id   = $widget.attr('id') || '';
+        $baseId  =  id.substr(0, id.lastIndexOf('_'));
+        initRange();
+        
+        var selector = '#'+id;
+
+        if ($rangeWidget)
+        {
+          $rangeWidget.removeClass('uo_widget_form_select_slider');
+          $rangeWidget.addClass('uo_widget_form_select_slider_ON');
+          
+          $rangeWidget.prevAll('span.from:first').hide();
+          $rangeWidget.prevAll('span.to:first').hide();
+          
+          selector += ', #'+$rangeWidget.attr('id');
+        }
+        
+        $(selector).accessibleUISlider(getConfiguration());
       }
-    }
-
-    if (selectIds.length > 2)
-    {
-      return $(this);
-    }
-
-    $(selectIds).each(function(i)
-    {
-      if ('' != selector)
+      
+      /**
+       * Return widget's specific configuration
+       */
+      function getConfiguration()
       {
-        selector += ',';
+        var result = uo_widget_form_select_slider_config[$widget.attr('id')] || uo_widget_form_select_slider_config[$baseId] || {};
+        return $.extend(true, configuration, result);
       }
-      selector += '#'+this;
 
-      $('#'+this).removeClass('uo_widget_form_select_slider');
-      $('#'+this).addClass('uo_widget_form_select_slider_ON');
+      /**
+       * Initialize range
+       */
+      function initRange()
+      {
+        var id   = $widget.attr('id') || '';
+        var name = $widget.attr('name') || '';
+
+        if (name.lastIndexOf('[from]') > 0)
+        {
+          $rangeWidget = $('#' + id.replace('_from', '_to'));
+          if ($rangeWidget.length < 1)
+          {
+            $rangeWidget = false;
+          }
+        }
+      }
+
+      init();
     });
 
-    if (undefined != uo_widget_form_select_slider_config[id])
-    {
-      params = uo_widget_form_select_slider_config[id];
-    }
+  };
 
-    $(selector).accessibleUISlider(params);
-  });
+})(jQuery);
+
+/**
+ * Initialize widget.
+ * Match all SELECT with "uo_widget_form_select_slider" class.
+ */
+jQuery(document).ready(function()
+{
+  $('select.uo_widget_form_select_slider').uoWidgetFormSelectSlider({})
 });

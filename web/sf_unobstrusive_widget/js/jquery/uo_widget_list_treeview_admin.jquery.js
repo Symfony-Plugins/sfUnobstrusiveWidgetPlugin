@@ -1,52 +1,83 @@
 /**
- * Initialize an unobstrusive admin treeview widget using jQuery.
- * Match all UL with "uo_widget_list_treeview_admin" class.
+ * Unobstrusive  admin treeview widget using jQuery.
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
 var uo_widget_list_treeview_admin_config = {};
-$(document).ready(function()
-{
-  $('ul.uo_widget_list_treeview_admin').each(function(i)
-  {
-    if ($(this).hasClass('uo_widget_list_treeview_admin_ON'))
-    {
-      return $(this);
-    }
-  
-    var treeview  = $(this);
-    var id        = $(this).attr('id');
-    var config    = {};
-    if (undefined != uo_widget_list_treeview_admin_config[id])
-    {
-      config = uo_widget_list_treeview_admin_config[id];
-    }
+(function($) {
 
-    //create root if not exists
-		if (treeview.find('.root').length < 1)
+  $.fn.uoWidgetListTreeviewAdmin = function(customConfiguration)
+  {
+    // default configuration
+    var configuration = {};
+
+    // merge default and custom configuration
+    $.extend(true, configuration, customConfiguration);
+
+    return this.each(function(index)
     {
-      treeview.before('<ul class="uo_widget_list_treeview_admin_ON"><li class="root">root</li></ul>');
-      treeview = treeview.prev();
-      $(this).appendTo(treeview.find('li:first'));
-    }
-    else
-    {
-      treeview.addClass('uo_widget_list_treeview_admin_ON');
-    }
-    
-    //create span
-    $('li', this).each(function(){
-      
-      var firstchild = this.firstChild;
-      if ('span' != firstchild.nodeName.toLowerCase() )
+      var $widget = $(this);
+
+      /**
+       * Initialize widget
+       */
+      function init()
       {
-        $(firstchild).before('<span></span>');
-        $(firstchild).appendTo(this.firstChild);
+        // prevent initialize twice
+        if ($widget.hasClass('uo_widget_list_treeview_admin_ON'))
+        {
+          return $widget;
+        }
+
+        $widget.removeClass('uo_widget_list_treeview_admin');
+        
+        //create root if not exists
+    		if ($widget.find('.root').length < 1)
+        {
+          $widget.before('<ul class="uo_widget_list_treeview_admin_ON"><li class="root">root</li></ul>');
+          $widget = $widget.prev();
+          $widget.appendTo($widget.find('li:first'));
+        }
+        else
+        {
+          $widget.addClass('uo_widget_list_treeview_admin_ON');
+        }
+        
+        //create span
+        $('li', $widget).each(function()
+        {
+          var firstchild = this.firstChild;
+          if ('span' != firstchild.nodeName.toLowerCase() )
+          {
+            $(firstchild).before('<span></span>');
+            $(firstchild).appendTo(this.firstChild);
+          }
+        });
+        
+        $widget.simpleTree(getConfiguration());
       }
+      
+      /**
+       * Return widget's specific configuration
+       */
+      function getConfiguration()
+      {
+        var result = uo_widget_list_treeview_admin_config[$widget.attr('id')] || {};
+        return $.extend(true, configuration, result);
+      }
+
+      init();
     });
 
-    $(this).removeClass('uo_widget_list_treeview_admin');
+  };
 
-    treeview.simpleTree(config);
-	});
+})(jQuery);
+
+/**
+ * Initialize widget.
+ * Match all UL with "uo_widget_list_treeview_admin" class.
+ */
+jQuery(document).ready(function()
+{
+  $('ul.uo_widget_list_treeview_admin').uoWidgetListTreeviewAdmin({})
 });

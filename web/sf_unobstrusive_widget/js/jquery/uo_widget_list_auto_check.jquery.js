@@ -1,38 +1,71 @@
 /**
- * Initialize an unobstrusive checklist widget using jQuery.
- * Match all UL with "uo_widget_list_auto_check" class.
+ * Unobstrusive checklist widget with auto check capability using jQuery.
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
 var uo_widget_form_list_auto_check_config = {};
-$(document).ready(function()
-{
-  $('ul.uo_widget_form_list_auto_check').each(function(i)
-  {
-    if ($(this).hasClass('uo_widget_form_list_auto_check_ON'))
-    {
-      return $(this);
-    }
-  
-    var id        = $(this).attr('id');
-    var config    = {};
-    if (undefined != uo_widget_form_list_auto_check_config[id])
-    {
-      config = uo_widget_form_list_auto_check_config[id];
-    }
-    
-    $(this).addClass('uo_widget_form_list_auto_check_ON');
-    $(this).removeClass('uo_widget_form_list_auto_check');
+(function($) {
 
-    $(this).find(':checkbox').click(function(){
-      if ($(this).attr('checked'))
+  $.fn.uoWidgetFormListAutoCheck = function(customConfiguration)
+  {
+    // default configuration
+    var configuration = {};
+
+    // merge default and custom configuration
+    $.extend(true, configuration, customConfiguration);
+
+    return this.each(function(index)
+    {
+      var $widget = $(this);
+
+      /**
+       * Initialize widget
+       */
+      function init()
       {
-        $(this).parents('li:first').find(':checkbox').attr('checked', 'checked');
+        // prevent initialize twice
+        if ($widget.hasClass('uo_widget_form_list_auto_check_ON'))
+        {
+          return $widget;
+        }
+
+        $widget.removeClass('uo_widget_form_list_auto_check');
+        $widget.addClass('uo_widget_form_list_auto_check_ON');
+        
+        $widget.find(':checkbox').click(function()
+        {
+          if ($(this).attr('checked'))
+          {
+            $(this).parents('li:first').find(':checkbox').attr('checked', 'checked');
+          }
+          else
+          {
+            $(this).parents('li:first').find(':checkbox').removeAttr('checked');
+          }
+        });
       }
-      else
+      
+      /**
+       * Return widget's specific configuration
+       */
+      function getConfiguration()
       {
-        $(this).parents('li:first').find(':checkbox').removeAttr('checked');
+        var result = uo_widget_form_list_auto_check_config[$widget.attr('id')] || {};
+        return $.extend(true, configuration, result);
       }
+
+      init();
     });
-  });
+
+  };
+
+})(jQuery);
+
+/**
+ * Initialize widget.
+ * Match all UL or OL with "uo_widget_form_list_auto_check" class.
+ */
+jQuery(document).ready(function()
+{
+  $('ul.uo_widget_form_list_auto_check, ol.uo_widget_form_list_auto_check').uoWidgetFormListAutoCheck({})
 });
