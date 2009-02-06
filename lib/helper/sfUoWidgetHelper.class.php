@@ -154,4 +154,25 @@ class sfUoWidgetHelper
       throw $e;
     }
   }
+  
+  /**
+   * Load all JS and CSS from a specific widget
+   */
+  static public function load($adapter, $jsSelector, $jsTransformer, $skin)
+  {
+    try
+    {
+      self::addJavascript(sfUoWidgetHelper::getConfigManager()->getJavascripts($adapter, $jsSelector, $jsTransformer));
+      $stylesheets = sfUoWidgetHelper::getConfigManager()->getStylesheets($adapter, $jsSelector, $jsTransformer, $skin);
+      foreach ($stylesheets as $css)
+      {
+        $results[$css] = 'all';
+      }
+      self::addStylesheet($stylesheets);
+    }
+    catch (Excepion $e)
+    {
+      throw $e;
+    }
+  }
 }
