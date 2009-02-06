@@ -134,4 +134,24 @@ class sfUoWidgetHelper
     $result = sfInflector::camelize($value);
     return strtolower(substr($result, 0, 1)).substr($result, 1);
   }
+  
+  /**
+   * Load all JS and CSS
+   */
+  static public function loadAll($adapter = 'jquery', $skin = 'default', $context=null)
+  {
+    try
+    {
+      self::addJavascript(self::getConfigManager($context)->getAllJavascripts($adapter));
+      $stylesheets = self::getConfigManager($context)->getAllStylesheets($adapter, $skin);
+      foreach ($stylesheets as $css)
+      {
+        self::addStylesheet($css, 'all');
+      }
+    }
+    catch (Exception $e)
+    {
+      throw $e;
+    }
+  }
 }

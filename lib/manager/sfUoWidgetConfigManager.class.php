@@ -219,6 +219,46 @@ class sfUoWidgetConfigManager implements ArrayAccess
       throw $e;
     }
   }
+  
+  /**
+   * Returns all javascripts
+   *
+   * @param  string $adapter The adapter
+   *
+   * @return array
+   */
+  public function getAllJavascripts($adapter = null)
+  {
+    $config = $this->getConfiguration($adapter);
+    return $this->getAllConfig('js_files', $config);
+  }
+  
+  /**
+   * Returns all stylesheets
+   *
+   * @param  string $adapter The adapter
+   * @param  string $skin The skin
+   *
+   * @return array
+   */
+  public function getAllStylesheets($adapter = null, $skin = null)
+  {
+    $config = $this->getConfiguration($adapter);
+    $result = $this->getAllConfig('css_files', $config);
+    
+    if (!is_null($skin))
+    {
+      foreach ($result as $key=>$value)
+      {
+        if ($key != $skin)
+        {
+          unset($result[$key]);
+        }
+      }
+    }
+
+    return $result;
+  }
 
   /**
    * ArrayAccess: isset
@@ -250,5 +290,31 @@ class sfUoWidgetConfigManager implements ArrayAccess
   public function offsetUnset($offset)
   {
     throw new LogicException('Cannot use array access of widget js transformer manager in write mode.');
+  }
+  
+  /**
+   * ArrayAccess: unset
+   */
+  protected function getAllConfig($configName, Array $config, $result = array())
+  {
+    foreach ($config as $key=>$value)
+    {
+      if ($configName == $key)
+      {
+        if (is_array($value))
+        {
+          foreach ($value as $v)
+          {
+            $result[] = $v;
+          }
+        }
+      }
+      else if(is_array($value))
+      {
+        $result = $this->getAllConfig($configName, $value, $result);
+      }
+    }
+    
+    return $result;
   }
 }

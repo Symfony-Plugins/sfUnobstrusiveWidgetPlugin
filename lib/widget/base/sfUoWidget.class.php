@@ -388,7 +388,7 @@ abstract class sfUoWidget extends sfWidgetForm
   protected function getJsConfig($id)
   {
     $config = $this->getOption('js_config');
-    if (empty($config) || empty($id))
+    if ((empty($config) && $this->isLazy()) || empty($id))
     {
       return '';
     }
