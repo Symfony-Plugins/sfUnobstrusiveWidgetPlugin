@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -24,7 +24,7 @@ abstract class sfUoWidget extends sfWidgetForm
     $renderAttributes = array(),
     $renderName       = '',
     $renderValue      = null;
-  
+
   /**
    * Return the JS transformers
    *
@@ -33,10 +33,10 @@ abstract class sfUoWidget extends sfWidgetForm
   public function getJsTransformers()
   {
     $transformer = $this->getOption('js_transformer');
-    
+
     return empty($transformer) ? array() : !is_array($transformer) ? array($transformer) : $transformer;
   }
-  
+
   /**
    * Has JS transformer ?
    *
@@ -47,7 +47,7 @@ abstract class sfUoWidget extends sfWidgetForm
     $transformer = $this->getOption('js_transformer');
     return !empty($transformer);
   }
-  
+
   /**
    * Is in "lazy" mode ?
    *
@@ -57,7 +57,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     return $this->getOption('js_lazy');
   }
-  
+
   /**
    * Return init template
    *
@@ -68,7 +68,7 @@ abstract class sfUoWidget extends sfWidgetForm
     $result = $this->getOption('js_init_template');
     return is_null($result) ? sfConfig::get('app_sfUoWidgetPlugin_init_template', self::INIT_TEMPLATE_JQUERY) : $result;
   }
-  
+
   /**
    * Return the JS skin
    *
@@ -78,8 +78,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     return $this->getOption('js_skin');
   }
-  
-  
+
   /**
    * Return the JS adapter
    *
@@ -89,7 +88,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     return $this->getOption('js_adapter');
   }
-  
+
   /**
    * @param  string $name        The element name
    * @param  string $value       The value displayed in this widget
@@ -104,18 +103,18 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     $attributes['id'] = $this->generateId($name);
     $attributes       = $this->getMergedAttributes($attributes, $this->hasJsTransformer());
-    
+
     $this->setRenderName($name);
     $this->setRenderValue($value);
     $this->setRenderAttributes($attributes);
-    
+
     $config = '';
     if ($this->hasJsTransformer())
     {
       $config = $this->getJsConfig($attributes['id']);
       $this->insertAssets();
     }
-    
+
     return $this->doRender().$config;
   }
 
@@ -135,7 +134,7 @@ abstract class sfUoWidget extends sfWidgetForm
     $manager      = sfUoWidgetHelper::getConfigManager();
     $transformers = $this->getJsTransformers();
     $results      = array();
-    
+
     foreach ($transformers as $transformer)
     {
       $stylesheets = $manager->getStylesheets($this->getJsAdapter(), $this->getJsSelector(), $transformer, $this->getJsSkin());
@@ -160,22 +159,22 @@ abstract class sfUoWidget extends sfWidgetForm
     $manager      = sfUoWidgetHelper::getConfigManager();
     $transformers = $this->getJsTransformers();
     $results      = array();
-    
+
     foreach ($transformers as $transformer)
     {
       $results = array_merge($results, $manager->getJavascripts($this->getJsAdapter(), $this->getJsSelector(), $transformer));
     }
-    
+
     return $results;
   }
-  
+
   /**
    * @return string An HTML tag string
    *
    * @see render()
    */
   abstract protected function doRender();
-  
+
   /**
    * Insert assets to response
    */
@@ -189,11 +188,11 @@ abstract class sfUoWidget extends sfWidgetForm
     {
       throw $e;
     }
-    
+
     sfUoWidgetHelper::addJavascript($this->getJavaScripts());
     sfUoWidgetHelper::addStylesheet($this->getStylesheets());
   }
-  
+
   /**
     * @param  string $value        The name
     *
@@ -203,7 +202,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     $this->renderName = $value;
   }
-  
+
   /**
     * @return string The name
     */
@@ -211,7 +210,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     return $this->renderName;
   }
-  
+
   /**
     * @return string The id
     */
@@ -220,7 +219,7 @@ abstract class sfUoWidget extends sfWidgetForm
     $attributes = $this->getRenderAttributes();
     return array_key_exists('id', $attributes) ? $attributes['id'] : null;
   }
-  
+
   /**
    * @param  mixed $values        The values
    *
@@ -230,7 +229,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     $this->renderAttributes = $values;
   }
-  
+
   /**
    * @param  string $name        The name
    *
@@ -240,7 +239,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     return $this->renderAttributes;
   }
-  
+
   /**
     * @param  mixed $values        The value
     *
@@ -250,7 +249,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     $this->renderValue = $value;
   }
-  
+
   /**
     * @return mixed The value
     */
@@ -294,7 +293,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     return 'uo_widget';
   }
-  
+
   /**
    * Gets the JavaScript class.
    *
@@ -379,7 +378,7 @@ abstract class sfUoWidget extends sfWidgetForm
 
     return $attributes;
   }
-  
+
   /**
    * Gets the JavaScript configuration.
    *
@@ -408,13 +407,13 @@ abstract class sfUoWidget extends sfWidgetForm
       {
         $result[] = $jsSelector.'_'.$transformer.'_config.'.$id.'={'.implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($config[$transformer]), array_values($config[$transformer]))).'};';
       }
-      
+
       if (!$this->isLazy())
       {
         $result[] = sprintf($this->getInitTemplate(), $id, sfUoWidgetHelper::camelizeLcFirst($jsSelector.'_'.$transformer));
       }
     }
-    
+
     return empty($result) ? '' : $this->renderContentTag('script', implode("\n", $result), array('type'=>'text/javascript'));
   }
 
@@ -455,7 +454,7 @@ abstract class sfUoWidget extends sfWidgetForm
       {
         $v = '"'.$v.'"';
       }
-      
+
       $result = (is_null($v) || '' === $v) ? '' : sprintf('"%s":%s', $k, $v);
     }
 

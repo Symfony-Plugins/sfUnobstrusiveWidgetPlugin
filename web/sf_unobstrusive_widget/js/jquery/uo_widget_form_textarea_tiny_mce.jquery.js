@@ -278,6 +278,7 @@ var uo_widget_form_textarea_tiny_mce_config = {};
         +"ul[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
           +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
           +"|onmouseup|style|title|type],"
+        +"embed[type|width|height|src],"
         +"var[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
           +"|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
           +"|title]"
