@@ -68,7 +68,9 @@ var uo_widget_list_drop_line_config = {};
         });
         
         // open active
-        $('a.active', $widget).parents('ul:first').show();
+        $('a.active', $widget)
+          .parents('ul:first').show().end()
+          .parents('li').addClass('active');
       }
       
       /**
