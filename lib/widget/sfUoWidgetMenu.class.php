@@ -31,6 +31,7 @@ class sfUoWidgetMenu extends sfUoWidgetList
     parent::configure($options, $attributes);
     
     $this->addOption('controller', null);
+    $this->addOption('active', null);
   }
   
   /**
@@ -57,8 +58,17 @@ class sfUoWidgetMenu extends sfUoWidgetList
   {
     if (isset($value['label']))
     {
-      $value['label'] = $this->hasUrl($value) ? $this->renderContentTag('a', $value['label'], array('href' => $this->getUrl($value))) : $value['label'];
-      unset($value['url']);
+      if ($this->hasUrl($value))
+      {
+        $options = array('href' => $this->getUrl($value));
+        if ($this->getOption('active') == $this->getUrl($value))
+        {
+          $options['class'] = 'active';
+          $value['label']   = $this->renderContentTag('strong', $value['label'], array());
+        }
+        $value['label'] = $this->renderContentTag('a', $value['label'], $options);
+        unset($value['url']);
+      }
     }
     
     return parent::getItemContent($key, $value);

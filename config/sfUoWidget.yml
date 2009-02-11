@@ -6,13 +6,19 @@ jquery:
       css_files:
         default:
           - default/uo_widget_list_accordion.default.css
-    dropdown:
+    drop_down:
       js_files:
-        - jquery/uo_widget_list_dropdown.jquery.js
+        - jquery/uo_widget_list_drop_down.jquery.js
         - jquery/vendor/ddsmoothmenu.js
       css_files:
         default:
-          - default/uo_widget_list_dropdown.default.css
+          - default/uo_widget_list_drop_down.default.css
+    drop_line:
+      js_files:
+        - jquery/uo_widget_list_drop_line.jquery.js
+      css_files:
+        default:
+          - default/uo_widget_list_drop_line.default.css
     treeview_admin:
       js_files:
         - jquery/uo_widget_list_treeview_admin.jquery.js

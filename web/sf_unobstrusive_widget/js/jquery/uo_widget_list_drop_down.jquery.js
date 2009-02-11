@@ -3,10 +3,10 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_list_dropdown_config = {};
+var uo_widget_list_drop_down_config = {};
 (function($) {
 
-  $.fn.uoWidgetListDropdown = function(customConfiguration)
+  $.fn.uoWidgetListDropDown = function(customConfiguration)
   {
     // default configuration
     var configuration = {};
@@ -25,17 +25,17 @@ var uo_widget_list_dropdown_config = {};
       function init()
       {
         // prevent initialize twice
-        if ($widget.hasClass('uo_widget_list_dropdown_ON'))
+        if ($widget.hasClass('uo_widget_list_drop_down_ON'))
         {
           return $widget;
         }
 
-        $widget.removeClass('uo_widget_list_dropdown');
-        $widget.addClass('uo_widget_list_dropdown_ON');
+        $widget.removeClass('uo_widget_list_drop_down');
+        $widget.addClass('uo_widget_list_drop_down_ON');
         
         //create container
-        var containerId = 'uo_widget_list_dropdown_container_' + $widget.attr('id');
-        $widget.before('<div class="uo_widget_list_dropdown_ON_container" id="'+containerId+'"></div>');
+        var containerId = 'uo_widget_list_drop_down_container_' + $widget.attr('id');
+        $widget.before('<div class="uo_widget_list_drop_down_ON_container" id="'+containerId+'"></div>');
         $container = $widget.prev();
         $widget.appendTo($container);
         
@@ -65,7 +65,7 @@ var uo_widget_list_dropdown_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_list_dropdown_config[$widget.attr('id')] || {};
+        var result = uo_widget_list_drop_down_config[$widget.attr('id')] || {};
         
         //disable shadow on IE6
         var strChUserAgent  = navigator.userAgent;
@@ -92,9 +92,9 @@ var uo_widget_list_dropdown_config = {};
 
 /**
  * Initialize widget.
- * Match all UL with "uo_widget_list_dropdown" class.
+ * Match all UL with "uo_widget_list_drop_down" class.
  */
 jQuery(document).ready(function()
 {
-  $('ul.uo_widget_list_dropdown').uoWidgetListDropdown({})
+  $('ul.uo_widget_list_drop_down').uoWidgetListDropDown({})
 });
