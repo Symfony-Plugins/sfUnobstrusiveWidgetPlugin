@@ -1,5 +1,6 @@
 /**
  * Unobstrusive date picker widget using jQuery.
+ * example : $('select.uo_widget_form_date_picker, :text.uo_widget_form_date_picker').uoWidgetFormDatePicker({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -43,14 +44,14 @@ var uo_widget_form_date_picker_config = {};
         $baseId  =  id.substr(0, id.lastIndexOf('_'));
         $widgets = initWidgets($widget, $baseId);
         initRange();
-        
+
         if ($rangeWidget.length > 0)
         {
           for (var property in $widgets)
           {
             $widgets[property].change(dateUpdate);
           }
-          
+
           for (var property in $rangeWidgets)
           {
             $rangeWidgets[property].change(dateUpdate);
@@ -202,8 +203,8 @@ var uo_widget_form_date_picker_config = {};
 
         if (objects)
         {
-          objects.month.val(date.substring(0, 2)); 
-          objects.day.val(date.substring(3, 5)); 
+          objects.month.val(date.substring(0, 2));
+          objects.day.val(date.substring(3, 5));
           objects.year.val(date.substring(6, 10));
         }
       }
@@ -232,7 +233,7 @@ var uo_widget_form_date_picker_config = {};
        * Prevent selection of invalid dates through the controls
        */
       function checkLinkedDays()
-      { 
+      {
         var id      = $(this).attr('id') || '';
         var baseId  = id.substr(0, id.lastIndexOf('_'));
         var objects = false;
@@ -257,9 +258,9 @@ var uo_widget_form_date_picker_config = {};
 
 
         if (objects.day.val() > daysInMonth)
-        { 
-          objects.day.val(daysInMonth); 
-        } 
+        {
+          objects.day.val(daysInMonth);
+        }
       }
 
       init();
@@ -268,12 +269,3 @@ var uo_widget_form_date_picker_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all SELECT and INPUT with "uo_widget_form_date_picker" class.
- */
-jQuery(document).ready(function()
-{
-  $('select.uo_widget_form_date_picker, :text.uo_widget_form_date_picker').uoWidgetFormDatePicker({})
-});

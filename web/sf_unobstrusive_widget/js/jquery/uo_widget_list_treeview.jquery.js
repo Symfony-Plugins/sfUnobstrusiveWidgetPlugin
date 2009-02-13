@@ -1,5 +1,6 @@
 /**
  * Unobstrusive treeview widget using jQuery.
+ * example : $('ul.uo_widget_list_treeview, ul.uo_widget_form_list_treeview,').uoWidgetFormListTreeview({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -32,10 +33,10 @@ var uo_widget_form_list_treeview_config = {};
 
         $widget.removeClass('uo_widget_list_treeview');
         $widget.addClass('uo_widget_list_treeview_ON');
-        
+
         $widget.treeview(getConfiguration());
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -49,7 +50,7 @@ var uo_widget_form_list_treeview_config = {};
     });
 
   };
-  
+
   $.fn.uoWidgetFormListTreeview = function(customConfiguration)
   {
     // default configuration
@@ -75,10 +76,10 @@ var uo_widget_form_list_treeview_config = {};
 
         $widget.removeClass('uo_widget_form_list_treeview');
         $widget.addClass('uo_widget_form_list_treeview_ON');
-        
+
         $widget.uoWidgetListTreeview(getConfiguration());
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -92,15 +93,5 @@ var uo_widget_form_list_treeview_config = {};
     });
 
   };
-  
-})(jQuery);
 
-/**
- * Initialize widget.
- * Match all UL with "uo_widget_list_treeview" or "uo_widget_form_list_treeview" class.
- */
-jQuery(document).ready(function()
-{
-  $('ul.uo_widget_list_treeview').uoWidgetListTreeview({});
-  $('ul.uo_widget_form_list_treeview,').uoWidgetFormListTreeview({});
-});
+})(jQuery);

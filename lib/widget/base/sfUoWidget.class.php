@@ -387,7 +387,7 @@ abstract class sfUoWidget extends sfWidgetForm
   protected function getJsConfig($id)
   {
     $config = $this->getOption('js_config');
-    if ((empty($config) && $this->isLazy()) || empty($id))
+    if ((empty($config) && !$this->isLazy()) || empty($id))
     {
       return '';
     }
@@ -408,7 +408,7 @@ abstract class sfUoWidget extends sfWidgetForm
         $result[] = $jsSelector.'_'.$transformer.'_config.'.$id.'={'.implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($config[$transformer]), array_values($config[$transformer]))).'};';
       }
 
-      if (!$this->isLazy())
+      if ($this->isLazy())
       {
         $result[] = sprintf($this->getInitTemplate(), $id, sfUoWidgetHelper::camelizeLcFirst($jsSelector.'_'.$transformer));
       }

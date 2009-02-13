@@ -1,5 +1,6 @@
 /**
  * Unobstrusive double list widget using jQuery.
+ * example : $('select.uo_widget_form_select_many_double_list').uoWidgetFormSelectManyDoubleList({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -161,12 +162,3 @@ var uo_widget_form_select_many_double_list_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all SELECT with "uo_widget_form_select_many_double_list" class.
- */
-jQuery(document).ready(function()
-{
-  $('select.uo_widget_form_select_many_double_list').uoWidgetFormSelectManyDoubleList({})
-});

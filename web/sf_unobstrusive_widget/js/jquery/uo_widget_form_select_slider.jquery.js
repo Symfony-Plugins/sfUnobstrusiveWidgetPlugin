@@ -1,5 +1,6 @@
 /**
  * Unobstrusive  slider widget using jQuery.
+ * example : $('select.uo_widget_form_select_slider').uoWidgetFormSelectSlider({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -33,27 +34,27 @@ var uo_widget_form_select_slider_config = {};
 
         $widget.removeClass('uo_widget_form_select_slider');
         $widget.addClass('uo_widget_form_select_slider_ON');
-        
+
         var id   = $widget.attr('id') || '';
         $baseId  =  id.substr(0, id.lastIndexOf('_'));
         initRange();
-        
+
         var selector = '#'+id;
 
         if ($rangeWidget)
         {
           $rangeWidget.removeClass('uo_widget_form_select_slider');
           $rangeWidget.addClass('uo_widget_form_select_slider_ON');
-          
+
           $rangeWidget.prevAll('span.from:first').hide();
           $rangeWidget.prevAll('span.to:first').hide();
-          
+
           selector += ', #'+$rangeWidget.attr('id');
         }
-        
+
         $(selector).accessibleUISlider(getConfiguration());
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -87,12 +88,3 @@ var uo_widget_form_select_slider_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all SELECT with "uo_widget_form_select_slider" class.
- */
-jQuery(document).ready(function()
-{
-  $('select.uo_widget_form_select_slider').uoWidgetFormSelectSlider({})
-});

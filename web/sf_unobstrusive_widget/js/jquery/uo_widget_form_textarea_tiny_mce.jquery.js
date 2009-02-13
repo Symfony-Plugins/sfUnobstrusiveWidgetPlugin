@@ -1,5 +1,6 @@
 /**
  * Unobstrusive tinyMCE widget using jQuery.
+ * example : $('textarea.uo_widget_form_textarea_tiny_mce').uoWidgetFormTextareaTinyMce({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -306,7 +307,7 @@ var uo_widget_form_textarea_tiny_mce_config = {};
           $widget.addClass('uo_widget_form_textarea_tiny_mce_ON');
           tinyMCE.init(getConfiguration());
         }
-        
+
         /**
          * Return widget's specific configuration
          */
@@ -326,13 +327,3 @@ var uo_widget_form_textarea_tiny_mce_config = {};
     };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all TEXTAREA with "uo_widget_form_textarea_tiny_mce" class.
- * Can't use "$('document').ready", so use "window.onload"
- */
-window.onload = function()
-{
-  $('textarea.uo_widget_form_textarea_tiny_mce').uoWidgetFormTextareaTinyMce({});
-};

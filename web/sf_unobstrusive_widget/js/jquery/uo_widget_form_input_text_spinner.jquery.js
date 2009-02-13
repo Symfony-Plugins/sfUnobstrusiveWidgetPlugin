@@ -1,5 +1,6 @@
 /**
  * Unobstrusive spinner widget using jQuery.
+ *example : $(':text.uo_widget_form_input_text_spinner').uoWidgetFormInputTextSpinner({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -33,7 +34,7 @@ var uo_widget_form_input_text_spinner_config = {};
         $widget.addClass('uo_widget_form_input_text_spinner_ON');
         $widget.spinner(getConfiguration());
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -42,19 +43,10 @@ var uo_widget_form_input_text_spinner_config = {};
         var result = uo_widget_form_input_text_spinner_config[$widget.attr('id')] || {};
         return $.extend(true, configuration, result);
       }
-      
+
       init();
     });
 
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all INPUT TEXT with "uo_widget_form_input_type_spinner" class.
- */
-jQuery(document).ready(function()
-{
-  $(':text.uo_widget_form_input_text_spinner').uoWidgetFormInputTextSpinner({})
-});

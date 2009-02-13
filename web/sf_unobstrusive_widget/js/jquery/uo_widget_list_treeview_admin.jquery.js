@@ -1,5 +1,6 @@
 /**
  * Unobstrusive  admin treeview widget using jQuery.
+ * example : $('ul.uo_widget_list_treeview_admin').uoWidgetListTreeviewAdmin({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -30,7 +31,7 @@ var uo_widget_list_treeview_admin_config = {};
         }
 
         $widget.removeClass('uo_widget_list_treeview_admin');
-        
+
         //create root if not exists
     		if ($widget.find('.root').length < 1)
         {
@@ -42,7 +43,7 @@ var uo_widget_list_treeview_admin_config = {};
         {
           $widget.addClass('uo_widget_list_treeview_admin_ON');
         }
-        
+
         //create span
         $('li', $widget).each(function()
         {
@@ -53,10 +54,10 @@ var uo_widget_list_treeview_admin_config = {};
             $(firstchild).appendTo(this.firstChild);
           }
         });
-        
+
         $widget.simpleTree(getConfiguration());
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -72,12 +73,3 @@ var uo_widget_list_treeview_admin_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all UL with "uo_widget_list_treeview_admin" class.
- */
-jQuery(document).ready(function()
-{
-  $('ul.uo_widget_list_treeview_admin').uoWidgetListTreeviewAdmin({})
-});

@@ -1,5 +1,6 @@
 /**
  * Unobstrusive checklist widget with auto check capability using jQuery.
+ * example : $('ul.uo_widget_form_list_auto_check, ol.uo_widget_form_list_auto_check').uoWidgetFormListAutoCheck({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -31,7 +32,7 @@ var uo_widget_form_list_auto_check_config = {};
 
         $widget.removeClass('uo_widget_form_list_auto_check');
         $widget.addClass('uo_widget_form_list_auto_check_ON');
-        
+
         $widget.find(':checkbox').click(function()
         {
           if ($(this).attr('checked'))
@@ -44,7 +45,7 @@ var uo_widget_form_list_auto_check_config = {};
           }
         });
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -60,12 +61,3 @@ var uo_widget_form_list_auto_check_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all UL or OL with "uo_widget_form_list_auto_check" class.
- */
-jQuery(document).ready(function()
-{
-  $('ul.uo_widget_form_list_auto_check, ol.uo_widget_form_list_auto_check').uoWidgetFormListAutoCheck({})
-});

@@ -1,5 +1,6 @@
 /**
  * Unobstrusive wym editor widget using jQuery.
+ * example : $('textarea.uo_widget_form_textarea_wym_editor').uoWidgetFormTextareaWymEditor({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -33,7 +34,7 @@ var uo_widget_form_textarea_wym_editor_config = {};
         $widget.addClass('uo_widget_form_textarea_wym_editor_ON');
         $widget.wymeditor(getConfiguration());
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -49,12 +50,3 @@ var uo_widget_form_textarea_wym_editor_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all TEXTAREA with "uo_widget_form_textarea_wym_editor" class.
- */
-jQuery(document).ready(function()
-{
-  $('textarea.uo_widget_form_textarea_wym_editor').uoWidgetFormTextareaWymEditor({})
-});

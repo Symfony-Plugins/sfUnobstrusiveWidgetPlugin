@@ -1,5 +1,6 @@
 /**
  * Unobstrusive drop down menu widget using jQuery.
+ * example : $('ul.uo_widget_list_drop_down').uoWidgetListDropDown({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -32,16 +33,16 @@ var uo_widget_list_drop_down_config = {};
 
         $widget.removeClass('uo_widget_list_drop_down');
         $widget.addClass('uo_widget_list_drop_down_ON');
-        
+
         //create container
         var containerId = 'uo_widget_list_drop_down_container_' + $widget.attr('id');
         $widget.before('<div class="uo_widget_list_drop_down_ON_container" id="'+containerId+'"></div>');
         $container = $widget.prev();
         $widget.appendTo($container);
-        
+
         //fix float style
         $container.append('<div style="clear:both"></div>');
-        
+
         //create A element
         $('li', $widget).each(function()
         {
@@ -51,22 +52,22 @@ var uo_widget_list_drop_down_config = {};
             $(firstchild).before('<a href="#"></a>');
             $(firstchild).appendTo(this.firstChild);
             $(this.firstChild).click(function()
-            { 
+            {
               return false;
             });
           }
         });
-        
+
         ddsmoothmenu.init(getConfiguration());
       }
-      
+
       /**
        * Return widget's specific configuration
        */
       function getConfiguration()
       {
         var result = uo_widget_list_drop_down_config[$widget.attr('id')] || {};
-        
+
         //disable shadow on IE6
         var strChUserAgent  = navigator.userAgent;
         var intSplitStart   = strChUserAgent.indexOf("(",0);
@@ -76,10 +77,10 @@ var uo_widget_list_drop_down_config = {};
         {
           ddsmoothmenu.shadow = {enabled:false};
         }
-        
+
         result.mainmenuid     = $container.attr('id');
         result.contentsource  = 'markup';
-        
+
         return $.extend(true, configuration, result);
       }
 
@@ -89,12 +90,3 @@ var uo_widget_list_drop_down_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all UL with "uo_widget_list_drop_down" class.
- */
-jQuery(document).ready(function()
-{
-  $('ul.uo_widget_list_drop_down').uoWidgetListDropDown({})
-});

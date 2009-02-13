@@ -1,5 +1,6 @@
 /**
  * Unobstrusive drop line menu widget using jQuery.
+ * example : $('ul.uo_widget_list_drop_line').uoWidgetListDropLine({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -32,16 +33,16 @@ var uo_widget_list_drop_line_config = {};
 
         $widget.removeClass('uo_widget_list_drop_line');
         $widget.addClass('uo_widget_list_drop_line_ON');
-        
+
         //create container
         var containerId = 'uo_widget_list_drop_line_container_' + $widget.attr('id');
         $widget.before('<div class="uo_widget_list_drop_line_ON_container" id="'+containerId+'"></div>');
         $container = $widget.prev();
         $widget.appendTo($container);
-        
+
         //fix float style
         $container.append('<div style="clear:both"></div>');
-        
+
         //create A element
         $('li', $widget).each(function()
         {
@@ -51,14 +52,14 @@ var uo_widget_list_drop_line_config = {};
             $(firstchild).before('<a href="#"></a>');
             $(firstchild).appendTo(this.firstChild);
             $(this.firstChild).click(function()
-            { 
+            {
               return false;
             });
           }
         });
-        
+
         hideAll();
-        
+
         $('li', $widget).each(function()
         {
           if ($(this).parents('ul:first').hasClass('uo_widget_list_drop_line_ON'))
@@ -66,13 +67,13 @@ var uo_widget_list_drop_line_config = {};
             $('a:first', $(this)).click(displaySubLMenu);
           }
         });
-        
+
         // open active
         $('a.active', $widget)
           .parents('ul:first').show().end()
           .parents('li').addClass('active');
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -81,15 +82,15 @@ var uo_widget_list_drop_line_config = {};
         var result = uo_widget_list_drop_line_config[$widget.attr('id')] || {};
         return $.extend(true, configuration, result);
       }
-      
+
       /**
        * Hide all children of menu
        */
       function hideAll()
       {
-        $('li ul', $widget).hide(); 
+        $('li ul', $widget).hide();
       }
-      
+
       /**
        * Display a sub menu
        */
@@ -98,8 +99,8 @@ var uo_widget_list_drop_line_config = {};
         if (this == event.target)
         {
           hideAll();
-          $('ul:first', $(this).parents('li:first')).animate({opacity:'toggle'},'slow'); 
-        } 
+          $('ul:first', $(this).parents('li:first')).animate({opacity:'toggle'},'slow');
+        }
       }
 
       init();
@@ -108,12 +109,3 @@ var uo_widget_list_drop_line_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all UL with "uo_widget_list_drop_line" class.
- */
-jQuery(document).ready(function()
-{
-  $('ul.uo_widget_list_drop_line').uoWidgetListDropLine({})
-});

@@ -1,5 +1,6 @@
 /**
  * Unobstrusive asm widget using jQuery.
+ * example : $('select.uo_widget_form_select_many_asm').uoWidgetFormSelectManyAsm({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -40,7 +41,7 @@ var uo_widget_form_select_many_asm_config = {};
         $widget.addClass('uo_widget_form_select_many_asm_ON');
         $widget.asmSelect(getConfiguration());
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -56,12 +57,3 @@ var uo_widget_form_select_many_asm_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all SELECT with "uo_widget_form_select_many_asm" class.
- */
-jQuery(document).ready(function()
-{
-  $('select.uo_widget_form_select_many_asm').uoWidgetFormSelectManyAsm({})
-});

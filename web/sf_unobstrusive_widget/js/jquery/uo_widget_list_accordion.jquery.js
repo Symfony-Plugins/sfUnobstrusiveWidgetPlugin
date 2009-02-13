@@ -1,5 +1,6 @@
 /**
  * Unobstrusive accordion widget using jQuery.
+ * example : $('ul.uo_widget_list_accordion, ol.uo_widget_list_accordion').uoWidgetListAccordion({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
@@ -47,7 +48,7 @@ var uo_widget_list_accordion_config = {};
         $widget.addClass('uo_widget_list_accordion_ON');
         $widget.accordion(getConfiguration());
       }
-      
+
       /**
        * Return widget's specific configuration
        */
@@ -63,12 +64,3 @@ var uo_widget_list_accordion_config = {};
   };
 
 })(jQuery);
-
-/**
- * Initialize widget.
- * Match all UL or OL with "uo_widget_list_accordion" class.
- */
-jQuery(document).ready(function()
-{
-  $('ul.uo_widget_list_accordion, ol.uo_widget_list_accordion').uoWidgetListAccordion({})
-});
