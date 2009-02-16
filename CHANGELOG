@@ -7,6 +7,7 @@ v 1.0.3 - 2009-02-12
  * Francois Béliveau : remove widget JS initialization in JS files on window.load (to increase performance)
  * Francois Béliveau : add load all JS and CSS methods
  * Francois Béliveau : add embed element to valid elment in tinyMCE default config
+ * Francois Béliveau : fix JS config rendering for renge widget
 
 v 1.0.2 - 2009-02-05
 --------------------

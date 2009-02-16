@@ -37,6 +37,33 @@ class sfUoWidgetFormDate extends sfUoWidget
 
     parent::__construct($options, $attributes);
   }
+  
+  /**
+   * @param  string $name        The element name
+   * @param  string $value       The value displayed in this widget
+   * @param  array  $attributes  An array of HTML attributes to be merged with the default HTML attributes
+   * @param  array  $errors      An array of errors for the field
+   *
+   * @return string An HTML tag string
+   *
+   * @see sfWidget
+   */
+  public function render($name, $value = null, $attributes = array(), $errors = array())
+  {
+    $jsLazy = $this->getOption('js_lazy');
+    $this->setOption('js_lazy', false);
+
+    $result = parent::render($name, $value, $attributes, $errors);
+    $config = '';
+    if ($jsLazy)
+    {
+      $this->setOption('js_lazy', $jsLazy);
+      $config = $this->getJsConfig($this->generateId($name.'['.$this->getLastSelectName().']'));
+      // @todo : fix date range picker
+    }
+
+    return $result.$config;
+  }
     
   /**
    * Configures the current widget.
