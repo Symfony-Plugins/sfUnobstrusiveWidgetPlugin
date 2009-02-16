@@ -10,7 +10,9 @@ var uo_widget_form_select_slider_config = {};
   $.fn.uoWidgetFormSelectSlider = function(customConfiguration)
   {
     // default configuration
-    var configuration = {};
+    var configuration = {
+      width: 450
+    };
 
     // merge default and custom configuration
     $.extend(true, configuration, customConfiguration);

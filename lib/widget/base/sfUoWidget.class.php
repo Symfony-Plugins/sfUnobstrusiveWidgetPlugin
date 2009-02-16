@@ -169,6 +169,44 @@ abstract class sfUoWidget extends sfWidgetForm
   }
 
   /**
+   * Gets the JavaScript configuration.
+   *
+   * @return string A JS configuration
+   */
+  public function getJsConfig($id)
+  {
+    $config = $this->getOption('js_config');
+    if ((empty($config) && !$this->isLazy()) || empty($id))
+    {
+      return '';
+    }
+
+    $jsSelector     = $this->getJsSelector();
+    $jsTransformers = $this->getJsTransformers();
+    $result         = array();
+
+    if (count($jsTransformers) == 1 && !isset($config[$jsTransformers[0]]))
+    {
+      $config = array($jsTransformers[0] => $config);
+    }
+
+    foreach ($this->getJsTransformers() as $transformer)
+    {
+      if (isset($config[$transformer]))
+      {
+        $result[] = $jsSelector.'_'.$transformer.'_config.'.$id.'={'.implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($config[$transformer]), array_values($config[$transformer]))).'};';
+      }
+
+      if ($this->isLazy())
+      {
+        $result[] = sprintf($this->getInitTemplate(), $id, sfUoWidgetHelper::camelizeLcFirst($jsSelector.'_'.$transformer));
+      }
+    }
+
+    return empty($result) ? '' : $this->renderContentTag('script', implode("\n", $result), array('type'=>'text/javascript'));
+  }
+
+  /**
    * @return string An HTML tag string
    *
    * @see render()
@@ -377,44 +415,6 @@ abstract class sfUoWidget extends sfWidgetForm
     }
 
     return $attributes;
-  }
-
-  /**
-   * Gets the JavaScript configuration.
-   *
-   * @return string A JS configuration
-   */
-  protected function getJsConfig($id)
-  {
-    $config = $this->getOption('js_config');
-    if ((empty($config) && !$this->isLazy()) || empty($id))
-    {
-      return '';
-    }
-
-    $jsSelector     = $this->getJsSelector();
-    $jsTransformers = $this->getJsTransformers();
-    $result         = array();
-
-    if (count($jsTransformers) == 1 && !isset($config[$jsTransformers[0]]))
-    {
-      $config = array($jsTransformers[0] => $config);
-    }
-
-    foreach ($this->getJsTransformers() as $transformer)
-    {
-      if (isset($config[$transformer]))
-      {
-        $result[] = $jsSelector.'_'.$transformer.'_config.'.$id.'={'.implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($config[$transformer]), array_values($config[$transformer]))).'};';
-      }
-
-      if ($this->isLazy())
-      {
-        $result[] = sprintf($this->getInitTemplate(), $id, sfUoWidgetHelper::camelizeLcFirst($jsSelector.'_'.$transformer));
-      }
-    }
-
-    return empty($result) ? '' : $this->renderContentTag('script', implode("\n", $result), array('type'=>'text/javascript'));
   }
 
   /**

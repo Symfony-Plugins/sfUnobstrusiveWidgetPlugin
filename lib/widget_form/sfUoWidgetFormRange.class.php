@@ -49,13 +49,34 @@ class sfUoWidgetFormRange extends sfUoWidget
   {
     $name   = $this->getRenderName();
     $value  = $this->getRenderValue();
-    
     $values = array_merge(array('from' => '', 'to' => '', 'is_empty' => ''), is_array($value) ? $value : array());
+    
+    $widgetFrom = $this->getOption('from');
+    $widgetTo   = $this->getOption('to');
+    $jsLazyFrom = $widgetFrom->getOption('js_lazy');
+    $jsLazyTo   = $widgetTo->getOption('js_lazy');
 
-    return strtr($this->getOption('template'), array(
-      '%from%'      => $this->getOption('from')->render($name.'[from]', $value['from']),
-      '%to%'        => $this->getOption('to')->render($name.'[to]', $value['to']),
+    if ($jsLazyFrom || $jsLazyTo)
+    {
+      $widgetFrom->setOption('js_lazy', false);
+      $widgetTo->setOption('js_lazy', false);
+    }
+
+    $result = strtr($this->getOption('template'), array(
+      '%from%'      => $widgetFrom->render($name.'[from]', $value['from']),
+      '%to%'        => $widgetTo->render($name.'[to]', $value['to']),
     ));
+
+    $config = '';
+    if ($jsLazyFrom || $jsLazyTo)
+    {
+      $widgetFrom->setOption('js_lazy', $jsLazyFrom);
+      $widgetTo->setOption('js_lazy', $jsLazyTo);
+      $config .= $widgetFrom->getJsConfig($this->generateId($name.'[from]'));
+      $config .= $widgetTo->getJsConfig($this->generateId($name.'[to]'));
+    }
+
+    return $result.$config;
   }
 
   /**
