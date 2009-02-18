@@ -42,6 +42,7 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
     parent::configure($options, $attributes);
     
     $this->addOption('user', null);
+    $this->addOption('is_super_admin_method', 'isSuperAdmin');
   }
 
   /**
@@ -118,7 +119,10 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
         return false;
       }
 
-      if ($credential)
+      $isSuperAdminMethod = $this->getOption('is_super_admin_method');
+      $isSuperAdmin       = method_exists($this->user, $isSuperAdminMethod) ? $this->user->$isSuperAdminMethod() : false;
+
+      if ($credential && !$isSuperAdmin)
       {
         $response = false;
         foreach ($values as $key => $value)

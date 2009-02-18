@@ -9,6 +9,8 @@ v 1.0.3 - 2009-02-12
  * Francois Béliveau : add embed element to valid elment in tinyMCE default config
  * Francois Béliveau : fix JS config rendering for range widget
  * Francois Béliveau : fix JS config rendering for date picker widget
+ * Francois Béliveau : add "is_super_admin_method" option to sfUoWidgetAdminMenu
+ * Francois Béliveau : is super admin check on credential check in sfUoWidgetAdminMenu
 
 v 1.0.2 - 2009-02-05
 --------------------
