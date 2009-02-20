@@ -56,7 +56,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
       $attributes['multiple'] = 'multiple';
       if ('[]' != substr($this->getRenderName(), -2))
       {
-        $this->setRenderValue($this->getRenderName().'[]');
+        $this->setRenderName($this->getRenderName().'[]');
       }
     }
 
