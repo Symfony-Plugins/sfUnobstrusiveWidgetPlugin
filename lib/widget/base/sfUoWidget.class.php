@@ -313,13 +313,13 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   protected function configure($options = array(), $attributes = array())
   {
+    parent::configure($options, $attributes);
+
     $this->addOption('js_transformer', array());
     $this->addOption('js_config', array());
     $this->addOption('js_adapter', sfConfig::get('app_sfUoWidgetPlugin_adapter', 'jquery'));
     $this->addOption('js_skin', sfConfig::get('app_sfUoWidgetPlugin_skin', 'default'));
     $this->addOption('js_lazy', sfConfig::get('app_sfUoWidgetPlugin_lazy', true));
-
-    parent::configure($options, $attributes);
   }
 
   /**

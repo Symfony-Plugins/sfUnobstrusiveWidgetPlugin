@@ -15,25 +15,19 @@
  * @subpackage sfUnobstrusiveWidgetPlugin
  * @author     François Béliveau
  */
-class sfUoWidgetFormInputText extends sfUoWidget
+class sfUoWidgetFormInputText extends sfUoWidgetFormInput
 {
   /**
-   * @return string An HTML tag string
+   * @param array $options     An array of options
+   * @param array $attributes  An array of default HTML attributes
    *
-   * @see render()
+   * @see sfWidgetFormInput
    */
-  protected function doRender()
+  protected function configure($options = array(), $attributes = array())
   {
-    return $this->renderTag('input', array_merge(array('type' => 'text', 'name' => $this->getRenderName(), 'value' => $this->getRenderValue()), $this->getRenderAttributes()));
-  }
-  
-  /**
-   * Gets the JavaScript selector.
-   *
-   * @return string A JS selector
-   */
-  protected function getJsSelector()
-  {
-    return 'uo_widget_form_input_text';
+    parent::configure($options, $attributes);
+
+    $this->setOption('type', 'text');
+    $this->setOption('needs_multipart', true);
   }
 }
