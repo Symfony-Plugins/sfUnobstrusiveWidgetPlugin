@@ -46,7 +46,6 @@ class sfUoWidgetFormInputFile extends sfUoWidgetFormInput
   protected function doRender()
   {
     $result = parent::doRender();
-
     if ($this->getOption('file_src') && $this->getOption('edit_mode'))
     {
       $delete      = '';
@@ -72,7 +71,7 @@ class sfUoWidgetFormInputFile extends sfUoWidgetFormInput
     {
       if ($this->getOption('is_image'))
       {
-        return $this->renderTag('img', array_merge(array('alt'=>'', 'src' => $this->getOption('file_src'))), $attributes);
+        return $this->renderTag('img', array_merge(array('alt'=>' ', 'src' => $this->getOption('file_src'))), $attributes);
       }
       else
       {
