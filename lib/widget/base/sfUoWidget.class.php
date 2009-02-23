@@ -190,6 +190,7 @@ abstract class sfUoWidget extends sfWidgetForm
       $config = array($jsTransformers[0] => $config);
     }
 
+    $id = $this->getJsId($id);
     foreach ($this->getJsTransformers() as $transformer)
     {
       if (isset($config[$transformer]))
@@ -204,6 +205,16 @@ abstract class sfUoWidget extends sfWidgetForm
     }
 
     return empty($result) ? '' : $this->renderContentTag('script', implode("\n", $result), array('type'=>'text/javascript'));
+  }
+
+  /**
+   * Return JS config id.
+   *
+   * @return string The JS id
+   */
+  public function getJsId($id)
+  {
+    return $id;
   }
 
   /**
