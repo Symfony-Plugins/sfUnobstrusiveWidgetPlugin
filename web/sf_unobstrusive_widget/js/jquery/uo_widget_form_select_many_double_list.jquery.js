@@ -58,6 +58,7 @@ var uo_widget_form_select_many_double_list_config = {};
 
         createContainer();
         createActions();
+        doAdd();
       }
 
       /**

@@ -33,11 +33,12 @@ var uo_widget_list_treeview_admin_config = {};
         $widget.removeClass('uo_widget_list_treeview_admin');
 
         //create root if not exists
-    		if ($widget.find('.root').length < 1)
+        if ($widget.find('.root').length < 1)
         {
+          var $widgetContent = $widget;
           $widget.before('<ul class="uo_widget_list_treeview_admin_ON"><li class="root">root</li></ul>');
-          $widget = $widget.prev();
-          $widget.appendTo($widget.find('li:first'));
+          $widget.appendTo($widget.prev().find('li:first'));
+          $widget = $widget.parents('ul:first');
         }
         else
         {
