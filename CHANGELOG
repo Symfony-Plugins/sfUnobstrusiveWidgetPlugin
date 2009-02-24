@@ -14,6 +14,7 @@ v 1.0.3 - 2009-02-12
  * Francois Béliveau : fix JS double list script selected value on initialization
  * Francois Béliveau : fix JS dom manipulation bug in treeview admin when root not exists
  * Francois Béliveau : fix JS id widgets output to be able to display date range
+ * Francois Béliveau : add file widget with swf upload transformer
 
 v 1.0.2 - 2009-02-05
 --------------------
