@@ -15,7 +15,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       labels: {
         browse: 'browse'
       },
-      upload_url: '/backend_dev.php/swfUpload/upload/boq/59e02db7a9b7feb4fdd5848fd75c6b19',
+      upload_url: false,
       file_post_name: 'upload_file',
 
       // Flash file settings
