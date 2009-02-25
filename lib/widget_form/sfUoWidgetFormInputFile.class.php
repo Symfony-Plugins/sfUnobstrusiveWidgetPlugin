@@ -53,7 +53,7 @@ class sfUoWidgetFormInputFile extends sfUoWidgetFormInput
 
       if ($this->getOption('with_delete'))
       {
-        $deleteName = ']' == substr($name, -1) ? substr($name, 0, -1).'_delete]' : $name.'_delete';
+        $deleteName = ']' == substr($this->getRenderName(), -1) ? substr($this->getRenderName(), 0, -1).'_delete]' : $this->getRenderName().'_delete';
 
         $delete = $this->renderTag('input', array_merge(array('type' => 'checkbox', 'name' => $deleteName), array()));
         $deleteLabel = $this->renderContentTag('label', $this->getOption('delete_label'), array_merge(array('for' => $this->generateId($deleteName))));

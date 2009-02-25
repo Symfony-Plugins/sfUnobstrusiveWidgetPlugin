@@ -50,8 +50,8 @@ jquery:
   uo_widget_form_input_file:
     swf_upload:
       js_files:
-        - ../vendor/swf_upload/fileprogress.js
         - ../vendor/swf_upload/swfupload.js
+        - ../vendor/swf_upload/fileprogress.js
         - jquery/uo_widget_form_input_file_swf_upload.jquery.js
       css_files:
         default:

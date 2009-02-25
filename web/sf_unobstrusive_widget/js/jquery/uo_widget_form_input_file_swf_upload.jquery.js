@@ -15,8 +15,9 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       labels: {
         browse: 'browse'
       },
+      upload_auto: false,
       upload_url: false,
-      file_post_name: 'upload_file',
+      file_post_name: 'swf_upload_file',
 
       // Flash file settings
       file_size_limit: '10240', //10 MB
@@ -33,7 +34,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       flash_url : "/sf_unobstrusive_widget/vendor/swf_upload/swfupload.swf",
 
       // Debug settings
-      debug: true
+      debug: false
     };
 
     // merge default and custom configuration
@@ -72,12 +73,11 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
         if (config.upload_url)
         {
           $widget.after(getHtmlTemplate(config))
-          var newWidget = $widget.next();
+          var newWidget   = $widget.next();
           $widget.remove();
-          $widget = newWidget;
 
-          $widget.parents('form:first').submit(doUpload);
-          $widgetFileName =  $('#'+$widgetId);
+          $widget         = newWidget;
+          $widgetFileName = $('#'+$widgetId);
         
           $swfUpload = new SWFUpload(config);
           uo_widget_form_input_file_swf_upload_count++;
@@ -94,11 +94,12 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       function getConfiguration()
       {
         var result = uo_widget_form_input_file_swf_upload_config[$widgetId] || {};
-        
+        result     = $.extend(true, configuration, result);
+
         // Event handler settings
         result.swfupload_loaded_handler     = swfUploadLoaded,
 				result.file_dialog_start_handler    = fileDialogStart;
-				result.file_queued_handler          = fileQueued;
+				
 				result.file_queue_error_handler     = fileQueueError;
 				result.file_dialog_complete_handler = fileDialogComplete;
 				result.upload_start_handler         = uploadStart;
@@ -115,8 +116,16 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
         result.custom_settings.upload_successful = false;
         
         result.button_placeholder_id  = $widgetId + '_browse';
-        result                        = $.extend(true, configuration, result);
         result.button_text            = '<span>'+result.labels.browse+'</span>';
+        
+        if (result.upload_auto)
+        {
+          result.file_queued_handler = fileQueuedAutoUpload;
+        }
+        else
+        {
+          result.file_queued_handler = fileQueued;
+        }
         
         return result
       }
@@ -141,7 +150,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       }
       
       /**
-       * Do upload, launch on widget's form submit 
+       * Start upload
        */
       function doUpload(e)
       {
@@ -161,6 +170,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       {
       	try
         {
+          $swfUpload.destroy();
           $widget.parents('form:first')
             .unbind('submit', doUpload)
             .submit();
@@ -214,7 +224,16 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
 
       function fileQueued(file)
       {
+        $widget.parents('form:first')
+          .unbind('submit', doUpload)
+          .submit(doUpload);
         $widgetFileName.val(file.name);
+      }
+      
+      function fileQueuedAutoUpload(file)
+      {
+        $widgetFileName.val(file.name);
+        doUpload();
       }
       
       function uploadProgress(file, bytesLoaded, bytesTotal)
@@ -260,7 +279,11 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
         {
       		if (this.customSettings.upload_successful)
           {
-      			uploadDone();
+            var config = getConfiguration();
+            if (!config.upload_auto)
+            {
+              uploadDone();
+            }
       		}
           else
           {
