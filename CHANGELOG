@@ -1,4 +1,4 @@
-v 1.0.3 - 2009-02-12
+v 1.0.3 - 2009-02-26
 --------------------
 
  * Francois Béliveau : change "dropdown" JS transformer name to "drop_down"
@@ -15,6 +15,7 @@ v 1.0.3 - 2009-02-12
  * Francois Béliveau : fix JS dom manipulation bug in treeview admin when root not exists
  * Francois Béliveau : fix JS id widgets output to be able to display date range
  * Francois Béliveau : add file widget with swf upload transformer
+ * Francois Béliveau : fix getJsTransformers function (always return an array)
 
 v 1.0.2 - 2009-02-05
 --------------------
