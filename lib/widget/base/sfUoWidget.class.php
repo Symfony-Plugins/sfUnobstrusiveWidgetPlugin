@@ -33,8 +33,12 @@ abstract class sfUoWidget extends sfWidgetForm
   public function getJsTransformers()
   {
     $transformer = $this->getOption('js_transformer');
+    if (empty($transformer))
+    {
+      $transformer = array();
+    }
 
-    return empty($transformer) ? array() : !is_array($transformer) ? array($transformer) : $transformer;
+    return !is_array($transformer) ? array($transformer) : $transformer;
   }
 
   /**
