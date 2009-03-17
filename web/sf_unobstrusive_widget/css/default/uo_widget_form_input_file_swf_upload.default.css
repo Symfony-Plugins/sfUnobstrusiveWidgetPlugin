@@ -77,18 +77,3 @@
 	text-align: left;
 	white-space: nowrap;
 }
-
-a.progressCancel {
-	font-size: 0;
-	display: block;
-	height: 14px;
-	width: 14px;
-	background-image: url(/sf_unobstrusive_widget/images/default/uo_widget_form_input_file_swf_upload/cancel.gif);
-	background-repeat: no-repeat;
-	background-position: -14px 0px;
-	float: right;
-}
-
-a.progressCancel:hover {
-	background-position: 0px 0px;
-}

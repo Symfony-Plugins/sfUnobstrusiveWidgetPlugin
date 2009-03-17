@@ -15,6 +15,9 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       labels: {
         browse: 'browse'
       },
+      images: {
+        browse: '/sf_unobstrusive_widget/images/default/uo_widget_form_input_file_swf_upload/folder_explore.png'
+      },
       upload_auto: false,
       upload_url: false,
       file_post_name: 'swf_upload_file',
@@ -25,10 +28,10 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       file_types_description: 'All files',
       file_upload_limit: '0',
       file_queue_limit: '1',
-      
+
       // Button Settings
-      button_width: 61,
-      button_height: 22,
+      button_width: 16,
+      button_height: 16,
 
       // Flash Settings
       flash_url : "/sf_unobstrusive_widget/vendor/swf_upload/swfupload.swf",
@@ -78,7 +81,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
 
           $widget         = newWidget;
           $widgetFileName = $('#'+$widgetId);
-        
+
           $swfUpload = new SWFUpload(config);
           uo_widget_form_input_file_swf_upload_count++;
         }
@@ -99,7 +102,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
         // Event handler settings
         result.swfupload_loaded_handler     = swfUploadLoaded,
 				result.file_dialog_start_handler    = fileDialogStart;
-				
+
 				result.file_queue_error_handler     = fileQueueError;
 				result.file_dialog_complete_handler = fileDialogComplete;
 				result.upload_start_handler         = uploadStart;
@@ -107,7 +110,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
 				result.upload_error_handler         = uploadError;
 				result.upload_success_handler       = uploadSuccess;
 				result.upload_complete_handler      = uploadComplete;
-        
+
         if (undefined == result.custom_settings)
         {
           result.custom_settings = {};
@@ -115,9 +118,18 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
         result.custom_settings.progress_target   = $widgetId+'_flash',
         result.custom_settings.upload_successful = false;
         
-        result.button_placeholder_id  = $widgetId + '_browse';
-        result.button_text            = '<span>'+result.labels.browse+'</span>';
-        
+        result.button_window_mode = SWFUpload.WINDOW_MODE.TRANSPARENT;
+
+        result.button_placeholder_id    = $widgetId+'_browse';
+        if (result.images.browse)
+        {
+          result.button_image_url = result.images.browse;
+        }
+        else
+        {
+          result.button_text = result.labels.browse;
+        }
+
         if (result.upload_auto)
         {
           result.file_queued_handler = fileQueuedAutoUpload;
@@ -126,7 +138,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
         {
           result.file_queued_handler = fileQueued;
         }
-        
+
         return result
       }
 
@@ -148,7 +160,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
 
         return $(result);
       }
-      
+
       /**
        * Start upload
        */
@@ -159,10 +171,10 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
           $swfUpload.startUpload();
         }
         catch(ex){}
-        
+
         return false;
       }
-      
+
       /**
        * Called by the queue complete handler to submit the form
        */
@@ -180,7 +192,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       		alert("Error submitting form");
       	}
       }
-      
+
       /**
        * Cancel upload if allready start
        */
@@ -188,7 +200,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       {
       	this.cancelUpload();
       }
-      
+
       /**
        * Handle this error separately because we don't want to create a FileProgress element for it.
        */
@@ -229,19 +241,19 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
           .submit(doUpload);
         $widgetFileName.val(file.name);
       }
-      
+
       function fileQueuedAutoUpload(file)
       {
         $widgetFileName.val(file.name);
         doUpload();
       }
-      
+
       function uploadProgress(file, bytesLoaded, bytesTotal)
       {
         try
         {
           var percent = Math.ceil((bytesLoaded / bytesTotal) * 100);
-          
+
           file.id = "singlefile";	// This makes it so FileProgress only makes a single UI element, instead of one for each file
           var progress = new FileProgress(file, this.customSettings.progress_target);
           progress.setProgress(percent);
@@ -259,7 +271,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       		progress.setComplete();
       		progress.setStatus("Complete.");
       		progress.toggleCancel(false);
-      		
+
       		if (serverData === " ")
           {
       			this.customSettings.upload_successful = false;
@@ -292,7 +304,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       			progress.setError();
       			progress.setStatus("File rejected");
       			progress.toggleCancel(false);
-      			
+
             $widgetFileName.val('');
 
       			alert("There was a problem with the upload.\nThe server did not accept it.");
@@ -310,9 +322,9 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       			// Don't show cancelled error boxes
       			return;
       		}
-		
+
           $widgetFileName.val('');
-		
+
           // Handle this error separately because we don't want to create a FileProgress element for it.
           switch (errorCode)
           {
@@ -368,15 +380,15 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
         }
         catch(ex){}
       }
-      
+
       function swfUploadLoaded()
       {
       }
-      
+
       function fileDialogComplete()
       {
       }
-      
+
       function uploadStart()
       {
       }
