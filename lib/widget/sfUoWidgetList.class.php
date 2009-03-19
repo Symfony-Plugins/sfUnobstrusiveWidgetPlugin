@@ -63,7 +63,7 @@ class sfUoWidgetList extends sfUoWidget
     $itemAttributes = array();
     if ($this->getOption('add_root'))
     {
-      $choices                  = array($this->getOption('root_name')=>$choices);
+      $choices                  = array($this->getOption('root_name') => $choices);
       $itemAttributes['class']  = 'root';
     }
     
@@ -90,11 +90,20 @@ class sfUoWidgetList extends sfUoWidget
    *
    * @return string
    */
-  protected function recursiveRender(Array $choices, $attributes = array(), $parent = false, $root = false)
+  protected function recursiveRender(array $choices, $attributes = array(), $parent = false, $root = false)
   {
     $result = '';
     foreach ($choices as $key => $value)
     {
+      if (is_array($value) && isset($value['label'])) 
+      { 
+        $value['label'] = $this->getI18n($value['label']); 
+      } 
+      elseif (!is_array($value)) 
+      { 
+        $value = $this->getI18n($value); 
+      }
+
       $attributes = array_merge($attributes, (is_array($value) && array_key_exists('attributes', $value)) ? $value['attributes'] : array());
       $result .= $this->renderItem($key, $this->getItemContent($key, $value), $attributes);
     }

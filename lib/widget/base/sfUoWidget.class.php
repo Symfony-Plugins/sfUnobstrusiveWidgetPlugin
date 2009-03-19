@@ -335,6 +335,7 @@ abstract class sfUoWidget extends sfWidgetForm
     $this->addOption('js_adapter', sfConfig::get('app_sfUoWidgetPlugin_adapter', 'jquery'));
     $this->addOption('js_skin', sfConfig::get('app_sfUoWidgetPlugin_skin', 'default'));
     $this->addOption('js_lazy', sfConfig::get('app_sfUoWidgetPlugin_lazy', true));
+    $this->addOption('i18n_catalogue', 'messages');
   }
 
   /**
@@ -474,5 +475,23 @@ abstract class sfUoWidget extends sfWidgetForm
     }
 
     return $result;
+  }
+
+  /** 
+   * Returns the i18n version of the string 
+   * if i18n is activated, or the string itself otherwise 
+   * 
+   * @todo handle placeholders 
+   * @param string $string 
+   * @return string 
+   */ 
+
+  protected function getI18n($string) 
+  { 
+    if (sfConfig::get('sf_i18n')) 
+    { 
+      return sfContext::getInstance()->getI18n()->__($string, array(), $this->getOption('i18n_catalogue')); 
+    } 
+    return $string; 
   }
 }
