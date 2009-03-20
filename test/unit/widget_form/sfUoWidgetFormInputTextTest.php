@@ -4,6 +4,7 @@ $pluginPath = dirname(__FILE__).'/../../..';
 include($pluginPath.'/test/bootstrap.php');
 
 require_once($pluginPath.'/lib/widget/base/sfUoWidget.class.php');
+require_once($pluginPath.'/lib/widget_form/base/sfUoWidgetFormInput.class.php');
 require_once($pluginPath.'/lib/widget_form/sfUoWidgetFormInputText.class.php');
 
 
