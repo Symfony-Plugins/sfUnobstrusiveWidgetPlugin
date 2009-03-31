@@ -28,6 +28,5 @@ class sfUoWidgetFormInputText extends sfUoWidgetFormInput
     parent::configure($options, $attributes);
 
     $this->setOption('type', 'text');
-    $this->setOption('needs_multipart', true);
   }
 }
