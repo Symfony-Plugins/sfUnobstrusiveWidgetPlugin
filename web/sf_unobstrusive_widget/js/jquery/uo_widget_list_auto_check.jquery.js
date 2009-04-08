@@ -37,7 +37,11 @@ var uo_widget_form_list_auto_check_config = {};
         {
           if ($(this).attr('checked'))
           {
-            $(this).parents('li:last').find(':checkbox').attr('checked', 'checked');
+            $(this).parents('li:first').find(':checkbox').attr('checked', 'checked');
+            $(this).parents('li').each(function(index)
+            {
+              $(this).find(':checkbox:first').attr('checked', 'checked');
+            });
           }
           else
           {
