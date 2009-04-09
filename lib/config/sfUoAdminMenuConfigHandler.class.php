@@ -62,7 +62,7 @@ class sfUoAdminMenuConfigHandler extends sfYamlConfigHandler
     $result = true;
     foreach ($config as $key => $value)
     {
-      if (is_array($value))
+      if ('credentials' != $key && is_array($value))
       {
         try
         {
