@@ -447,8 +447,16 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     if (is_array($v))
     {
-      $v      = implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($v), array_values($v)));
-      $result = empty($v) ? '' : sprintf('"%s":{%s}', $k, $v);
+      $v = implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($v), array_values($v)));
+      if (is_integer($k))
+      {
+        $result = empty($v) ? '' : sprintf('{%s}', $v);
+      }
+      else
+      {
+        $template = substr($v, 0, 1) == '{' ? '"%s":[%s]' : '"%s":{%s}';
+        $result   = empty($v) ? '' : sprintf($template, $k, $v);
+      }
     }
     else
     {
