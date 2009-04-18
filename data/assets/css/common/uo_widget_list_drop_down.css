@@ -1,0 +1,88 @@
+.uo_widget_list_drop_down_ON_container {
+  margin: 0;
+  padding-left: 30px;
+  background-color: #414141;
+  font: bold 12px verdana;
+}
+.uo_widget_list_drop_down_ON{
+  margin:0;
+}
+/* IE hack */
+* html .uo_widget_list_drop_down_ON{
+  height: 1%;
+}
+.uo_widget_list_drop_down_ON li {
+  position: relative;
+  display: inline;
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.uo_widget_list_drop_down_ON li a {
+  display: block;
+  background: #414141;
+  color: white;
+  padding: 8px 10px;
+  border-right: 1px solid #778;
+  color: #2d2b2b;
+  text-decoration: none;
+}
+/* IE6 hack to get sub menu links to behave correctly */
+* html .uo_widget_list_drop_down_ON li a { 
+  display: inline-block;
+}
+.uo_widget_list_drop_down_ON li a:link,
+.uo_widget_list_drop_down_ON li a:visited {
+  color: white;
+}
+.uo_widget_list_drop_down_ON li a:hover {
+  background: black;
+  color: white;
+}
+.uo_widget_list_drop_down_ON li ul {
+  position: absolute;
+  left: 0;
+  display: none;
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+  z-index: 500;
+}
+.uo_widget_list_drop_down_ON li ul li {
+  display: list-item;
+  float: none;
+}
+.uo_widget_list_drop_down_ON li ul li ul {
+  top: 0;
+}
+.uo_widget_list_drop_down_ON li ul li a {
+  font: normal 13px Verdana;
+  width: 160px;
+  padding: 5px;
+  margin: 0;
+  border-top-width: 0;
+  border-bottom: 1px solid gray;
+}
+.downarrowclass {
+  position: absolute;
+  top: 12px;
+  right: 7px;
+}
+.rightarrowclass {
+  position: absolute;
+  top: 6px;
+  right: 5px;
+}
+.ddshadow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  background: #DADADA;
+}
+/*shadow opacity. Doesn't work in IE*/
+.toplevelshadow {
+  opacity: 0.7;
+}
