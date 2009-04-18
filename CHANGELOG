@@ -1,0 +1,40 @@
+v 1.0.3 - 2009-03-19
+--------------------
+
+ * Francois Béliveau : change "dropdown" JS transformer name to "drop_down"
+ * Francois Béliveau : add "drop_line" JS transformer for menu
+ * Francois Béliveau : set "js_lazy" property to TRUE by default
+ * Francois Béliveau : remove widget JS initialization in JS files on window.load (to increase performance)
+ * Francois Béliveau : add load all JS and CSS methods
+ * Francois Béliveau : add embed element to valid elment in tinyMCE default config
+ * Francois Béliveau : fix JS config rendering for range widget
+ * Francois Béliveau : fix JS config rendering for date picker widget
+ * Francois Béliveau : add "is_super_admin_method" option to sfUoWidgetAdminMenu
+ * Francois Béliveau : is super admin check on credential check in sfUoWidgetAdminMenu
+ * Francois Béliveau : fix JS double list script selected value on initialization
+ * Francois Béliveau : fix JS dom manipulation bug in treeview admin when root not exists
+ * Francois Béliveau : fix JS id widgets output to be able to display date range
+ * Francois Béliveau : add file widget with swf upload transformer
+ * Francois Béliveau : fix getJsTransformers function (always return an array)
+ * Francois Béliveau : add image by default to qswf uplaod widget flash button
+ * Francois Béliveau : add image by default to qswf uplaod widget flash button
+ * Geoffrey Bachelet : added i18n support for sfUoWidgetList
+
+v 1.0.2 - 2009-02-05
+--------------------
+
+ * Francois Béliveau : refactoring javascript
+ * Francois Béliveau : add default "rows" and "cols" attribute for textarea widget
+ * Francois Béliveau : add "js_lazy" option
+
+v 1.0.1 - 2009-01-24
+--------------------
+
+ * Francois Béliveau : add documentation
+ * Francois Béliveau : refactoring javascript
+ * Francois Béliveau : fix "multiple" option in sfUoWidgetFormSelect class
+
+v 1.0.0 - 2009-01-18
+--------------------
+
+ * Francois Béliveau : first release

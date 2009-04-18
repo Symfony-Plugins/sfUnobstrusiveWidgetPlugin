@@ -1,0 +1,27 @@
+# Configuration
+ 
+## Overview
+ 
+sfUnobstrusiveWidgetPlugin configuration file is a YAML file describing all required JS and CSS file for each available "transformer".
+ 
+## Customize configuration
+ 
+### app.yml
+
+By default, the javascript adapter is sets to "jQuery" to change this, you can set "app_sfUoWidgetPlugin_adapter" into the "app.yml" file.
+By default, the skin is sets to "default" to change this, you can set "app_sfUoWidgetPlugin_skin" into the "app.yml" file.
+By default, the plugin assets web path is sets to "/sf_unobstrusive_widget" to change this, you can set "app_sfUoWidgetPlugin_js_path" into the "app.yml" file.
+
+
+### Modify the main configuration file
+
+You be able to customize the plugin's main configuration file "sfUoWidget.yml" by add a copy in the project or application config dir. Then, you can modify whatever you want :
+
+  * change a css file
+  * change a js file
+  * create a new transformer
+  * define your own widgets configuration
+
+### Configuration convention
+
+In the "sfuoWidget.yml" file, all path are sets in relative by default. You can set the to absolute if you don't want add  the plugin files path to them.

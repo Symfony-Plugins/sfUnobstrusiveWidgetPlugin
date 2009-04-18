@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <import resource="dynamics-jquery-1.3.2-dev.xml" />
+
+  <package name="uo_widget_form_input_text.spinner.jquery">
+    <require>uo_widget.base.jquery</require>
+    <require>jquery.ui.dev.spinner</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_input_text_spinner.jquery</javascript>
+    <stylesheet>css/common/uo_widget_form_input_text_spinner</stylesheet>
+  </package>
+
+  <package name="uo_widget_form_input_text.mask.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_input_text_mask.jquery</javascript>
+    <javascript>js/jquery/vendor/digital_bush/jquery.maskedinput-1.2.2</javascript>
+  </package>
+
+</dynamics>

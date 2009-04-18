@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <import resource="dynamics-jquery-1.3.2.xml" />
+  <package name="uo_widget.base.jquery">
+    <require>jquery.all</require>
+  </package>
+
+  <import resource="dynamics/jquery/uo_widget_list.jquery.xml" />
+  <import resource="dynamics/jquery/uo_widget_form_date.jquery.xml" />
+  <import resource="dynamics/jquery/uo_widget_form_input_text.jquery.xml" />
+  <import resource="dynamics/jquery/uo_widget_form_input_file.jquery.xml" />
+  <import resource="dynamics/jquery/uo_widget_form_select_many.jquery.xml" />
+  <import resource="dynamics/jquery/uo_widget_form_select.jquery.xml" />
+  <import resource="dynamics/jquery/uo_widget_form_textarea.jquery.xml" />
+  <import resource="dynamics/jquery/uo_widget_form_list.jquery.xml" />
+
+</dynamics>

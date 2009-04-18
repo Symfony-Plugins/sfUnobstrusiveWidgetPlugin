@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <package name="uo_widget_form_input_file.swf_upload.jquery">
+    <require>uo_widget.base.jquery</require>
+    <require>swf_upload</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/common/swf_upload/fileprogress</javascript>
+    <javascript>js/jquery/uo_widget_form_input_file_swf_upload.jquery</javascript>
+    <stylesheet>css/common/uo_widget_form_input_file_swf_upload</stylesheet>
+  </package>
+
+</dynamics>

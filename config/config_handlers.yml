@@ -1,0 +1,7 @@
+config/sfUoWidget.yml:
+  class: sfUoWidgetConfigHandler
+  file: %sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/lib/config/sfUoWidgetConfigHandler.class.php
+config/sfUoAdminMenu.yml:
+  class: sfUoAdminMenuConfigHandler
+  file: %sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/lib/config/sfUoAdminMenuConfigHandler.class.php
+

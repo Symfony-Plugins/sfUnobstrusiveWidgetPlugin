@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <package name="swf_upload">
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/vendor/swf_upload</path>
+    <javascript>swfupload</javascript>
+  </package>
+
+  <package name="swf_upload.plugin.swfobject">
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/vendor/swf_upload/plugins</path>
+    <javascript>swfupload.swfobject</javascript>
+  </package>
+
+  <package name="swf_upload.plugin.speed">
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/vendor/swf_upload/plugins</path>
+    <javascript>swfupload.speed</javascript>
+  </package>
+  
+  <package name="swf_upload.plugin.queue">
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/vendor/swf_upload/plugins</path>
+    <javascript>swfupload.queue</javascript>
+  </package>
+  
+  <package name="swf_upload.plugin.cookies">
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/vendor/swf_upload/plugins</path>
+    <javascript>swfupload.cookies</javascript>
+  </package>
+  
+  <package name="swf_upload.plugin.all">
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/vendor/swf_upload/plugins</path>
+    <javascript>swfupload.swfobject</javascript>
+    <javascript>swfupload.speed</javascript>
+    <javascript>swfupload.queue</javascript>
+    <javascript>swfupload.cookies</javascript>
+  </package>
+
+  <package name="swf_upload.all">
+    <require>swf_upload</require>
+    <require>swf_upload.plugin.all</require>
+  </package>
+
+</dynamics>

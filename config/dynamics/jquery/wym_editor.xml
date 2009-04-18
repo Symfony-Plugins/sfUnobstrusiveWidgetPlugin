@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <package name="wym_editor">
+    <require>jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/js/jquery/vendor/wym_editor</path>
+    <javascript>jquery.wymeditor</javascript>
+  </package>
+
+</dynamics>
