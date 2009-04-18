@@ -23,13 +23,13 @@
   font-size: 105%;
   font-weight: bold;
 	cursor: pointer;
-  background: #E6E6E6 url(/sf_unobstrusive_widget/images/default/uo_widget_accordion/right.gif) .5em 50% no-repeat;
+  background: #E6E6E6 url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_accordion/right.gif) .5em 50% no-repeat;
 }
 .uo_widget_list_accordion_ON .uo_widget_accordion_title:hover {
 	background-color: #DADADA;
 }
 .uo_widget_list_accordion_ON .selected .uo_widget_accordion_title {
-	background: #DADADA url(/sf_unobstrusive_widget/images/default/uo_widget_accordion/down.gif) .5em 50% no-repeat;
+	background: #DADADA url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_accordion/down.gif) .5em 50% no-repeat;
   cursor: default;
 }
 .uo_widget_list_accordion_ON .uo_widget_accordion_title a {

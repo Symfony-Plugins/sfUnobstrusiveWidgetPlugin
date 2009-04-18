@@ -35,7 +35,7 @@
 	position: absolute;
 	left: .5em;
 	top: .5em;
-	background: #e6e6e6 url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/button_texture.png) 0 50% repeat-x;
+	background: #e6e6e6 url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/button_texture.png) 0 50% repeat-x;
 }
 .ui-datepicker-prev label, .ui-datepicker-next label {
   display: none;
@@ -44,7 +44,7 @@
 	left: 14.6em;
 }
 .ui-datepicker-next:hover, .ui-datepicker-prev:hover {
-	background: #dadada url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/button_texture_hover.png) 0 50% repeat-x;
+	background: #dadada url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/button_texture_hover.png) 0 50% repeat-x;
 }
 .ui-datepicker-next a, .ui-datepicker-prev a {
 	text-indent: -999999px;
@@ -52,24 +52,24 @@
 	height: 1.2em;
 	display: block;
 	font-size: 1em;
-	background: url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/arrow_left.gif) 50% 50% no-repeat;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/arrow_left.gif) 50% 50% no-repeat;
 	border: 1px solid #d3d3d3;
 	cursor: pointer;
 }
 .ui-datepicker-next a {
-	background: url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/arrow_right.gif) 50% 50% no-repeat;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/arrow_right.gif) 50% 50% no-repeat;
 }
 .ui-datepicker-prev a:hover {
-	background: url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/arrow_left_hover.gif) 50% 50% no-repeat;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/arrow_left_hover.gif) 50% 50% no-repeat;
 }
 .ui-datepicker-next a:hover {
-	background: url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/arrow_right_hover.gif) 50% 50% no-repeat;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/arrow_right_hover.gif) 50% 50% no-repeat;
 }
 .ui-datepicker-prev a:active {
-	background: url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/arrow_left_active.gif) 50% 50% no-repeat;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/arrow_left_active.gif) 50% 50% no-repeat;
 }
 .ui-datepicker-next a:active {
-	background: url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/arrow_right_active.gif) 50% 50% no-repeat;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/arrow_right_active.gif) 50% 50% no-repeat;
 }
 .ui-datepicker-header select {
 	border: 1px solid #d3d3d3;
@@ -98,19 +98,19 @@ table.ui-datepicker td a {
 	padding: .1em .3em .1em 0;
 	display: block;
 	color: #555555;
-	background: #e6e6e6 url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/button_texture.png) 0 50% repeat-x;
+	background: #e6e6e6 url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/button_texture.png) 0 50% repeat-x;
 	cursor: pointer;
 	border: 1px solid #ffffff;
 }
 table.ui-datepicker td a:hover {
 	border: 1px solid #999999;
 	color: #212121;
-	background: #dadada url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/button_texture_hover.png) 0 50% repeat-x;
+	background: #dadada url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/button_texture_hover.png) 0 50% repeat-x;
 }
 table.ui-datepicker td a:active {
 	border: 1px solid #dddddd;
 	color: #222222;
-	background: #ffffff url(/sf_unobstrusive_widget/images/default/uo_widget_form_date_picker/button_texture_active.png) 0 50% repeat-x;
+	background: #ffffff url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_form_date_picker/button_texture_active.png) 0 50% repeat-x;
 }
 table.ui-datepicker .ui-datepicker-title-row td {
 	padding: .3em 0;

@@ -11,7 +11,7 @@
 }
 .uo_widget_list_treeview_ON .hitarea,
 .uo_widget_form_list_treeview_ON .hitarea {
-	background: url(/sf_unobstrusive_widget/images/default/uo_widget_list_treeview/treeview-default.gif) -64px -25px no-repeat;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview/treeview-default.gif) -64px -25px no-repeat;
 	height: 16px;
 	width: 16px;
 	margin-left: -16px;
@@ -38,7 +38,7 @@
 }
 .uo_widget_list_treeview_ON li,
 .uo_widget_form_list_treeview_ON li {
-  background: url(/sf_unobstrusive_widget/images/default/uo_widget_list_treeview/treeview-default-line.gif) 0 0 no-repeat;
+  background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview/treeview-default-line.gif) 0 0 no-repeat;
 }
 .uo_widget_list_treeview_ON li.collapsable,
 .uo_widget_list_treeview_ON li.expandable,
@@ -58,7 +58,7 @@
 .uo_widget_list_treeview_ON li.lastExpandable,
 .uo_widget_form_list_treeview_ON li.lastCollapsable,
 .uo_widget_form_list_treeview_ON li.lastExpandable {
-  background-image: url(/sf_unobstrusive_widget/images/default/uo_widget_list_treeview/treeview-default.gif);
+  background-image: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview/treeview-default.gif);
 }  
 .uo_widget_list_treeview_ON li.lastCollapsable,
 .uo_widget_form_list_treeview_ON li.lastCollapsable {
