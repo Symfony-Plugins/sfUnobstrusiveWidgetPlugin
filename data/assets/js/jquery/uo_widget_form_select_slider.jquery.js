@@ -54,7 +54,7 @@ var uo_widget_form_select_slider_config = {};
           selector += ', #'+$rangeWidget.attr('id');
         }
 
-        $(selector).accessibleUISlider(getConfiguration());
+        $(selector).selectToUISlider(getConfiguration());
       }
 
       /**

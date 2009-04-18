@@ -15,7 +15,7 @@
     <require>uo_widget.base.jquery</require>
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
     <javascript>js/jquery/uo_widget_form_input_text_mask.jquery</javascript>
-    <javascript>js/jquery/vendor/digital_bush/jquery.maskedinput-1.2.2</javascript>
+    <javascript>vendor/jquery/digital_bush/jquery.maskedinput-1.2.2</javascript>
   </package>
 
 </dynamics>

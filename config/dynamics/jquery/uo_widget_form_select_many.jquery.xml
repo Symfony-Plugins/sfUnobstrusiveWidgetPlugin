@@ -5,7 +5,7 @@
     <require>uo_widget.base.jquery</require>
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
     <javascript>js/jquery/uo_widget_form_select_many_asm.jquery</javascript>
-    <javascript>js/jquery/vendor/asm_select/jquery.asmselect</javascript>
+    <javascript>vendor/jquery/asm_select/jquery.asmselect</javascript>
     <stylesheet>css/common/uo_widget_form_select_many_asm</stylesheet>
   </package>
 

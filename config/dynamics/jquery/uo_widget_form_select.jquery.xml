@@ -5,8 +5,8 @@
     <require>uo_widget.base.jquery</require>
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
     <javascript>js/jquery/uo_widget_form_select_slider.jquery</javascript>
-    <javascript>js/jquery/vendor/accessibleUISlider.jQuery</javascript>
-    <stylesheet>css/common/uo_widget_form_select_slider</stylesheet>
+    <javascript>vendor/jquery/filament_group/slider/js/selectToUISlider.jQuery</javascript>
+    <stylesheet>vendor/jquery/filament_group/slider/css/ui.slider.extras</stylesheet>
   </package>
 
 </dynamics>
