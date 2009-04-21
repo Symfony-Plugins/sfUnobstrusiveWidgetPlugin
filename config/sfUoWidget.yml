@@ -70,6 +70,13 @@ jquery:
       css_files:
         default:
           - default/uo_widget_form_select_many_double_list.default.css
+    drop_down_check_list:
+      window_onload: true
+      js_files:
+        - jquery/uo_widget_form_select_many_drop_down_check_list.jquery.js
+      css_files:
+        default:
+          - default/uo_widget_form_select_many_drop_down_check_list.default.css
   uo_widget_form_select:
     slider:
       js_files:

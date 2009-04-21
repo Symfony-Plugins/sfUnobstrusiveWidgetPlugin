@@ -261,6 +261,21 @@ class sfUoWidgetConfigManager implements ArrayAccess
   }
 
   /**
+   * Return true if an adapter's transformer have to be call from window on load, false otherwise
+   *
+   * @param  string $adapter The adapter
+   * @param  string $selector The selector
+   * @param  string $transformer The transformer
+   *
+   * @return boolean
+   */
+  public function haveToSetsInWindowOnLoad($adapter, $selector, $transformer)
+  {
+    $config = $this->getTransformerConfiguration($adapter, $selector, $transformer);
+    return isset($config['window_onload']) ? $config['window_onload'] : false;
+  }
+
+  /**
    * ArrayAccess: isset
    */
   public function offsetExists($offset)
@@ -293,7 +308,7 @@ class sfUoWidgetConfigManager implements ArrayAccess
   }
   
   /**
-   * ArrayAccess: unset
+   * Return all config
    */
   protected function getAllConfig($configName, Array $config, $result = array())
   {
