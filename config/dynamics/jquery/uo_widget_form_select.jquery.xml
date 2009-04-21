@@ -7,6 +7,7 @@
     <javascript>js/jquery/uo_widget_form_select_slider.jquery</javascript>
     <javascript>vendor/jquery/filament_group/slider/js/selectToUISlider.jQuery</javascript>
     <stylesheet>vendor/jquery/filament_group/slider/css/ui.slider.extras</stylesheet>
+    <stylesheet>css/themes/redmond/jquery-ui-1.7.1.custom</stylesheet>
   </package>
 
 </dynamics>

@@ -1,3 +1,10 @@
+v 1.1.0 - 2009-04-30
+--------------------
+
+ * Francois Béliveau : implement sfDynamicsPlugin compatibility (with Romain Dorgueil help)
+ * Francois Béliveau : added "mask" transformer to text input widget
+ * Francois Béliveau : refactoring
+
 v 1.0.3 - 2009-03-19
 --------------------
 
@@ -6,7 +13,7 @@ v 1.0.3 - 2009-03-19
  * Francois Béliveau : set "js_lazy" property to TRUE by default
  * Francois Béliveau : remove widget JS initialization in JS files on window.load (to increase performance)
  * Francois Béliveau : add load all JS and CSS methods
- * Francois Béliveau : add embed element to valid elment in tinyMCE default config
+ * Francois Béliveau : add embed element to valid elements in tinyMCE default config
  * Francois Béliveau : fix JS config rendering for range widget
  * Francois Béliveau : fix JS config rendering for date picker widget
  * Francois Béliveau : add "is_super_admin_method" option to sfUoWidgetAdminMenu
@@ -16,9 +23,12 @@ v 1.0.3 - 2009-03-19
  * Francois Béliveau : fix JS id widgets output to be able to display date range
  * Francois Béliveau : add file widget with swf upload transformer
  * Francois Béliveau : fix getJsTransformers function (always return an array)
- * Francois Béliveau : add image by default to qswf uplaod widget flash button
- * Francois Béliveau : add image by default to qswf uplaod widget flash button
+ * Francois Béliveau : add image by default to swf uplaod widget flash button
  * Geoffrey Bachelet : added i18n support for sfUoWidgetList
+ * Hugo Hamon        : fixed wrong implementation of offsetGet() in config manager
+ * Karim Tache       : added sfUoWidgetFormDoctrineSelect and sfUoWidgetFormDoctrineSelectMany widgets
+ * Francois Béliveau : added drop down check list transformer to select many widget
+ * Francois Béliveau : added window_onload config in yaml
 
 v 1.0.2 - 2009-02-05
 --------------------

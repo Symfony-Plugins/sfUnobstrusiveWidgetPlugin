@@ -48,8 +48,8 @@ var uo_widget_form_select_slider_config = {};
           $rangeWidget.removeClass('uo_widget_form_select_slider');
           $rangeWidget.addClass('uo_widget_form_select_slider_ON');
 
-          $rangeWidget.prevAll('span.from:first').hide();
-          $rangeWidget.prevAll('span.to:first').hide();
+          $rangeWidget.prevAll('span.from:first').addClass('uo_widget_form_select_slider_ON');
+          $rangeWidget.prevAll('span.to:first').addClass('uo_widget_form_select_slider_ON');
 
           selector += ', #'+$rangeWidget.attr('id');
         }

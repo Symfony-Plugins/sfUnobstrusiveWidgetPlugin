@@ -5,7 +5,7 @@
     <require>uo_widget.base.jquery</require>
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
     <javascript>js/jquery/uo_widget_form_date_picker.jquery</javascript>
-    <stylesheet>css/themes/smoothness/jquery-ui-1.7.1.custom</stylesheet>
+    <stylesheet>css/themes/redmond/jquery-ui-1.7.1.custom</stylesheet>
   </package>
 
 </dynamics>

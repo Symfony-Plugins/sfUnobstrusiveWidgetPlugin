@@ -1,5 +1,5 @@
 <?php
-class sfUoWidgetPluginInstallTask extends sfUoWidgetPluginUninstallTask
+class sfUoWidgetPluginPublishTask extends sfUoWidgetPluginUnpublishTask
 {
   /**
    * Configures the task
@@ -9,13 +9,13 @@ class sfUoWidgetPluginInstallTask extends sfUoWidgetPluginUninstallTask
   protected function configure()
   {
     $this->namespace            = 'uo-widget';
-    $this->name                 = 'install';
-    $this->briefDescription     = '"sfUnobstrusiveWidgetPlugin" install task';
+    $this->name                 = 'publish';
+    $this->briefDescription     = '"sfUnobstrusiveWidgetPlugin" publish assets task';
     $this->detailedDescription  = <<<EOF
-Install "sfUnobstrusiveWidgetPlugin" plugin's assets
+Publish "sfUnobstrusiveWidgetPlugin" assets
 
 Examples:
-  [./symfony uo-widget:install]
+  [./symfony uo-widget:publish]
 EOF;
   }
 

@@ -1,5 +1,5 @@
 <?php
-class sfUoWidgetPluginUninstallTask extends sfBaseTask
+class sfUoWidgetPluginUnpublishTask extends sfBaseTask
 {
   protected
     $pluginName = 'sfUnobstrusiveWidgetPlugin',
@@ -15,13 +15,13 @@ class sfUoWidgetPluginUninstallTask extends sfBaseTask
   protected function configure()
   {
     $this->namespace            = 'uo-widget';
-    $this->name                 = 'uninstall';
-    $this->briefDescription     = '"sfUnobstrusiveWidgetPlugin" uninstall task';
+    $this->name                 = 'unpublish';
+    $this->briefDescription     = '"sfUnobstrusiveWidgetPlugin" unpublish assets task';
     $this->detailedDescription  = <<<EOF
-Uninstall "sfUnobstrusiveWidgetPlugin" plugin's assets
+Unpublish "sfUnobstrusiveWidgetPlugin" assets
 
 Examples:
-  [./symfony uo-widget:uninstall]
+  [./symfony uo-widget:unpublish]
 EOF;
   }
 
