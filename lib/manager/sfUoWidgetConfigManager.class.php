@@ -288,7 +288,7 @@ class sfUoWidgetConfigManager implements ArrayAccess
    */
   public function offsetGet($offset)
   {
-    return $this->get($offset);
+    return $this->configuration[$offset];
   }
 
   /**

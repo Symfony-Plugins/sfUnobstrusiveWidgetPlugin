@@ -1,24 +1,27 @@
-v 1.0.3 - 2009-03-19
+v 1.0.3 - 2009-04-22
 --------------------
 
- * Francois Bﾃｩliveau : change "dropdown" JS transformer name to "drop_down"
- * Francois Bﾃｩliveau : add "drop_line" JS transformer for menu
- * Francois Bﾃｩliveau : set "js_lazy" property to TRUE by default
- * Francois Bﾃｩliveau : remove widget JS initialization in JS files on window.load (to increase performance)
- * Francois Bﾃｩliveau : add load all JS and CSS methods
- * Francois Bﾃｩliveau : add embed element to valid elment in tinyMCE default config
- * Francois Bﾃｩliveau : fix JS config rendering for range widget
- * Francois Bﾃｩliveau : fix JS config rendering for date picker widget
- * Francois Bﾃｩliveau : add "is_super_admin_method" option to sfUoWidgetAdminMenu
- * Francois Bﾃｩliveau : is super admin check on credential check in sfUoWidgetAdminMenu
- * Francois Bﾃｩliveau : fix JS double list script selected value on initialization
- * Francois Bﾃｩliveau : fix JS dom manipulation bug in treeview admin when root not exists
- * Francois Bﾃｩliveau : fix JS id widgets output to be able to display date range
- * Francois Bﾃｩliveau : add file widget with swf upload transformer
- * Francois Bﾃｩliveau : fix getJsTransformers function (always return an array)
- * Francois Bﾃｩliveau : add image by default to qswf uplaod widget flash button
- * Francois Bﾃｩliveau : add image by default to qswf uplaod widget flash button
+ * Francois B四iveau : change "dropdown" JS transformer name to "drop_down"
+ * Francois B四iveau : add "drop_line" JS transformer for menu
+ * Francois B四iveau : set "js_lazy" property to TRUE by default
+ * Francois B四iveau : remove widget JS initialization in JS files on window.load (to increase performance)
+ * Francois B四iveau : add load all JS and CSS methods
+ * Francois B四iveau : add embed element to valid elements in tinyMCE default config
+ * Francois B四iveau : fix JS config rendering for range widget
+ * Francois B四iveau : fix JS config rendering for date picker widget
+ * Francois B四iveau : add "is_super_admin_method" option to sfUoWidgetAdminMenu
+ * Francois B四iveau : is super admin check on credential check in sfUoWidgetAdminMenu
+ * Francois B四iveau : fix JS double list script selected value on initialization
+ * Francois B四iveau : fix JS dom manipulation bug in treeview admin when root not exists
+ * Francois B四iveau : fix JS id widgets output to be able to display date range
+ * Francois B四iveau : add file widget with swf upload transformer
+ * Francois B四iveau : fix getJsTransformers function (always return an array)
+ * Francois B四iveau : add image by default to swf uplaod widget flash button
  * Geoffrey Bachelet : added i18n support for sfUoWidgetList
+ * Hugo Hamon        : fixed wrong implementation of offsetGet() in config manager
+ * Karim Tache       : added sfUoWidgetFormDoctrineSelect and sfUoWidgetFormDoctrineSelectMany widgets
+ * Francois B四iveau : added drop down check list transformer to select many widget
+ * Francois B四iveau : added window_onload config in yaml
 
 v 1.0.2 - 2009-02-05
 --------------------
