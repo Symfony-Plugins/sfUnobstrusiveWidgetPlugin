@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+  <name>sfUnobstrusiveWidgetPlugin</name>
+  <channel>pear.symfony-project.com</channel>
+  <summary>The `sfUnobstrusiveWidgetPlugin` packages useful widgets for symfony.</summary>
+  <description>The `sfUnobstrusiveWidgetPlugin` packages useful widgets for symfony.</description>
+  <lead>
+    <name>François Béliveau</name>
+    <user>francois.b</user>
+    <email>francois.beliveau@my-labz.com</email>
+    <active>yes</active>
+  </lead>
+  <developer>
+    <name>Hugo Hamon</name>
+    <user>hugo.hamon</user>
+    <email></email>
+    <active>yes</active>
+  </developer>
+  <developer>
+    <name>Karim Tache</name>
+    <user>karim</user>
+    <email></email>
+    <active>yes</active>
+  </developer>
+  <developer>
+    <name>Geoffrey Bachelet</name>
+    <user>geoffrey.bachelet</user>
+    <email></email>
+    <active>yes</active>
+  </developer>
+  <developer>
+    <name>Romain Dorgueil</name>
+    <user>romain.dorgueil</user>
+    <email></email>
+    <active>yes</active>
+  </developer>
+  <date>##CURRENT_DATE##</date>
+  <version>
+    <release>1.0.3</release>
+    <api>1.0.3</api>
+  </version>
+  <stability>
+    <release>stable</release>
+    <api>stable</api>
+ </stability>
+  <license uri="http://www.symfony-project.org/license">MIT license</license>
+  <notes>-</notes>
+  <contents>
+    ##CONTENTS##
+  </contents>
+  <dependencies>
+    <required>
+      <php>
+        <min>5.1.0</min>
+      </php>
+      <pearinstaller>
+        <min>1.4.1</min>
+      </pearinstaller>
+      <package>
+        <name>symfony</name>
+        <channel>pear.symfony-project.com</channel>
+        <min>1.1.0</min>
+        <max>1.3.0</max>
+        <exclude>1.3.0</exclude>
+      </package>
+    </required>
+  </dependencies>
+  <phprelease></phprelease>
+  <changelog>
+    <release>
+      <version>
+        <release>1.1.0</release>
+        <api>1.1.0</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2009-04-30</date>
+      <license>MIT</license>
+      <notes>
+        * Romain Dorgueil   : implement sfDynamicsPlugin compatibility (beta)
+        * Francois Béliveau : implement sfDynamicsPlugin compatibility
+        * Francois Béliveau : added "mask" transformer to text input widget
+        * Francois Béliveau : refactoring
+        * Francois Béliveau : removed install task end create publish and unpublish task
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>1.0.3</release>
+        <api>1.0.3</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2009-04-22</date>
+      <license>MIT</license>
+      <notes>
+        * François Béliveau : change "dropdown" JS transformer name to "drop_down"
+        * François Béliveau : add "drop_line" JS transformer for menu
+        * François Béliveau : set "js_lazy" property to TRUE by default
+        * François Béliveau : remove widget JS initialization in JS files on window.load (to increase performance)
+        * François Béliveau : add load all JS and CSS methods
+        * François Béliveau : add embed element to valid elements in tinyMCE default config
+        * François Béliveau : fix JS config rendering for range widget
+        * François Béliveau : fix JS config rendering for date picker widget
+        * François Béliveau : add "is_super_admin_method" option to sfUoWidgetAdminMenu
+        * François Béliveau : is super admin check on credential check in sfUoWidgetAdminMenu
+        * François Béliveau : fix JS double list script selected value on initialization
+        * François Béliveau : fix JS dom manipulation bug in treeview admin when root not exists
+        * François Béliveau : fix JS id widgets output to be able to display date range
+        * François Béliveau : add file widget with swf upload transformer
+        * François Béliveau : fix getJsTransformers function (always return an array)
+        * François Béliveau : add image by default to swf uplaod widget flash button
+        * Geoffrey Bachelet : added i18n support for sfUoWidgetList
+        * Hugo Hamon        : fixed wrong implementation of offsetGet() in config manager
+        * Karim Tache       : added sfUoWidgetFormDoctrineSelect and sfUoWidgetFormDoctrineSelectMany widgets
+        * François Béliveau : added drop down check list transformer to select many widget
+        * François Béliveau : added window_onload config in yaml
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>1.0.2</release>
+        <api>1.0.2</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2009-02-05</date>
+      <license>MIT</license>
+      <notes>
+        * Francois Béliveau : refactoring javascript
+        * Francois Béliveau : add default "rows" and "cols" attribute for textarea widget
+        * Francois Béliveau : add "js_lazy" option
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>1.0.1</release>
+        <api>1.0.1</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2009-01-24</date>
+      <license>MIT</license>
+      <notes>
+        * François Béliveau : add documentation
+        * François Béliveau : refactoring javascript
+        * Francois Béliveau : fix "multiple" option in sfUoWidgetFormSelect class
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>1.0.0</release>
+        <api>1.0.0</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2009-01-18</date>
+      <license>MIT</license>
+      <notes>
+        * François Béliveau : first release
+      </notes>
+    </release>
+  </changelog>
+</package>

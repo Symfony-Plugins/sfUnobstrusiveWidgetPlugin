@@ -1,7 +1,8 @@
 v 1.1.0 - 2009-04-30
 --------------------
 
- * Francois Béliveau : implement sfDynamicsPlugin compatibility (with Romain Dorgueil help)
+ * Romain Dorgueil   : implement sfDynamicsPlugin compatibility (beta)
+ * Francois Béliveau : implement sfDynamicsPlugin compatibility
  * Francois Béliveau : added "mask" transformer to text input widget
  * Francois Béliveau : refactoring
  * Francois Béliveau : removed install task end create publish and unpublish task

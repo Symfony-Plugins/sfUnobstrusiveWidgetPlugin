@@ -9,7 +9,7 @@ Installation
 
   * Install the plugin
 
-        $ symfony plugin:install sfUnobstrusiveWidgetPlugin
+        $ symfony uo-widget:publish
 
   * Clear the cache
 
@@ -64,5 +64,5 @@ Form propel widgets
 
 
 As no third party libraries is bundled in the plugin, you need to install and load the required
-dependencies like JQuery, JQuery UI, or TinyMCE by yourself.
+dependencies like JQuery or JQuery UI by yourself.
 
