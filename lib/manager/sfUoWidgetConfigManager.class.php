@@ -170,7 +170,7 @@ class sfUoWidgetConfigManager implements ArrayAccess
    *
    * @return array
    */
-  public function getCompatibilties($adapter, $selector, $transformer)
+  public function getCompatibilities($adapter, $selector, $transformer)
   {
     try
     {
@@ -201,7 +201,7 @@ class sfUoWidgetConfigManager implements ArrayAccess
     {
       foreach ($transformers as $transformer)
       {
-        $compatibilities = $this->getCompatibilties($adapter, $selector, $transformer);
+        $compatibilities = $this->getCompatibilities($adapter, $selector, $transformer);
         foreach ($transformers as $jsTransformer)
         {
           if ($transformer != $jsTransformer)
@@ -258,6 +258,21 @@ class sfUoWidgetConfigManager implements ArrayAccess
     }
 
     return $result;
+  }
+
+  /**
+   * Return true if an adapter's transformer have to be call from window on load, false otherwise
+   *
+   * @param  string $adapter The adapter
+   * @param  string $selector The selector
+   * @param  string $transformer The transformer
+   *
+   * @return boolean
+   */
+  public function haveToSetsInWindowOnLoad($adapter, $selector, $transformer)
+  {
+    $config = $this->getTransformerConfiguration($adapter, $selector, $transformer);
+    return isset($config['window_onload']) ? $config['window_onload'] : false;
   }
 
   /**

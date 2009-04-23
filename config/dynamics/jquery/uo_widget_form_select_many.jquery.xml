@@ -16,4 +16,11 @@
     <stylesheet>css/common/uo_widget_form_select_many_double_list</stylesheet>
   </package>
 
+  <package name="uo_widget_form_select_many.drop_down_check_list.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_select_many_drop_down_check_list.jquery</javascript>
+    <stylesheet>css/common/uo_widget_form_select_many_drop_down_check_list</stylesheet>
+  </package>
+
 </dynamics>

@@ -18,7 +18,8 @@
  */
 abstract class sfUoWidget extends sfWidgetForm
 {
-  const INIT_TEMPLATE_JQUERY = '$("#%1$s").%2$s({});';
+  const INIT_TEMPLATE_JQUERY    = '$("#%1$s").%2$s({});';
+  const ON_LOAD_TEMPLATE_JQUERY = 'jQuery(document).ready(function(){%1$s})';
 
   protected
     $renderAttributes = array(),
@@ -53,16 +54,6 @@ abstract class sfUoWidget extends sfWidgetForm
   }
 
   /**
-   * Is in "lazy" mode ?
-   *
-   * @return boolean
-   */
-  public function isLazy()
-  {
-    return $this->getOption('js_lazy');
-  }
-
-  /**
    * Return init template
    *
    * @return string
@@ -71,6 +62,27 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     $result = $this->getOption('js_init_template');
     return is_null($result) ? sfConfig::get('app_sfUoWidgetPlugin_init_template', self::INIT_TEMPLATE_JQUERY) : $result;
+  }
+
+  /**
+   * Return windowOnLoad template
+   *
+   * @return string
+   */
+  public function getOnLoadTemplate()
+  {
+    $result = $this->getOption('js_on_load_template');
+    return is_null($result) ? sfConfig::get('app_sfUoWidgetPlugin_on_load_template', self::ON_LOAD_TEMPLATE_JQUERY) : $result;
+  }
+
+  /**
+   * Is in "lazy" mode ?
+   *
+   * @return boolean
+   */
+  public function isLazy()
+  {
+    return $this->getOption('js_lazy');
   }
 
   /**
@@ -185,6 +197,7 @@ abstract class sfUoWidget extends sfWidgetForm
       return '';
     }
 
+    $jsAdapter      = $this->getJsAdapter();
     $jsSelector     = $this->getJsSelector();
     $jsTransformers = $this->getJsTransformers();
     $result         = array();
@@ -204,7 +217,15 @@ abstract class sfUoWidget extends sfWidgetForm
 
       if ($this->isLazy())
       {
-        $result[] = sprintf($this->getInitTemplate(), $id, sfUoWidgetHelper::camelizeLcFirst($jsSelector.'_'.$transformer));
+        $widgetInitialization = sprintf($this->getInitTemplate(), $id, sfUoWidgetHelper::camelizeLcFirst($jsSelector.'_'.$transformer));
+        if (sfUoWidgetHelper::getConfigManager()->haveToSetsInWindowOnLoad($jsAdapter, $jsSelector, $transformer))
+        {
+          $result[] = sprintf($this->getOnLoadTemplate(), $widgetInitialization);
+        }
+        else
+        {
+          $result[] = $widgetInitialization;
+        }
       }
     }
 
