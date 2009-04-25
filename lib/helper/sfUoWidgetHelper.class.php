@@ -63,37 +63,8 @@ class sfUoWidgetHelper
    */
   public static function isDynamicsEnable()
   {
+    //return false;
     return is_dir(sfConfig::get('sf_plugins_dir').'/sfDynamicsPlugin') && class_exists('sfDynamics');
-  }
-
-  /**
-   * Return plugin's web path
-   *
-   * @return string
-   */
-  static public function getWebPath()
-  {
-    return sfConfig::get('app_sfUoWidgetPlugin_js_path', '/sf_unobstrusive_widget');
-  }
-  
-  /**
-   * Return plugin's web js path
-   *
-   * @return string
-   */
-  static public function getWebJsPath()
-  {
-    return self::getWebPath().'/js';
-  }
-  
-  /**
-   * Return plugin's web css path
-   *
-   * @return string
-   */
-  static public function getWebCssPath()
-  {
-    return self::getWebPath().'/css';
   }
 
   /**
@@ -106,10 +77,6 @@ class sfUoWidgetHelper
     $response = sfContext::getInstance()->getResponse();
     foreach ($values as $js)
     {
-      if (substr($js, 0, 1) != '/')
-      {
-        $js = self::getWebJsPath().'/'.$js;
-      }
       $response->addJavascript($js, 'last');
     }
   }
@@ -124,10 +91,6 @@ class sfUoWidgetHelper
     $response = sfContext::getInstance()->getResponse();
     foreach ($values as $css => $media)
     {
-      if (substr($css, 0, 1) != '/')
-      {
-        $css = self::getWebCssPath().'/'.$css;
-      }
       $response->addStylesheet($css, 'last', array('media'=>$media));
     }
   }
@@ -166,7 +129,7 @@ class sfUoWidgetHelper
   }
   
   /**
-   * Load all JS and CSS from a specific widget
+   * Load all JS and CSS for a specific widget
    */
   static public function load($adapter, $jsSelector, $jsTransformer, $skin)
   {
