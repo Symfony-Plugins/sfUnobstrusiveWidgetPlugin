@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_list_drop_down_config = {};
 (function($) {
 
   $.fn.uoWidgetListDropDown = function(customConfiguration)
@@ -66,7 +65,7 @@ var uo_widget_list_drop_down_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_list_drop_down_config[$widget.attr('id')] || {};
+        var result = {};
 
         //disable shadow on IE6
         var strChUserAgent  = navigator.userAgent;

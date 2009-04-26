@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_list_treeview_admin_config = {};
 (function($) {
 
   $.fn.uoWidgetListTreeviewAdmin = function(customConfiguration)
@@ -64,7 +63,7 @@ var uo_widget_list_treeview_admin_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_list_treeview_admin_config[$widget.attr('id')] || {};
+        var result = {};
         return $.extend(true, configuration, result);
       }
 

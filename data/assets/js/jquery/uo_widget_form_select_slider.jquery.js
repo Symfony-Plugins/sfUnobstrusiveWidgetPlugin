@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_form_select_slider_config = {};
 (function($) {
 
   $.fn.uoWidgetFormSelectSlider = function(customConfiguration)
@@ -62,7 +61,7 @@ var uo_widget_form_select_slider_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_form_select_slider_config[$widget.attr('id')] || uo_widget_form_select_slider_config[$baseId] || {};
+        var result = {};
         return $.extend(true, configuration, result);
       }
 

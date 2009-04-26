@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_list_drop_line_config = {};
 (function($) {
 
   $.fn.uoWidgetListDropLine = function(customConfiguration)
@@ -79,7 +78,7 @@ var uo_widget_list_drop_line_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_list_drop_line_config[$widget.attr('id')] || {};
+        var result = {};
         return $.extend(true, configuration, result);
       }
 

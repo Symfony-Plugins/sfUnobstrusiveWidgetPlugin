@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_form_select_many_double_list_config = {};
 (function($) {
 
   $.fn.uoWidgetFormSelectManyDoubleList = function(customConfiguration)
@@ -66,7 +65,7 @@ var uo_widget_form_select_many_double_list_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_form_select_many_double_list_config[$widget.attr('id')] || {};
+        var result = {};
         return $.extend(true, configuration, result);
       }
 

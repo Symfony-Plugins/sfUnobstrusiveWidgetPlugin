@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_form_select_many_drop_down_check_list_config = {};
 (function($)
 {
   $.widget("ui.uoWidgetFormSelectManyDropDownCheckList", {

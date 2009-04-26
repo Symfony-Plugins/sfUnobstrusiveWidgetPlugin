@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_list_accordion_config = {};
 (function($) {
 
   $.fn.uoWidgetListAccordion = function(customConfiguration)
@@ -54,7 +53,7 @@ var uo_widget_list_accordion_config = {};
        */
       function getConfiguration()
       {
-        var result    = uo_widget_list_accordion_config[$widget.attr('id')] || {};
+        var result = {};
         return $.extend(true, configuration, result);
       }
 

@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_form_date_picker_config = {};
 (function($) {
 
   $.fn.uoWidgetFormDatePicker = function(customConfiguration)
@@ -75,7 +74,7 @@ var uo_widget_form_date_picker_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_form_date_picker_config[$widget.attr('id')] || uo_widget_form_date_picker_config[$baseId] || {};
+        var result = {};
 
         if (undefined == result.beforeShow)
         {

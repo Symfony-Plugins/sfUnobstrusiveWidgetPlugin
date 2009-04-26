@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_form_textarea_wym_editor_config = {};
 (function($) {
 
   $.fn.uoWidgetFormTextareaWymEditor = function(customConfiguration)
@@ -40,7 +39,7 @@ var uo_widget_form_textarea_wym_editor_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_form_select_many_asm_config[$widget.attr('id')] || {};
+        var result = {};
         return $.extend(true, configuration, result);
       }
 

@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_form_textarea_tiny_mce_config = {};
 (function($) {
 
   $.fn.uoWidgetFormTextareaTinyMce = function(customConfiguration)
@@ -314,7 +313,7 @@ var uo_widget_form_textarea_tiny_mce_config = {};
         function getConfiguration()
         {
           var config      = configuration;
-          var result      = uo_widget_form_textarea_tiny_mce_config[$widget.attr('id')] || {};
+          var result      = {};
           result.mode     = "exact";
           result.elements = $widget.attr('id');
 

@@ -51,6 +51,12 @@ adapters:
           js_files:
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_input_text_mask.jquery.js
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/digital_bush/jquery.maskedinput-1.2.2.js
+        auto_complete:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_input_text_auto_complete.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/pengo_works/auto_complete/jquery.autocomplete.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/pengo_works/auto_complete/jquery.autocomplete.css
       uo_widget_form_input_file:
         swf_upload:
           js_files:

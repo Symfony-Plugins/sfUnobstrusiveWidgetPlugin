@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_form_input_file_swf_upload_config = {};
 var uo_widget_form_input_file_swf_upload_count  = 0;
 (function($) {
 
@@ -96,7 +95,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
        */
       function getConfiguration()
       {
-        var result = uo_widget_form_input_file_swf_upload_config[$widgetId] || {};
+        var result = {};
         result     = $.extend(true, configuration, result);
 
         // Event handler settings

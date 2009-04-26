@@ -4,7 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_form_input_text_spinner_config = {};
 (function($) {
 
   $.fn.uoWidgetFormInputTextSpinner = function(customConfiguration)
@@ -40,7 +39,7 @@ var uo_widget_form_input_text_spinner_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_form_input_text_spinner_config[$widget.attr('id')] || {};
+        var result = {};
         return $.extend(true, configuration, result);
       }
 

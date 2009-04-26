@@ -1,16 +1,17 @@
 /**
- * Unobstrusive masked input widget using jQuery.
- *example : $(':text.uo_widget_form_input_text_mask').uoWidgetFormInputTextMask({});
+ * Unobstrusive auto complete input widget using jQuery.
+ *example : $(':text.uo_widget_form_input_text_auto_complete').uoWidgetFormInputTextAutoComplete({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
 (function($) {
 
-  $.fn.uoWidgetFormInputTextMask = function(customConfiguration)
+  $.fn.uoWidgetFormInputTextAutoComplete = function(customConfiguration)
   {
     // default configuration
     var configuration = {
-      'mask': ''
+      url: false,
+      data: []
     };
 
     // merge default and custom configuration
@@ -26,17 +27,23 @@
       function init()
       {
         // prevent initialize twice
-        if ($widget.hasClass('uo_widget_form_input_text_mask_ON'))
+        if ($widget.hasClass('uo_widget_form_input_text_auto_complete_ON'))
         {
           return $widget;
         }
 
-        $widget.removeClass('uo_widget_form_input_text_mask');
-        $widget.addClass('uo_widget_form_input_text_mask_ON');
+        $widget.removeClass('uo_widget_form_input_text_auto_complete');
+        $widget.addClass('uo_widget_form_input_text_auto_complete_ON');
         
         var config = getConfiguration();
-        var mask   = config.mask || '';
-        $widget.mask(mask, config);
+        if (config.url)
+        {
+          $widget.autocomplete(config.url, config);
+        }
+        else
+        {
+          $widget.autocompleteArray(config.data, config);
+        }
       }
 
       /**

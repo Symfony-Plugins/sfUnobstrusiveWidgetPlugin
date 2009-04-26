@@ -4,8 +4,6 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-var uo_widget_list_treeview_config      = {};
-var uo_widget_form_list_treeview_config = {};
 (function($) {
 
   $.fn.uoWidgetListTreeview = function(customConfiguration)
@@ -42,7 +40,7 @@ var uo_widget_form_list_treeview_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_list_treeview_config[$widget.attr('id')] || {};
+        var result = {};
         return $.extend(true, configuration, result);
       }
 
@@ -85,7 +83,7 @@ var uo_widget_form_list_treeview_config = {};
        */
       function getConfiguration()
       {
-        var result = uo_widget_form_list_treeview_config[$widget.attr('id')] || {};
+        var result = {};
         return $.extend(true, configuration, result);
       }
 
