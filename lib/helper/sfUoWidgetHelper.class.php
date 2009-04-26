@@ -106,6 +106,7 @@ class sfUoWidgetHelper
    */
   public static function isDynamicsEnable()
   {
+    return false;
     return is_dir(sfConfig::get('sf_plugins_dir').'/sfDynamicsPlugin') && class_exists('sfDynamics');
   }
 

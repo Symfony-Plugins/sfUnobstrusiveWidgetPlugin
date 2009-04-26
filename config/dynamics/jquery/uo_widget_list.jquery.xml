@@ -5,7 +5,6 @@
     <require>uo_widget.base.jquery</require>
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
     <javascript>js/jquery/uo_widget_list_accordion.jquery</javascript>
-    <stylesheet>css/common/uo_widget_list_accordion</stylesheet>
   </package>
 
   <package name="uo_widget_list.drop_down.jquery">
