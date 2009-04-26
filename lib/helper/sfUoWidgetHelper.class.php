@@ -18,9 +18,28 @@
  */
 class sfUoWidgetHelper
 {
-  static protected
+  protected static
     $configManager          = null,
-    $adminMenuConfigManager = null;
+    $adminMenuConfigManager = null,
+    $loader;
+
+  /**
+   * Return loader
+   *
+   * @param  mixte
+   *
+   * @return object extends sfUoWidgetBaseLoader
+   */
+  public static function getLoader($context=null)
+  {
+    if (is_null(self::$loader))
+    {
+      $loaderClass  = self::isDynamicsEnable() ? 'sfUoWidgetDynamicsLoader' : 'sfUoWidgetDefaultLoader';
+      self::$loader = new $loaderClass(self::getConfigManager($context));
+    }
+
+    return self::$loader;
+  }
 
   /**
    * Return config manager
@@ -29,7 +48,7 @@ class sfUoWidgetHelper
    *
    * @return sfUoWidgetConfigManager
    */
-  static public function getConfigManager($context=null)
+  public static function getConfigManager($context=null)
   {
     if (is_null(self::$configManager))
     {
@@ -46,7 +65,7 @@ class sfUoWidgetHelper
    *
    * @return sfUoAdminMenuConfigManager
    */
-  static public function getAdminMenuConfigManager($context=null)
+  public static function getAdminMenuConfigManager($context=null)
   {
     if (is_null(self::$adminMenuConfigManager))
     {
@@ -57,44 +76,39 @@ class sfUoWidgetHelper
   }
   
   /**
+   * Return config manager
+   *
+   * @param  mixte
+   *
+   * @return sfUoWidgetConfigManager
+   */
+  public static function getDefaultJsAdapter($context=null)
+  {
+    return self::getConfigManager($context)->getDefaultAdapter();
+  }
+  
+  /**
+   * Return config manager
+   *
+   * @param  mixte
+   *
+   * @return sfUoWidgetConfigManager
+   */
+  public static function isInLazyModeByDefault($context=null)
+  {
+    return self::getConfigManager($context)->isInLazyModeByDefault();
+  }
+  
+  /**
    * Return true if sfDynamics plugin enabled, false otherwise
    *
    * @return boolean
    */
   public static function isDynamicsEnable()
   {
-    //return false;
     return is_dir(sfConfig::get('sf_plugins_dir').'/sfDynamicsPlugin') && class_exists('sfDynamics');
   }
 
-  /**
-   * Add javascripts to response
-   *
-   * @param Array $values
-   */
-  static public function addJavascript(Array $values)
-  {
-    $response = sfContext::getInstance()->getResponse();
-    foreach ($values as $js)
-    {
-      $response->addJavascript($js, 'last');
-    }
-  }
-
-  /**
-   * Add stylesheets to response
-   *
-   * @param Array $values
-   */
-  static public function addStylesheet(Array $values)
-  {
-    $response = sfContext::getInstance()->getResponse();
-    foreach ($values as $css => $media)
-    {
-      $response->addStylesheet($css, 'last', array('media'=>$media));
-    }
-  }
-  
   /**
    * Return a camelized string with first letter in lowercase
    *
@@ -102,50 +116,9 @@ class sfUoWidgetHelper
    *
    * @return string
    */
-  static public function camelizeLcFirst($value)
+  public static function camelizeLcFirst($value)
   {
     $result = sfInflector::camelize($value);
     return strtolower(substr($result, 0, 1)).substr($result, 1);
-  }
-  
-  /**
-   * Load all JS and CSS
-   */
-  static public function loadAll($adapter = 'jquery', $skin = 'default', $context=null)
-  {
-    try
-    {
-      self::addJavascript(self::getConfigManager($context)->getAllJavascripts($adapter));
-      $stylesheets = self::getConfigManager($context)->getAllStylesheets($adapter, $skin);
-      foreach ($stylesheets as $css)
-      {
-        self::addStylesheet($css, 'all');
-      }
-    }
-    catch (Exception $e)
-    {
-      throw $e;
-    }
-  }
-  
-  /**
-   * Load all JS and CSS for a specific widget
-   */
-  static public function load($adapter, $jsSelector, $jsTransformer, $skin)
-  {
-    try
-    {
-      self::addJavascript(sfUoWidgetHelper::getConfigManager()->getJavascripts($adapter, $jsSelector, $jsTransformer));
-      $stylesheets = sfUoWidgetHelper::getConfigManager()->getStylesheets($adapter, $jsSelector, $jsTransformer, $skin);
-      foreach ($stylesheets as $css)
-      {
-        $results[$css] = 'all';
-      }
-      self::addStylesheet($stylesheets);
-    }
-    catch (Excepion $e)
-    {
-      throw $e;
-    }
   }
 }
