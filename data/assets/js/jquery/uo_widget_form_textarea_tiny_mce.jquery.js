@@ -4,7 +4,7 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-(function($) {
+;(function($) {
 
   $.fn.uoWidgetFormTextareaTinyMce = function(customConfiguration)
   {

@@ -4,7 +4,7 @@
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
-(function($)
+;(function($)
 {
   $.widget("ui.uoWidgetFormSelectManyDropDownCheckList", {
         // Creates the drop container that keeps the items and appends it to the document

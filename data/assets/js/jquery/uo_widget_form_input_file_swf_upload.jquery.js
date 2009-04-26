@@ -5,7 +5,7 @@
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
 var uo_widget_form_input_file_swf_upload_count  = 0;
-(function($) {
+;(function($) {
 
   $.fn.uoWidgetFormInputFileSwfUpload = function(customConfiguration)
   {

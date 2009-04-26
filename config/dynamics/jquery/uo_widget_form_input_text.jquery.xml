@@ -17,5 +17,13 @@
     <javascript>js/jquery/uo_widget_form_input_text_mask.jquery</javascript>
     <javascript>vendor/jquery/digital_bush/jquery.maskedinput-1.2.2</javascript>
   </package>
+  
+  <package name="uo_widget_form_input_text.auto_complete.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_input_text_auto_complete.jquery</javascript>
+    <javascript>vendor/jquery/pengo_works/auto_complete/jquery.autocomplete</javascript>
+    <stylesheet>vendor/jquery/pengo_works/auto_complete/jquery.autocomplete</stylesheet>
+  </package>
 
 </dynamics>
