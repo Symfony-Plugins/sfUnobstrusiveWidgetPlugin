@@ -280,8 +280,6 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   protected function configure($options = array(), $attributes = array())
   {
-    echo '<pre>'.print_r($options, true).'</pre>';
-  
     parent::configure($options, $attributes);
 
     $this->addOption('js_transformer', array());
