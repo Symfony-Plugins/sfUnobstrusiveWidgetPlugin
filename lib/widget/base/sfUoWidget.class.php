@@ -112,20 +112,8 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function getStylesheets()
   {
-    $manager      = sfUoWidgetHelper::getConfigManager();
-    $transformers = $this->getJsTransformers();
-    $results      = array();
-
-    foreach ($transformers as $transformer)
-    {
-      $stylesheets = $manager->getTransformerStylesheets($this->getJsAdapter(), $this->getJsSelector(), $transformer);
-      foreach ($stylesheets as $css)
-      {
-        $results[$css] = 'all';
-      }
-    }
-
-    return $results;
+    //include_stylesheets_for_form cause some problem with dynamics
+    return array();
   }
 
   /**
@@ -137,16 +125,8 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function getJavaScripts()
   {
-    $manager      = sfUoWidgetHelper::getConfigManager();
-    $transformers = $this->getJsTransformers();
-    $results      = array();
-
-    foreach ($transformers as $transformer)
-    {
-      $results = array_merge($results, $manager->getTransformerJavascripts($this->getJsAdapter(), $this->getJsSelector(), $transformer));
-    }
-
-    return $results;
+    //include_javascripts_for_form cause some problem with dynamics
+    return array();
   }
 
   /**
