@@ -146,7 +146,11 @@ abstract class sfUoWidget extends sfWidgetForm
     $jsSelector     = $this->getJsSelector();
     $jsTransformers = $this->getJsTransformers();
     $result         = array();
+    
+    echo '<pre>'.print_r($config, true).'</pre>';
 
+    echo $config[$jsTransformers[0]]; exit;
+    
     if (count($jsTransformers) == 1 && (!isset($config[$jsTransformers[0]]) || !is_array($config[$jsTransformers[0]])))
     {
       $config = array($jsTransformers[0] => $config);
@@ -276,6 +280,8 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   protected function configure($options = array(), $attributes = array())
   {
+    echo '<pre>'.print_r($options, true).'</pre>';
+  
     parent::configure($options, $attributes);
 
     $this->addOption('js_transformer', array());

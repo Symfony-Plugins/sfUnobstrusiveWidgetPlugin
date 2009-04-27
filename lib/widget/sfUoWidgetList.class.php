@@ -39,7 +39,7 @@ class sfUoWidgetList extends sfUoWidget
    */
   protected function configure($options = array(), $attributes = array())
   {
-    parent::configure($options = array(), $attributes = array());
+    parent::configure($options, $attributes);
   
     $this->addRequiredOption('choices');
     $this->addOption('list_type', 'ul');

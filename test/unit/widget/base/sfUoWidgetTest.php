@@ -56,7 +56,7 @@ class sfUoWidgetTest extends sfUoWidget
 
   public function configure($options = array(), $attributes = array())
   {
-    return parent::configure($options = array(), $attributes = array());
+    return parent::configure($options, $attributes);
   }
 
   public function getJsSelector()

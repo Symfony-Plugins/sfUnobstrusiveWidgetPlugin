@@ -35,7 +35,7 @@ class sfUoWidgetFormPropelCheckList extends sfUoWidgetPropelList
    */
   protected function configure($options = array(), $attributes = array())
   {
-    parent::configure($options = array(), $attributes = array());
+    parent::configure($options, $attributes);
   
     $this->addOption('multiple', true);
   }
