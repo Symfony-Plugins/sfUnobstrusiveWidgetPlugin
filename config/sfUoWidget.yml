@@ -41,6 +41,7 @@ adapters:
         picker:
           js_files:
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_date_picker.jquery.js
+          template: window_onload
       uo_widget_form_input_text:
         spinner:
           js_files:
