@@ -302,8 +302,23 @@
             return $widget;
           }
 
+          try
+          {
+            if (undefined == tinyMCE)
+            {
+              alert('tinyMCe is undefined');
+              return $widget;
+            }
+          }
+          catch(e)
+          {
+            alert('tinyMCe is undefined');
+            return $widget;
+          }
+
           $widget.removeClass('uo_widget_form_textarea_tiny_mce');
           $widget.addClass('uo_widget_form_textarea_tiny_mce_ON');
+
           tinyMCE.init(getConfiguration());
         }
 

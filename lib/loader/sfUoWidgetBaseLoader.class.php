@@ -32,15 +32,6 @@ abstract class sfUoWidgetBaseLoader
 
   public function loadTransformers($jsAdapter, $jsSelector, array $jsTransformers)
   {
-    try
-    {
-      $this->configManager->checkTransformersCompatibilities($jsAdapter, $jsSelector, $jsTransformers);
-    }
-    catch (Excepion $e)
-    {
-      throw $e;
-    }
-    
     foreach ($jsTransformers as $jsTransformer)
     {
       $this->loadTransformer($jsAdapter, $jsSelector, $jsTransformer);

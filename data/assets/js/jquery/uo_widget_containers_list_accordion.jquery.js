@@ -1,17 +1,16 @@
 /**
  * Unobstrusive accordion widget using jQuery.
- * example : $('ul.uo_widget_list_accordion, ol.uo_widget_list_accordion').uoWidgetListAccordion({});
+ * example : $('ul.uo_widget_containers_list_accordion, ol.uo_widget_containers_list_accordion').uoWidgetContainersListAccordion({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
 ;(function($) {
 
-  $.fn.uoWidgetListAccordion = function(customConfiguration)
+  $.fn.uoWidgetContainersListAccordion = function(customConfiguration)
   {
     // default configuration
     var configuration = {
-      active: '.uo_widget_accordion_active',
-      header: '.uo_widget_accordion_title'
+      header: '.uo_widget_containers_list_title'
     };
 
     // merge default and custom configuration
@@ -27,13 +26,13 @@
       function init()
       {
         // prevent initialize twice
-        if ($widget.hasClass('uo_widget_list_accordion_ON'))
+        if ($widget.hasClass('uo_widget_containers_list_accordion_ON'))
         {
           return $widget;
         }
 
         //create A element
-        $('.uo_widget_accordion_title', $widget).each(function()
+        $('.uo_widget_containers_list_title', $widget).each(function()
         {
           var firstchild = this.firstChild;
           if ('a' != firstchild.nodeName.toLowerCase())
@@ -43,8 +42,8 @@
           }
         });
 
-        $widget.removeClass('uo_widget_list_accordion');
-        $widget.addClass('uo_widget_list_accordion_ON');
+        $widget.removeClass('uo_widget_containers_list_accordion');
+        $widget.addClass('uo_widget_containers_list_accordion_ON');
         $widget.accordion(getConfiguration());
       }
 

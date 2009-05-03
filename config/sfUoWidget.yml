@@ -10,10 +10,14 @@ adapters:
       window_onload: jQuery(document).ready(function(){ $("#%1$s").%2$s({%3$s}); });
 
     packages:
-      uo_widget_list:
+      uo_widget_containers_list:
         accordion:
           js_files:
-            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_accordion.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_containers_list_accordion.jquery.js
+        tabs:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_containers_list_tabs.jquery.js
+      uo_widget_list:
         drop_down:
           js_files:
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_drop_down.jquery.js
@@ -95,11 +99,9 @@ adapters:
         tiny_mce:
           js_files:
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_textarea_tiny_mce.jquery.js
-            - /sfUnobstrusiveWidgetPlugin/vendor/tiny_mce/tiny_mce.js
         wym_editor:
           js_files:
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_textarea_wym_editor.jquery.js
-            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/wymeditor/jquery.wymeditor.js
       uo_widget_form_list:
         treeview:
           js_files:

@@ -1,0 +1,9 @@
+# sfUnobstrusiveWidgetPlugin
+
+1. presentation
+2. philosophy
+3. installation
+4. configuration
+5. extending
+6. 
+7. contributors

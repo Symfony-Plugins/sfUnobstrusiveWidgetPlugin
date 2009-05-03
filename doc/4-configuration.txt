@@ -1,0 +1,45 @@
+# Configuration
+
+## publish assets
+
+Since plugin use CSS, javascripts, images and SWF assets, you need to publish them. The easiest way to do that is to use uo_widget:publish task:
+
+  [bash]
+  php symfony uo_widget:publish
+  
+This task will remove all sfUnobstrusiveWidgetPlugin published assets and recreate them.
+
+### Why not use plugin:publish-assets task provided by symfony ?
+
+sfUnobstrusiveWidgetPlugin is fully compatible with an other great plugin [sfDynamicsPlugin](http://www.symfony-project.org/plugins/sfDynamicsPlugin). To publish only some assets when use this plugin with dynamics, we put all assets file in the 'data' repertory instead of the traditionnal 'web' one. So the publish assets task provided by symfony can't be use in this case.
+
+An other reason, is that in symfony 1.1, the plugin:publish-assets task not exists.
+
+
+## widget configuration
+
+All widget configuration is sets in the YAML file 'sfUoWidget.yml'.
+
+default_adapter: defined the default adapter (jquery by default)
+lazy_mode: define if lazy mode is enable or not y default. If enabled, all JS initialization will be done automatically on widget render, if not, you have to done by your self.
+
+adapter definition
+
+
+### using default loader
+
+### using dynamics loader
+
+
+
+
+
+
+widget options
+* Available options:
+   *
+   *  * js_transformer:        JS transformer to apply (null by default)
+   *  * js_config:             Associative array with JS options (empty array by default)
+   *  * js_adapter:            The JS adapter (see sfUoWidget.yml to defined the default value)
+   *  * js_lazy:               Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+   *  * i18n_catalogue:        The i18n catalogue to use ("messages" by default)

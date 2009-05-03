@@ -46,6 +46,20 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
     }
   }
 
+  public function loadTransformers($jsAdapter, $jsSelector, array $jsTransformers)
+  {
+    try
+    {
+      $this->configManager->checkTransformersCompatibilities($jsAdapter, $jsSelector, $jsTransformers);
+    }
+    catch (Excepion $e)
+    {
+      throw $e;
+    }
+    
+    parent::loadTransformers($jsAdapter, $jsSelector, $jsTransformers);
+  }
+
   public function loadTransformer($jsAdapter, $jsSelector, $jsTransformer)
   {
     try

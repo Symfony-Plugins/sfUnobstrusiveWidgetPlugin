@@ -28,6 +28,12 @@
         {
           return $widget;
         }
+        
+        if (undefined == $widget.wymeditor)
+        {
+          alert('wymeditor is undefined');
+          return $widget;
+        }
 
         $widget.removeClass('uo_widget_form_textarea_wym_editor');
         $widget.addClass('uo_widget_form_textarea_wym_editor_ON');

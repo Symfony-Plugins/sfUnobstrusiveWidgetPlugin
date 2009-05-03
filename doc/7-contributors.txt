@@ -1,0 +1,7 @@
+# Contributors
+
+François Béliveau as lead developper
+Romain Dorgueil,
+Geoffrey Bachelet,
+Hugo Hamond,
+Karim Tache

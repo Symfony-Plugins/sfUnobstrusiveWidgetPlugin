@@ -9,35 +9,31 @@
  */
 
 /**
- * sfUoWidgetAccordion
- * Accordion widget render a simpe list with a title on each items.
+ * sfUoWidgetContainersList
+ * Container widget render a simpe list with a title on each items.
  *
  * @package    symfony
  * @subpackage sfUnobstrusiveWidgetPlugin
  * @author     François Béliveau  <francois.beliveau@my-labz.com>
  */
-class sfUoWidgetAccordion extends sfUoWidgetList
+class sfUoWidgetContainersList extends sfUoWidgetList
 {
   /**
-   * @see sfUoWidget
+   * Gets the JavaScript selector.
+   *
+   * @return string A JS selector
    */
-  public function __construct($options = array(), $attributes = array())
+  protected function getJsSelector()
   {
-    $options['js_transformer'] = 'accordion';
-
-    parent::__construct($options, $attributes);
+    return 'uo_widget_containers_list';
   }
-
+  
   /**
    * Configures the current widget.
    *
    * Available options:
    *
    *  * title_type:            An array of possible choices ("h3" by default)
-   *
-   * Available transformers:
-   *
-   *  * accordion
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
@@ -53,8 +49,8 @@ class sfUoWidgetAccordion extends sfUoWidgetList
 
   protected function getItemContent($key, $value)
   {
-    $result  = $this->renderContentTag($this->getOption('title_type'), $key, array('class' => 'uo_widget_accordion_title'));
-    $result .= $this->renderContentTag('div', $value, array('class' => 'uo_widget_accordion_content'));
+    $result  = $this->renderContentTag($this->getOption('title_type'), $key, array('class' => 'uo_widget_containers_list_title'));
+    $result .= $this->renderContentTag('div', $value, array('class' => 'uo_widget_containers_list_content'));
     
     return $result;
   }

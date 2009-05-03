@@ -267,7 +267,9 @@ abstract class sfUoWidget extends sfWidgetForm
    *
    *  * js_transformer:        JS transformer to apply (null by default)
    *  * js_config:             Associative array with JS options (empty array by default)
-   *  * js_adapter:            The JS adapter ("jquery" by default)
+   *  * js_adapter:            The JS adapter (see sfUoWidget.yml to defined the default value)
+   *  * js_lazy:               Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+   *  * i18n_catalogue:        The i18n catalogue to use ("messages" by default)
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
