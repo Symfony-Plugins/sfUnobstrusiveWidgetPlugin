@@ -9,7 +9,9 @@
   $.fn.uoWidgetFormInputTextSpinner = function(customConfiguration)
   {
     // default configuration
-    var configuration = {};
+    var configuration = {
+      min: 0
+    };
 
     // merge default and custom configuration
     $.extend(true, configuration, customConfiguration);
@@ -31,16 +33,40 @@
 
         $widget.removeClass('uo_widget_form_input_text_spinner');
         $widget.addClass('uo_widget_form_input_text_spinner_ON');
-        $widget.spinner(getConfiguration());
-      }
+        
+        if (1>$widget.attr('maxlength'))
+        {
+          var maxLength = 2;
+          if (undefined != configuration.max)
+          {
+            length   = String(configuration.max).length;
+            if (length > maxLength)
+            {
+              maxLength = length;
+            }
+            if ($widget.val() > configuration.max)
+            {
+              $widget.val(configuration.max)
+            }
+          }
 
-      /**
-       * Return widget's specific configuration
-       */
-      function getConfiguration()
-      {
-        var result = {};
-        return $.extend(true, configuration, result);
+          if (undefined != configuration.min)
+          {
+            length   = String(configuration.min).length + 1;
+            if (length > maxLength)
+            {
+              maxLength = length;
+            }
+            if ($widget.val() < configuration.min)
+            {
+              $widget.val(configuration.min)
+            }
+          }
+
+          $widget.attr('maxlength', maxLength);
+        }
+
+        $widget.spinner(configuration);
       }
 
       init();

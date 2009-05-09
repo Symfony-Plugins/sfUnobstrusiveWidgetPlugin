@@ -33,7 +33,7 @@ class sfUoWidgetContainersList extends sfUoWidgetList
    *
    * Available options:
    *
-   *  * title_type:            An array of possible choices ("h3" by default)
+   *  * title_type:            The html title element to use to generate each container's title ("h3" by default)
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes

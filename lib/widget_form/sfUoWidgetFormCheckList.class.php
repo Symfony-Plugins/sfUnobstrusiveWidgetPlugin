@@ -22,11 +22,7 @@ class sfUoWidgetFormCheckList extends sfUoWidgetList
    *
    * Available options:
    *
-   *  * multiple:               true if the list must allow multiple selections
-   *
-   * Available transformers:
-   *
-   *  * nested_check
+   *  * multiple:               Whether to allow multiple values or not (true by default)
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes

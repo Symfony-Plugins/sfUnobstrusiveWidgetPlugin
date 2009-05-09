@@ -24,13 +24,8 @@ class sfUoWidgetList extends sfUoWidget
    * Available options:
    *
    *  * choices:               An array of possible choices (required)
-   *  * list_type:             List type (ul or ol)
+   *  * list_type:             List type ("ul" by default)
    *  * root:                  Root name (null by default)
-   *
-   * Available transformers:
-   *
-   *  * treeview_admin
-   *  * treeview
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes

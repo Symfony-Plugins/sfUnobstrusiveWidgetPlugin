@@ -6,8 +6,8 @@ adapters:
     theme: redmond
 
     templates:
-      widget: '$("#%1$s").%2$s({%3$s});'
-      window_onload: jQuery(document).ready(function(){ $("#%1$s").%2$s({%3$s}); });
+      widget: '$("#%1$s").%2$s({ %3$s });'
+      window_onload: jQuery(document).ready(function(){ $("#%1$s").%2$s({ %3$s }); });
 
     packages:
       uo_widget_containers_list:
@@ -49,9 +49,10 @@ adapters:
       uo_widget_form_input_text:
         spinner:
           js_files:
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/btburnett/spinner/ui.spinner.js
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_input_text_spinner.jquery.js
           css_files:
-            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_form_input_text_spinner.css
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/btburnett/spinner/ui.spinner.css
         mask:
           js_files:
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_input_text_mask.jquery.js

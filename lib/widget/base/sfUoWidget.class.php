@@ -399,11 +399,11 @@ abstract class sfUoWidget extends sfWidgetForm
       $v = implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($v), array_values($v)));
       if (is_integer($k))
       {
-        $result = empty($v) ? '' : sprintf('{%s}', $v);
+        $result = empty($v) ? '' : sprintf('{ %s }', $v);
       }
       else
       {
-        $template = substr($v, 0, 1) == '{' ? '"%s":[%s]' : '"%s":{%s}';
+        $template = substr($v, 0, 1) == '{' ? '%s: [%s]' : '%s: {%s}';
         $result   = empty($v) ? '' : sprintf($template, $k, $v);
       }
     }
@@ -428,7 +428,7 @@ abstract class sfUoWidget extends sfWidgetForm
         $v = '"'.$v.'"';
       }
 
-      $result = (is_null($v) || '' === $v) ? '' : sprintf('"%s":%s', $k, $v);
+      $result = (is_null($v) || '' === $v) ? '' : sprintf('%s: %s', $k, $v);
     }
 
     return $result;

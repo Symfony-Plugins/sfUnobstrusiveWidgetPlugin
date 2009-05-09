@@ -9,13 +9,13 @@
  */
 
 /**
- * sfUoWidgetFormSelectMany represents a select HTML tag where you can select multiple values.
+ * mlzUnobstrusiveWidgetFormSelectMany represents a select HTML tag where you can select multiple values.
  *
  * @package    symfony
- * @subpackage sfUnobstrusiveWidget
+ * @subpackage mlzUnobstrusiveWidget
  * @author     François Béliveau
  */
-class sfUoWidgetFormSelectMany extends sfUoWidgetFormSelect
+class sfUoWidgetFormPropelSelectMany extends sfUoWidgetFormPropelSelect
 {
   /**
    * Configures the current widget.

@@ -26,10 +26,6 @@ class sfUoWidgetFormSelect extends sfUoWidget
    *  * choices:  An array of possible choices (required)
    *  * multiple: true if the select tag must allow multiple selections
    *
-   * Available transformers:
-   *
-   *  * slider
-   *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
    *
@@ -76,7 +72,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
    */
   protected function getJsSelector()
   {
-    return 'uo_widget_form_select';
+    return $this->getOption('multiple') ? 'uo_widget_form_select_many' : 'uo_widget_form_select';
   }
 
   /**

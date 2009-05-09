@@ -40,7 +40,6 @@ class sfUoWidgetFormPropelSelect extends sfWidgetFormSelect
    *                  * asc or desc
    *  * criteria:   A criteria to use when retrieving objects
    *  * connection: The Propel connection to use (null by default)
-   *  * multiple:   true if the select tag must allow multiple selections
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes

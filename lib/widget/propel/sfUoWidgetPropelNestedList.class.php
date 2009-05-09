@@ -54,9 +54,9 @@ class sfUoWidgetPropelNestedList extends sfUoWidgetPropelList
   /**
    * Configures the current widget.
    *
-   *  * tree_left_method:     The method to use to get tree left object values (getTreeLeft by default)
-   *  * tree_right_method:     The method to use to get tree right object values (getTreeRight by default)
-   *  * scope_method:     The method to use to get scope object values (getScope by default)
+   *  * tree_left_method:     The method to use to get tree left object values ("getTreeLeft" by default)
+   *  * tree_right_method:    The method to use to get tree right object values ("getTreeRight" by default)
+   *  * scope_method:         The method to use to get scope object values ("getScope" by default)
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes

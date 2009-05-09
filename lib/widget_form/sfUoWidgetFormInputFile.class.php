@@ -18,10 +18,28 @@
 class sfUoWidgetFormInputFile extends sfUoWidgetFormInput
 {
   /**
+   * Configures the current widget.
+   *
+   *  * file_src:       The current image web source path (required)
+   *  * edit_mode:      A Boolean: true to enabled edit mode, false otherwise
+   *  * is_image:       Whether the file is a displayable image
+   *  * with_delete:    Whether to add a delete checkbox or not
+   *  * delete_label:   The delete label used by the template
+   *  * template:       The HTML template to use to render this widget
+   *                    The available placeholders are:
+   *                      * input (the image upload widget)
+   *                      * delete (the delete checkbox)
+   *                      * delete_label (the delete label text)
+   *                      * file (the file tag)
+   *
+   * In edit mode, this widget renders an additional widget named after the
+   * file upload widget with a "_delete" suffix. So, when creating a form,
+   * don't forget to add a validator for this additional field.
+   *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
    *
-   * @see sfWidgetFormInput
+   * @see sfUoWidget
    */
   protected function configure($options = array(), $attributes = array())
   {

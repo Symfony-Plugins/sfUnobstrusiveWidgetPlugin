@@ -5,10 +5,10 @@
 
   <package name="uo_widget_form_input_text.spinner.jquery">
     <require>uo_widget.base.jquery</require>
-    <require>jquery.ui.dev.spinner</require>
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>vendor/jquery/btburnett/spinner/ui.spinner</javascript>
     <javascript>js/jquery/uo_widget_form_input_text_spinner.jquery</javascript>
-    <stylesheet>css/common/uo_widget_form_input_text_spinner</stylesheet>
+    <stylesheet>vendor/jquery/btburnett/spinner/ui.spinner</stylesheet>
   </package>
 
   <package name="uo_widget_form_input_text.mask.jquery">

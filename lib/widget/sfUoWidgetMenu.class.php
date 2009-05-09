@@ -24,6 +24,11 @@ class sfUoWidgetMenu extends sfUoWidgetList
   /**
    * Configures the current widget.
    *
+   * Available options:
+   *
+   *  * controller:            Controller object to generate url (null by default)
+   *  * active:                The active url (null by default)
+   *
    * @see sfUoWidget->configure()
    */
   protected function configure($options = array(), $attributes = array())
