@@ -1,0 +1,83 @@
+# available doctrine widgets
+sfUnobstrusiveWidget plugin provide some doctrine widgets. Here is the list, and status of each one.
+
+
+## sfUoWidgetFormDoctrineSelect
+
+To deal with select with doctrine.
+
+**selector**: uo_widget_form_select or uo_widget_form_select_many
+
+**available options**:
+  - model:                    The model class (required)
+  - add_empty:                Whether to add a first empty value or not (false by default)
+                              If the option is not a Boolean, the value will be used as the text value
+  - method:                   The method to use to display object values (__toString by default)
+  - order_by:                 An array composed of two fields:
+                                - The column to order by the results (must be in the PhpName format)
+                                - asc or desc
+  - alias:                    The alias for the main component involved in the query
+  - query:                    A query to use when retrieving objects
+  - connection:               The Doctrine connection to use (null by default)
+  - *herited from sfUoWidgetFormSelect*
+    - choices:                An array of possible choices (required)
+    - multiple:               true if the select tag must allow multiple selections
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - slider                accessibleUISlider - creates a UI slider component from a select element(s) by Scott Jehl, scott@filamentgroup.com
+
+**generated HTML**
+<select>
+  <option>Option 1</option>
+  <option>Option 2</option>
+  <option>...</option>
+</select>
+
+
+## sfUoWidgetFormDoctrineSelectMany
+
+To deal with multiple select with doctrine.
+
+**selector**: uo_widget_form_select_many
+
+**available options**:
+  - *herited from sfUoWidgetFormDoctrineSelect*
+    - model:                  The model class (required)
+    - add_empty:              Whether to add a first empty value or not (false by default)
+                              If the option is not a Boolean, the value will be used as the text value
+    - method:                 The method to use to display object values (__toString by default)
+    - order_by:               An array composed of two fields:
+                                - The column to order by the results (must be in the PhpName format)
+                                - asc or desc
+    - alias:                  The alias for the main component involved in the query
+    - query:                  A query to use when retrieving objects
+    - connection:             The Doctrine connection to use (null by default)
+  - *herited from sfUoWidgetFormSelect*
+    - choices:                An array of possible choices (required)
+    - multiple:               true if the select tag must allow multiple selections
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - asm                   Alternate Select Multiple (asmSelect) by http://www.ryancramer.com/projects/asmselect/
+    - double_list           double list widget
+    - drop_down_check_list  select with a drop down check list
+
+**generated HTML**
+<select multiple="multiple">
+  <option>Option 1</option>
+  <option>Option 2</option>
+  <option>...</option>
+</select>

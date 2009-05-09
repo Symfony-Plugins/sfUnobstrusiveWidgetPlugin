@@ -5,5 +5,7 @@
 3. installation
 4. configuration
 5. extending
-6. 
+6. available widgets
+  6.1. available propel widgets
+  6.2. available doctrine widgets
 7. contributors
