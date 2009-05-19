@@ -1,5 +1,6 @@
 # Configuration
 
+
 ## publish assets
 
 Since plugin use CSS, javascripts, images and SWF assets, you need to publish them. The easiest way to do that is to use uo_widget:publish task:
@@ -8,6 +9,7 @@ Since plugin use CSS, javascripts, images and SWF assets, you need to publish th
   php symfony uo_widget:publish
   
 This task will remove all sfUnobstrusiveWidgetPlugin published assets and recreate them.
+
 
 ### Why not use plugin:publish-assets task provided by symfony ?
 
@@ -18,28 +20,22 @@ An other reason, is that in symfony 1.1, the plugin:publish-assets task not exis
 
 ## widget configuration
 
-All widget configuration is sets in the YAML file 'sfUoWidget.yml'.
+All widget configuration is sets both in the YAML file 'sfUoWidget.yml' and in its constructor (widget's option). Here is the main configuration options:
 
-default_adapter: defined the default adapter (jquery by default)
-lazy_mode: define if lazy mode is enable or not y default. If enabled, all JS initialization will be done automatically on widget render, if not, you have to done by your self.
+js_adapter: The javascript adapter to use (jQuery by default). The default value is sets in the main YAML configuration file, anyway you can specify a new one by the option in widget constructor.
 
-adapter definition
+js_lazy: The javascript render lazy mode (true by default). The default value is sets in the main YAML configuration file, anyway you can specify a new one by the option in widget constructor. If enabled, all JS initialization will be done automatically on widget render, if not, you have to done it by your self.
+
+js_transformer: The javascript transformer to apply to the rendered HTML widget (null by default). A widget can apply many transformation (see "compatibilities" in YAML configuration).
+
+js_config: The widget's javascript configurations to used by the transformer (null by default). In case of many transformers, it must be an associative array with the transformer name as key.
 
 
 ### using default loader
 
+All default configuration is sets in yhe YAML file 'sfUoWidget.yml'.
+
+
 ### using dynamics loader
 
-
-
-
-
-
-widget options
-* Available options:
-   *
-   *  * js_transformer:        JS transformer to apply (null by default)
-   *  * js_config:             Associative array with JS options (empty array by default)
-   *  * js_adapter:            The JS adapter (see sfUoWidget.yml to defined the default value)
-   *  * js_lazy:               Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
-   *  * i18n_catalogue:        The i18n catalogue to use ("messages" by default)
+Dynamics configuration is both sets in yhe YAML file 'sfUoWidget.yml' and in the dynamics XML packages.
