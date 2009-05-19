@@ -18,26 +18,37 @@
  */
 class sfUoAdminMenuConfigManager implements ArrayAccess
 {
-  /**
-   * Context references
-   */
   protected
-    $context    = null,
-    $controller = null,
-    $request    = null,
-    $response   = null;
+    $context       = null,
+    $configuration = array();
 
   /**
    * Constructor
    */
   public function __construct($context)
   {
-    $this->context    = $context;
-    $this->response   = $context->getResponse();
-    $this->request    = $context->getRequest();
-    $this->controller = $context->getController();
+    $this->context = $context;
+    $this->configuration = include($this->context->getConfiguration()->getConfigCache()->checkConfig('config/sfUoAdminMenu.yml'));
+  }
 
-    $this->configuration = include($context->getConfiguration()->getConfigCache()->checkConfig('config/sfUoAdminMenu.yml'));
+  /**
+   * Returns context
+   *
+   * @return sfContext
+   */
+  public function getContext()
+  {
+    return $this->context;
+  }
+
+  /**
+   * Returns all configuration
+   *
+   * @return array
+   */
+  public function getAllConfiguration()
+  {
+    return $this->configuration;
   }
 
   /**

@@ -67,7 +67,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function getJsAdapter()
   {
-    return $this->getOption('js_adapter');
+    return $this->getOption('js_adapter') ? $this->getOption('js_adapter') : sfUoWidgetHelper::getDefaultJsAdapter();
   }
 
   /**
