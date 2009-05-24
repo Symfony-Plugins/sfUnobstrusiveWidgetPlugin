@@ -18,51 +18,10 @@ Installation
 Documentation
 -------------
 
-All classes have full API and usage documentation. The best way to learn each widget or validator is to read the API.
-
-All widgets from this plugin extends the sfUoWidget class wich provided some specific options :
-
-  * js_transformer : a transformer is the way that javascripts transforms widget (if JS enable of course). A widget can apply many transformers at the same time
-  * js_config : the specific configuration use by javascript for the widget
-  * js_adapter : the adapter to use, jQuery by default but there are no limitation
-  * js_skin : the skin used by widget, you can defined your own skin
-
-You will also find some examples on my web site: http://my-labz.com
-
-
-Widgets
--------
-
-  * sfUoWidgetAccordion: Displays an accordion widget
-  * sfUoWidgetList: Displays a list widget
-  * sfUoWidgetMenu: Displays a list widget with link
-  * sfUoWidgetAdminMenu: Displays a menu widget from a yaml description
-
-Propel widgets
--------
-
-  * sfUoWidgetPropelList: Displays a list widget tied to a Propel model
-  * sfUoWidgetPropelNestedList: Displays a nested list widget tied to a Propel model
-
-Form widgets
--------
-
-  * sfUoWidgetFormCheckList: Displays a check list widget
-  * sfUoWidgetFormDate: Displays a date widget
-  * sfUoWidgetFormInputText: Displays an input text widget
-  * sfUoWidgetFormRange: Displays a range widget between two others widgets
-  * sfUoWidgetFormSelect: Displays a select widget
-  * sfUoWidgetFormSelectMany: Displays a multiple select widget
-  * sfUoWidgetFormTextarea: Displays a textarea widget
-
-Form propel widgets
--------
-
-  * sfUoWidgetFormPropelSelect: Displays a select widget tied to a Propel model
-  * sfUoWidgetFormPropelCheckList: Displays a check list widget tied to a Propel model
-  * sfUoWidgetFormPropelNestedCheckList: Displays a nested check list widget tied to a Propel model
-
+Full documentation is disponibel in the directory "doc", but I encourage you to look at the code phpdoc for other information.
 
 As no third party libraries is bundled in the plugin, you need to install and load the required
 dependencies like JQuery or JQuery UI by yourself.
 
+
+This plugin is fully compatible with sfDynamicsPlugin (http://www.symfony-project.org/plugins/sfDynamicsPlugin).
