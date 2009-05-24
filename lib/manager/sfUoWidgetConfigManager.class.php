@@ -329,7 +329,7 @@ class sfUoWidgetConfigManager implements ArrayAccess
     try
     {
       $config = $this->getTransformerConfiguration($adapter, $selector, $transformer);
-      $result = $this->getAdapterTemplate($adapter, array_key_exists('template', $config) ? $config['template'] : 'widget');
+      $result = $this->getAdapterTemplate($adapter, array_key_exists('template', $config) ? $config['template'] : 'default');
     }
     catch(Exception $e)
     {

@@ -2,12 +2,13 @@ default_adapter: jquery
 lazy_mode: true
 
 adapters:
+
   jquery:
     theme: redmond
 
     templates:
-      widget: '$("#%1$s").%2$s({ %3$s });'
-      window_onload: jQuery(document).ready(function(){ $("#%1$s").%2$s({ %3$s }); });
+      default: 'jQuery("#%1$s").%2$s({ %3$s });'
+      window_onload: jQuery(document).ready(function(){ jQuery("#%1$s").%2$s({ %3$s }); });
 
     packages:
       uo_widget_containers_list:
