@@ -1,0 +1,25 @@
+# learn by example - treeview
+
+
+## create widget
+
+You can apply the treeview transformers to list, checklist and menu widgets :
+  * sfUoWidgetList
+  * sfUoWidgetMenu
+  * sfUoWidgetAdminMenu
+  * sfUoWidgetFormCheckList
+
+$checklist = new sfUoWidgetFormCheckList(array(
+    'choices'=>array(
+      'item A', 
+      'item_B' => array('label' => 'item B', 'content' => array('item B1', 'item B2')), 
+      'item_C' => array('item_C1' => array('item_C1.1', 'item_C1.2'))
+      ),
+      'js_transformer' => 'treeview',
+  )
+);
+
+
+## render widget
+
+$checklist->render('form_field_name');

@@ -1,0 +1,33 @@
+# learn by example - slider
+
+
+## simple slider
+
+### create widget
+
+$slider = sfUoWidgetFormSelect(array(
+  'choices' => array('test 0','test 1','test 2','test 3'),
+  'js_transformer' => 'slider',
+));
+
+
+### render widget
+
+$slider->render('form_field_name');
+
+
+
+## range slider
+
+### create widget
+
+$slider = new sfUoWidgetFormRange(array(
+  'to'   => new sfUoWidgetFormSelect(array('js_transformer' => 'slider')),
+  'from' => new sfUoWidgetFormSelect(array('js_transformer' => 'slider')),
+  )
+);
+
+
+### render widget
+
+$slider->render('form_field_name');

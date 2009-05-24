@@ -1,0 +1,18 @@
+# learn by example - many transformers on one widget
+
+Sometime, you may need to apply few transformers on one widget. here is what you can do :
+
+
+$checklist = new sfUoWidgetFormCheckList(array(
+    'choices'=>array(
+      'item A', 
+      'item_B' => array('label' => 'item B', 'content' => array('item B1', 'item B2')), 
+      'item_C' => array('item_C1' => array('item_C1.1', 'item_C1.2'))
+      ),
+      'js_transformer' => array('treeview', 'auto_check'),
+      'js_config'      => array('treeview'=>array(), 'auto_check'=>array()), // this is the way to add javascript configuration
+  )
+);
+
+
+In this example, both 'treeview' and 'auto_check' transformers will be apply to the widget.

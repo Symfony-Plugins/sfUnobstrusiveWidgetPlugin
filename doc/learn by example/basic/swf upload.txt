@@ -1,0 +1,18 @@
+# learn by example - swf upload
+
+As it's just a widget, you need to create an action to received the swfUpload file and a specific validator.
+Fortunately there is already a plugin for it : sfUploadManagerPlugin (http://www.symfony-project.org/plugins/sfUploadManagerPlugin)
+
+
+## create widget
+
+$swfUpload = new sfUoWidgetFormInputFile(array(
+  'js_transformer' => 'swf_upload',
+  'js_config'      => array('upload_url' => url_for($route), 'file_post_name' => 'file'),
+  )
+);
+
+
+## render widget
+
+$swfUpload->render('widget_name');

@@ -1,0 +1,6 @@
+# learn by example - escaping strategy
+
+
+## render with escaping_strategy sets to ON
+
+$tabs->render('my_first_tabs', ESC_RAW);

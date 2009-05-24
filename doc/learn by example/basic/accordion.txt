@@ -1,0 +1,21 @@
+# learn by example - accordion
+
+
+## create widget
+
+$accordion = new sfUoWidgetContainersList(
+  array(
+    'choices' => array(
+      'FOO' => 'foo content', 
+      'BAR' => 'bar content', 
+    ),
+    'js_transformer' => 'accordion',
+    'title_type'     => 'h2',
+    'js_config'      => array('collapsible' => true) // see http://jqueryui.com/demos/accordion/#options for other config
+  )
+);
+
+
+## render widget
+
+$accordion->render('my_first_accordion');
