@@ -284,6 +284,9 @@ abstract class sfUoWidget extends sfWidgetForm
     $this->addOption('js_config', array());
     $this->addOption('js_adapter', sfUoWidgetHelper::getDefaultJsAdapter());
     $this->addOption('js_lazy', sfUoWidgetHelper::isInLazyModeByDefault());
+    
+    $this->addOption('controller', false);
+    $this->addOption('i18n', false);
     $this->addOption('i18n_catalogue', 'messages');
   }
 
@@ -438,17 +441,37 @@ abstract class sfUoWidget extends sfWidgetForm
    * Returns the i18n version of the string 
    * if i18n is activated, or the string itself otherwise 
    * 
-   * @todo handle placeholders 
-   * @param string $string 
+   * @param string $message 
+   * @param array $option 
+   *
    * @return string 
    */ 
-
-  protected function getI18n($string) 
+  protected function translate($message, $options = array()) 
   { 
     if (sfConfig::get('sf_i18n')) 
     { 
-      return sfContext::getInstance()->getI18n()->__($string, array(), $this->getOption('i18n_catalogue')); 
+      return $this->getI18n()->__($message, $options, $this->getOption('i18n_catalogue')); 
     } 
-    return $string; 
+    return $message; 
+  }
+  
+  /** 
+   * Returns an i18n object 
+   * 
+   * @return sfI18n or equivalent 
+   */ 
+  protected function getI18n()
+  {
+    return $this->getOption('i18n') ? $this->getOption('i18n') : sfContext::getInstance()->getI18n();
+  }
+  
+  /** 
+   * Returns a controller object 
+   * 
+   * @return sfWebController or equivalent 
+   */ 
+  protected function getController()
+  {
+    return $this->getOption('controller') ? $this->getOption('controller') : sfContext::getInstance()->getController();
   }
 }
