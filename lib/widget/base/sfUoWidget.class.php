@@ -57,7 +57,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function isLazy()
   {
-    return $this->getOption('js_lazy');
+    return !is_null($this->getOption('js_lazy')) ? $this->getOption('js_lazy') : $this->getConfigManager()->isInLazyModeByDefault();
   }
 
   /**
@@ -67,7 +67,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function getJsAdapter()
   {
-    return $this->getOption('js_adapter') ? $this->getOption('js_adapter') : sfUoWidgetHelper::getDefaultJsAdapter();
+    return !is_null($this->getOption('js_adapter')) ? $this->getOption('js_adapter') : $this->getConfigManager()->getDefaultAdapter();
   }
 
   /**
@@ -157,11 +157,11 @@ abstract class sfUoWidget extends sfWidgetForm
     {
       if ($this->isLazy())
       {
-        $template = sfUoWidgetHelper::getConfigManager()->getTransformerTemplate($jsAdapter, $jsSelector, $transformer);
+        $template = $this->getConfigManager()->getTransformerTemplate($jsAdapter, $jsSelector, $transformer);
         $result[] = sprintf(
           $template, 
           $id, 
-          sfUoWidgetHelper::camelizeLcFirst($jsSelector.'_'.$transformer),
+          sfUoStringHelper::camelizeLcFirst($jsSelector.'_'.$transformer),
           isset($config[$transformer]) ? implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($config[$transformer]), array_values($config[$transformer]))) : ''
         );
       }
@@ -192,7 +192,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   protected function loadAssets()
   {
-    sfUoWidgetHelper::getLoader()->loadTransformers($this->getJsAdapter(), $this->getJsSelector(), $this->getJsTransformers());
+    $this->getLoader()->loadTransformers($this->getJsAdapter(), $this->getJsSelector(), $this->getJsTransformers());
   }
 
   /**
@@ -282,9 +282,11 @@ abstract class sfUoWidget extends sfWidgetForm
 
     $this->addOption('js_transformer', array());
     $this->addOption('js_config', array());
-    $this->addOption('js_adapter', sfUoWidgetHelper::getDefaultJsAdapter());
-    $this->addOption('js_lazy', sfUoWidgetHelper::isInLazyModeByDefault());
+    $this->addOption('js_adapter', null);
+    $this->addOption('js_lazy', null);
     
+    $this->addOption('config_manager', false);
+    $this->addOption('loader', false);
     $this->addOption('controller', false);
     $this->addOption('i18n', false);
     $this->addOption('i18n_catalogue', 'messages');
@@ -464,7 +466,7 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     return $this->getOption('i18n') ? $this->getOption('i18n') : sfContext::getInstance()->getI18n();
   }
-  
+
   /** 
    * Returns a controller object 
    * 
@@ -473,5 +475,25 @@ abstract class sfUoWidget extends sfWidgetForm
   protected function getController()
   {
     return $this->getOption('controller') ? $this->getOption('controller') : sfContext::getInstance()->getController();
+  }
+
+  /** 
+   * Returns a loader object 
+   * 
+   * @return sfUoWidgetBaseLoader or equivalent 
+   */ 
+  protected function getLoader()
+  {
+    return $this->getOption('loader') ? $this->getOption('loader') : sfUoWidgetHelper::getLoader();
+  }
+
+  /** 
+   * Returns a loader object 
+   * 
+   * @return sfUoWidgetBaseLoader or equivalent 
+   */ 
+  protected function getConfigManager()
+  {
+    return $this->getOption('config_manager') ? $this->getOption('config_manager') : sfUoWidgetHelper::getConfigManager();
   }
 }
