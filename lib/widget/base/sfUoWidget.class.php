@@ -112,7 +112,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function getStylesheets()
   {
-    //include_stylesheets_for_form cause some problem with dynamics
+    //include_stylesheets_for_form include assets twice, so return an empty array
     return array();
   }
 
@@ -125,7 +125,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function getJavaScripts()
   {
-    //include_javascripts_for_form cause some problem with dynamics
+    //include_stylesheets_for_form include assets twice, so return an empty array
     return array();
   }
 
@@ -162,7 +162,7 @@ abstract class sfUoWidget extends sfWidgetForm
           $template, 
           $id, 
           sfUoStringHelper::camelizeLcFirst($jsSelector.'_'.$transformer),
-          isset($config[$transformer]) ? implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($config[$transformer]), array_values($config[$transformer]))) : ''
+          isset($config[$transformer]) ? sfUoStringHelper::getJavascriptConfiguration($config[$transformer]) : ''
         );
       }
     }
@@ -227,7 +227,7 @@ abstract class sfUoWidget extends sfWidgetForm
    *
    * @return void
    */
-  protected function setRenderAttributes(Array $values)
+  protected function setRenderAttributes(array $values)
   {
     $this->renderAttributes = $values;
   }
@@ -315,7 +315,7 @@ abstract class sfUoWidget extends sfWidgetForm
   /**
    * Gets the JavaScript classes.
    *
-   * @return Array JS classes
+   * @return array JS classes
    */
   protected function getJsClasses()
   {
@@ -343,7 +343,7 @@ abstract class sfUoWidget extends sfWidgetForm
    *
    * @return array An array of merged attributes
    */
-  protected function getMergedAttributes(Array $attributes, $mergeJsClass = false)
+  protected function getMergedAttributes(array $attributes, $mergeJsClass = false)
   {
     $attributes = array_merge($this->attributes, $attributes);
     if ($mergeJsClass)
@@ -363,7 +363,7 @@ abstract class sfUoWidget extends sfWidgetForm
    *
    * @return array An array of merged attributes
    */
-  protected function addAttribute(Array $attributes, $key, $value)
+  protected function addAttribute(array $attributes, $key, $value)
   {
     if (empty($value))
     {
@@ -387,58 +387,6 @@ abstract class sfUoWidget extends sfWidgetForm
     return $attributes;
   }
 
-  /**
-   * Prepares a JS config key and value for HTML representation.
-   *
-   * It removes empty attributes, except for the value one.
-   *
-   * @param  string $k  The config key
-   * @param  string $v  The config value
-   *
-   * @return string The HTML representation of the JS config key attribute pair.
-   */
-  public function getJsConfigCallback($k, $v)
-  {
-    if (is_array($v))
-    {
-      $v = implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($v), array_values($v)));
-      if (is_integer($k))
-      {
-        $result = empty($v) ? '' : sprintf('{ %s }', $v);
-      }
-      else
-      {
-        $template = substr($v, 0, 1) == '{' ? '%s: [%s]' : '%s: {%s}';
-        $result   = empty($v) ? '' : sprintf($template, $k, $v);
-      }
-    }
-    else
-    {
-      if (is_bool($v))
-      {
-        $v = $v ? 'true' : 'false';
-      }
-      else if (false !== strpos($k, '()'))
-      {
-        //function
-        $k = str_replace('()', '', $k);
-        $v = $v;
-      }
-      else if (is_numeric($v))
-      {
-        $v = $v;
-      }
-      else
-      {
-        $v = '"'.$v.'"';
-      }
-
-      $result = (is_null($v) || '' === $v) ? '' : sprintf('%s: %s', $k, $v);
-    }
-
-    return $result;
-  }
-
   /** 
    * Returns the i18n version of the string 
    * if i18n is activated, or the string itself otherwise 
@@ -456,7 +404,7 @@ abstract class sfUoWidget extends sfWidgetForm
     } 
     return $message; 
   }
-  
+
   /** 
    * Returns an i18n object 
    * 

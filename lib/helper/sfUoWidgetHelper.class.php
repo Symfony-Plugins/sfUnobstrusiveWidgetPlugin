@@ -74,31 +74,7 @@ class sfUoWidgetHelper
 
     return self::$adminMenuConfigManager;
   }
-  
-  /**
-   * Return config manager
-   *
-   * @param  mixte
-   *
-   * @return sfUoWidgetConfigManager
-   */
-  public static function getDefaultJsAdapter($context=null)
-  {
-    return self::getConfigManager($context)->getDefaultAdapter();
-  }
-  
-  /**
-   * Return config manager
-   *
-   * @param  mixte
-   *
-   * @return sfUoWidgetConfigManager
-   */
-  public static function isInLazyModeByDefault($context=null)
-  {
-    return self::getConfigManager($context)->isInLazyModeByDefault();
-  }
-  
+
   /**
    * Return true if sfDynamics plugin enabled, false otherwise
    *
@@ -107,18 +83,5 @@ class sfUoWidgetHelper
   public static function isDynamicsEnable()
   {
     return is_dir(sfConfig::get('sf_plugins_dir').'/sfDynamicsPlugin') && class_exists('sfDynamics');
-  }
-
-  /**
-   * Return a camelized string with first letter in lowercase
-   *
-   * @param string $value
-   *
-   * @return string
-   */
-  public static function camelizeLcFirst($value)
-  {
-    $result = sfInflector::camelize($value);
-    return strtolower(substr($result, 0, 1)).substr($result, 1);
   }
 }

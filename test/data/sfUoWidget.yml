@@ -1,0 +1,134 @@
+default_adapter: jquery
+lazy_mode: true
+
+adapters:
+
+  jquery:
+    theme: redmond
+
+    templates:
+      default: 'jQuery("#%1$s").%2$s({ %3$s });'
+      window_onload: jQuery(document).ready(function(){ jQuery("#%1$s").%2$s({ %3$s }); });
+
+    packages:
+      uo_widget_containers_list:
+        accordion:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_containers_list_accordion.jquery.js
+        tabs:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_containers_list_tabs.jquery.js
+      uo_widget_list:
+        drop_down:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_drop_down.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/dynamic_drive/menu/ddsmoothmenu.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_list_drop_down.css
+        drop_line:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_drop_line.jquery.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_list_drop_line.css
+        treeview_admin:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_treeview_admin.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/jquery.simple.tree.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_list_treeview_admin.css
+        treeview:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_treeview.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/jquery.treeview.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_list_treeview.css
+      uo_widget_form_date:
+        picker:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_date_picker.jquery.js
+          template: window_onload
+      uo_widget_form_input_text:
+        spinner:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/btburnett/spinner/ui.spinner.js
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_input_text_spinner.jquery.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/btburnett/spinner/ui.spinner.css
+        mask:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_input_text_mask.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/digital_bush/jquery.maskedinput-1.2.2.js
+        auto_complete:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_input_text_auto_complete.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/pengo_works/auto_complete/jquery.autocomplete.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/pengo_works/auto_complete/jquery.autocomplete.css
+      uo_widget_form_input_file:
+        swf_upload:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/vendor/swf_upload/swfupload.js
+            - /sfUnobstrusiveWidgetPlugin/js/common/swf_upload/fileprogress.js
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_input_file_swf_upload.jquery.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_form_input_file_swf_upload.css
+      uo_widget_form_select_many:
+        asm:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_many_asm.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/asm_select/jquery.asmselect.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_form_select_many_asm.css
+        double_list:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_many_double_list.jquery.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_form_select_many_double_list.css
+        drop_down_check_list:
+          template: window_onload
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_many_drop_down_check_list.jquery.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_form_select_many_drop_down_check_list.css
+      uo_widget_form_select:
+        slider:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_slider.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/filament_group/slider/js/selectToUISlider.jQuery.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/filament_group/slider/css/ui.slider.extras.css
+      uo_widget_form_textarea:
+        tiny_mce:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_textarea_tiny_mce.jquery.js
+        wym_editor:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_textarea_wym_editor.jquery.js
+      uo_widget_form_list:
+        treeview:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_treeview.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/jquery.treeview.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_list_treeview.css
+          compatibilities:
+            - auto_check
+        auto_check:
+          js_files:
+             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_auto_check.jquery.js
+          compatibilities:
+            - treeview
+          
+themes:
+  redmond:
+    css_files:
+      - /sfUnobstrusiveWidgetPlugin/css/themes/redmond/jquery-ui-1.7.1.custom.css
+  smoothness:
+    css_files:
+      - /sfUnobstrusiveWidgetPlugin/css/themes/smoothness/jquery-ui-1.7.1.custom.css
+  ui-darkness:
+    css_files:
+      - /sfUnobstrusiveWidgetPlugin/css/themes/ui-darkness/jquery-ui-1.7.1.custom.css
+  ui-lightness:
+    css_files:
+      - /sfUnobstrusiveWidgetPlugin/css/themes/ui-lightness/jquery-ui-1.7.1.custom.css
