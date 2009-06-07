@@ -4,7 +4,7 @@ include($pluginPath.'/test/bootstrap.php');
 require_once($pluginPath.'/lib/helper/sfUoStringHelper.class.php');
 
 
-$test = new lime_test(20, new lime_output_color());
+$test = new lime_test(21, new lime_output_color());
 
 $test->diag('sfUnobstrusiveWidgetPlugin : test sfUoStringHelper class');
 
@@ -34,6 +34,7 @@ $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('bar
 $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('foo'=>'bar')),  'foo: {foo: "bar"}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
 $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('foo'=>'bar', 'foo1'=>'bar1')),  'foo: {foo: "bar",foo1: "bar1"}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
 $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('foo'=>array('foo1'=>'bar1'))),  'foo: {foo: {foo1: "bar1"}}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
+$test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('data'=>array('test', 'test 2', 'foo', 'bar'))),   'foo: {data: ["test 2", "foo", "bar"]}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
 
 
 $test->diag('sfUoStringHelper::getJavascriptConfiguration()');

@@ -11,6 +11,7 @@ v 1.1.0 - 2009-05-25
  * Francois Béliveau : added tabs transformer to sfUoWidgetContainersList widget
  * Francois Béliveau : changed spinner JS script
  * Francois Béliveau : added sfUoWidgetFormPropelSelectMany widget
+ * Francois Béliveau : removed default transformer for sfUoWidgetFormDate
 
 v 1.0.3 - 2009-04-22
 --------------------

@@ -25,20 +25,6 @@ class sfUoWidgetFormDate extends sfUoWidget
     );
 
   /**
-   * @see sfUoWidget
-   */
-  public function __construct($options = array(), $attributes = array())
-  {
-    //sets default transformer
-    if (!array_key_exists('js_transformer', $options))
-    {
-      $options['js_transformer'] = 'picker';
-    }
-
-    parent::__construct($options, $attributes);
-  }
-
-  /**
    * Return JS config id.
    *
    * @return string The JS id
