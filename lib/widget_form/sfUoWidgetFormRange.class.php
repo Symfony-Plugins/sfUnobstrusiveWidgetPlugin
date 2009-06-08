@@ -53,8 +53,8 @@ class sfUoWidgetFormRange extends sfUoWidget
     
     $widgetFrom = $this->getOption('from');
     $widgetTo   = $this->getOption('to');
-    $jsLazyFrom = $widgetFrom->getOption('js_lazy');
-    $jsLazyTo   = $widgetTo->getOption('js_lazy');
+    $jsLazyFrom = $widgetFrom->isLazy();
+    $jsLazyTo   = $widgetTo->isLazy();
 
     if ($jsLazyFrom || $jsLazyTo)
     {
