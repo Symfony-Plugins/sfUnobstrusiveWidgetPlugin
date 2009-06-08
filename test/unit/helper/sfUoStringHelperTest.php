@@ -30,11 +30,11 @@ $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('bar', false),  '
 $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo()', 'bar'),  'foo: bar', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
 $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', 0),  'foo: 0', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
 $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', 5),  'foo: 5', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
-$test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('bar')),  null, "::getJavascriptConfigurationCallback() return a JavaScript configuration");
+$test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('bar')),  'foo: ["bar"]', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
 $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('foo'=>'bar')),  'foo: {foo: "bar"}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
-$test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('foo'=>'bar', 'foo1'=>'bar1')),  'foo: {foo: "bar",foo1: "bar1"}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
+$test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('foo'=>'bar', 'foo1'=>'bar1')),  'foo: {foo: "bar", foo1: "bar1"}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
 $test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('foo'=>array('foo1'=>'bar1'))),  'foo: {foo: {foo1: "bar1"}}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
-$test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('data'=>array('test', 'test 2', 'foo', 'bar'))),   'foo: {data: ["test 2", "foo", "bar"]}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
+$test->is(sfUoStringHelper::getJavascriptConfigurationCallback('foo', array('data'=>array('test', 'test 2', 'foo', 'bar'))),   'foo: {data: ["test", "test 2", "foo", "bar"]}', "::getJavascriptConfigurationCallback() return a JavaScript configuration");
 
 
 $test->diag('sfUoStringHelper::getJavascriptConfiguration()');
@@ -62,5 +62,6 @@ $test->is(
       ),
     )
   ),
-  'bool: false,int: 345,float: 34.6,function: aCallBack,string: "foo bar",array: {bool: false,int: 345,float: 34.6,function: aCallBack,string: "foo bar",array: {bool: false,int: 345,float: 34.6,function: aCallBack,string: "foo bar"}}',
+  'bool: false, int: 345, float: 34.6, function: aCallBack, string: "foo bar", array: {bool: false, int: 345, float: 34.6, function(): "aCallBack", string: "foo bar", array: {bool: false, int: 345, float: 34.6, function(): "aCallBack", string: "foo bar"}}',
   "::getJavascriptConfiguration() return a complete JavaScript configuration");
+

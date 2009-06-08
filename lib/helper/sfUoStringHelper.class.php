@@ -40,7 +40,7 @@ class sfUoStringHelper
    */
   public static function getJavascriptConfiguration(array $data)
   {
-    return implode(',', array_map(array('sfUoStringHelper', 'getJavascriptConfigurationCallback'), array_keys($data), array_values($data)));
+    return implode(', ', array_map(array('sfUoStringHelper', 'getJavascriptConfigurationCallback'), array_keys($data), array_values($data)));
   }
 
   /**
@@ -55,7 +55,35 @@ class sfUoStringHelper
    */
   public static function getJavascriptConfigurationCallback($k, $v)
   {
-    if (empty($k) || (empty($v) && !is_bool($v) && !is_numeric($v)))
+    if (is_string($k) && false !== strpos($k, '()'))
+    {
+      //function
+      $k = str_replace('()', '', $k);
+      $v = $v;
+    }
+    else
+    {
+      $v = self::getJavascriptConfigurationValue($v);
+    }
+
+    if (empty($k) || (is_null($v)))
+    {
+      return null;
+    }
+
+    return sprintf('%s: %s', $k, $v);
+  }
+
+  /**
+   * Return a configuration value.
+   *
+   * @param  string $v  The config value
+   *
+   * @return mixed
+   */
+  protected static function getJavascriptConfigurationValue($v)
+  {
+    if (empty($v) && !is_bool($v) && !is_numeric($v))
     {
       return null;
     }
@@ -63,17 +91,28 @@ class sfUoStringHelper
     switch (true)
     {
       case is_array($v):
-        $v = implode(',', array_map(array('sfUoStringHelper', 'getJavascriptConfigurationCallback'), array_keys($v), array_values($v)));
-        if (is_integer($k))
+        $result  = array();
+        $isArray = true;
+        foreach ($v as $key => $value)
         {
-          return empty($v) ? '' : sprintf('{ %s }', $v);
+          $value = self::getJavascriptConfigurationValue($value);
+          if (!is_int($key))
+          {
+            $isArray = false;
+            $value   = $key.': '.$value;
+          }
+
+          $result[] = $value;
+        }
+
+        if (empty($result))
+        {
+          return null;
         }
         else
         {
-          $template = substr($v, 0, 1) == '{' ? '%s: [%s]' : '%s: {%s}';
-          return empty($v) ? '' : sprintf($template, $k, $v);
+          return $isArray ? sprintf('[%s]', implode(', ', $result)) : sprintf('{%s}', implode(', ', $result));
         }
-        break;
 
       case is_bool($v):
         $v = $v ? 'true' : 'false';
@@ -85,22 +124,13 @@ class sfUoStringHelper
         break;
 
       case is_string($v):
-        if (false !== strpos($k, '()'))
-        {
-          //function
-          $k = str_replace('()', '', $k);
-          $v = $v;
-        }
-        else
-        {
-          $v = '"'.$v.'"';
-        }
+        $v = '"'.$v.'"';
         break;
 
       default:
         throw new Exception('Invalid value');
     }
 
-    return sprintf('%s: %s', $k, $v);
+    return $v;
   }
 }
