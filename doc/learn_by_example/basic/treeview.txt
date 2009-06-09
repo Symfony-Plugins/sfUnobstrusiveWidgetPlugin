@@ -13,7 +13,7 @@ $checklist = new sfUoWidgetFormCheckList(array(
     'choices'=>array(
       'item A', 
       'item_B' => array('label' => 'item B', 'content' => array('item B1', 'item B2')), 
-      'item_C' => array('item_C1' => array('item_C1.1', 'item_C1.2'))
+      'item_C' => array('item_C1' => array('item_C1.1', 'item_C1.2')),
       ),
       'js_transformer' => 'treeview',
   )

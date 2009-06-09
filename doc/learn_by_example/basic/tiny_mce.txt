@@ -6,7 +6,7 @@ As tinyMCE (http://tinymce.moxiecode.com/index.php) is not bundled in the plugin
 ## create widget
 
 $tinyMce = sfUoWidgetFormTextarea(array(
-  'js_transformer'=>'tiny_mce'
+  'js_transformer'=>'tiny_mce',
 ));
 
 

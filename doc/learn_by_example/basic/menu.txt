@@ -14,7 +14,7 @@ $accordion = new sfUoWidgetList(
     ),
     'js_transformer' => 'accordion',
     'title_type'     => 'h2',
-    'js_config'      => array('collapsible' => true) // see http://jqueryui.com/demos/accordion/#options for other config
+    'js_config'      => array('collapsible' => true), // see http://jqueryui.com/demos/accordion/#options for other config
   )
 );
 
@@ -29,9 +29,9 @@ $tabs = new sfUoWidgetContainersList(
       'FOO' => 'foo content', 
       'BAR' => 'bar content', 
     ),
-    'js_transformer' => 'tabs'
-    'title_type'     => 'h4'
-    'js_config'      => array('event' => 'mouseover') // see http://jqueryui.com/demos/tabs/#options for other config
+    'js_transformer' => 'tabs',
+    'title_type'     => 'h4',
+    'js_config'      => array('event' => 'mouseover'), // see http://jqueryui.com/demos/tabs/#options for other config
   )
 );
 
@@ -46,9 +46,9 @@ $tabs = new sfUoWidgetContainersList(
       'FOO' => 'foo content', 
       'BAR' => 'bar content', 
     ),
-    'js_transformer' => 'tabs'
-    'title_type'     => 'h4'
-    'js_config'      => array('event' => 'mouseover') // see http://jqueryui.com/demos/tabs/#options for other config
+    'js_transformer' => 'tabs',
+    'title_type'     => 'h4',
+    'js_config'      => array('event' => 'mouseover'), // see http://jqueryui.com/demos/tabs/#options for other config
   )
 );
 

@@ -10,8 +10,8 @@ $tabs = new sfUoWidgetContainersList(
       'BAR' => 'bar content', 
     ),
     'js_transformer' => 'tabs'
-    'title_type'     => 'h4'
-    'js_config'      => array('event' => 'mouseover') // see http://jqueryui.com/demos/tabs/#options for other config
+    'title_type'     => 'h4',
+    'js_config'      => array('event' => 'mouseover'), // see http://jqueryui.com/demos/tabs/#options for other config
   )
 );
 

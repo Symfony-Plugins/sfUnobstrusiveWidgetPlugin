@@ -6,7 +6,7 @@
 $spinner = new sfUoWidgetFormInputText(
   array(
     'js_transformer' => 'spinner',
-    'js_config'      => array('max' => 10)
+    'js_config'      => array('max' => 10),
   )
 );
 

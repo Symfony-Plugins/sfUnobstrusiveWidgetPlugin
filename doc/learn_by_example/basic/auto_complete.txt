@@ -6,7 +6,7 @@
 $autoCompleteInput = new sfUoWidgetFormInputText(
   array(
     'js_transformer' => 'auto_complete',
-    'js_config'      => array('data'=>array("test", "test 2", "foo", "bar")) // example with predefined data
+    'js_config'      => array('data'=>array("test", "test 2", "foo", "bar")), // example with predefined data
   )
 );
 
@@ -14,7 +14,7 @@ $autoCompleteInput = new sfUoWidgetFormInputText(
 $autoCompleteInput = new sfUoWidgetFormInputText(
   array(
     'js_transformer' => 'auto_complete',
-    'js_config'      => array('url'=>url_for($route)) // example with ajax loaded data
+    'js_config'      => array('url'=>url_for($route)), // example with ajax loaded data
   )
 );
 

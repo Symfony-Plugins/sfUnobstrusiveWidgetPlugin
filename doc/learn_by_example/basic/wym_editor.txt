@@ -6,7 +6,7 @@ As WYMeditor (http://www.wymeditor.org/) is not bundled in the plugin, you need 
 ## create widget
 
 $wymEditor = sfUoWidgetFormTextarea(array(
-  'js_transformer'=>'wym_editor'
+  'js_transformer'=>'wym_editor',
 ));
 
 
