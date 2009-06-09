@@ -1,13 +1,17 @@
 sfUnobstrusiveWidgetPlugin
 =================
 
-The `sfUnobstrusiveWidgetPlugin` packages useful widgets for symfony.
+The `sfUnobstrusiveWidgetPlugin` packages useful widgets for symfony in an unobstrusive way.
 
 
 Installation
 ------------
 
   * Install the plugin
+
+        $ symfony plugin:install sfFormExtraPlugin
+
+  * Publish assets
 
         $ symfony uo-widget:publish
 
@@ -17,11 +21,11 @@ Installation
 
 Documentation
 -------------
-
-Full documentation is disponibel in the directory "doc", but I encourage you to look at the code phpdoc for other information.
-
-As no third party libraries is bundled in the plugin, you need to install and load the required
-dependencies like JQuery or JQuery UI by yourself.
+	
+The full documentation can be found in the plugin's "doc" directory. You can also look the phpdoc for further informations.
 
 
-This plugin is fully compatible with sfDynamicsPlugin (http://www.symfony-project.org/plugins/sfDynamicsPlugin).
+As no third party libraries is bundled in the plugin, you need to install and load the required dependencies like JQuery or JQuery UI by yourself.
+
+
+This plugin can be used with sfDynamicsPlugin (http://www.symfony-project.org/plugins/sfDynamicsPlugin) without any additional setup.

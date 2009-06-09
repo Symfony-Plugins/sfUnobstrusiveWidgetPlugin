@@ -12,6 +12,8 @@ v 1.1.0 - 2009-05-25
  * Francois Béliveau : changed spinner JS script
  * Francois Béliveau : added sfUoWidgetFormPropelSelectMany widget
  * Francois Béliveau : removed default transformer for sfUoWidgetFormDate
+ * Francois Béliveau : added some unit test
+ * Francois Béliveau : added documentation and examples
 
 v 1.0.3 - 2009-04-22
 --------------------
