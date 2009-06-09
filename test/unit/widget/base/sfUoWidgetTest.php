@@ -5,8 +5,8 @@ include($pluginPath.'/test/bootstrap.php');
 
 require_once($pluginPath.'/lib/widget/base/sfUoWidget.class.php');
 require_once($pluginPath.'/lib/helper/sfUoWidgetHelper.class.php');
-require_once($pluginPath.'/lib/test/sfUoControllerMock.class.php');
-require_once($pluginPath.'/lib/test/sfUoControllerMock.class.php');
+require_once($pluginPath.'/lib/test/sfUoConfigManagerMock.class.php');
+require_once($pluginPath.'/lib/test/sfUoLoaderMock.class.php');
 require_once($pluginPath.'/lib/test/sfUoControllerMock.class.php');
 require_once($pluginPath.'/lib/test/sfUoI18nMock.class.php');
 require_once($pluginPath.'/lib/test/sfUoWidgetMock.class.php');
