@@ -13,7 +13,7 @@
  *
  * @package    symfony
  * @subpackage sfUnobstrusiveWidgetPlugin
- * @author     François Béliveau  <francois.beliveau@my-labz.com>
+ * @author     FranÃ§ois BÃ©liveau  <francois.beliveau@my-labz.com>
  */
 class sfUoWidgetFormPropelNestedCheckList extends sfUoWidgetPropelNestedList
 {
@@ -24,10 +24,6 @@ class sfUoWidgetFormPropelNestedCheckList extends sfUoWidgetPropelNestedList
    *
    *  * multiple:               true if the list must allow multiple selections
    *
-   * Available transformers:
-   *
-   *  * nested_check
-   *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
    *
@@ -35,7 +31,7 @@ class sfUoWidgetFormPropelNestedCheckList extends sfUoWidgetPropelNestedList
    */
   protected function configure($options = array(), $attributes = array())
   {
-    parent::configure($options = array(), $attributes = array());
+    parent::configure($options, $attributes);
   
     $this->addOption('multiple', true);
   }

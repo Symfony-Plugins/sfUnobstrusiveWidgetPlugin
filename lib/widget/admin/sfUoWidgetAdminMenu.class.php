@@ -35,6 +35,11 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
   /**
    * Configures the current widget.
    *
+   * Available options:
+   *
+   *  * user:                   User object (null by default)
+   *  * is_super_admin_method:  The isSuperAdmin method name url ("isSuperAdmin" by default)
+   *
    * @see sfUoWidget->configure()
    */
   protected function configure($options = array(), $attributes = array())

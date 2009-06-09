@@ -20,11 +20,6 @@ class sfUoWidgetFormSelectMany extends sfUoWidgetFormSelect
   /**
    * Configures the current widget.
    *
-   * Available transformer:
-   *
-   *  * double_list
-   *  * asm
-   *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
    *
@@ -35,15 +30,5 @@ class sfUoWidgetFormSelectMany extends sfUoWidgetFormSelect
     parent::configure($options, $attributes);
 
     $this->setOption('multiple', true);
-  }
-  
-  /**
-   * Gets the JavaScript selector.
-   *
-   * @return string A JS selector
-   */
-  protected function getJsSelector()
-  {
-    return 'uo_widget_form_select_many';
   }
 }

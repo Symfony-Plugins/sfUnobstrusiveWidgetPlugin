@@ -1,0 +1,140 @@
+.uo_widget_list_treeview_admin_ON {
+	margin:0;
+	padding:0;
+}
+.uo_widget_list_treeview_admin_ON li {
+	list-style: none;
+	margin:0;
+	padding:0 0 0 34px;
+	line-height: 14px;
+}
+.uo_widget_list_treeview_admin_ON li span {
+	display:inline;
+	clear: left;
+	white-space: nowrap;
+}
+.uo_widget_list_treeview_admin_ON ul {
+	margin:0; 
+	padding:0;
+}
+.uo_widget_list_treeview_admin_ON .root {
+	margin-left:-16px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/root.gif) no-repeat 16px 0 #ffffff;
+}
+.uo_widget_list_treeview_admin_ON .line {
+	margin:0 0 0 -16px;
+	padding:0;
+	line-height: 3px;
+	height:3px;
+	font-size:3px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/line_bg.gif) 0 0 no-repeat transparent;
+}
+.uo_widget_list_treeview_admin_ON .line-last {
+	margin:0 0 0 -16px;
+	padding:0;
+	line-height: 3px;
+	height:3px;
+	font-size:3px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/spacer.gif) 0 0 no-repeat transparent;
+}
+.uo_widget_list_treeview_admin_ON .line-over {
+	margin:0 0 0 -16px;
+	padding:0;
+	line-height: 3px;
+	height:3px;
+	font-size:3px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/line_bg_over.gif) 0 0 no-repeat transparent;
+}
+.uo_widget_list_treeview_admin_ON .line-over-last {
+	margin:0 0 0 -16px;
+	padding:0;
+	line-height: 3px;
+	height:3px;
+	font-size:3px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/line_bg_over_last.gif) 0 0 no-repeat transparent;
+}
+.uo_widget_list_treeview_admin_ON .folder-open {
+	margin-left:-16px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/collapsable.gif) 0 -2px no-repeat #fff;
+}
+.uo_widget_list_treeview_admin_ON .folder-open-last {
+	margin-left:-16px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/collapsable-last.gif) 0 -2px no-repeat #fff;
+}
+.uo_widget_list_treeview_admin_ON .folder-close {
+	margin-left:-16px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/expandable.gif) 0 -2px no-repeat #fff;
+}
+.uo_widget_list_treeview_admin_ON .folder-close-last {
+	margin-left:-16px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/expandable-last.gif) 0 -2px no-repeat #fff;
+}
+.uo_widget_list_treeview_admin_ON .doc {
+	margin-left:-16px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/leaf.gif) 0 -1px no-repeat #fff;
+}
+.uo_widget_list_treeview_admin_ON .doc-last {
+	margin-left:-16px;
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/leaf-last.gif) 0 -1px no-repeat #fff;
+}
+.uo_widget_list_treeview_admin_ON .ajax {
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/spinner.gif) no-repeat 0 0 #ffffff;
+	height: 16px;
+	display:none;
+}
+.uo_widget_list_treeview_admin_ON .ajax li {
+	display:none;
+	margin:0; 
+	padding:0;
+}
+.uo_widget_list_treeview_admin_ON .trigger {
+	display:inline;
+	margin-left:-32px;
+	width: 28px;
+	height: 11px;
+	cursor:pointer;
+}
+.uo_widget_list_treeview_admin_ON .text {
+	cursor: default;
+}
+.uo_widget_list_treeview_admin_ON .active {
+	cursor: default;
+	background-color:#F7BE77;
+	padding:0px 2px;
+	border: 1px dashed #444;
+}
+#drag_container {
+	background:#ffffff;
+	color:#000;
+	font: normal 11px arial, tahoma, helvetica, sans-serif;
+	border: 1px dashed #767676;
+}
+#drag_container ul {
+	list-style: none;
+	padding:0;
+	margin:0;
+}
+#drag_container li {
+	list-style: none;
+	background-color:#ffffff;
+	line-height:18px;
+	white-space: nowrap;
+	padding:1px 1px 0px 16px;
+	margin:0;
+}
+#drag_container li span {
+	padding:0;
+}
+#drag_container li.doc, #drag_container li.doc-last {
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/leaf.gif) no-repeat -17px 0 #ffffff;
+}
+#drag_container .folder-close, #drag_container .folder-close-last {
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/expandable.gif) no-repeat -17px 0 #ffffff;
+}
+
+#drag_container .folder-open, #drag_container .folder-open-last {
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview_admin/collapsable.gif) no-repeat -17px 0 #ffffff;
+}
+.contextMenu {
+	display:none;
+}

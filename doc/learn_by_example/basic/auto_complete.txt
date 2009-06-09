@@ -1,0 +1,35 @@
+# learn by example - auto complete
+
+
+## create widget
+
+$autoCompleteInput = new sfUoWidgetFormInputText(
+  array(
+    'js_transformer' => 'auto_complete',
+    'js_config'      => array('data'=>array("test", "test 2", "foo", "bar")), // example with predefined data
+  )
+);
+
+
+$autoCompleteInput = new sfUoWidgetFormInputText(
+  array(
+    'js_transformer' => 'auto_complete',
+    'js_config'      => array('url'=>url_for($route)), // example with ajax loaded data
+  )
+);
+
+
+## render widget
+
+$autoCompleteInput->render('form_field_name');
+
+
+## auto complete action
+
+The action call by auto complete should return someting like that :
+
+public function executeAutoCompleteData($request)
+{
+    sfConfig::set('sf_web_debug', false);
+    return $this->renderText("Sparta \n Spencer \n Spencerville \n Spring Valley \n Springboro \n Springfield");
+} 

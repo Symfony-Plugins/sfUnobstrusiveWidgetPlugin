@@ -1,8 +1,6 @@
 <?php
 $pluginPath = dirname(__FILE__).'/../../..';
-
 include($pluginPath.'/test/bootstrap.php');
-
 require_once($pluginPath.'/lib/helper/sfUoWidgetHelper.class.php');
 
 

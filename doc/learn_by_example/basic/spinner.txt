@@ -1,0 +1,16 @@
+# learn by example - spinner
+
+
+## create widget
+
+$spinner = new sfUoWidgetFormInputText(
+  array(
+    'js_transformer' => 'spinner',
+    'js_config'      => array('max' => 10),
+  )
+);
+
+
+## render widget
+
+$spinner->render('form_field_name');

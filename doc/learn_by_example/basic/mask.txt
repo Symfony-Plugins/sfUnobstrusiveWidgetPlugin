@@ -1,0 +1,16 @@
+# learn by example - mask
+
+
+## create widget
+
+$maskInput = new sfUoWidgetFormInputText(
+  array(
+    'js_transformer' => 'mask',
+    'js_config'      => array('mask'=>'99-99-99-99-99'), // mask example for a french phone number
+  )
+);
+
+
+## render widget
+
+$maskInput->render('form_field_name');

@@ -1,0 +1,15 @@
+# learn by example - wym editor
+
+As WYMeditor (http://www.wymeditor.org/) is not bundled in the plugin, you need to install and load the required dependencies by yourself.
+
+
+## create widget
+
+$wymEditor = sfUoWidgetFormTextarea(array(
+  'js_transformer'=>'wym_editor',
+));
+
+
+## render widget
+
+$wymEditor->render('');

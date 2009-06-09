@@ -18,9 +18,6 @@
  */
 abstract class sfUoWidget extends sfWidgetForm
 {
-  const INIT_TEMPLATE_JQUERY    = '$("#%1$s").%2$s({});';
-  const ON_LOAD_TEMPLATE_JQUERY = 'jQuery(document).ready(function(){%1$s})';
-
   protected
     $renderAttributes = array(),
     $renderName       = '',
@@ -60,39 +57,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function isLazy()
   {
-    return $this->getOption('js_lazy');
-  }
-
-  /**
-   * Return init template
-   *
-   * @return string
-   */
-  public function getInitTemplate()
-  {
-    $result = $this->getOption('js_init_template');
-    return is_null($result) ? sfConfig::get('app_sfUoWidgetPlugin_init_template', self::INIT_TEMPLATE_JQUERY) : $result;
-  }
-  
-  /**
-   * Return windowOnLoad template
-   *
-   * @return string
-   */
-  public function getOnLoadTemplate()
-  {
-    $result = $this->getOption('js_on_load_template');
-    return is_null($result) ? sfConfig::get('app_sfUoWidgetPlugin_on_load_template', self::ON_LOAD_TEMPLATE_JQUERY) : $result;
-  }
-
-  /**
-   * Return the JS skin
-   *
-   * @return string A JS skin
-   */
-  public function getJsSkin()
-  {
-    return $this->getOption('js_skin');
+    return !is_null($this->getOption('js_lazy')) ? $this->getOption('js_lazy') : $this->getConfigManager()->isInLazyModeByDefault();
   }
 
   /**
@@ -102,7 +67,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function getJsAdapter()
   {
-    return $this->getOption('js_adapter');
+    return !is_null($this->getOption('js_adapter')) ? $this->getOption('js_adapter') : $this->getConfigManager()->getDefaultAdapter();
   }
 
   /**
@@ -128,7 +93,7 @@ abstract class sfUoWidget extends sfWidgetForm
     if ($this->hasJsTransformer())
     {
       $config = $this->getJsConfig($attributes['id']);
-      $this->insertAssets();
+      $this->loadAssets();
     }
 
     return $this->doRender().$config;
@@ -147,20 +112,8 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function getStylesheets()
   {
-    $manager      = sfUoWidgetHelper::getConfigManager();
-    $transformers = $this->getJsTransformers();
-    $results      = array();
-
-    foreach ($transformers as $transformer)
-    {
-      $stylesheets = $manager->getStylesheets($this->getJsAdapter(), $this->getJsSelector(), $transformer, $this->getJsSkin());
-      foreach ($stylesheets as $css)
-      {
-        $results[$css] = 'all';
-      }
-    }
-
-    return $results;
+    //include_stylesheets_for_form include assets twice, so return an empty array
+    return array();
   }
 
   /**
@@ -172,16 +125,8 @@ abstract class sfUoWidget extends sfWidgetForm
    */
   public function getJavaScripts()
   {
-    $manager      = sfUoWidgetHelper::getConfigManager();
-    $transformers = $this->getJsTransformers();
-    $results      = array();
-
-    foreach ($transformers as $transformer)
-    {
-      $results = array_merge($results, $manager->getJavascripts($this->getJsAdapter(), $this->getJsSelector(), $transformer));
-    }
-
-    return $results;
+    //include_stylesheets_for_form include assets twice, so return an empty array
+    return array();
   }
 
   /**
@@ -202,7 +147,7 @@ abstract class sfUoWidget extends sfWidgetForm
     $jsTransformers = $this->getJsTransformers();
     $result         = array();
 
-    if (count($jsTransformers) == 1 && !isset($config[$jsTransformers[0]]))
+    if (count($jsTransformers) == 1 && (!isset($config[$jsTransformers[0]]) || !is_array($config[$jsTransformers[0]])))
     {
       $config = array($jsTransformers[0] => $config);
     }
@@ -210,22 +155,15 @@ abstract class sfUoWidget extends sfWidgetForm
     $id = $this->getJsId($id);
     foreach ($this->getJsTransformers() as $transformer)
     {
-      if (isset($config[$transformer]))
-      {
-        $result[] = $jsSelector.'_'.$transformer.'_config.'.$id.'={'.implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($config[$transformer]), array_values($config[$transformer]))).'};';
-      }
-
       if ($this->isLazy())
       {
-        $widgetInitialization = sprintf($this->getInitTemplate(), $id, sfUoWidgetHelper::camelizeLcFirst($jsSelector.'_'.$transformer));
-        if (sfUoWidgetHelper::getConfigManager()->haveToSetsInWindowOnLoad($jsAdapter, $jsSelector, $transformer))
-        {
-          $result[] = sprintf($this->getOnLoadTemplate(), $widgetInitialization);
-        }
-        else
-        {
-          $result[] = $widgetInitialization;
-        }
+        $template = $this->getConfigManager()->getTransformerTemplate($jsAdapter, $jsSelector, $transformer);
+        $result[] = sprintf(
+          $template, 
+          $id, 
+          sfUoStringHelper::camelizeLcFirst($jsSelector.'_'.$transformer),
+          isset($config[$transformer]) ? sfUoStringHelper::getJavascriptConfiguration($config[$transformer]) : ''
+        );
       }
     }
 
@@ -250,21 +188,11 @@ abstract class sfUoWidget extends sfWidgetForm
   abstract protected function doRender();
 
   /**
-   * Insert assets to response
+   * Load assets to response
    */
-  protected function insertAssets()
+  protected function loadAssets()
   {
-    try
-    {
-      sfUoWidgetHelper::getConfigManager()->checkTransformersCompatibilities($this->getJsAdapter(), $this->getJsSelector(), $this->getJsTransformers());
-    }
-    catch (Excepion $e)
-    {
-      throw $e;
-    }
-
-    sfUoWidgetHelper::addJavascript($this->getJavaScripts());
-    sfUoWidgetHelper::addStylesheet($this->getStylesheets());
+    $this->getLoader()->loadTransformers($this->getJsAdapter(), $this->getJsSelector(), $this->getJsTransformers());
   }
 
   /**
@@ -299,7 +227,7 @@ abstract class sfUoWidget extends sfWidgetForm
    *
    * @return void
    */
-  protected function setRenderAttributes(Array $values)
+  protected function setRenderAttributes(array $values)
   {
     $this->renderAttributes = $values;
   }
@@ -339,8 +267,9 @@ abstract class sfUoWidget extends sfWidgetForm
    *
    *  * js_transformer:        JS transformer to apply (null by default)
    *  * js_config:             Associative array with JS options (empty array by default)
-   *  * js_adapter:            The JS adapter ("jquery" by default)
-   *  * js_skin:               The JS adapter ("default" by default)
+   *  * js_adapter:            The JS adapter (see sfUoWidget.yml to defined the default value)
+   *  * js_lazy:               Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+   *  * i18n_catalogue:        The i18n catalogue to use ("messages" by default)
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
@@ -353,9 +282,13 @@ abstract class sfUoWidget extends sfWidgetForm
 
     $this->addOption('js_transformer', array());
     $this->addOption('js_config', array());
-    $this->addOption('js_adapter', sfConfig::get('app_sfUoWidgetPlugin_adapter', 'jquery'));
-    $this->addOption('js_skin', sfConfig::get('app_sfUoWidgetPlugin_skin', 'default'));
-    $this->addOption('js_lazy', sfConfig::get('app_sfUoWidgetPlugin_lazy', true));
+    $this->addOption('js_adapter', null);
+    $this->addOption('js_lazy', null);
+    
+    $this->addOption('config_manager', false);
+    $this->addOption('loader', false);
+    $this->addOption('controller', false);
+    $this->addOption('i18n', false);
     $this->addOption('i18n_catalogue', 'messages');
   }
 
@@ -382,7 +315,7 @@ abstract class sfUoWidget extends sfWidgetForm
   /**
    * Gets the JavaScript classes.
    *
-   * @return Array JS classes
+   * @return array JS classes
    */
   protected function getJsClasses()
   {
@@ -410,7 +343,7 @@ abstract class sfUoWidget extends sfWidgetForm
    *
    * @return array An array of merged attributes
    */
-  protected function getMergedAttributes(Array $attributes, $mergeJsClass = false)
+  protected function getMergedAttributes(array $attributes, $mergeJsClass = false)
   {
     $attributes = array_merge($this->attributes, $attributes);
     if ($mergeJsClass)
@@ -430,7 +363,7 @@ abstract class sfUoWidget extends sfWidgetForm
    *
    * @return array An array of merged attributes
    */
-  protected function addAttribute(Array $attributes, $key, $value)
+  protected function addAttribute(array $attributes, $key, $value)
   {
     if (empty($value))
     {
@@ -454,73 +387,61 @@ abstract class sfUoWidget extends sfWidgetForm
     return $attributes;
   }
 
-  /**
-   * Prepares a JS config key and value for HTML representation.
-   *
-   * It removes empty attributes, except for the value one.
-   *
-   * @param  string $k  The config key
-   * @param  string $v  The config value
-   *
-   * @return string The HTML representation of the JS config key attribute pair.
-   */
-  public function getJsConfigCallback($k, $v)
-  {
-    if (is_array($v))
-    {
-      $v = implode(',', array_map(array($this, 'getJsConfigCallback'), array_keys($v), array_values($v)));
-      if (is_integer($k))
-      {
-        $result = empty($v) ? '' : sprintf('{%s}', $v);
-      }
-      else
-      {
-        $template = substr($v, 0, 1) == '{' ? '"%s":[%s]' : '"%s":{%s}';
-        $result   = empty($v) ? '' : sprintf($template, $k, $v);
-      }
-    }
-    else
-    {
-      if (is_bool($v))
-      {
-        $v = $v ? 'true' : 'false';
-      }
-      else if (false !== strpos($k, '()'))
-      {
-        //function
-        $k = str_replace('()', '', $k);
-        $v = $v;
-      }
-      else if (is_numeric($v))
-      {
-        $v = $v;
-      }
-      else
-      {
-        $v = '"'.$v.'"';
-      }
-
-      $result = (is_null($v) || '' === $v) ? '' : sprintf('"%s":%s', $k, $v);
-    }
-
-    return $result;
-  }
-
   /** 
    * Returns the i18n version of the string 
    * if i18n is activated, or the string itself otherwise 
    * 
-   * @todo handle placeholders 
-   * @param string $string 
+   * @param string $message 
+   * @param array $option 
+   *
    * @return string 
    */ 
-
-  protected function getI18n($string) 
+  protected function translate($message, $options = array()) 
   { 
     if (sfConfig::get('sf_i18n')) 
     { 
-      return sfContext::getInstance()->getI18n()->__($string, array(), $this->getOption('i18n_catalogue')); 
+      return $this->getI18n()->__($message, $options, $this->getOption('i18n_catalogue')); 
     } 
-    return $string; 
+    return $message; 
+  }
+
+  /** 
+   * Returns an i18n object 
+   * 
+   * @return sfI18n or equivalent 
+   */ 
+  protected function getI18n()
+  {
+    return $this->getOption('i18n') ? $this->getOption('i18n') : sfContext::getInstance()->getI18n();
+  }
+
+  /** 
+   * Returns a controller object 
+   * 
+   * @return sfWebController or equivalent 
+   */ 
+  protected function getController()
+  {
+    return $this->getOption('controller') ? $this->getOption('controller') : sfContext::getInstance()->getController();
+  }
+
+  /** 
+   * Returns a loader object 
+   * 
+   * @return sfUoWidgetBaseLoader or equivalent 
+   */ 
+  protected function getLoader()
+  {
+    return $this->getOption('loader') ? $this->getOption('loader') : sfUoWidgetHelper::getLoader();
+  }
+
+  /** 
+   * Returns a loader object 
+   * 
+   * @return sfUoWidgetBaseLoader or equivalent 
+   */ 
+  protected function getConfigManager()
+  {
+    return $this->getOption('config_manager') ? $this->getOption('config_manager') : sfUoWidgetHelper::getConfigManager();
   }
 }

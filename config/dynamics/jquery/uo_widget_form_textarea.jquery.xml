@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <package name="uo_widget_form_textarea.tiny_mce.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_textarea_tiny_mce.jquery</javascript>
+  </package>
+
+  <package name="uo_widget_form_textarea.wym_editor.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_textarea_wym_editor.jquery</javascript>
+  </package>
+
+</dynamics>

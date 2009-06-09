@@ -1,0 +1,13 @@
+# sfUnobstrusiveWidgetPlugin
+
+1. presentation
+2. philosophy
+3. installation
+4. configuration
+  4.1. default configuration
+  4.2. dynamics configuration
+5. extending
+6. available widgets
+  6.1. available propel widgets
+  6.2. available doctrine widgets
+7. contributors

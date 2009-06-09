@@ -1,0 +1,74 @@
+# learn by example - dropdown menu
+
+## simple example
+
+### drop down
+
+$menu = new sfUoWidgetAdminMenu(array('js_transformer' => 'drop_down'), array());
+
+$accordion = new sfUoWidgetList(
+  array(
+    'choices' => array(
+      'item 1' => 'foo content', 
+      'item 2' => 'bar content', 
+    ),
+    'js_transformer' => 'accordion',
+    'title_type'     => 'h2',
+    'js_config'      => array('collapsible' => true), // see http://jqueryui.com/demos/accordion/#options for other config
+  )
+);
+
+$accordion->render('my_first_accordion');
+
+
+### drop line
+
+$tabs = new sfUoWidgetContainersList(
+  array(
+    'choices' => array(
+      'FOO' => 'foo content', 
+      'BAR' => 'bar content', 
+    ),
+    'js_transformer' => 'tabs',
+    'title_type'     => 'h4',
+    'js_config'      => array('event' => 'mouseover'), // see http://jqueryui.com/demos/tabs/#options for other config
+  )
+);
+
+$tabs->render('my_first_tabs');
+
+
+### treeview
+
+$tabs = new sfUoWidgetContainersList(
+  array(
+    'choices' => array(
+      'FOO' => 'foo content', 
+      'BAR' => 'bar content', 
+    ),
+    'js_transformer' => 'tabs',
+    'title_type'     => 'h4',
+    'js_config'      => array('event' => 'mouseover'), // see http://jqueryui.com/demos/tabs/#options for other config
+  )
+);
+
+$tabs->render('my_first_tabs');
+
+
+## rich choices content
+
+To sets rich choices content you can use partial or component like this :
+
+$containersList = new sfUoWidgetContainersList(
+  array(
+    'choices' => array(
+      'partial'   => get_partial('module/partial', array()),
+      'component' => get_component('module', 'partial', array()),
+    ),
+  )
+);
+
+
+## render with escaping_strategy sets to ON
+
+$tabs->render('my_first_tabs', ESC_RAW);

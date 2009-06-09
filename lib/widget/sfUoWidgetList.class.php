@@ -24,13 +24,8 @@ class sfUoWidgetList extends sfUoWidget
    * Available options:
    *
    *  * choices:               An array of possible choices (required)
-   *  * list_type:             List type (ul or ol)
+   *  * list_type:             List type ("ul" by default)
    *  * root:                  Root name (null by default)
-   *
-   * Available transformers:
-   *
-   *  * treeview_admin
-   *  * treeview
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
@@ -39,7 +34,7 @@ class sfUoWidgetList extends sfUoWidget
    */
   protected function configure($options = array(), $attributes = array())
   {
-    parent::configure($options = array(), $attributes = array());
+    parent::configure($options, $attributes);
   
     $this->addRequiredOption('choices');
     $this->addOption('list_type', 'ul');
@@ -97,11 +92,11 @@ class sfUoWidgetList extends sfUoWidget
     {
       if (is_array($value) && isset($value['label'])) 
       { 
-        $value['label'] = $this->getI18n($value['label']); 
+        $value['label'] = $this->translate($value['label']); 
       } 
       elseif (!is_array($value)) 
       { 
-        $value = $this->getI18n($value); 
+        $value = $this->translate($value); 
       }
 
       $attributes = array_merge($attributes, (is_array($value) && array_key_exists('attributes', $value)) ? $value['attributes'] : array());

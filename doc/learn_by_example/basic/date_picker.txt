@@ -1,0 +1,45 @@
+# learn by example - date picker
+
+
+## single date picker
+
+### create widget
+
+#### select mode
+
+$datePicker = sfUoWidgetFormDate(array(
+  'can_be_empty' => false,
+  'js_transformer' => 'picker',
+));
+
+
+#### input text mode
+
+$datePicker = sfUoWidgetFormDate(array(
+  'year_as_text'  => true,
+  'month_as_text' => true,
+  'day_as_text'   => true,
+  'js_transformer' => 'picker',
+));
+
+
+### render widget
+
+$datePicker->render('form_field_name');
+
+
+
+## range date picker
+
+### create widget
+
+$rangeDatePicker = new sfUoWidgetFormRange(array(
+  'to'   => new sfUoWidgetFormDate(array('js_transformer' => 'picker')),
+  'from' => new sfUoWidgetFormDate(array('js_transformer' => 'picker')),
+  )
+);
+
+
+### render widget
+
+$rangeDatePicker->render('form_field_name');

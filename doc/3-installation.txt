@@ -1,0 +1,18 @@
+# Installation
+
+## install by PEAR
+
+The easiest way is to use the latest release available on [the symfony project plugin's page](http://www.symfony-project.org/plugins/sfUnobstrusiveWidgetPlugin).
+Just use the plugin:install task on it and you'll be done:
+
+  [bash]
+  php symfony plugin:install sfUnobstrusiveWidgetPlugin
+  
+## install by SVN
+
+You can also use directly the SVN repository :
+[Go to the repository](http://www.symfony-project.org/plugins/sfUnobstrusiveWidgetPlugin): http://www.symfony-project.org/plugins/sfUnobstrusiveWidgetPlugin
+
+## install by package
+
+Go to [the symfony project plugin's page](http://www.symfony-project.org/plugins/sfUnobstrusiveWidgetPlugin) to download PEAR package and extract it in the plugin directory of your symfony project.

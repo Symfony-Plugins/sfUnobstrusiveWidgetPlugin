@@ -1,0 +1,47 @@
+# Default configuration
+
+The sfUoWidget.yml file contains the description of all default plugin configuration and adapters packages. 
+
+Default configuration :
+
+    * default_adapter: The javascript default adapter to use
+    * lazy_mode: The javascript default render lazy mode
+
+
+Each adapters is described with the following information:
+
+    * theme: The theme name to use.
+    * templates: Deffinition of available javascript template use by widget render method.
+    * packages: Description of adapter availables packages. Each packages is described with the javascripts selector and the transformer name and defined:
+      
+        * javascripts files (js_files)
+        * stylesheets files (css_files)
+        * compatibilities : list of compatible transformer name
+
+
+You can defined severals themes, each of them defined the required stylesheets.
+
+Here is an example of configuration :
+
+default_adapter: jquery
+lazy_mode: true
+adapters:
+  jquery:
+    theme: redmond
+    templates:
+      widget: '$("#%1$s").%2$s({ %3$s });'
+      window_onload: jQuery(document).ready(function(){ $("#%1$s").%2$s({ %3$s }); });
+    packages:
+      uo_widget_form_list:
+        treeview:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_treeview.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/jquery.treeview.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_list_treeview.css
+          compatibilities:
+            - auto_check
+themes:
+  redmond:
+    css_files:
+      - /sfUnobstrusiveWidgetPlugin/css/themes/redmond/jquery-ui-1.7.1.custom.css

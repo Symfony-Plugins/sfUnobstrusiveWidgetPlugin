@@ -1,0 +1,277 @@
+# available propel widgets
+sfUnobstrusiveWidget plugin provide some propel widgets. Here is the list, and status of each one.
+
+
+## sfUoWidgetPropelList
+
+To deal with simple list with propel.
+
+**selector**: uo_widget_list
+
+**available options**:
+  - model:                  The model class (required)
+  - add_empty:              Whether to add a first empty value or not (false by default).
+                            If the option is not a Boolean, the value will be used as the text value
+  - method:                 The method to use to display object values (__toString by default)
+  - peer_method:            The method to use to get objects (doSelect by default)
+  - order_by:               An array composed of two fields:
+                              - The column to order by the results (must be in the PhpName format)
+                              - asc or desc
+  - criteria:               A criteria to use when retrieving objects
+  - connection:             The Propel connection to use (null by default)
+  - *herited from sfUoWidgetList*
+    - choices:              An array of possible choices (required)
+    - list_type:            List type ("ul" by default)
+    - root:                 Root name (null by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - drop_down:            drop down list (see sfUoWidgetMenu) by Dynamic Drive (http://www.dynamicdrive.com/dynamicindex1/ddlevelsmenu/)
+    - drop_line:            drop line list (see sfUoWidgetMenu)
+    - treeview_admin        administrable treeview by Peter Panov <panov@elcat.kg>, IKEEN Group http://www.ikeen.com
+    - treeview              treeview (see sfUoWidgetMenu, sfUoWidgetFormCheckList) by Jörn Zaefferer http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
+
+**generated HTML**
+<ul class="uo_widget_list">
+  <li>content 1</li>
+  <li>content 2</li>
+  <li>...</li>
+</ul>
+
+
+## sfUoWidgetPropelNestedList
+
+To deal with nested list with propel.
+
+**selector**: uo_widget_list
+
+**available options**:
+  - tree_left_method:       The method to use to get tree left object values ("getTreeLeft" by default)
+  - tree_right_method:      The method to use to get tree right object values ("getTreeRight" by default)
+  - scope_method:           The method to use to get scope object values ("getScope" by default)
+  - *herited from sfUoWidgetPropelList*
+    - model:                The model class (required)
+    - add_empty:            Whether to add a first empty value or not (false by default).
+                            If the option is not a Boolean, the value will be used as the text value
+    - method:               The method to use to display object values ("__toString" by default)
+    - peer_method:          The method to use to get objects ("doSelect" by default)
+    - order_by:             An array composed of two fields:
+                              - The column to order by the results (must be in the PhpName format)
+                              - "asc" or "desc"
+    - criteria:             A criteria to use when retrieving objects
+    - connection:           The Propel connection to use (null by default)
+  - *herited from sfUoWidgetList*
+    - choices:              An array of possible choices (required)
+    - list_type:            List type ("ul" by default)
+    - root:                 Root name (null by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - drop_down:            drop down list (see sfUoWidgetMenu) by Dynamic Drive (http://www.dynamicdrive.com/dynamicindex1/ddlevelsmenu/)
+    - drop_line:            drop line list (see sfUoWidgetMenu)
+    - treeview_admin        administrable treeview by Peter Panov <panov@elcat.kg>, IKEEN Group http://www.ikeen.com
+    - treeview              treeview (see sfUoWidgetMenu, sfUoWidgetFormCheckList) by Jörn Zaefferer http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
+
+**generated HTML**
+<ul class="uo_widget_list">
+  <li>content 1</li>
+  <li>content 2
+    <ul>
+      <li>content 3</li>
+      <li>...</li>
+    </ul>
+  </li>
+  <li>...</li>
+</ul>
+
+
+## sfUoWidgetFormPropelSelect
+
+To deal with select with propel.
+
+**selector**: uo_widget_form_select or uo_widget_form_select_many
+
+**available options**:
+  - model:                    The model class (required)
+  - add_empty:                Whether to add a first empty value or not (false by default)
+                              If the option is not a Boolean, the value will be used as the text value
+  - method:                   The method to use to display object values (__toString by default)
+  - peer_method:              The method to use to get objects (doSelect by default)
+  - order_by:                 An array composed of two fields:
+                                - The column to order by the results (must be in the PhpName format)
+                                - asc or desc
+  - criteria:                 A criteria to use when retrieving objects
+  - connection:               The Propel connection to use (null by default)
+  - *herited from sfUoWidgetFormSelect*
+    - choices:                An array of possible choices (required)
+    - multiple:               true if the select tag must allow multiple selections
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - slider                accessibleUISlider - creates a UI slider component from a select element(s) by Scott Jehl, scott@filamentgroup.com
+
+**generated HTML**
+<select>
+  <option>Option 1</option>
+  <option>Option 2</option>
+  <option>...</option>
+</select>
+
+
+## sfUoWidgetFormPropelSelectMany
+
+To deal with multiple select with propel.
+
+**selector**: uo_widget_form_select_many
+
+**available options**:
+  - *herited from sfUoWidgetFormPropelSelect*
+    - model:                  The model class (required)
+    - add_empty:              Whether to add a first empty value or not (false by default)
+                              If the option is not a Boolean, the value will be used as the text value
+    - method:                 The method to use to display object values (__toString by default)
+    - peer_method:            The method to use to get objects (doSelect by default)
+    - order_by:               An array composed of two fields:
+                                - The column to order by the results (must be in the PhpName format)
+                                - asc or desc
+    - criteria:               A criteria to use when retrieving objects
+    - connection:             The Propel connection to use (null by default)
+  - *herited from sfUoWidgetFormSelect*
+    - choices:                An array of possible choices (required)
+    - multiple:               true if the select tag must allow multiple selections
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - asm                   Alternate Select Multiple (asmSelect) by http://www.ryancramer.com/projects/asmselect/
+    - double_list           double list widget
+    - drop_down_check_list  select with a drop down check list
+
+**generated HTML**
+<select multiple="multiple">
+  <option>Option 1</option>
+  <option>Option 2</option>
+  <option>...</option>
+</select>
+
+
+## sfUoWidgetPropelList
+
+To deal with simple ckecklist with propel.
+
+**selector**: uo_widget_form_list
+
+**available options**:
+  - multiple:               true if the select tag must allow multiple selections
+  - *herited from sfUoWidgetPropelNestedList*
+    - tree_left_method:     The method to use to get tree left object values ("getTreeLeft" by default)
+    - tree_right_method:    The method to use to get tree right object values ("getTreeRight" by default)
+    - scope_method:         The method to use to get scope object values ("getScope" by default)
+  - *herited from sfUoWidgetPropelList*
+    - model:                The model class (required)
+    - add_empty:            Whether to add a first empty value or not (false by default).
+                            If the option is not a Boolean, the value will be used as the text value
+    - method:               The method to use to display object values ("__toString" by default)
+    - peer_method:          The method to use to get objects ("doSelect" by default)
+    - order_by:             An array composed of two fields:
+                              - The column to order by the results (must be in the PhpName format)
+                              - "asc" or "desc"
+    - criteria:             A criteria to use when retrieving objects
+    - connection:           The Propel connection to use (null by default)
+  - *herited from sfUoWidgetList*
+    - choices:              An array of possible choices (required)
+    - list_type:            List type ("ul" by default)
+    - root:                 Root name (null by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - treeview              treeview (see sfUoWidgetMenu, sfUoWidgetFormCheckList) by Jörn Zaefferer http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
+    - auto_check            Add automatic check capability on parents and childrens of the curent item of the list.
+
+**generated HTML**
+<ul class="uo_widget_form_list">
+  <li><input id="item_1" value="" name="item_1" /><label for="item_1">item 1</label></li>
+  <li><input id="item_2" value="" name="item_2" /><label for="item_2">item 2</label></li>
+  <li>...</li>
+</ul>
+
+
+## sfUoWidgetFormPropelNestedCheckList
+
+To deal with nested ckecklist with propel.
+
+**selector**: uo_widget_form_list
+
+**available options**:
+  - multiple:               true if the select tag must allow multiple selections
+  - *herited from sfUoWidgetPropelNestedList*
+    - tree_left_method:     The method to use to get tree left object values ("getTreeLeft" by default)
+    - tree_right_method:    The method to use to get tree right object values ("getTreeRight" by default)
+    - scope_method:         The method to use to get scope object values ("getScope" by default)
+  - *herited from sfUoWidgetPropelList*
+    - model:                The model class (required)
+    - add_empty:            Whether to add a first empty value or not (false by default).
+                            If the option is not a Boolean, the value will be used as the text value
+    - method:               The method to use to display object values ("__toString" by default)
+    - peer_method:          The method to use to get objects ("doSelect" by default)
+    - order_by:             An array composed of two fields:
+                              - The column to order by the results (must be in the PhpName format)
+                              - "asc" or "desc"
+    - criteria:             A criteria to use when retrieving objects
+    - connection:           The Propel connection to use (null by default)
+  - *herited from sfUoWidgetList*
+    - choices:              An array of possible choices (required)
+    - list_type:            List type ("ul" by default)
+    - root:                 Root name (null by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - treeview              treeview (see sfUoWidgetMenu, sfUoWidgetFormCheckList) by Jörn Zaefferer http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
+    - auto_check            Add automatic check capability on parents and childrens of the curent item of the list.
+
+**generated HTML**
+<ul class="uo_widget_form_list">
+  <li><input id="item_1" value="" name="item_1" /><label for="item_1">item 1</label></li>
+  <li><input id="item_2" value="" name="item_2" /><label for="item_2">item 2</label>
+    <ul>
+      <li><input id="item_3" value="" name="item_3" /><label for="item_3">item 3</label></li>
+      <li>...</li>
+    </ul>
+  </li>
+  <li>...</li>
+</ul>

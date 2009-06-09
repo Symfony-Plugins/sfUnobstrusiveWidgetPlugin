@@ -1,0 +1,25 @@
+# learn by example - dropdown menu
+
+
+## create widget
+
+$menu = new sfUoWidgetMenu(array(
+    'choices'=>array(
+      'item_A' => array('label' => 'item A', 'route' => '@route_a'),
+      'item_B' => array('label' => 'item B', 'route' => '@route_b', 'content' => array(
+        'item_B1' => array('label' => 'item B1', 'route' => '@route_b1'),
+        'item_B2' => array('label' => 'item B2', 'route' => '@route_b2'),
+      )), 
+      'item_C' => array('label' => 'item C', 'content' => array(
+        'item_C1' => array('label' => 'item C1', 'route' => '@route_c1'),
+        'item_C2' => array('label' => 'item C2', 'route' => '@route_c2'),
+      )), 
+      ),
+      'js_transformer' => 'drop_down',
+  )
+);
+
+
+## render widget
+
+$menu->render('menu');

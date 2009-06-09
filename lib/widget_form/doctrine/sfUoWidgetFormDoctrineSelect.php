@@ -45,7 +45,6 @@ class sfUoWidgetFormDoctrineSelect extends sfUoWidgetFormSelect
    *  * alias:      The alias for the main component involved in the query
    *  * query:      A query to use when retrieving objects
    *  * connection: The Doctrine connection to use (null by default)
-   *  * multiple:   true if the select tag must allow multiple selections
    *
    * @see sfWidgetFormSelect
    */
@@ -58,7 +57,6 @@ class sfUoWidgetFormDoctrineSelect extends sfUoWidgetFormSelect
     $this->addOption('alias', 'a');
     $this->addOption('query', null);
     $this->addOption('connection', null);
-    $this->addOption('multiple', false);
 
     parent::configure($options, $attributes);
   }

@@ -1,0 +1,3 @@
+# Dynamics configuration
+
+The sfUoWidget.yml file contains the description of all default plugin configuration and adapters packages. However, with dynamics, the packets deffinition is sets in xml files (config/dynamics). See the sfDynamics plugin for documentation.

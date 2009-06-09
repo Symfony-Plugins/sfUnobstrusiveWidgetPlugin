@@ -1,0 +1,43 @@
+# philosophy
+
+sfUnobstrusiveWidgetPlugin is an attempt to use javascripts best pratices development in a symfony project.
+The main idea :
+HTML is the language of the web, it works everywhere (pretty much). Images, CSS, Javascript, Flash are all extras that will break (badly) somewhere. Everyone should be able to get a usable, functional experience some get an even better one.
+You can use JavaScript for nice extras, though However Without JavaScript the page will become less user-friendly. Can't be helped. After all, the purpose of JavaScript is to add interactivity to a page.
+
+All widget have to work :
+ - without JS orCSS 
+ - with Keyboard 
+ - with Mouse 
+
+Two fundamental principles: 
+  1. Separation of structure, presentation, and behavior 
+    - Separation of HTML and CSS (No inline styles)
+    - Separation of HTML and JavaScript (No inline event handlers)
+  2. The script doesn't assume anything
+
+
+We figth some uggly idea like :
+  1. "JavaScript is always available" -> FALSE
+    - Primitive cell phones don't support it (sufficiently)
+    - Speech browsers' support may be spotty 
+    - Company networks may filter out <script> tags
+  2. "Everybody uses a mouse" -> FALSE
+    - Device independence
+    - Generally, keyboard users need more actions to achieve the same goals as mouse users. Don't interfere too much. There are reasons for this behavior, and keyboard users are used to it.
+
+
+To the question :
+Do I need to support ___ on this project?
+
+we answered : 
+
+1. We need a realistic definition of Support 
+  - "Support" does not equal to "identical"
+  - "Support" means "content is available" 
+  - Expecting two users using different browser software to have an identical experience fails to embrace or acknowledge the heterogeneous essence of the Web
+
+2. "Support" is not binary. There are 3 grades of browser support.
+  - C-gradesupport (core support, 2%) 
+  - A-gradesupport (advanced support, 96%) 
+  - X-gradesupport (the X-Factor, 2%)

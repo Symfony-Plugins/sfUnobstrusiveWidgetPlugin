@@ -26,10 +26,6 @@ class sfUoWidgetFormSelect extends sfUoWidget
    *  * choices:  An array of possible choices (required)
    *  * multiple: true if the select tag must allow multiple selections
    *
-   * Available transformers:
-   *
-   *  * slider
-   *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
    *
@@ -76,7 +72,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
    */
   protected function getJsSelector()
   {
-    return 'uo_widget_form_select';
+    return $this->getOption('multiple') ? 'uo_widget_form_select_many' : 'uo_widget_form_select';
   }
 
   /**
@@ -97,7 +93,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
     {
       if (is_array($option))
       {
-        $options[] = $this->renderContentTag('optgroup', implode("\n", $this->getOptionsForSelect($value, $option)), array('label' => self::escapeOnce($key)));
+        $options[] = $this->renderContentTag('optgroup', implode("\n", $this->getOptionsForSelect($this->translate($value), $option)), array('label' => self::escapeOnce($key)));
       }
       else
       {
@@ -107,7 +103,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
           $attributes['selected'] = 'selected';
         }
 
-        $options[] = $this->renderContentTag('option', self::escapeOnce($option), $attributes);
+        $options[] = $this->renderContentTag('option', $this->translate(self::escapeOnce($option)), $attributes);
       }
     }
 

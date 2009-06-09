@@ -1,0 +1,451 @@
+# available widgets
+sfUnobstrusiveWidget plugin provide both simple and form html widgets and for each of them a set of transformers. Here is the list, and status of each one.
+
+
+## sfUoWidgetList
+
+To deal with list and nested list.
+
+**selector**: uo_widget_list
+
+**available options**:
+  - choices:                An array of possible choices (required)
+  - list_type:              List type ("ul" by default)
+  - root:                   Root name (null by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - drop_down:            drop down list (see sfUoWidgetMenu) by Dynamic Drive (http://www.dynamicdrive.com/dynamicindex1/ddlevelsmenu/)
+    - drop_line:            drop line list (see sfUoWidgetMenu)
+    - treeview_admin        administrable treeview by Peter Panov <panov@elcat.kg>, IKEEN Group http://www.ikeen.com
+    _ treeview              treeview (see sfUoWidgetMenu, sfUoWidgetFormCheckList) by Jörn Zaefferer http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
+
+**generated HTML**
+<ul class="uo_widget_list">
+  <li>content 1</li>
+  <li>content 2
+    <ul>
+      <li>content 3</li>
+      <li>...</li>
+    </ul>
+  </li>
+  <li>...</li>
+</ul>
+
+
+## sfUoWidgetMenu
+
+To deal with menu.
+
+**selector**: uo_widget_list
+
+**available options**:
+  - controller:             Controller object to generate url (null by default)
+  - active:                 The active url (null by default)
+  - *herited from sfUoWidgetList*
+    - choices:              An array of possible choices (required)
+    - list_type:            List type ("ul" by default)
+    - root:                 Root name (null by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - drop_down:            drop down list by Dynamic Drive (http://www.dynamicdrive.com/dynamicindex1/ddlevelsmenu/)
+    - drop_line:            drop line list
+    _ treeview              treeview by Jörn Zaefferer http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
+
+**generated HTML**
+<ul class="uo_widget_list">
+  <li><a href="#">content 1</a></li>
+  <li>content 2
+    <ul>
+      <li><a href="#">content 3</a></li>
+      <li><a href="#">...</a></li>
+    </ul>
+  </li>
+  <li>...</li>
+</ul>
+
+
+## sfUoWidgetAdminMenu
+
+To deal with a static menu defined in a yaml config file (sfUoAdminMenu.yml) and credentials.
+
+**selector**: uo_widget_list
+
+**available options**:
+  - user:                   User object (null by default)
+  - is_super_admin_method:  The isSuperAdmin method name url ("isSuperAdmin" by default)
+  - *herited from sfUoWidgetMenu*
+    - controller:           Controller object to generate url (null by default)
+    - active:               The active url (null by default)
+  - *herited from sfUoWidgetList*
+    - choices:              An array of possible choices (required)
+    - list_type:            List type ("ul" by default)
+    - root:                 Root name (null by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - drop_down:            drop down list by Dynamic Drive (http://www.dynamicdrive.com/dynamicindex1/ddlevelsmenu/)
+    - drop_line:            drop line list
+    _ treeview              treeview by Jörn Zaefferer http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
+
+**generated HTML**
+<ul class="uo_widget_list">
+  <li><a href="#">content 1</a></li>
+  <li>content 2
+    <ul>
+      <li><a href="#">content 3</a></li>
+      <li><a href="#">...</a></li>
+    </ul>
+  </li>
+  <li>...</li>
+</ul>
+
+
+## sfUoWidgetContainersList
+
+To deal with containers, each of them have a title and a content.
+
+**selector**: uo_widget_containers_list
+
+**available options**:
+  - title_type:             The html title element to use to generate each container's title ("h3" by default)
+  - *herited from sfUoWidgetList*
+    - choices:              An array of possible choices (required)
+    - list_type:            List type ("ul" by default)
+    - root:                 Root name (null by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - accordion:            jquery UI accordion
+    - tabs:                 jquery UI tabs
+
+**generated HTML**
+<ul class="uo_widget_containers_list">
+  <li>
+    <h3 class="uo_widget_containers_list_title">title 1</h3>
+    <div clas="uo_widget_containers_list_content">Content 1</div>
+  </li>
+    <h3 class="uo_widget_containers_list_title">title 2</h3>
+    <div clas="uo_widget_containers_list_content">Content 2</div>
+  <li>
+  </li>
+  <li>...</li>
+</ul>
+
+
+## sfUoWidgetFormCheckList
+
+To deal with checklist.
+
+**selector**: uo_widget_form_list
+
+**available options**:
+  - multiple:               Whether to allow multiple values or not (true by default)
+  - *herited from sfUoWidgetList*
+    - choices:              An array of possible choices (required)
+    - list_type:            List type ("ul" by default)
+    - root:                 Root name (null by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - treeview              treeview (see sfUoWidgetMenu, sfUoWidgetFormCheckList) by Jörn Zaefferer http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
+    - auto_check            Add automatic check capability on parents and childrens of the curent item of the list.
+
+**generated HTML**
+<ul class="uo_widget_form_list">
+  <li><input id="item_1" value="" name="item_1" /><label for="item_1">item 1</label></li>
+  <li><input id="item_2" value="" name="item_2" /><label for="item_2">item 2</label>
+    <ul>
+      <li><input id="item_3" value="" name="item_3" /><label for="item_3">item 3</label></li>
+      <li>...</li>
+    </ul>
+  </li>
+  <li>...</li>
+</ul>
+
+
+## sfUoWidgetFormDate
+
+To deal with date.
+
+**selector**: uo_widget_form_date
+
+**available options**:
+  - year_as_text:           Render year widget as input text (false by default)
+  - month_as_text:          Render month widget as input text (false by default)
+  - day_as_text:            Render day widget as input text (false by default)
+  - format:                 The date format string (%month%/%day%/%year% by default)
+  - years:                  An array of years for the year select tag (optional)
+                            Be careful that the keys must be the years, and the values what will be displayed to the user
+  - months:                 An array of months for the month select tag (optional)
+  - days:                   An array of days for the day select tag (optional)
+  - can_be_empty:           Whether the widget accept an empty value (true by default)
+  - empty_values:           An array of values to use for the empty value (empty string for year, month, and day by default)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - picker                jquery UI date picker
+
+**generated HTML**
+<select class="month" name="form_name[month]">
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+</select>
+/
+<select class="day" name="form_nametest[test_date_2][day]">
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+</select>
+/
+<select class="uo_widget_form_date year" name="form_name[year]">
+<option value="2004">2004</option>
+<option value="2005">2005</option>
+<option value="2006">2006</option>
+<option value="2007">2007</option>
+<option value="2008">2008</option>
+<option value="2009">2009</option>
+<option value="2010">2010</option>
+<option value="2011">2011</option>
+<option value="2012">2012</option>
+<option value="2013">2013</option>
+<option value="2014">2014</option>
+</select>
+
+
+## sfUoWidgetFormInputFile
+
+To deal with input file. In edit mode (see options), this widget renders an additional widget named after the file upload widget with a "_delete" suffix. So, when creating a form, don't forget to add a validator for this additional field.
+
+**selector**: uo_widget_form_input_file
+
+**available options**:
+  - file_src:               The current image web source path (required)
+  - edit_mode:              A Boolean: true to enabled edit mode, false otherwise
+  - is_image:               Whether the file is a displayable image
+  - with_delete:            Whether to add a delete checkbox or not
+  - delete_label:           The delete label used by the template
+  - template:               The HTML template to use to render this widget
+                            The available placeholders are:
+                              - input (the image upload widget)
+                              - delete (the delete checkbox)
+                              - delete_label (the delete label text)
+                              - file (the file tag)
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - swf_upload              SWFUpload implementation http://www.swfupload.org, http://swfupload.googlecode.com
+
+**generated HTML**
+<input type="file" />
+
+
+## sfUoWidgetFormInputText
+
+To deal with input text.
+
+**selector**: uo_widget_form_input_text
+
+**available options**:
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - spinner               Written by Brant Burnett http://github.com/btburnett3/jquery.ui.spinner/tree/master
+    - mask                  Masked Input plugin for jQuery by Josh Bush (digitalbush.com)
+    - auto_complete         auto completer from http://www.pengoworks.com/workshop/jquery/autocomplete.htm
+
+**generated HTML**
+<input type="text" />
+
+
+## sfUoWidgetFormRange
+
+To deal with range.
+
+**selector**: uo_widget_form_input_text
+
+**available options**:
+  - from:                   The "from"" widget (required)
+  - to:                     The "to" widget (required)
+  - template:               The template to use to render the widget
+                            Available placeholders: %from%, %to%
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+
+**generated HTML**
+<span>from</span> <input type="text" /> <span>to</span> <input type="text" />
+
+
+## sfUoWidgetFormSelect
+
+To deal with select.
+
+**selector**: uo_widget_form_select or uo_widget_form_select_many
+
+**available options**:
+  - choices:                An array of possible choices (required)
+  - multiple:               true if the select tag must allow multiple selections
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - slider                accessibleUISlider - creates a UI slider component from a select element(s) by Scott Jehl, scott@filamentgroup.com
+
+**generated HTML**
+<select>
+  <option>Option 1</option>
+  <option>Option 2</option>
+  <option>...</option>
+</select>
+
+
+## sfUoWidgetFormSelectMany
+
+To deal with multiple select.
+
+**selector**: uo_widget_form_select_many
+
+**available options**:
+  - *herited from sfUoWidgetFormSelect*
+    - choices:                An array of possible choices (required)
+    - multiple:               true if the select tag must allow multiple selections
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - asm                   Alternate Select Multiple (asmSelect) by http://www.ryancramer.com/projects/asmselect/
+    - double_list           double list widget
+    - drop_down_check_list  select with a drop down check list
+
+**generated HTML**
+<select multiple="multiple">
+  <option>Option 1</option>
+  <option>Option 2</option>
+  <option>...</option>
+</select>
+
+
+## sfUoWidgetFormTextarea
+
+To deal with textarea.
+
+**selector**: uo_widget_form_textarea
+
+**available options**:
+  - *herited from sfUoWidget*
+    - js_transformer:       JS transformer to apply (null by default)
+    - js_config:            Associative array with JS options (empty array by default)
+    - js_adapter:           The JS adapter (see sfUoWidget.yml to defined the default value)
+    - js_lazy:              Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+    - i18n_catalogue:       The i18n catalogue to use ("messages" by default)
+
+**available transformers**:
+  - *"jquery" adapter*
+    - tiny_mce              tinyMCE implementation (you have to include tinyMCE by your self http://tinymce.moxiecode.com/)
+    - wym_editor            WYMeditor implementation (you have to include WYMeditor by your self http://www.wymeditor.org/)
+
+**generated HTML**
+<textarea cols="2" rows="2"></textarea>

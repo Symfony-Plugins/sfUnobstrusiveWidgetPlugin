@@ -1,0 +1,21 @@
+# learn by example - tabs
+
+
+## create widget
+
+$tabs = new sfUoWidgetContainersList(
+  array(
+    'choices' => array(
+      'FOO' => 'foo content', 
+      'BAR' => 'bar content', 
+    ),
+    'js_transformer' => 'tabs'
+    'title_type'     => 'h4',
+    'js_config'      => array('event' => 'mouseover'), // see http://jqueryui.com/demos/tabs/#options for other config
+  )
+);
+
+
+## render widget
+
+$tabs->render('my_first_tabs');

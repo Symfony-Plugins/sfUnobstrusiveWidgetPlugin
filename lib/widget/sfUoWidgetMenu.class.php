@@ -18,11 +18,13 @@
  */
 class sfUoWidgetMenu extends sfUoWidgetList
 {
-  protected
-    $controller = null;
-  
   /**
    * Configures the current widget.
+   *
+   * Available options:
+   *
+   *  * controller:            Controller object to generate url (null by default)
+   *  * active:                The active url (null by default)
    *
    * @see sfUoWidget->configure()
    */
@@ -30,20 +32,7 @@ class sfUoWidgetMenu extends sfUoWidgetList
   {
     parent::configure($options, $attributes);
     
-    $this->addOption('controller', null);
     $this->addOption('active', null);
-  }
-  
-  /**
-   * @return string An HTML tag string
-   *
-   * @see render()
-   */
-  protected function doRender()
-  {
-    $this->controller = $this->getOption('controller') ? $this->getOption('controller') : sfContext::getInstance()->getController();
-
-    return parent::doRender();
   }
 
   /**
@@ -104,7 +93,7 @@ class sfUoWidgetMenu extends sfUoWidgetList
       }
       else
       {
-        $result = $this->controller->genUrl($values['route'], array_key_exists('absolute', $values) && $values['absolute']);
+        $result = $this->getController()->genUrl($values['route'], array_key_exists('absolute', $values) && $values['absolute']);
       }
     }
     

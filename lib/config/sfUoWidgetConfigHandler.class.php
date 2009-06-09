@@ -22,7 +22,21 @@ class sfUoWidgetConfigHandler extends sfYamlConfigHandler
   {
     // retrieve yaml data
     $config = $this->parseYamls($configFiles);
+    
+    try
+    {
+      $this->checkConfiguration($config);
+    }
+    catch(Exception $e)
+    {
+      throw $e;
+    }
 
     return sprintf('<?php return %s;', var_export($config, 1));
+  }
+
+  protected function checkConfiguration($config)
+  {
+    // todo
   }
 }

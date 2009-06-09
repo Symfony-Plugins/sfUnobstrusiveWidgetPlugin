@@ -1,0 +1,19 @@
+# What's sfUnobstrusiveWidgetPlugin?
+
+sfUnobstrusiveWidgetPlugin is a plugin for symfony PHP framework (http://www.symfony-project.org).
+
+It aims to facilitate application development by providing rich widgets that will make a real bonus for the end user of your applications.
+This plugin is not bound to a specific javascript framework, and provides an easy way to use several scripts alltogether.
+
+For now, only configuration files for jQuery and jQuery UI are provided, but our YAML based configuration system allows to create different configuration packages describing how each framework interacts with each of their associated libraries.
+
+sfUnobstrusiveWidgetPlugin is a brand new way of thinking old symfony 1.0 helpers in rich and powerfull widgets within a symfony project. Each widget defined few transformers (coherent group of javascripts/stylesheets) and load all necessary assets.
+
+
+## Some definitions
+
+    # adapter: An adapter in the sfUnobstrusiveWidgetPlugin is the way to use javascript. it could be a framework (like jquery or other) but also some function library.
+    
+    # transformer: A transformer defined how an HTML structure will be transform by a javascript script.
+    
+    # selector: A selector is use to select a DOM element in an HTML document with the javascript. The final selector is composed with both selector string and transformer name.

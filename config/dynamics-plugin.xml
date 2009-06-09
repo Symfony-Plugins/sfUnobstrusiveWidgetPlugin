@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<dynamics-plugin>
+
+  <import resource="dynamics/themes/uo_widget.themes.xml" />
+
+  <import resource="dynamics/jquery/uo_widget.jquery.xml" />
+  <import resource="dynamics/swf_upload/swf_upload.xml" />
+
+</dynamics-plugin>

@@ -1,0 +1,13 @@
+# learn by example - partial
+
+
+To sets a choice content in a widget (like sfUoWidgetContainersList), you can use getPartial or getConmponent method (in an sfActions class) :
+
+$containersList = new sfUoWidgetContainersList(
+  array(
+    'choices' => array(
+      'partial'   => $this->getPartial('module/partial', array()),
+      'component' => $this->getComponent('module', 'partial', array()),
+    ),
+  )
+);

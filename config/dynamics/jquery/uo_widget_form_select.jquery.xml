@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <package name="uo_widget_form_select.slider.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_select_slider.jquery</javascript>
+    <javascript>vendor/jquery/filament_group/slider/js/selectToUISlider.jQuery</javascript>
+    <stylesheet>vendor/jquery/filament_group/slider/css/ui.slider.extras</stylesheet>
+  </package>
+
+</dynamics>

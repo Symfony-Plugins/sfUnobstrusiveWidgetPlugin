@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <package name="uo_widget_containers_list.accordion.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_containers_list_accordion.jquery</javascript>
+  </package>
+
+  <package name="uo_widget_containers_list.tabs.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_containers_list_tabs.jquery</javascript>
+  </package>
+
+</dynamics>

@@ -1,0 +1,76 @@
+.uo_widget_list_treeview_ON, .uo_widget_list_treeview_ON ul,
+.uo_widget_form_list_treeview_ON, .uo_widget_form_list_treeview_ON ul { 
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.uo_widget_list_treeview_ON ul,
+.uo_widget_form_list_treeview_ON ul {
+	background-color: white;
+	margin-top: 4px;
+}
+.uo_widget_list_treeview_ON .hitarea,
+.uo_widget_form_list_treeview_ON .hitarea {
+	background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview/treeview-default.gif) -64px -25px no-repeat;
+	height: 16px;
+	width: 16px;
+	margin-left: -16px;
+	float: left;
+	cursor: pointer;
+}
+/* fix for IE6 */
+* html .hitarea {
+	display: inline;
+	float:none;
+}
+.uo_widget_list_treeview_ON li,
+.uo_widget_form_list_treeview_ON li { 
+	margin: 0;
+	padding: 3px 0 2px 16px;
+}
+.uo_widget_list_treeview_ON a.selected,
+.uo_widget_form_list_treeview_ON a.selected {
+	background-color: #eee;
+}
+.uo_widget_list_treeview_ON .hover,
+.uo_widget_form_list_treeview_ON .hover {
+  color: red; cursor: pointer;
+}
+.uo_widget_list_treeview_ON li,
+.uo_widget_form_list_treeview_ON li {
+  background: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview/treeview-default-line.gif) 0 0 no-repeat;
+}
+.uo_widget_list_treeview_ON li.collapsable,
+.uo_widget_list_treeview_ON li.expandable,
+.uo_widget_form_list_treeview_ON li.collapsable,
+.uo_widget_form_list_treeview_ON li.expandable {
+  background-position: 0 -176px;
+}
+.uo_widget_list_treeview_ON .expandable-hitarea,
+.uo_widget_form_list_treeview_ON .expandable-hitarea {
+  background-position: -80px -3px;
+}
+.uo_widget_list_treeview_ON li.last,
+.uo_widget_form_list_treeview_ON li.last {
+  background-position: 0 -1766px;
+}
+.uo_widget_list_treeview_ON li.lastCollapsable,
+.uo_widget_list_treeview_ON li.lastExpandable,
+.uo_widget_form_list_treeview_ON li.lastCollapsable,
+.uo_widget_form_list_treeview_ON li.lastExpandable {
+  background-image: url(/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_treeview/treeview-default.gif);
+}  
+.uo_widget_list_treeview_ON li.lastCollapsable,
+.uo_widget_form_list_treeview_ON li.lastCollapsable {
+  background-position: 0 -111px;
+}
+.uo_widget_list_treeview_ON li.lastExpandable,
+.uo_widget_form_list_treeview_ON li.lastExpandable {
+  background-position: -32px -67px;
+}
+.uo_widget_list_treeview_ON div.lastCollapsable-hitarea,
+.uo_widget_list_treeview_ON div.lastExpandable-hitarea,
+.uo_widget_form_list_treeview_ON div.lastCollapsable-hitarea,
+.uo_widget_form_list_treeview_ON div.lastExpandable-hitarea {
+  background-position: 0;
+}

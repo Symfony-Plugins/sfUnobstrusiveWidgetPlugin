@@ -18,248 +18,303 @@
  */
 class sfUoWidgetConfigManager implements ArrayAccess
 {
-  /**
-   * Context references
-   */
   protected
-    $context    = null,
-    $controller = null,
-    $request    = null,
-    $response   = null;
+    $context       = null,
+    $configuration = array();
 
   /**
    * Constructor
    */
-  public function __construct($context)
+  public function __construct(sfContext $context)
   {
-    $this->context    = $context;
-    $this->response   = $context->getResponse();
-    $this->request    = $context->getRequest();
-    $this->controller = $context->getController();
-
-    $this->configuration = include($context->getConfiguration()->getConfigCache()->checkConfig('config/sfUoWidget.yml'));
-  }
-
-  /**
-   * Returns global or adapter specific configuration
-   *
-   * @throws InvalidArgumentException if specified behavior does not have configuration
-   *
-   * @param  string $adapter If null, global configuration will be returned
-   *
-   * @return void
-   */
-  public function getConfiguration($adapter=null)
-  {
-    if (is_null($adapter))
-    {
-      return $this->configuration;
-    }
-    else
-    {
-      if (!isset($this->configuration[$adapter]))
-      {
-        throw new InvalidArgumentException('Configuration for sfUoWidget adapter «'.$adapter.'» is not available.');
-      }
-      return $this->configuration[$adapter];
-    }
+    $this->context = $context;
+    $this->configuration = include($this->context->getConfiguration()->getConfigCache()->checkConfig('config/sfUoWidget.yml'));
   }
   
   /**
-   * Returns configuration for specific adapter, widget and transformer
+   * Returns context
    *
-   * @throws InvalidArgumentException if specified behavior does not have configuration
-   *
-   * @param  string $adapter The adapter
-   * @param  string $selector The selector
-   * @param  string $transformer The transformer
+   * @return sfContext
+   */
+  public function getContext()
+  {
+    return $this->context;
+  }
+
+  /**
+   * Returns all configuration
    *
    * @return array
    */
-  public function getTransformerConfiguration($adapter, $selector, $transformer)
+  public function getAllConfiguration()
+  {
+    return $this->configuration;
+  }
+
+  /**
+   * Returns default adapter
+   *
+   * @return string
+   */
+  public function getDefaultAdapter()
+  {
+    return $this->configuration['default_adapter'];
+  }
+  
+  /**
+   * Returns default adapter
+   *
+   * @return string
+   */
+  public function isInLazyModeByDefault()
+  {
+    return $this->configuration['lazy_mode'];
+  }
+  
+  /**
+   * Returns availables adapter
+   *
+   * @return array
+   */
+  public function getAvailableAdapters()
+  {
+    return array_keys($this->configuration['adapters']);
+  }
+  
+  /**
+   * Returns if an adapter is available
+   *
+   * @param  string
+   *
+   * @return boolean
+   */
+  public function isAvailableAdapter($adapter)
+  {
+    return in_array($adapter, $this->getAvailableAdapters());
+  }
+
+  /**
+   * Returns availables themes
+   *
+   * @return array
+   */
+  public function getAvailableThemes()
+  {
+    return array_keys($this->configuration['themes']);
+  }
+  
+  /**
+   * Returns if a theme is available
+   *
+   * @param  string
+   *
+   * @return boolean
+   */
+  public function isAvailableTheme($theme)
+  {
+    return in_array($theme, $this->getAvailableThemes());
+  }
+
+  /**
+   * Returns adapter specific configuration
+   *
+   * @throws InvalidArgumentException if specified adapter does not have configuration
+   *
+   * @param  string
+   *
+   * @return array
+   */
+  public function getAdapterConfiguration($adapter)
+  {
+    if (!$this->isAvailableAdapter($adapter))
+    {
+      throw new InvalidArgumentException('Adapter «'.$adapter.'» is not available.');
+    }
+    return $this->configuration['adapters'][$adapter];
+  }
+  
+  /**
+   * Returns adapter specific configuration
+   *
+   * @throws InvalidArgumentException if specified adapter does not have configuration
+   *
+   * @param  string
+   *
+   * @return array
+   */
+  public function getAdapterTemplateConfiguration($adapter)
   {
     try
     {
-      $config = $this->getConfiguration($adapter);
+      $config = $this->getAdapterConfiguration($adapter);
     }
     catch(Exception $e)
     {
       throw $e;
     }
 
-    if (!isset($config[$selector]))
+    return $config['templates'];
+  }
+  
+  /**
+   * Returns adapter specific configuration
+   *
+   * @throws InvalidArgumentException if specified adapter does not have configuration
+   *
+   * @param  string
+   *
+   * @return array
+   */
+  public function getAdapterTemplate($adapter, $template)
+  {
+    try
     {
-        throw new InvalidArgumentException('Configuration for sfUoWidget selector «'.$selector.'» is not available for «'.$adapter.'» adapter.');
+      $config = $this->getAdapterTemplateConfiguration($adapter);
     }
-    if (!isset($config[$selector][$transformer]))
+    catch(Exception $e)
     {
-        throw new InvalidArgumentException('Configuration for sfUoWidget transformer «'.$transformer.'» is not available for «'.$adapter.'» adapter and «'.$selector.'» selector.');
+      throw $e;
     }
     
-    return $config[$selector][$transformer];
-  }
+    if (!array_key_exists($template, $config))
+    {
+      throw new InvalidArgumentException('Template «'.$template.'» is not available for adapter «'.$adapter.'».');
+    }
 
+    return $config[$template];
+  }
+  
   /**
-   * Returns javascripts for specific adapter, widget and transformer configuration
+   * Returns adapter specific configuration
    *
-   * @throws InvalidArgumentException if specified behavior does not have configuration
+   * @throws InvalidArgumentException if specified adapter does not have configuration
    *
-   * @param  string $adapter The adapter
-   * @param  string $selector The selector
-   * @param  string $transformer The transformer
+   * @param  string
    *
    * @return array
    */
-  public function getJavascripts($adapter, $selector, $transformer)
+  public function getAdapterTheme($adapter)
   {
     try
     {
-      $config = $this->getTransformerConfiguration($adapter, $selector, $transformer);
+      $config = $this->getAdapterConfiguration($adapter);
     }
     catch(Exception $e)
     {
       throw $e;
     }
 
-    return isset($config['js_files']) ? $config['js_files'] : array();
+    return $config['theme'];
   }
   
   /**
-   * Returns stylesheets for specific adapter, widget, transformer and skin configuration
+   * Returns selector configuration for a specific adapter
    *
-   * @throws InvalidArgumentException if specified behavior does not have configuration
+   * @throws InvalidArgumentException if specified adapter does not have configuration
    *
-   * @param  string $adapter The adapter
-   * @param  string $selector The selector
-   * @param  string $transformer The transformer
-   * @param  string $skin The skin
+   * @param  string
    *
    * @return array
    */
-  public function getStylesheets($adapter, $selector, $transformer, $skin)
+  public function getSelectorConfiguration($adapter, $selector)
   {
     try
     {
-      $config = $this->getTransformerConfiguration($adapter, $selector, $transformer);
+      $config = $this->getAdapterConfiguration($adapter);
+    }
+    catch(Exception $e)
+    {
+      throw $e;
+    }
+
+    if (!array_key_exists($selector, $config['packages']))
+    {
+      throw new InvalidArgumentException('Selector «'.$selector.'» is not available for adapter «'.$adapter.'».');
+    }
+
+    return $config['packages'][$selector];
+  }
+  
+  /**
+   * Returns transformer specific configuration
+   *
+   * @throws InvalidArgumentException if specified transormer does not exists
+   *
+   * @param  string
+   * @param  string
+   * @param  string
+   *
+   * @return array
+   */
+  public function getTransformerConfiguration($adapter, $selector, $tranformer)
+  {
+    try
+    {
+      $config = $this->getSelectorConfiguration($adapter, $selector);
     }
     catch(Exception $e)
     {
       throw $e;
     }
     
-    if (!isset($config['css_files']))
+    if (!array_key_exists($tranformer, $config))
     {
-      return array();
-    }
-    if (!isset($config['css_files'][$skin]))
-    {
-      throw new InvalidArgumentException('Configuration for sfUoWidget skin «'.$skin.'» is not available for «'.$adapter.'» adapter, «'.$selector.'» selector and «'.$transformer.'» transformer.');
+      throw new InvalidArgumentException('Transformer «'.$tranformer.'» is not available for adapter «'.$adapter.'» and selector «'.$selector.'».');
     }
 
-    return $config['css_files'][$skin];
+    return $config[$tranformer];
   }
   
   /**
-   * Returns compatibilities for specific adapter, widget and transformer configuration
+   * Returns transformer specific configuration
    *
-   * @throws InvalidArgumentException if specified behavior does not have configuration
+   * @throws InvalidArgumentException if specified transormer does not exists
    *
-   * @param  string $adapter The adapter
-   * @param  string $selector The selector
-   * @param  string $transformer The transformer
+   * @param  string
+   * @param  string
+   * @param  string
    *
    * @return array
    */
-  public function getCompatibilties($adapter, $selector, $transformer)
+  public function getTransformerJavascripts($adapter, $selector, $tranformer)
   {
     try
     {
-      $config = $this->getTransformerConfiguration($adapter, $selector, $transformer);
+      $config = $this->getTransformerConfiguration($adapter, $selector, $tranformer);
     }
     catch(Exception $e)
     {
       throw $e;
     }
 
-    return isset($config['compatibilities']) ? $config['compatibilities'] : array();
+    return array_key_exists('js_files', $config) ? $config['js_files'] : array();
   }
-
+  
   /**
-   * Check compatibilities for specific adapter, widget and transformer configuration
+   * Returns transformer specific configuration
    *
-   * @throws InvalidArgumentException if invalid
+   * @throws InvalidArgumentException if specified transormer does not exists
    *
-   * @param  string $adapter The adapter
-   * @param  string $selector The selector
-   * @param  aray $transformer The transformers
+   * @param  string
+   * @param  string
+   * @param  string
    *
-   * @return void
+   * @return array
    */
-  public function checkTransformersCompatibilities($adapter, $selector, Array $transformers)
+  public function getTransformerStylesheets($adapter, $selector, $tranformer)
   {
     try
     {
-      foreach ($transformers as $transformer)
-      {
-        $compatibilities = $this->getCompatibilties($adapter, $selector, $transformer);
-        foreach ($transformers as $jsTransformer)
-        {
-          if ($transformer != $jsTransformer)
-          {
-            if (!in_array($jsTransformer, $compatibilities))
-            {
-              throw new InvalidArgumentException('"'.$jsTransformer.'" transformer is incompatible with "'.$transformer.'" transformer');
-            }
-          }
-        }
-      }
+      $config = $this->getTransformerConfiguration($adapter, $selector, $tranformer);
     }
     catch(Exception $e)
     {
       throw $e;
     }
+
+    return array_key_exists('css_files', $config) ? $config['css_files'] : array();
   }
   
-  /**
-   * Returns all javascripts
-   *
-   * @param  string $adapter The adapter
-   *
-   * @return array
-   */
-  public function getAllJavascripts($adapter = null)
-  {
-    $config = $this->getConfiguration($adapter);
-    return $this->getAllConfig('js_files', $config);
-  }
-  
-  /**
-   * Returns all stylesheets
-   *
-   * @param  string $adapter The adapter
-   * @param  string $skin The skin
-   *
-   * @return array
-   */
-  public function getAllStylesheets($adapter = null, $skin = null)
-  {
-    $config = $this->getConfiguration($adapter);
-    $result = $this->getAllConfig('css_files', $config);
-    
-    if (!is_null($skin))
-    {
-      foreach ($result as $key=>$value)
-      {
-        if ($key != $skin)
-        {
-          unset($result[$key]);
-        }
-      }
-    }
-
-    return $result;
-  }
-
   /**
    * Return true if an adapter's transformer have to be call from window on load, false otherwise
    *
@@ -269,10 +324,123 @@ class sfUoWidgetConfigManager implements ArrayAccess
    *
    * @return boolean
    */
-  public function haveToSetsInWindowOnLoad($adapter, $selector, $transformer)
+  public function getTransformerTemplate($adapter, $selector, $transformer)
   {
-    $config = $this->getTransformerConfiguration($adapter, $selector, $transformer);
-    return isset($config['window_onload']) ? $config['window_onload'] : false;
+    try
+    {
+      $config = $this->getTransformerConfiguration($adapter, $selector, $transformer);
+      $result = $this->getAdapterTemplate($adapter, array_key_exists('template', $config) ? $config['template'] : 'default');
+    }
+    catch(Exception $e)
+    {
+      throw $e;
+    }
+
+    return $result;
+  }
+  
+  /**
+   * Returns transformer specific configuration
+   *
+   * @throws InvalidArgumentException if specified transormer does not exists
+   *
+   * @param  string
+   * @param  string
+   * @param  string
+   *
+   * @return array
+   */
+  public function getTransformerCompatibilities($adapter, $selector, $tranformer)
+  {
+    try
+    {
+      $config = $this->getTransformerConfiguration($adapter, $selector, $tranformer);
+    }
+    catch(Exception $e)
+    {
+      throw $e;
+    }
+
+    return array_key_exists('compatibilities', $config) ? $config['compatibilities'] : array();
+  }
+  
+  /**
+   * Check compatibilities for specific adapter, widget and transformer configuration
+   *
+   * @throws InvalidArgumentException if invalid
+   *
+   * @param  string $adapter The adapter
+   * @param  string $selector The selector
+   * @param  aray $transformer The transformers
+   *
+   * @return boolean
+   */
+  public function checkTransformersCompatibilities($adapter, $selector, array $transformers)
+  {
+    try
+    {
+      foreach ($transformers as $transformer)
+      {
+        $compatibilities = $this->getTransformerCompatibilities($adapter, $selector, $transformer);
+        foreach ($transformers as $jsTransformer)
+        {
+          if ($transformer != $jsTransformer)
+          {
+            if (!in_array($jsTransformer, $compatibilities))
+            {
+              throw new InvalidArgumentException('«'.$jsTransformer.'» transformer is incompatible with «'.$transformer.'» transformer');
+            }
+          }
+        }
+      }
+    }
+    catch(Exception $e)
+    {
+      throw $e;
+    }
+    
+    return true;
+  }
+  
+  /**
+   * Returns theme specific configuration
+   *
+   * @throws InvalidArgumentException if specified theme does not have configuration
+   *
+   * @param  string
+   *
+   * @return array
+   */
+  public function getThemeConfiguration($theme)
+  {
+    if (!$this->isAvailableTheme($theme))
+    {
+      throw new InvalidArgumentException('Theme «'.$theme.'» is not available.');
+    }
+    return $this->configuration['themes'][$theme];
+  }
+  
+  /**
+   * Returns transformer specific configuration
+   *
+   * @throws InvalidArgumentException if specified transormer does not exists
+   *
+   * @param  string
+   *
+   * @return array
+   */
+  public function getThemeStylesheets($theme)
+  {
+    try
+    {
+      $config = $this->getThemeConfiguration($theme);
+    }
+    catch(Exception $e)
+    {
+      throw $e;
+    }
+
+    return array_key_exists('css_files', $config) ? $config['css_files'] : array();
   }
 
   /**
@@ -305,31 +473,5 @@ class sfUoWidgetConfigManager implements ArrayAccess
   public function offsetUnset($offset)
   {
     throw new LogicException('Cannot use array access of widget js transformer manager in write mode.');
-  }
-  
-  /**
-   * Return all config
-   */
-  protected function getAllConfig($configName, Array $config, $result = array())
-  {
-    foreach ($config as $key=>$value)
-    {
-      if ($configName == $key)
-      {
-        if (is_array($value))
-        {
-          foreach ($value as $v)
-          {
-            $result[] = $v;
-          }
-        }
-      }
-      else if(is_array($value))
-      {
-        $result = $this->getAllConfig($configName, $value, $result);
-      }
-    }
-    
-    return $result;
   }
 }

@@ -1,12 +1,16 @@
 <?php
-$pluginPath = dirname(__FILE__).'/../../..';
-
+$pluginPath = realpath(dirname(__FILE__).'/../../..');
 include($pluginPath.'/test/bootstrap.php');
-
 require_once($pluginPath.'/lib/config/sfUoWidgetConfigHandler.class.php');
 
 
-$t = new lime_test(0, new lime_output_color());
+$test = new lime_test(0, new lime_output_color());
+
+$test->diag('sfUnobstrusiveWidgetPlugin : test sfUoWidgetConfigHandler class');
 
 $uoWidgetConfigHandler = new sfUoWidgetConfigHandler();
-//todo
+$uoWidgetConfigHandler->initialize();
+
+$test->diag('sfUoWidgetConfigHandler->parseYaml()');
+
+$yamlConfig = $uoWidgetConfigHandler->execute(array($pluginPath.'/test/data/sfUoWidget.yml'));

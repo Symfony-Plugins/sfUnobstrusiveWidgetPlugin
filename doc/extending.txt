@@ -1,3 +1,0 @@
-# Extending the plugin
- 
-sfUnobstrusiveWidgetPlugin is written to be easily extensible. To customize CSS ans JS files, you have to copy the "sfUoWidget.yml" file to your the projet or application config dir and modify or add whatever you want.

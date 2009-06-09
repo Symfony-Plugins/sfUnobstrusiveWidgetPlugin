@@ -1,0 +1,15 @@
+# learn by example - tiny mce
+
+As tinyMCE (http://tinymce.moxiecode.com/index.php) is not bundled in the plugin, you need to install and load the required dependencies by yourself.
+
+
+## create widget
+
+$tinyMce = sfUoWidgetFormTextarea(array(
+  'js_transformer'=>'tiny_mce',
+));
+
+
+## render widget
+
+$tinyMce->render('form_field_name');

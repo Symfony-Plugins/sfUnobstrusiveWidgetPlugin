@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <package name="uo_widget_list.drop_down.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>vendor/jquery/dynamic_drive/menu/ddsmoothmenu</javascript>
+    <javascript>js/jquery/uo_widget_list_drop_down.jquery</javascript>
+    <stylesheet>css/common/uo_widget_list_drop_down</stylesheet>
+  </package>
+
+  <package name="uo_widget_list.drop_line.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_list_drop_line.jquery</javascript>
+    <stylesheet>css/common/uo_widget_list_drop_line</stylesheet>
+  </package>
+
+  <package name="uo_widget_list.treeview_admin.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_list_treeview_admin.jquery</javascript>
+    <javascript>vendor/jquery/jquery.simple.tree</javascript>
+    <stylesheet>css/common/uo_widget_list_treeview_admin</stylesheet>
+  </package>
+  
+  <package name="uo_widget_list.treeview.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_list_treeview.jquery</javascript>
+    <javascript>vendor/jquery/jquery.treeview</javascript>
+    <stylesheet>css/common/uo_widget_list_treeview</stylesheet>
+  </package>
+
+</dynamics>

@@ -1,0 +1,41 @@
+# Configuration
+
+
+## publish assets
+
+Since plugin use CSS, javascripts, images and SWF assets, you need to publish them. The easiest way to do that is to use uo_widget:publish task:
+
+  [bash]
+  php symfony uo_widget:publish
+  
+This task will remove all sfUnobstrusiveWidgetPlugin published assets and recreate them.
+
+
+### Why not use plugin:publish-assets task provided by symfony ?
+
+sfUnobstrusiveWidgetPlugin is fully compatible with an other great plugin [sfDynamicsPlugin](http://www.symfony-project.org/plugins/sfDynamicsPlugin). To publish only some assets when use this plugin with dynamics, we put all assets file in the 'data' repertory instead of the traditionnal 'web' one. So the publish assets task provided by symfony can't be use in this case.
+
+An other reason, is that in symfony 1.1, the plugin:publish-assets task not exists.
+
+
+## widget configuration
+
+All widget configuration is sets both in the YAML file 'sfUoWidget.yml' and in its constructor (widget's option). Here is the main configuration options:
+
+js_adapter: The javascript adapter to use (jQuery by default). The default value is sets in the main YAML configuration file, anyway you can specify a new one by the option in widget constructor.
+
+js_lazy: The javascript render lazy mode (true by default). The default value is sets in the main YAML configuration file, anyway you can specify a new one by the option in widget constructor. If enabled, all JS initialization will be done automatically on widget render, if not, you have to done it by your self.
+
+js_transformer: The javascript transformer to apply to the rendered HTML widget (null by default). A widget can apply many transformation (see "compatibilities" in YAML configuration).
+
+js_config: The widget's javascript configurations to used by the transformer (null by default). In case of many transformers, it must be an associative array with the transformer name as key.
+
+
+### using default loader
+
+All default configuration is sets in yhe YAML file 'sfUoWidget.yml'.
+
+
+### using dynamics loader
+
+Dynamics configuration is both sets in yhe YAML file 'sfUoWidget.yml' and in the dynamics XML packages.
