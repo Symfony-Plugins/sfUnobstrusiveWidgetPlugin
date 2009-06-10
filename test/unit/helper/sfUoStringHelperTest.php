@@ -54,6 +54,7 @@ $test->is(
         'string'=>'foo bar',
         'array'=>array(
           'bool'=>false,
+          'empty_string_toto'=>'',
           'int'=>345,
           'float'=>34.6,
           'function()'=>'aCallBack',

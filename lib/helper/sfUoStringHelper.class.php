@@ -66,7 +66,7 @@ class sfUoStringHelper
       $v = self::getJavascriptConfigurationValue($v);
     }
 
-    if (empty($k) || (is_null($v)))
+    if (empty($k) || '' === $v || is_null($v))
     {
       return null;
     }
@@ -83,11 +83,6 @@ class sfUoStringHelper
    */
   protected static function getJavascriptConfigurationValue($v)
   {
-    if (empty($v) && !is_bool($v) && !is_numeric($v))
-    {
-      return null;
-    }
-
     switch (true)
     {
       case is_array($v):
@@ -96,13 +91,16 @@ class sfUoStringHelper
         foreach ($v as $key => $value)
         {
           $value = self::getJavascriptConfigurationValue($value);
-          if (!is_int($key))
+          if ('' !== $value && !is_null($value))
           {
-            $isArray = false;
-            $value   = $key.': '.$value;
-          }
+            if (!is_int($key))
+            {
+              $isArray = false;
+              $value   = $key.': '.$value;
+            }
 
-          $result[] = $value;
+            $result[] = $value;
+          }
         }
 
         if (empty($result))
@@ -124,13 +122,18 @@ class sfUoStringHelper
         break;
 
       case is_string($v):
-        $v = '"'.$v.'"';
+        $v = empty($v) ? null : '"'.$v.'"';
         break;
 
       default:
         throw new Exception('Invalid value');
     }
+    
+    if ('' !== $v && !is_null($v))
+    {
+      return $v;
+    }
 
-    return $v;
+    return null;
   }
 }
