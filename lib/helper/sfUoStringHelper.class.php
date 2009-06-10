@@ -40,7 +40,16 @@ class sfUoStringHelper
    */
   public static function getJavascriptConfiguration(array $data)
   {
-    return implode(', ', array_map(array('sfUoStringHelper', 'getJavascriptConfigurationCallback'), array_keys($data), array_values($data)));
+    $data = array_map(array('sfUoStringHelper', 'getJavascriptConfigurationCallback'), array_keys($data), array_values($data));
+    foreach ($data as $k => $v)
+    {
+      if ('' === $v || is_null($v))
+      {
+        unset($data[$k]);
+      }
+    }
+    
+    return implode(', ', $data);
   }
 
   /**

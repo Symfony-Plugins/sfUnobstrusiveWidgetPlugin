@@ -41,6 +41,7 @@ $test->diag('sfUoStringHelper::getJavascriptConfiguration()');
 $test->is(
   sfUoStringHelper::getJavascriptConfiguration(
     array(
+      'empty_string_toto'=>'',
       'bool'=>false,
       'int'=>345,
       'float'=>34.6,
