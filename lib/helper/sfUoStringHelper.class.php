@@ -133,6 +133,9 @@ class sfUoStringHelper
       case is_string($v):
         $v = empty($v) ? null : '"'.$v.'"';
         break;
+      
+      case is_null($v):
+        break;
 
       default:
         throw new Exception('Invalid value');

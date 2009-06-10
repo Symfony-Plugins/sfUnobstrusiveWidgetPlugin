@@ -333,7 +333,7 @@ class sfUoWidgetConfigManager implements ArrayAccess
     }
     catch(Exception $e)
     {
-      throw $e;
+      $result = $this->getAdapterTemplate($adapter, 'default');
     }
 
     return $result;
