@@ -33,6 +33,7 @@ class sfUoWidgetMenu extends sfUoWidgetList
     parent::configure($options, $attributes);
     
     $this->addOption('active', null);
+    $this->addOption('active_onlink', true);
   }
 
   /**
@@ -52,7 +53,10 @@ class sfUoWidgetMenu extends sfUoWidgetList
         $options = array('href' => $this->getUrl($value));
         if ($this->getOption('active') == $this->getUrl($value))
         {
-          $options['class'] = 'active';
+          if ($this->getOption('active_onlink'))
+          {
+            $options['class'] = 'active';
+          }
           $value['label']   = $this->renderContentTag('strong', $value['label'], array());
         }
         $value['label'] = $this->renderContentTag('a', $value['label'], $options);
@@ -61,6 +65,24 @@ class sfUoWidgetMenu extends sfUoWidgetList
     }
     
     return parent::getItemContent($key, $value);
+  }
+  
+  /**
+   * Return an item.
+   *
+   * @param  string $key
+   * @param  mixed $content
+   * @param  array $attributes
+   *
+   * @return string
+   */
+  protected function renderItem($key, $content, $attributes = array())
+  {
+    if (!$this->getOption('active_onlink') && strpos($content, '<strong>'))
+    {
+      $attributes['class'] = isset($attributes['class']) ? $attributes['class'].' active' : 'active';
+    }
+    return empty($content) ? '' : $this->renderContentTag('li', $content, $attributes);
   }
 
   /**
