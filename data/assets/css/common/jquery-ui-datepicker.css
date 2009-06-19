@@ -1,0 +1,4 @@
+.ui-datepicker
+{
+  z-index: 9999; /* fixed bug when use date picker in a modal div */
+}
