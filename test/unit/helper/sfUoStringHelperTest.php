@@ -64,6 +64,6 @@ $test->is(
       ),
     )
   ),
-  'bool: false, int: 345, float: 34.6, function: aCallBack, string: "foo bar", array: {bool: false, int: 345, float: 34.6, function(): "aCallBack", string: "foo bar", array: {bool: false, int: 345, float: 34.6, function(): "aCallBack", string: "foo bar"}}',
+  'bool: false, int: 345, float: 34.6, function: aCallBack, string: "foo bar", array: {bool: false, int: 345, float: 34.6, function: aCallBack, string: "foo bar", array: {bool: false, int: 345, float: 34.6, function: aCallBack, string: "foo bar"}}',
   "::getJavascriptConfiguration() return a complete JavaScript configuration");
 

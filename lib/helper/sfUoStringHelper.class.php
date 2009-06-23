@@ -99,7 +99,15 @@ class sfUoStringHelper
         $isArray = true;
         foreach ($v as $key => $value)
         {
-          $value = self::getJavascriptConfigurationValue($value);
+          if (false === strpos($key, '()'))
+          {
+            $value = self::getJavascriptConfigurationValue($value);
+          }
+          else
+          {
+            $key = str_replace('()', '', $key);
+          }
+          
           if ('' !== $value && !is_null($value))
           {
             if (!is_int($key))
@@ -131,7 +139,7 @@ class sfUoStringHelper
         break;
 
       case is_string($v):
-        $v = empty($v) ? null : '"'.$v.'"';
+        $v = empty($v) ? null : json_encode($v);
         break;
       
       case is_null($v):
