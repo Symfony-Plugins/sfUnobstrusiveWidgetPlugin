@@ -48,9 +48,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       upload_error_handler: false,
       upload_success_handler: false,
       upload_complete_handler: false,
-      file_queued_handler: false,
-      swfupload_loaded_handler: false,
-      swfupload_loaded_handler: false
+      file_queued_handler: false
     };
 
     // merge default and custom configuration
