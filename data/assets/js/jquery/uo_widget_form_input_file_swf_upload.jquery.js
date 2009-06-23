@@ -38,8 +38,29 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
       // Debug settings
       debug: false
     };
+    var handlers = {
+      swfupload_loaded_handler: false,
+      file_dialog_start_handler: false,
+      file_queue_error_handler: false,
+      file_dialog_complete_handler: false,
+      upload_start_handler: false,
+      upload_progress_handler: false,
+      upload_error_handler: false,
+      upload_success_handler: false,
+      upload_complete_handler: false,
+      file_queued_handler: false,
+      swfupload_loaded_handler: false,
+      swfupload_loaded_handler: false
+    };
 
     // merge default and custom configuration
+    for (handlerName in handlers)
+    {
+      if (typeof(customConfiguration[handlerName]) == 'function')
+      {
+        handlers[handlerName] = customConfiguration[handlerName];
+      }
+    }
     $.extend(true, configuration, customConfiguration);
 
     return this.each(function(index)
@@ -101,7 +122,6 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
         // Event handler settings
         result.swfupload_loaded_handler     = swfUploadLoaded,
         result.file_dialog_start_handler    = fileDialogStart;
-
         result.file_queue_error_handler     = fileQueueError;
         result.file_dialog_complete_handler = fileDialogComplete;
         result.upload_start_handler         = uploadStart;
@@ -197,7 +217,12 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
        */
       function fileDialogStart()
       {
-      	this.cancelUpload();
+      	$swfUpload.cancelUpload();
+        
+        if (typeof(handlers.file_dialog_start_handler) == 'function')
+        {
+          handlers.file_dialog_start_handler();
+        }
       }
 
       /**
@@ -231,6 +256,11 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
           }
         }
         catch(e){}
+        
+        if (typeof(handlers.file_queue_error_handler) == 'function')
+        {
+          handlers.file_queue_error_handler(file, errorCode, message);
+        }
       }
 
       function fileQueued(file)
@@ -239,15 +269,25 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
           .unbind('submit', doUpload)
           .submit(doUpload);
         $widgetFileName.val(file.name);
+        
+        if (typeof(handlers.file_queued_handler) == 'function')
+        {
+          handlers.file_queued_handler(file);
+        }
       }
 
       function fileQueuedAutoUpload(file)
       {
         $widgetFileName.val(file.name);
         doUpload();
+        
+        if (typeof(handlers.file_queued_handler) == 'function')
+        {
+          handlers.file_queued_handler(file);
+        }
       }
 
-      function uploadProgress(file, bytesLoaded, bytesTotal)
+      function uploadProgress(file, bytesLoaded, totalBytes)
       {
         try
         {
@@ -259,9 +299,14 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
           progress.setStatus("Uploading...");
         }
         catch(e){}
+        
+        if (typeof(handlers.upload_progress_handler) == 'function')
+        {
+          handlers.upload_progress_handler(file, bytesLoaded, totalBytes);
+        }
       }
 
-      function uploadSuccess(file, serverData)
+      function uploadSuccess(file, serverData, receivedResponse)
       {
         try
         {
@@ -282,6 +327,11 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
           }
         }
         catch(e){}
+        
+        if (typeof(handlers.upload_success_handler) == 'function')
+        {
+          handlers.upload_success_handler(file, serverData, receivedResponse);
+        }
       }
 
       function uploadComplete(file)
@@ -310,8 +360,13 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
           }
         }
         catch(e){}
+        
+        if (typeof(handlers.upload_complete_handler) == 'function')
+        {
+          handlers.upload_complete_handler(file);
+        }
       }
-
+      
       function uploadError(file, errorCode, message)
       {
         try
@@ -378,18 +433,35 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
           }
         }
         catch(ex){}
+        
+        if (typeof(handlers.upload_error_handler) == 'function')
+        {
+          handlers.upload_error_handler(file, errorCode, message);
+        }
       }
 
       function swfUploadLoaded()
       {
+        if (typeof(handlers.swfupload_loaded_handler) == 'function')
+        {
+          handlers.swfupload_loaded_handler();
+        }
       }
 
-      function fileDialogComplete()
+      function fileDialogComplete(numFilesSelected, numFilesQueued)
       {
+        if (typeof(handlers.file_dialog_complete_handler) == 'function')
+        {
+          handlers.file_dialog_complete_handler(numFilesSelected, numFilesQueued);
+        }
       }
 
-      function uploadStart()
+      function uploadStart(file)
       {
+        if (typeof(handlers.upload_start_handler) == 'function')
+        {
+          handlers.upload_start_handler(file);
+        }
       }
 
       init();

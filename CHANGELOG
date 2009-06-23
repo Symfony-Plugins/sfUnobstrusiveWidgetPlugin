@@ -1,3 +1,9 @@
+v 1.1.1 - 
+--------------------
+
+ * Francois Béliveau : fixed callback in swfupload transformer
+ * Francois Béliveau : fixed js config helper
+
 v 1.1.0 - 2009-05-25
 --------------------
 
