@@ -92,6 +92,12 @@ adapters:
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_many_drop_down_check_list.jquery.js
           css_files:
             - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_form_select_many_drop_down_check_list.css
+        multiselect:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_many_multiselect.jquery
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-multiselect/ui.multiselect.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-multiselect/ui.multiselect.css
       uo_widget_form_select:
         slider:
           js_files:

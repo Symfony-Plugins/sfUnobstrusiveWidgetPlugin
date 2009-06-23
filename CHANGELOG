@@ -3,6 +3,7 @@ v 1.1.1 -
 
  * Francois Béliveau : fixed callback in swfupload transformer
  * Francois Béliveau : fixed js config helper
+ * Francois Béliveau : added multiselect transformer for select many form widget
 
 v 1.1.0 - 2009-05-25
 --------------------

@@ -22,5 +22,13 @@
     <javascript>js/jquery/uo_widget_form_select_many_drop_down_check_list.jquery</javascript>
     <stylesheet>css/common/uo_widget_form_select_many_drop_down_check_list</stylesheet>
   </package>
+  
+  <package name="uo_widget_form_select_many.multiselect.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_select_many_multiselect.jquery</javascript>
+    <javascript>vendor/jquery/ui-multiselect/ui.multiselect</javascript>
+    <stylesheet>vendor/jquery/ui-multiselect/ui.multiselect</stylesheet>
+  </package>
 
 </dynamics>

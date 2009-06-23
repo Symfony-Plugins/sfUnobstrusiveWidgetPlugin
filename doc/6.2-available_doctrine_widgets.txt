@@ -74,6 +74,7 @@ To deal with multiple select with doctrine.
     - asm                   Alternate Select Multiple (asmSelect) by http://www.ryancramer.com/projects/asmselect/
     - double_list           double list widget
     - drop_down_check_list  select with a drop down check list
+    - multiselect           double list with search by Michael Aufreiter http://github.com/michael/multiselect/tree/searchable
 
 **generated HTML**
 <select multiple="multiple">
