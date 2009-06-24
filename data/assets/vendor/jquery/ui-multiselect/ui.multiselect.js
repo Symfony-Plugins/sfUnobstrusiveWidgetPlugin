@@ -38,8 +38,8 @@ $.widget("ui.multiselect", {
 		this.count = 0; // number of currently selected options
 		this.selectedContainer = $('<div class="selected"></div>').appendTo(this.container);
 		this.availableContainer = $('<div class="available"></div>').appendTo(this.container);
-		this.selectedActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><span class="count">0 items selected</span><a href="#" class="remove-all">Remove All</a></div>').appendTo(this.selectedContainer);
-		this.availableActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><input type="text" class="search ui-widget-content ui-corner-all"/><a href="#" class="add-all">Add All</a></div>').appendTo(this.availableContainer);
+		this.selectedActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><span class="count">'+this.options.labels.no_selected+'</span><a href="#" class="remove-all">'+this.options.labels.remove_all+'</a></div>').appendTo(this.selectedContainer);
+		this.availableActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><input type="text" class="search ui-widget-content ui-corner-all"/><a href="#" class="add-all">'+this.options.labels.add_all+'</a></div>').appendTo(this.availableContainer);
 		this.selectedList = $('<ul class="selected"></ul>').bind('selectstart', function(){return false;}).appendTo(this.selectedContainer);
 		this.availableList = $('<ul class="available"></ul>').bind('selectstart', function(){return false;}).appendTo(this.availableContainer);
 		
@@ -50,8 +50,8 @@ $.widget("ui.multiselect", {
 		//this.selectedList.width(this.element.width()*0.6);
 		//this.availableList.width(this.element.width()*0.4);
 
-		this.selectedList.height(this.element.height());
-		this.availableList.height(this.element.height());
+		//this.selectedList.height(this.element.height());
+		//this.availableList.height(this.element.height());
 		
 		if ( !this.options.animated ) {
 			this.options.show = 'show';
@@ -79,10 +79,11 @@ $.widget("ui.multiselect", {
 			this.availableContainer.find('input.search')
 				.keyup(function() {
 					that._filter.apply(this, [that.availableList]);
-				}).keyup()
-				.parents('form').submit(function(){
+          return false;
+				}).keyup();
+				/*.parents('form').submit(function(){
 					return false;
-				});
+				});*/
 		}
 		
 		// batch actions
@@ -123,7 +124,21 @@ $.widget("ui.multiselect", {
 		this._updateCount();
   },
 	_updateCount: function() {
-		this.selectedContainer.find('span.count').text(this.count+" items selected");
+    
+    var label;
+    if (0 == this.count)
+    {
+      label = this.options.labels.no_selected;
+    }
+    else if (1 == this.count)
+    {
+      label = this.count + ' ' + this.options.labels.single_selected;
+    }
+    else
+    {
+      label = this.count + ' ' + this.options.labels.many_selected;
+    }
+		this.selectedContainer.find('span.count').text(label);
 	},
 	_getOptionNode: function(option) {
 		var node = $('<li class="ui-state-default"> \
@@ -244,7 +259,14 @@ $.extend($.ui.multiselect, {
 		searchable: true,
 		animated: 'fast',
 		show: 'slideDown',
-		hide: 'slideUp'
+		hide: 'slideUp',
+    labels: {
+      no_selected: 'no item selected',
+      single_selected: 'item selected',
+      many_selected: 'items selected',
+      remove_all: 'Remove all',
+      add_all: 'Add all'
+    }
 	}
 });
 	
