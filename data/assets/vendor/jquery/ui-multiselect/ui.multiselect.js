@@ -79,8 +79,14 @@ $.widget("ui.multiselect", {
 			this.availableContainer.find('input.search')
 				.keyup(function() {
 					that._filter.apply(this, [that.availableList]);
-          return false;
-				}).keyup();
+				}).keyup()
+        .keypress(function(event) {
+          if (13 == event.keyCode)
+          {
+            // desactivate form submission on press key enter
+            return false;
+          }
+				});
 				/*.parents('form').submit(function(){
 					return false;
 				});*/
