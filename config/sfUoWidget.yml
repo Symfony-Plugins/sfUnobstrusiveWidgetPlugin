@@ -66,6 +66,12 @@ adapters:
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/pengo_works/auto_complete/jquery.autocomplete.js
           css_files:
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/pengo_works/auto_complete/jquery.autocomplete.css
+      uo_widget_form_input_text_many:
+        ajax_search:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_input_text_many_ajax_search.jquery.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_form_input_text_many_ajax_search.css
       uo_widget_form_input_file:
         swf_upload:
           js_files:

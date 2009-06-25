@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <import resource="dynamics-jquery-1.3.2-dev.xml" />
+
+  <package name="uo_widget_form_input_text_many.ajax_search.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_input_text_many_ajax_search.jquery</javascript>
+    <stylesheet>css/common/uo_widget_form_input_text_many_ajax_search</stylesheet>
+  </package>
+
+</dynamics>

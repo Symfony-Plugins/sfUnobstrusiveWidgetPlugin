@@ -10,6 +10,7 @@
   <import resource="dynamics/jquery/uo_widget_containers_list.jquery.xml" />
   <import resource="dynamics/jquery/uo_widget_form_date.jquery.xml" />
   <import resource="dynamics/jquery/uo_widget_form_input_text.jquery.xml" />
+  <import resource="dynamics/jquery/uo_widget_form_input_text_many.jquery.xml" />
   <import resource="dynamics/jquery/uo_widget_form_input_file.jquery.xml" />
   <import resource="dynamics/jquery/uo_widget_form_select_many.jquery.xml" />
   <import resource="dynamics/jquery/uo_widget_form_select.jquery.xml" />

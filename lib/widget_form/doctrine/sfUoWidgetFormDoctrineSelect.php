@@ -71,13 +71,11 @@ class sfUoWidgetFormDoctrineSelect extends sfUoWidgetFormSelect
     $choices = array();
     if (false !== $this->getOption('add_empty'))
     {
-      $choices[''] = true === $this->getOption('add_empty') ? '' : $this->getOption('add_empty');
+      $choices[''] = (true === $this->getOption('add_empty')) ? '' : $this->getOption('add_empty');
     }
 
     $a = $this->getOption('alias');
-    $q = is_null($this->getOption('query'))
-        ? Doctrine::getTable($this->getOption('model'))->createQuery($a)
-        : $this->getOption('query');
+    $q = is_null($this->getOption('query')) ? Doctrine::getTable($this->getOption('model'))->createQuery($a) : $this->getOption('query');
 
     if ($order = $this->getOption('order_by'))
     {
@@ -88,7 +86,7 @@ class sfUoWidgetFormDoctrineSelect extends sfUoWidgetFormSelect
     $method = $this->getOption('method');
     foreach ($objects as $object)
     {
-        $choices[is_array($value = $object->getPrimaryKey()) ? current($value) : $value] = $object->$method();
+      $choices[is_array($value = $object->getPrimaryKey()) ? current($value) : $value] = $object->$method();
     }
 
     return $choices;

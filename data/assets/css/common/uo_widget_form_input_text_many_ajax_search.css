@@ -1,0 +1,27 @@
+.uo_widget_form_input_text_many_ajax_search_ON
+{
+  display: none;
+}
+.ui-uoWidgetFormInputTextManyAjaxSearch
+{
+  margin:2px 0 30px 10px;
+  border: solid 1px;
+  font-size: 0.8em;
+}
+.ui-uoWidgetFormInputTextManyAjaxSearch input.search
+{
+  height: 14px;
+  padding: 1px; opacity: 0.5;
+  margin: 5px;
+  width: 100px;
+}
+.ui-uoWidgetFormInputTextManyAjaxSearch ul
+{
+  margin:0;
+  padding:0;
+}
+.ui-uoWidgetFormInputTextManyAjaxSearch ul li
+{
+  float: left;
+  padding: 1px;
+}
