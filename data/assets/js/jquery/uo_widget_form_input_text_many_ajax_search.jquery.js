@@ -1,6 +1,6 @@
 /**
  * Unobstrusive many value input widget using jQuery.
- *example : $(':text.uo_widget_form_input_text_many_ajax_search').uoWidgetFormInputTextManyAjaxSearch({});
+ * example : $(':text.uo_widget_form_input_text_many_ajax_search').uoWidgetFormInputTextManyAjaxSearch({});
  *
  * @author     François Béliveau <francois.beliveau@my-labz.com>
  */
