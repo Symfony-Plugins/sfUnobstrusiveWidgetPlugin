@@ -84,7 +84,6 @@ adapters:
         asm:
           js_files:
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_many_asm.jquery.js
-            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/asm_select/jquery.asmselect.js
           css_files:
             - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_form_select_many_asm.css
         double_list:

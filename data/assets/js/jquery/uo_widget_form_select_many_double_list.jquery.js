@@ -28,7 +28,6 @@
       var actionsTemplate   = '<div class="actions"></div>';
       var selectedTemplate  = '<div class="selected"><div class="ui-widget-header ui-corner-top ui-helper-clearfix">' + this.options.labels.selected + '</div><select multiple="multiple" class="ui-widget-content"></select></div>';
       
-      
       if (!this.options.inverse)
       {
         this.availableContainer = $(availableTemplate).appendTo(this.container);
@@ -140,7 +139,7 @@
       
       this.element.find('option:selected').removeAttr('selected');
       
-      this.availableContainer.find('select option').each(function()
+      this.selectedContainer.find('select option').each(function()
       {
         // select the corresponding option from the original element
         that.element.find('option[value="' + $(this).attr('value') + '"]').attr('selected','selected');
