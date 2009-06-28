@@ -239,7 +239,7 @@
         }
       },
       list_type: 'ol',         // ol or ul
-      sortable: true,         // Use the sortable feature? 
+      sortable: false,         // Use the sortable feature? 
       add_item_target: 'bottom', // Where to place new selected items in list: top or bottom
       hide_when_added: false     // Hide the option when added to the list
     }
