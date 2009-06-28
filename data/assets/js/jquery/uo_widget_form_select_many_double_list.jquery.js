@@ -24,9 +24,9 @@
       this.container          = $('<div class="ui-uoWidgetFormSelectManyDoubleList ui-helper-clearfix ui-widget"></div>').insertAfter(this.element);
       this.choices            = this.element.find('option').clone();
       
-      var availableTemplate = '<div class="available"><div class="ui-widget-header ui-helper-clearfix">' + this.options.labels.available + '</div><select multiple="multiple"></select></div>';
+      var availableTemplate = '<div class="available"><div class="ui-widget-header ui-corner-top ui-helper-clearfix">' + this.options.labels.available + '</div><select multiple="multiple" class="ui-widget-content"></select></div>';
       var actionsTemplate   = '<div class="actions"></div>';
-      var selectedTemplate  = '<div class="selected"><div class="ui-widget-header ui-helper-clearfix">' + this.options.labels.selected + '</div><select multiple="multiple"></select></div>';
+      var selectedTemplate  = '<div class="selected"><div class="ui-widget-header ui-corner-top ui-helper-clearfix">' + this.options.labels.selected + '</div><select multiple="multiple" class="ui-widget-content"></select></div>';
       
       
       if (!this.options.inverse)
