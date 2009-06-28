@@ -438,7 +438,7 @@ To deal with multiple select.
 
 **available transformers**:
   - *"jquery" adapter*
-    - asm                   Alternate Select Multiple (asmSelect) by http://www.ryancramer.com/projects/asmselect/
+    - asm                   Alternate Select Multiple (asmSelect) by François Béliveau (from Ryan Cramer (http://www.ryancramer.com/journal/entries/select_multiple/) original idea)
     - double_list           double list widget
     - drop_down_check_list  select with a drop down check list
     - multiselect           double list with search by Michael Aufreiter http://github.com/michael/multiselect/tree/searchable
