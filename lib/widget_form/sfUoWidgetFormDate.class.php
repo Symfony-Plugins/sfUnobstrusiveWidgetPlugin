@@ -100,7 +100,7 @@ class sfUoWidgetFormDate extends sfUoWidget
     
     if ($key != $lastSelect)
     {
-      $class                = str_replace($this->getJsClass(), '', $attributes['class']);
+      $class                = str_replace($this->getJsClass(), '', isset($attributes['class']) ? $attributes['class'] : null);
       $attributes['class']  = $class;
     }
     $attributes = $this->addAttribute($attributes, 'class', $key);

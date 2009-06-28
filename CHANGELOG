@@ -6,6 +6,7 @@ v 1.1.1 -
  * Francois Béliveau : added multiselect transformer for select many form widget
  * Francois Béliveau : added "input text many" widget transformer ajax search transformer
  * Francois Béliveau : make jquery "double_list" transformer compatible with jQuery UI
+ * Francois Béliveau : fixed warning in sfUoWidgetFormDate when no transformer sets
  * Francois Béliveau : added more unit tests
 
 v 1.1.0 - 2009-05-25
