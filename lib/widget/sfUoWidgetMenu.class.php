@@ -46,7 +46,7 @@ class sfUoWidgetMenu extends sfUoWidgetList
    */
   protected function getItemContent($key, $value)
   {
-    if (isset($value['label']))
+    if (is_array($value) && array_key_exists('label', $value))
     {
       if ($this->hasUrl($value))
       {
