@@ -99,8 +99,8 @@ class sfUoWidgetList extends sfUoWidget
         $value = $this->translate($value); 
       }
 
-      $attributes = array_merge($attributes, (is_array($value) && array_key_exists('attributes', $value)) ? $value['attributes'] : array());
-      $result .= $this->renderItem($key, $this->getItemContent($key, $value), $attributes);
+      $attr = array_merge($attributes, (is_array($value) && array_key_exists('attributes', $value)) ? $value['attributes'] : array());
+      $result .= $this->renderItem($key, $this->getItemContent($key, $value), $attr);
     }
 
     if ($parent)
