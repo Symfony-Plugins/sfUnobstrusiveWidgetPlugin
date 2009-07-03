@@ -9,6 +9,10 @@ v 1.1.1 -
  * Francois Béliveau : fixed warning in sfUoWidgetFormDate when no transformer sets
  * Francois Béliveau : make jquery "asm" transformer compatible with jQuery UI
  * Francois Béliveau : added more unit tests
+ * Karim Tache       : fixed bug when merging html attributes for items (sfUoWidgetList)
+ * Karim Tache       : added is_array test on item values (sfUoWidgetMenu)
+ * Karim Tache       : fixed doc
+ * Francois Béliveau : added "button_set" transformer for select widgets
 
 v 1.1.0 - 2009-05-25
 --------------------
