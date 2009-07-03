@@ -5,6 +5,12 @@
   <package name="uo_widget.base.jquery">
     <require>jquery.all</require>
   </package>
+  
+  <package name="ui.classnameoptions.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>vendor/jquery/ui-classnameoptions/ui.classnameoptions</javascript>
+  </package>
 
   <import resource="dynamics/jquery/uo_widget_list.jquery.xml" />
   <import resource="dynamics/jquery/uo_widget_containers_list.jquery.xml" />

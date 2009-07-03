@@ -8,5 +8,15 @@
     <javascript>vendor/jquery/filament_group/slider/js/selectToUISlider.jQuery</javascript>
     <stylesheet>vendor/jquery/filament_group/slider/css/ui.slider.extras</stylesheet>
   </package>
+  
+  <package name="uo_widget_form_select.button_set.jquery">
+    <require>uo_widget.base.jquery</require>
+    <require>ui.classnameoptions.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_select_button_set.jquery</javascript>
+    <javascript>vendor/jquery/ui-button/ui.button</javascript>
+    <javascript>vendor/jquery/ui-button/ui.buttonset</javascript>
+    <stylesheet>vendor/jquery/ui-button/ui.button</stylesheet>
+  </package>
 
 </dynamics>

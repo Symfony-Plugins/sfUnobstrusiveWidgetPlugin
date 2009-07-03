@@ -110,6 +110,14 @@ adapters:
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/filament_group/slider/js/selectToUISlider.jQuery.js
           css_files:
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/filament_group/slider/css/ui.slider.extras.css
+        button_set:
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_button_set.jquery.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-classnameoptions/ui.classnameoptions.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-button/ui.button.js
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-button/ui.buttonset.js
+          css_files:
+            - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-button/ui.button.css
       uo_widget_form_textarea:
         tiny_mce:
           js_files:

@@ -410,6 +410,7 @@ To deal with select.
 **available transformers**:
   - *"jquery" adapter*
     - slider                accessibleUISlider - creates a UI slider component from a select element(s) by Scott Jehl, scott@filamentgroup.com
+    - button_set            button set from jquery ui labs (http://jqueryui.pbworks.com/Buttons)
 
 **generated HTML**
 <select>
