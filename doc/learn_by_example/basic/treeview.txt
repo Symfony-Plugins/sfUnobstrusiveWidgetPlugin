@@ -22,4 +22,4 @@ $checklist = new sfUoWidgetFormCheckList(array(
 
 ## render widget
 
-$checklist->render('form_field_name');
+echo $checklist->render('form_field_name');
