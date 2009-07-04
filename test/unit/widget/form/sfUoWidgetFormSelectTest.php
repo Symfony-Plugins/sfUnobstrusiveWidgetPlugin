@@ -1,10 +1,10 @@
 <?php
-$pluginPath = dirname(__FILE__).'/../../..';
+$pluginPath = dirname(__FILE__).'/../../../..';
 
 include($pluginPath.'/test/bootstrap.php');
 
 require_once($pluginPath.'/lib/widget/base/sfUoWidget.class.php');
-require_once($pluginPath.'/lib/widget_form/sfUoWidgetFormSelect.class.php');
+require_once($pluginPath.'/lib/widget/form/sfUoWidgetFormSelect.class.php');
 
 $t = new lime_test(17, new lime_output_color());
 

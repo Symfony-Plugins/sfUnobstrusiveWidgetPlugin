@@ -63,7 +63,7 @@ class sfUoAdminMenuConfigManager implements ArrayAccess
   {
     if (is_null($menu))
     {
-      return $this->configuration;
+      return $this->getAllConfiguration();
     }
     else
     {
