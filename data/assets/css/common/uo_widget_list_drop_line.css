@@ -7,4 +7,6 @@
 }
 .uo_widget_list_drop_line_ON li ul {
   position: absolute;
+  display: block;
+  width: 100%;
 }

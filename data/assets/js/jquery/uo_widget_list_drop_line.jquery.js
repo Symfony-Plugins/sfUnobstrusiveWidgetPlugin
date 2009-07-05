@@ -6,105 +6,137 @@
  */
 ;(function($) {
 
-  $.fn.uoWidgetListDropLine = function(customConfiguration)
+  $.widget('ui.uoWidgetListDropLine', 
   {
-    // default configuration
-    var configuration = {};
-
-    // merge default and custom configuration
-    $.extend(true, configuration, customConfiguration);
-
-    return this.each(function(index)
+ 
+    _init: function()
     {
-      var $widget    = $(this);
-      var $container = false;
-
-      /**
-       * Initialize widget
-       */
-      function init()
+      // prevent initialize twice
+      if (this.element.hasClass('uo_widget_list_drop_line_ON'))
       {
-        // prevent initialize twice
-        if ($widget.hasClass('uo_widget_list_drop_line_ON'))
+        return false;
+      }
+      
+      this.element.removeClass('uo_widget_list_drop_line');
+      this.element.addClass('uo_widget_list_drop_line_ON');
+
+      this.id                 = this.element.attr('id');
+      this.container          = $('<div class="ui-uoWidgetListDropLine ui-helper-clearfix ui-widget"></div>').insertAfter(this.element);
+      this.element.appendTo(this.container);
+      
+      this.showTimer          = 0;
+      this.hideTimer          = 0;
+      this.activated          = false;
+
+      // register events
+      this._registerListEvents(this.container.find('select'));
+      
+      this._showCurrents();
+    },
+    
+    destroy: function()
+    {
+      this.element.removeClass('uo_widget_list_drop_line_ON');
+      this.element.addClass('uo_widget_list_drop_line');
+    },
+    
+    _showCurrents: function()
+    {
+      this._hideAll();
+      
+      $('a.active', this.element).parents('ul').show();
+    },
+    
+    _hideAll: function(element)
+    {
+      clearTimeout(this.showTimer);
+      clearTimeout(this.hideTimer);
+      
+      if (undefined != element)
+      {
+        $('ul', this.element).not(element.parents()).end().not($('ul:first', element)).hide();
+      }
+      else
+      {
+        $('ul', this.element).hide();
+      }
+    },
+    
+    _hide: function(element)
+    {
+      var that       = this;
+      this.activated = false;
+      clearTimeout(this.showTimer);
+
+      this.hideTimer = setTimeout(
+        function()
         {
-          return $widget;
-        }
-
-        $widget.removeClass('uo_widget_list_drop_line');
-        $widget.addClass('uo_widget_list_drop_line_ON');
-
-        //create container
-        var containerId = 'uo_widget_list_drop_line_container_' + $widget.attr('id');
-        $widget.before('<div class="uo_widget_list_drop_line_ON_container" id="'+containerId+'"></div>');
-        $container = $widget.prev();
-        $widget.appendTo($container);
-
-        //fix float style
-        $container.append('<div style="clear:both"></div>');
-
-        //create A element
-        $('li', $widget).each(function()
-        {
-          var firstchild = this.firstChild;
-          if ('a' != firstchild.nodeName.toLowerCase())
+          if (that.activated)
           {
-            $(firstchild).before('<a href="#"></a>');
-            $(firstchild).appendTo(this.firstChild);
-            $(this.firstChild).click(function()
-            {
-              return false;
-            });
+            $('ul', element).fadeOut(that.options.fade_out_speed);
           }
-        });
-
-        hideAll();
-
-        $('li', $widget).each(function()
-        {
-          if ($(this).parents('ul:first').hasClass('uo_widget_list_drop_line_ON'))
+          else
           {
-            $('a:first', $(this)).click(displaySubLMenu);
+            that._showCurrents();
           }
-        });
-
-        // open active
-        $('a.active', $widget)
-          .parents('ul:first').show().end()
-          .parents('li').addClass('active');
-      }
-
-      /**
-       * Return widget's specific configuration
-       */
-      function getConfiguration()
-      {
-        var result = {};
-        return $.extend(true, configuration, result);
-      }
-
-      /**
-       * Hide all children of menu
-       */
-      function hideAll()
-      {
-        $('li ul', $widget).hide();
-      }
-
-      /**
-       * Display a sub menu
-       */
-      function displaySubLMenu(event)
-      {
-        if (this == event.target)
+        }, 
+        that.options.time_before_hide
+      );
+    },
+    
+    _show: function(element)
+    {
+      var that       = this;
+      this.activated = true;
+      clearTimeout(this.hideTimer);
+      
+      this._hideAll($(element));
+      
+      $(element).parents('ul').show();
+      
+      this.showTimer = setTimeout(
+        function()
         {
-          hideAll();
-          $('ul:first', $(this).parents('li:first')).animate({opacity:'toggle'},'slow');
+          $('ul:first', element).fadeIn(that.options.fade_in_speed);
+        }, 
+        that.options.time_before_show
+      );
+    },
+    
+    _registerListEvents: function(elements)
+    {
+      var that = this;
+      
+      //create A element
+      $('li', this.element).each(function()
+      {
+        var firstchild = this.firstChild;
+        if ('a' != firstchild.nodeName.toLowerCase())
+        {
+          $(firstchild).before('<a href="#"></a>');
+          $(firstchild).appendTo(this.firstChild);
+          $(this.firstChild).click(function()
+          {
+            return false;
+          });
         }
-      }
+      });
+      
+      $('li a', this.element)
+        .hover(function(){ that._show($(this).parent()) }, function(){ that._hide($(this).parent()) })
+        .focus(function(){ that._show($(this).parent()) })
+        .blur(function(){ that._hide($(this).parent()) });
+    }
 
-      init();
-    });
-
-  };
+  });
+  
+  $.extend($.ui.uoWidgetListDropLine, {
+    defaults: {
+      time_before_show: 500,
+      time_before_hide: 500,
+      fade_in_speed: 'fast',
+      fade_out_speed: 'fast'
+    }
+  });
 
 })(jQuery);
