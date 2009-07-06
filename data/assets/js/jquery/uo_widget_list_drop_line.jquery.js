@@ -26,6 +26,7 @@
       
       this.showTimer          = 0;
       this.hideTimer          = 0;
+      this.currentElement     = false;
       this.activated          = false;
 
       // register events
@@ -44,7 +45,9 @@
     {
       this._hideAll();
       
-      $('a.active', this.element).parents('ul').show();
+      $('.active', this.element)
+        .parents('ul').show().end()
+        .find('ul:first').show();
     },
     
     _hideAll: function(element)
@@ -103,6 +106,11 @@
       );
     },
     
+    _cancelHide: function()
+    {
+      clearTimeout(this.hideTimer);
+    },
+    
     _registerListEvents: function(elements)
     {
       var that = this;
@@ -126,14 +134,18 @@
         .hover(function(){ that._show($(this).parent()) }, function(){ that._hide($(this).parent()) })
         .focus(function(){ that._show($(this).parent()) })
         .blur(function(){ that._hide($(this).parent()) });
+      
+      $('ul', this.element)
+        .mouseover(function(){ that._cancelHide() })
+        .mouseleave(function(){ that._hide($(this)) });
     }
 
   });
   
   $.extend($.ui.uoWidgetListDropLine, {
     defaults: {
-      time_before_show: 500,
-      time_before_hide: 500,
+      time_before_show: 200,
+      time_before_hide: 200,
       fade_in_speed: 'fast',
       fade_out_speed: 'fast'
     }
