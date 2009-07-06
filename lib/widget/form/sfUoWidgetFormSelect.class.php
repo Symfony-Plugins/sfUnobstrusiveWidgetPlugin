@@ -91,13 +91,27 @@ class sfUoWidgetFormSelect extends sfUoWidget
     $options = array();
     foreach ($choices as $key => $option)
     {
-      if (is_array($option))
+      if (is_array($option) && !array_key_exists('label', $option))
       {
         $options[] = $this->renderContentTag('optgroup', implode("\n", $this->getOptionsForSelect($this->translate($value), $option)), array('label' => self::escapeOnce($key)));
       }
       else
       {
         $attributes = array('value' => self::escapeOnce($key));
+      
+        if (is_array($option))
+        {
+          if (array_key_exists('attributes', $option))
+          {
+            $attributes = array_merge($option['attributes'], $attributes);
+          }
+          
+          if (array_key_exists('label', $option))
+          {
+            $option = $option['label'];
+          }
+        }
+      
         if ((is_array($value) && in_array(strval($key), $value)) || strval($key) == strval($value))
         {
           $attributes['selected'] = 'selected';

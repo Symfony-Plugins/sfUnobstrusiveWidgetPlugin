@@ -118,6 +118,10 @@ adapters:
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-button/ui.buttonset.js
           css_files:
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-button/ui.button.css
+        related_choices:
+          template: window_onload
+          js_files:
+            - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_related_choices.jquery.js
       uo_widget_form_textarea:
         tiny_mce:
           js_files:

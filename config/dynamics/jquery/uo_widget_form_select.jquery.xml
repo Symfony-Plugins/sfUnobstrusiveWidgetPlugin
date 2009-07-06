@@ -18,5 +18,11 @@
     <javascript>vendor/jquery/ui-button/ui.buttonset</javascript>
     <stylesheet>vendor/jquery/ui-button/ui.button</stylesheet>
   </package>
+  
+  <package name="uo_widget_form_select.related_choices.jquery">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo_widget_form_select_related_choices.jquery</javascript>
+  </package>
 
 </dynamics>

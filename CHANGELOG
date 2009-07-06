@@ -13,6 +13,8 @@ v 1.1.1 -
  * Karim Tache       : added is_array test on item values (sfUoWidgetMenu)
  * Karim Tache       : fixed doc
  * Francois Béliveau : added "button_set" transformer for select widgets
+ * Francois Béliveau : fixed "drop_line" menu widget transformer
+ * Francois Béliveau : added "related_choice" transformer for select
 
 v 1.1.0 - 2009-05-25
 --------------------

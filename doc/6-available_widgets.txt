@@ -411,6 +411,7 @@ To deal with select.
   - *"jquery" adapter*
     - slider                accessibleUISlider - creates a UI slider component from a select element(s) by Scott Jehl, scott@filamentgroup.com
     - button_set            button set from jquery ui labs (http://jqueryui.pbworks.com/Buttons)
+    - related_choices       related select's choices by François Béliveau
 
 **generated HTML**
 <select>
