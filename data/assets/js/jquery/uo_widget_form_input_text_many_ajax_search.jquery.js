@@ -34,6 +34,18 @@
     
       // register events
       this._registerSearchEvents(this.header.find(':text'));
+
+      // enable drag n drop
+      if (this.options.draggable_items)
+      {
+        var that = this;
+        $(".ui-uoWidgetFormInputTextManyAjaxSearch ul").addClass('sortable').sortable({
+          placeholder:     'ui-state-highlight',
+          stop:          function (event, ui){
+            that._rebuildValue();
+        }
+        });
+      }
     },
     
     destroy: function()
@@ -142,7 +154,8 @@
       that.itemContainer.append('<li><input type="hidden" value="'+value+'" />'+item+'</li>');
 
       $('li:last', that.itemContainer).find(that.options.remove_item_selector).click(function(){
-        $(this).parents('li:first').fadeOut('slow', function(){ that._removeItem(this); return false; });
+        $(this).parents('li:first').fadeOut('slow', function(){ that._removeItem(this); });
+        return false;
       });
       
       if (!that.autoloading && addValue)
@@ -156,29 +169,23 @@
         that.element.val(widgetValue+value);
       }
     },
-    
+
+    /** Rebuild the input value (hidden from user) with the current
+     *  selected elements
+     */
+    _rebuildValue: function ()
+    {
+      var newValue = new Array();
+      this.itemContainer.find("li input[type=hidden]").each(function (i,e){
+        newValue[newValue.length] = $(e).val();
+      });
+      this.element.val(newValue.join(','));
+    },
+
     _removeItem: function(element)
     {
-      var widgetValue    = this.element.val();
-      var widgetValues   = widgetValue.split(this.options.separator);
-      var widgetNewValue = '';
-      var itemValue      = $(':hidden:first', $(element)).val();
-      for(var i=0; i<widgetValues.length; i++)
-      {
-        if (widgetValues[i] !== itemValue)
-        {
-          if (widgetNewValue != '')
-          {
-            widgetNewValue += ',';
-          }
-        
-          widgetNewValue += widgetValues[i];
-        }
-      }
-      
-      this.element.val(widgetNewValue);
-    
       $(element).remove();
+      this._rebuildValue();
     },
     
     _isValueExists: function(value)
@@ -226,6 +233,7 @@
       template: false,
       url: false,
       json: true,
+      draggable_items: false,
       separator: ',',
       post_name: 'search',
       auto_load: true,
