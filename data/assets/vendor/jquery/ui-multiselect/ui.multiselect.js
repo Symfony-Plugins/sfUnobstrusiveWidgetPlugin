@@ -211,7 +211,7 @@ $.widget("ui.multiselect", {
 	_filter: function(list) {
 		var rows = list.children('li'),
 			cache = rows.map(function(){
-				return this.innerHTML.toLowerCase();
+				return $(this).text().toLowerCase();
 			});
 		
 		var term = $.trim( $(this).val().toLowerCase() ), scores = [];
