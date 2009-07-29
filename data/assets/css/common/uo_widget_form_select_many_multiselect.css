@@ -1,0 +1,24 @@
+.ui-multiselect ul li {
+  position:relative;
+}
+
+.ui-multiselect ul li a.action {
+position:absolute;
+display:block;
+text-align:right;
+right:0px;
+left: 0px;
+top:0px;
+float:left;
+bottom:0px;
+z-index:1000;
+}
+
+.ui-multiselect ul li a.action span {
+  float:right;
+}
+
+.ui-multiselect ul.ui-sortable li a.action {
+  left:auto;
+  width:30px;
+}

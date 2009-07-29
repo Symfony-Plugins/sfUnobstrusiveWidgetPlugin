@@ -28,6 +28,7 @@
     <javascript>js/jquery/uo_widget_form_select_many_multiselect.jquery</javascript>
     <javascript>vendor/jquery/ui-multiselect/ui.multiselect</javascript>
     <stylesheet>vendor/jquery/ui-multiselect/ui.multiselect</stylesheet>
+    <stylesheet>css/common/uo_widget_form_select_many_multiselect</stylesheet>
   </package>
 
 </dynamics>
