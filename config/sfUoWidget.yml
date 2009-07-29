@@ -102,6 +102,7 @@ adapters:
             - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_form_select_many_multiselect.jquery
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-multiselect/ui.multiselect.js
           css_files:
+            - /sfUnobstrusiveWidgetPlugin/css/common/uo_widget_form_select_many_multiselect.css
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/ui-multiselect/ui.multiselect.css
       uo_widget_form_select:
         slider:
