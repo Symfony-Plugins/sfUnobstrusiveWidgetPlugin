@@ -8,7 +8,6 @@
 
   $.widget('ui.uoWidgetFormSelectRelatedChoices', 
   {
- 
     _init: function()
     {
       // prevent initialize twice
@@ -22,11 +21,22 @@
 
       this.id                 = this.element.attr('id');
       this.relatedSelect      = $(this.options.related_select);
+      this.relatedSelectValue = this.relatedSelect.val();
 
       // register events
       this._registerEvents();
       
-      this._updateRelatedChoices();
+      if (this.options.update_on_document_ready)
+      {
+        var that = this;
+        $(document).ready(function(){
+          that._updateRelatedChoices();
+        });
+      }
+      else
+      {
+        this._updateRelatedChoices();
+      }
     },
     
     destroy: function()
@@ -41,7 +51,8 @@
     
       $('option', this.relatedSelect).hide();
       $('option[value=""]', this.relatedSelect).show();
-      
+      $('option:selected', this.relatedSelect).removeAttr('selected');
+
       if ('' != value)
       {
         if (undefined != this.options.class_prefix)
@@ -50,9 +61,8 @@
         }
 
         $('option.' + value, this.relatedSelect).show();
+        $('option.' + value + '[value="' + this.relatedSelectValue + '"]', this.relatedSelect).attr('selected', 'selected');
       }
-      
-      $('option:selected', this.relatedSelect).removeAttr('selected');
     },
     
     _registerEvents: function(elements)
@@ -66,7 +76,8 @@
   $.extend($.ui.uoWidgetFormSelectManyDoubleList, {
     defaults: {
       related_select: false, // selector || element
-      class_prefix: false
+      class_prefix: false,
+      update_on_document_ready: true
     }
   });
 

@@ -54,6 +54,7 @@ class sfUoWidgetFormDoctrineSelect extends sfUoWidgetFormSelect
     $this->addOption('add_empty', false);
     $this->addOption('method', '__toString');
     $this->addOption('method_value', 'getPrimaryKey');
+    $this->addOption('method_attributes', null);
     $this->addOption('order_by', null);
     $this->addOption('alias', 'a');
     $this->addOption('query', null);
@@ -83,12 +84,19 @@ class sfUoWidgetFormDoctrineSelect extends sfUoWidgetFormSelect
       $q->orderBy("$a." . $order[0] . ' ' . $order[1]);
     }
 
-    $objects     = $q->execute();
-    $method      = $this->getOption('method');
-    $methodValue = $this->getOption('method_value');
+    $objects          = $q->execute();
+    $method           = $this->getOption('method');
+    $methodValue      = $this->getOption('method_value');
+    $methodAttributes = $this->getOption('method_attributes');
     foreach ($objects as $object)
     {
-      $choices[is_array($value = $object->$methodValue()) ? current($value) : $value] = $object->$method();
+      $data = array('label' => $object->$method());
+      if ($methodAttributes)
+      {
+        $data['attributes'] = $object->$methodAttributes();
+      }
+      
+      $choices[is_array($value = $object->$methodValue()) ? current($value) : $value] = $data;
     }
 
     return $choices;
