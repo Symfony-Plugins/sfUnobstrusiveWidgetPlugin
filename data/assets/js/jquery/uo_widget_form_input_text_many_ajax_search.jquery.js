@@ -41,6 +41,7 @@
         var that = this;
         $(".ui-uoWidgetFormInputTextManyAjaxSearch ul").addClass('sortable').sortable({
           placeholder:     'ui-state-highlight',
+          tolerance:       'pointer',
           stop:          function (event, ui){
             that._rebuildValue();
         }
