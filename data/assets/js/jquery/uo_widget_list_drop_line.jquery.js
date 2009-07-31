@@ -76,7 +76,14 @@
         {
           if (that.activated)
           {
-            $('ul', element).fadeOut(that.options.fade_out_speed);
+            if (that.options.animate)
+            {
+              $('ul', element).fadeOut(that.options.fade_out_speed);
+            }
+            else
+            {
+              $('ul:first', element).hide();
+            }
           }
           else
           {
@@ -100,7 +107,14 @@
       this.showTimer = setTimeout(
         function()
         {
-          $('ul:first', element).fadeIn(that.options.fade_in_speed);
+          if (that.options.animate)
+          {
+            $('ul:first', element).fadeIn(that.options.fade_in_speed);
+          }
+          else
+          {
+            $('ul:first', element).show();
+          }
         }, 
         that.options.time_before_show
       );
@@ -146,6 +160,7 @@
     defaults: {
       time_before_show: 200,
       time_before_hide: 200,
+      animate: true,
       fade_in_speed: 'fast',
       fade_out_speed: 'fast'
     }
