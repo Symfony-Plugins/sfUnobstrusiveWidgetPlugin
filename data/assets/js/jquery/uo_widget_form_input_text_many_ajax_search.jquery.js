@@ -85,7 +85,7 @@
     
     _doSearch: function(value, addValue)
     {
-      if (!this.options.url)
+      if (!this.options.url || '' == value)
       {
         return false;
       }
