@@ -290,6 +290,7 @@ abstract class sfUoWidget extends sfWidgetForm
     $this->addOption('controller', false);
     $this->addOption('i18n', false);
     $this->addOption('i18n_catalogue', 'messages');
+    $this->addOption('user', false);
   }
 
   /**
@@ -443,5 +444,15 @@ abstract class sfUoWidget extends sfWidgetForm
   protected function getConfigManager()
   {
     return $this->getOption('config_manager') ? $this->getOption('config_manager') : sfUoWidgetHelper::getConfigManager();
+  }
+  
+  /** 
+   * Returns a user object 
+   * 
+   * @return sfUser or equivalent 
+   */ 
+  protected function getUser()
+  {
+    return $this->getOption('user') ? $this->getOption('user') : sfContext::getInstance()->getUser();
   }
 }

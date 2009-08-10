@@ -58,20 +58,24 @@ class sfUoWidgetFormDate extends sfUoWidget
    */
   protected function configure($options = array(), $attributes = array())
   {
+    parent::configure($options, $attributes);
+    
     $this->addOption('year_as_text', false);
     $this->addOption('month_as_text', false);
     $this->addOption('day_as_text', false);
+    $this->addOption('can_be_empty', true);
+    $this->addOption('empty_values', array('year' => '', 'month' => '', 'day' => ''));    
+    $this->addOption('month_format', 'number');
     
-    $this->addOption('format', '%month%/%day%/%year%');
+    $culture     = isset($this->options['culture']) ? $this->options['culture'] : $this->getUser()->getCulture();
+    $monthFormat = isset($this->options['month_format']) ? $this->options['month_format'] : 'name';
+    $months      = isset($this->options['months']) ? $this->options['months'] : parent::generateTwoCharsRange(1, 12);
+    
+    $this->addOption('format', $this->getDateFormat($culture));
     $this->addOption('days', parent::generateTwoCharsRange(1, 31));
-    $this->addOption('months', parent::generateTwoCharsRange(1, 12));
+    $this->addOption('months', $this->getMonthFormat($culture, $monthFormat, $months));
     $years = range(date('Y') - 5, date('Y') + 5);
     $this->addOption('years', array_combine($years, $years));
-
-    $this->addOption('can_be_empty', true);
-    $this->addOption('empty_values', array('year' => '', 'month' => '', 'day' => ''));
-    
-    parent::configure($options, $attributes);
   }
   
   /**
@@ -164,5 +168,36 @@ class sfUoWidgetFormDate extends sfUoWidget
   protected function getJsSelector()
   {
     return 'uo_widget_form_date';
+  }
+  
+  protected function getMonthFormat($culture, $monthFormat, array $months)
+  {
+    switch ($monthFormat)
+    {
+      case 'name':
+        return array_combine($months, sfDateTimeFormatInfo::getInstance($culture)->getMonthNames());
+      case 'short_name':
+        return array_combine($months, sfDateTimeFormatInfo::getInstance($culture)->getAbbreviatedMonthNames());
+      case 'number':
+        return $months;
+      default:
+        throw new InvalidArgumentException(sprintf('The month format "%s" is invalid.', $monthFormat));
+    }
+  }
+
+  protected function getDateFormat($culture)
+  {
+    $dateFormat = sfDateTimeFormatInfo::getInstance($culture)->getShortDatePattern();
+
+    if (false === ($dayPos = stripos($dateFormat, 'd')) || false === ($monthPos = stripos($dateFormat, 'm')) || false === ($yearPos = stripos($dateFormat, 'y')))
+    {
+      return $this->getOption('format');
+    }
+
+    return strtr($dateFormat, array(
+      substr($dateFormat, $dayPos,   strripos($dateFormat, 'd') - $dayPos + 1)   => '%day%',
+      substr($dateFormat, $monthPos, strripos($dateFormat, 'm') - $monthPos + 1) => '%month%',
+      substr($dateFormat, $yearPos,  strripos($dateFormat, 'y') - $yearPos + 1)  => '%year%',
+    ));
   }
 }
