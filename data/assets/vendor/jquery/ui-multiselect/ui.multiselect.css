@@ -29,7 +29,7 @@
   cursor: pointer;
 }
 
-.ui-multiselect div.selected
+.ui-multiselect div.first_position
 {
   padding: 0;
   margin: 0;
@@ -55,7 +55,7 @@
 {
 }
 
-.ui-multiselect div.available
+.ui-multiselect div.last_position
 {
   padding: 0;
   margin: 0 0 0 -2%;

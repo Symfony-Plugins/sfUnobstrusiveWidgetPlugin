@@ -36,8 +36,23 @@ $.widget("ui.multiselect", {
 		this.id = this.element.attr("id");
 		this.container = $('<div class="ui-multiselect ui-helper-clearfix ui-widget"></div>').insertAfter(this.element);
 		this.count = 0; // number of currently selected options
-		this.selectedContainer = $('<div class="selected"></div>').appendTo(this.container);
-		this.availableContainer = $('<div class="available"></div>').appendTo(this.container);
+    
+    if (this.options.selected_position == 'left')
+    {
+      this.selectedContainer = $('<div class="selected first_position"></div>').appendTo(this.container);
+      this.availableContainer = $('<div class="available last_position"></div>').appendTo(this.container);
+    }
+    else if (this.options.selected_position == 'right')
+    {
+      this.availableContainer = $('<div class="available first_position"></div>').appendTo(this.container);
+      this.selectedContainer = $('<div class="selected last_position"></div>').appendTo(this.container);
+    }
+    else
+    {
+      alert('Unavailable "selected_position" configuration');
+      return false;
+    }
+
 		this.selectedActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><span class="count">'+this.options.labels.no_selected+'</span><a href="#" class="remove-all">'+this.options.labels.remove_all+'</a></div>').appendTo(this.selectedContainer);
 		this.availableActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><input type="text" class="search ui-widget-content ui-corner-all"/><a href="#" class="add-all">'+this.options.labels.add_all+'</a></div>').appendTo(this.availableContainer);
 		this.selectedList = $('<ul class="selected"></ul>').bind('selectstart', function(){return false;}).appendTo(this.selectedContainer);
@@ -266,6 +281,7 @@ $.extend($.ui.multiselect, {
 		animated: 'fast',
 		show: 'slideDown',
 		hide: 'slideUp',
+    selected_position: 'left',
     labels: {
       no_selected: 'no item selected',
       single_selected: 'item selected',
