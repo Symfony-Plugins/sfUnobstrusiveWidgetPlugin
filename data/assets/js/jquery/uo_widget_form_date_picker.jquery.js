@@ -202,9 +202,14 @@
 
         if (objects)
         {
-          objects.month.val(date.substring(0, 2));
-          objects.day.val(date.substring(3, 5));
-          objects.year.val(date.substring(6, 10));
+          indexForDay   = $.datepicker._defaults.dateFormat.indexOf('dd');
+          indexForMonth = $.datepicker._defaults.dateFormat.indexOf('mm');
+          indexForYear  = $.datepicker._defaults.dateFormat.indexOf('yy');
+          var lastYear = objects.year.find('option:last').attr('value');
+          offsetForYear = lastYear.length;
+          objects.month.val(date.substring(indexForMonth, indexForMonth+2));
+          objects.day.val(date.substring(indexForDay, indexForDay+2));
+          objects.year.val(date.substring(indexForYear, indexForYear+offsetForYear));
         }
       }
 
