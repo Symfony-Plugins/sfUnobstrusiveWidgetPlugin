@@ -6,10 +6,10 @@ class sfUoWidgetPluginUnpublishTask extends sfBaseTask
     $pluginPath,
     $pluginWebPath,
     $pluginDataPath;
-  
+
   /**
    * Configures the task
-   * 
+   *
    * @access protected
    */
   protected function configure()
@@ -27,17 +27,17 @@ EOF;
 
   /**
    * Executes the task
-   * 
+   *
    * @param array $arguments The CLI arguments array
    * @param array $options   The CLI options array
-   * 
+   *
    * @access protected
    */
   protected function execute($arguments = array(), $options = array())
   {
-    $this->pluginPath     = sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.$this->pluginName;
+    $this->pluginPath     = realpath(sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.$this->pluginName);
     $this->pluginWebPath  = sfConfig::get('sf_web_dir').DIRECTORY_SEPARATOR.$this->pluginName;
-    $this->pluginDataPath = $this->pluginPath.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'assets';
+    $this->pluginDataPath = realpath($this->pluginPath.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'assets');
 
     if (file_exists($this->pluginWebPath))
     {
@@ -48,11 +48,11 @@ EOF;
 
   /**
    * Remove a file or a dir and all contents
-   * 
+   *
    * @param string $filepath   The filepath to remove
    *
    * @return boolean
-   * 
+   *
    * @access protected
    */
   protected function rmRecursive($filepath)
@@ -77,7 +77,7 @@ EOF;
       }
       return rmdir($filepath);
     }
-    
+
     return unlink($filepath);
   }
 }

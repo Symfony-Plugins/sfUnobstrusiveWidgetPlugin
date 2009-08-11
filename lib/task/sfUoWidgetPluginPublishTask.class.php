@@ -3,7 +3,7 @@ class sfUoWidgetPluginPublishTask extends sfUoWidgetPluginUnpublishTask
 {
   /**
    * Configures the task
-   * 
+   *
    * @access protected
    */
   protected function configure()
@@ -21,10 +21,10 @@ EOF;
 
   /**
    * Executes the task
-   * 
+   *
    * @param array $arguments The CLI arguments array
    * @param array $options   The CLI options array
-   * 
+   *
    * @access protected
    */
   protected function execute($arguments = array(), $options = array())
@@ -42,6 +42,7 @@ EOF;
       }
 
       $files = sfFinder::type('file')->prune('.svn')->discard('.svn')->name('*.jpg', '*.jpeg', '*.gif', '*.png', '*.swf')->in($this->pluginDataPath);
+
       foreach ($files as $file)
       {
         $target = str_replace($this->pluginDataPath, $this->pluginWebPath, $file);
