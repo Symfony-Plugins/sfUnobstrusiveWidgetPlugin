@@ -16,6 +16,7 @@ v 1.1.1 -
  * Francois Béliveau : fixed "drop_line" menu widget transformer
  * Francois Béliveau : added "related_choice" transformer for select
  * Francois Béliveau : added i18n support to sfUoWidgetFormDate
+ * François Béliveau : added color widget
 
 v 1.1.0 - 2009-05-25
 --------------------
