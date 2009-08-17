@@ -205,8 +205,18 @@
           indexForDay   = $.datepicker._defaults.dateFormat.indexOf('dd');
           indexForMonth = $.datepicker._defaults.dateFormat.indexOf('mm');
           indexForYear  = $.datepicker._defaults.dateFormat.indexOf('yy');
-          var lastYear = objects.year.find('option:last').attr('value');
-          offsetForYear = lastYear.length;
+
+          var offsetForYear;
+          if (objects.year.attr('maxlength'))
+          {
+            offsetForYear = objects.year.attr('maxlength');
+          }
+          else
+          {
+            var lastYear = objects.year.find('option:last').attr('value');
+            offsetForYear = lastYear.length;
+          }
+
           objects.month.val(date.substring(indexForMonth, indexForMonth+2));
           objects.day.val(date.substring(indexForDay, indexForDay+2));
           objects.year.val(date.substring(indexForYear, indexForYear+offsetForYear));
