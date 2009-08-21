@@ -92,11 +92,11 @@ class sfUoWidgetList extends sfUoWidget
     {
       if (is_array($value) && isset($value['label'])) 
       { 
-        $value['label'] = $this->translate($value['label']); 
+        $value['label'] = $this->__($value['label']); 
       } 
       elseif (!is_array($value)) 
       { 
-        $value = $this->translate($value); 
+        $value = $this->__($value); 
       }
 
       $attr = array_merge($attributes, (is_array($value) && array_key_exists('attributes', $value)) ? $value['attributes'] : array());

@@ -93,7 +93,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
     {
       if (is_array($option) && !array_key_exists('label', $option))
       {
-        $options[] = $this->renderContentTag('optgroup', implode("\n", $this->getOptionsForSelect($this->translate($value), $option)), array('label' => self::escapeOnce($key)));
+        $options[] = $this->renderContentTag('optgroup', implode("\n", $this->getOptionsForSelect($this->__($value), $option)), array('label' => self::escapeOnce($key)));
       }
       else
       {
@@ -117,7 +117,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
           $attributes['selected'] = 'selected';
         }
 
-        $options[] = $this->renderContentTag('option', $this->translate(self::escapeOnce($option)), $attributes);
+        $options[] = $this->renderContentTag('option', $this->__(self::escapeOnce($option)), $attributes);
       }
     }
 

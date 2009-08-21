@@ -269,6 +269,7 @@ abstract class sfUoWidget extends sfWidgetForm
    *  * js_config:             Associative array with JS options (empty array by default)
    *  * js_adapter:            The JS adapter (see sfUoWidget.yml to defined the default value)
    *  * js_lazy:               Lazy mode enabled or not (see sfUoWidget.yml to defined the default value)
+   *  * lazy_i18n:        Translate by default all widget labels or not
    *  * i18n_catalogue:        The i18n catalogue to use ("messages" by default)
    *
    * @param array $options     An array of options
@@ -285,11 +286,13 @@ abstract class sfUoWidget extends sfWidgetForm
     $this->addOption('js_adapter', null);
     $this->addOption('js_lazy', null);
     
+    $this->addOption('lazy_i18n', true);
+    $this->addOption('i18n_catalogue', 'messages');
+
     $this->addOption('config_manager', false);
     $this->addOption('loader', false);
     $this->addOption('controller', false);
     $this->addOption('i18n', false);
-    $this->addOption('i18n_catalogue', 'messages');
     $this->addOption('user', false);
   }
 
@@ -389,24 +392,6 @@ abstract class sfUoWidget extends sfWidgetForm
   }
 
   /** 
-   * Returns the i18n version of the string 
-   * if i18n is activated, or the string itself otherwise 
-   * 
-   * @param string $message 
-   * @param array $option 
-   *
-   * @return string 
-   */ 
-  protected function translate($message, $options = array()) 
-  { 
-    if (sfConfig::get('sf_i18n')) 
-    { 
-      return $this->getI18n()->__($message, $options, $this->getOption('i18n_catalogue')); 
-    } 
-    return $message; 
-  }
-
-  /** 
    * Returns an i18n object 
    * 
    * @return sfI18n or equivalent 
@@ -454,5 +439,24 @@ abstract class sfUoWidget extends sfWidgetForm
   protected function getUser()
   {
     return $this->getOption('user') ? $this->getOption('user') : sfContext::getInstance()->getUser();
+  }
+  
+  /** 
+   * Returns the i18n version of the string 
+   * if i18n is activated, or the string itself otherwise 
+   * 
+   * @param string $message 
+   * @param array $option 
+   *
+   * @return string 
+   */ 
+  protected function __($message, $options = array())
+  {
+    if (sfConfig::get('lazy_i18n')) 
+    { 
+      return $this->getI18n()->__($message, $options, $this->getOption('i18n_catalogue')); 
+    }
+
+    return $message; 
   }
 }
