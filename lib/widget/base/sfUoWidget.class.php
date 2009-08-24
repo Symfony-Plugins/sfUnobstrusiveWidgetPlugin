@@ -452,8 +452,8 @@ abstract class sfUoWidget extends sfWidgetForm
    */ 
   protected function __($message, $options = array())
   {
-    if (sfConfig::get('lazy_i18n')) 
-    { 
+    if ($this->getOption('lazy_i18n')) 
+    {
       return $this->getI18n()->__($message, $options, $this->getOption('i18n_catalogue')); 
     }
 
