@@ -19,7 +19,7 @@
 class sfUoAdminMenuConfigHandler extends sfYamlConfigHandler
 {
   protected static
-    $allowedKey = array('label', 'route', 'absolute', 'url', 'credentials', 'contents');
+    $allowedKey = array('label', 'route', 'absolute', 'url', 'credentials', 'permissions', 'contents');
 
   public function execute($configFiles)
   {
@@ -62,7 +62,7 @@ class sfUoAdminMenuConfigHandler extends sfYamlConfigHandler
     $result = true;
     foreach ($config as $key => $value)
     {
-      if ('credentials' != $key && is_array($value))
+      if (!in_array($key, array('credentials', 'permissions')) && is_array($value))
       {
         try
         {

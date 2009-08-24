@@ -18,10 +18,6 @@
  */
 class sfUoWidgetAdminMenu extends sfUoWidgetMenu
 {
-  protected
-    $user     = null,
-    $name     = '';
-
   /**
    * @see sfUoWidget
    */
@@ -37,8 +33,10 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
    *
    * Available options:
    *
-   *  * user:                   User object (null by default)
-   *  * is_super_admin_method:  The isSuperAdmin method name url ("isSuperAdmin" by default)
+   *  * is_super_admin_method:  The isSuperAdmin method name ("isSuperAdmin" by default)
+   *  * is_authenticated_method:  The isAuthenticated method name ("isAuthenticated" by default)
+   *  * has_credential_method:  The hasCredential method name ("hasCredential" by default) 
+   *  * has_permission_method:  The HasPermission method name ("hasPermission" by default)
    *
    * @see sfUoWidget->configure()
    */
@@ -46,8 +44,10 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
   {
     parent::configure($options, $attributes);
     
-    $this->addOption('user', null);
     $this->addOption('is_super_admin_method', 'isSuperAdmin');
+    $this->addOption('is_authenticated_method', 'isAuthenticated');
+    $this->addOption('has_credential_method', 'hasCredential');
+    $this->addOption('has_permission_method', 'hasPermission');
   }
 
   /**
@@ -57,8 +57,6 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
    */
   protected function doRender()
   {
-    $this->user = $this->getOption('user') ? $this->getOption('user') : sfContext::getInstance()->getUser();
-
     if ('' == $this->getRenderName())
     {
       throw new InvalidArgumentException('Empty name for sfAdminMenuWidget is not available.');
@@ -70,7 +68,7 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
   /**
    * Return menu choices.
    *
-   * @return string
+   * @return array
    */
   public function getChoices()
   {
@@ -95,7 +93,9 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
    */
   protected function getItemContent($key, $value)
   {
-    if ($this->hasCredential($value))
+    if (
+      $this->checkUserRights($value, 'credentials', $this->getOption('has_credential_method'))
+      && $this->checkUserRights($value, 'permissions', $this->getOption('has_permission_method')))
     {
       return parent::getItemContent($key, $value);
     }
@@ -109,39 +109,64 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
    * hasCredential.
    *
    * @param  array $values       The values
+   * @param  array $fieldName       The fieldName to test
+   * @param  array $values       The user method to use
    *
-   * @return string
+   * @return boolean
    */
-  protected function hasCredential($values)
+  protected function checkUserRights($values, $fieldName, $method)
   {
-    if (is_array($values))
+    if ($this->isSuperAdmin())
     {
-      $authenticate = array_key_exists('authenticate', $values) && $values['authenticate'];
-      $credential   = array_key_exists('credentials', $values) && !empty($values['credentials']);
-      
-      if (!$this->user->isAuthenticated() && ($authenticate || $credential))
+      return true;
+    }
+  
+    if (is_array($values) && array_key_exists($fieldName, $values) && !empty($values[$fieldName]))
+    {
+      if (!$this->isAuthenticated())
       {
         return false;
       }
 
-      $isSuperAdminMethod = $this->getOption('is_super_admin_method');
-      $isSuperAdmin       = method_exists($this->user, $isSuperAdminMethod) ? $this->user->$isSuperAdminMethod() : false;
-
-      if ($credential && !$isSuperAdmin)
+      $result = false;
+      foreach ($values[$fieldName] as $key => $value)
       {
-        $response = false;
-        foreach ($values as $key => $value)
+        $result = $this->getUser()->$method($value);
+        if ($result)
         {
-          $response = $this->user->hasCredential($value);
-          if ($response)
-          {
-            break;
-          }
+          break;
         }
-        return $response;
       }
+      return $result;
     }
 
     return true;
+  }
+  
+  /**
+   * isSuperAdmin.
+   *
+   * @return boolean
+   */
+  protected function isSuperAdmin()
+  {
+    if (!$this->isAuthenticated())
+    {
+      return false;
+    }
+  
+    $isSuperAdminMethod = $this->getOption('is_super_admin_method');
+    return $this->getUser()->$isSuperAdminMethod();
+  }
+  
+  /**
+   * isAuthenticated.
+   *
+   * @return boolean
+   */
+  protected function isAuthenticated()
+  {
+    $isAuthenticatedMethod = $this->getOption('is_authenticated_method');
+    return $this->getUser()->$isAuthenticatedMethod();
   }
 }
