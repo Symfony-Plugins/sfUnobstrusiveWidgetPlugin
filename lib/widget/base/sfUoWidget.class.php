@@ -398,7 +398,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */ 
   protected function getI18n()
   {
-    return $this->getOption('i18n') ? $this->getOption('i18n') : sfContext::getInstance()->getI18n();
+    return $this->getOption('i18n') ? $this->getOption('i18n') : $this->getContext()->getI18n();
   }
 
   /** 
@@ -408,7 +408,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */ 
   protected function getController()
   {
-    return $this->getOption('controller') ? $this->getOption('controller') : sfContext::getInstance()->getController();
+    return $this->getOption('controller') ? $this->getOption('controller') : $this->getContext()->getController();
   }
 
   /** 
@@ -438,7 +438,17 @@ abstract class sfUoWidget extends sfWidgetForm
    */ 
   protected function getUser()
   {
-    return $this->getOption('user') ? $this->getOption('user') : sfContext::getInstance()->getUser();
+    return $this->getOption('user') ? $this->getOption('user') : $this->getContext()->getUser();
+  }
+  
+  /** 
+   * Returns a context object 
+   * 
+   * @return sfContext or equivalent 
+   */ 
+  protected function getContext()
+  {
+    return $this->getOption('context') ? $this->getOption('context') : sfContext::getInstance();
   }
   
   /** 
@@ -452,7 +462,7 @@ abstract class sfUoWidget extends sfWidgetForm
    */ 
   protected function __($message, $options = array())
   {
-    if ($this->getOption('lazy_i18n')) 
+    if (sfConfig::get('sf_i18n') && $this->getOption('lazy_i18n')) 
     {
       return $this->getI18n()->__($message, $options, $this->getOption('i18n_catalogue')); 
     }
