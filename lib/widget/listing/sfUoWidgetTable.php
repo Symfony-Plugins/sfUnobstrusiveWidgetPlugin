@@ -28,9 +28,10 @@ class sfUoWidgetTable extends sfUoWidget
    *
    * Available options:
    *
-   *  * checkbox_enable:               Enable or not the checkbox in each row
-   *  * checkbox_name:                 Checkbox input name
-   *  * checkbox_position:             Checkbox position ("first" or "last")
+   *  * choice_enable:                 Enable or not the choice in each row
+   *  * choice_name:                   Choice input name
+   *  * choice_type:                   Choice type ("checkbox" or "radio")
+   *  * choice_position:               Checkbox position ("first" or "last")
    *  * row_number_enable:             Enable or not a number in each row
    *  * row_number_start:              Row number start
    *  * row_classname_enable:          Enable or not the class in each row
@@ -60,9 +61,10 @@ class sfUoWidgetTable extends sfUoWidget
     $this->addOption('no_data_message', 'no data');
     $this->addOption('no_data_classname', 'no-data');
 
-    $this->addOption('checkbox_enable', true);
-    $this->addOption('checkbox_name', 'items');
-    $this->addOption('checkbox_position', 'last');
+    $this->addOption('choice_enable', true);
+    $this->addOption('choice_name', 'items');
+    $this->addOption('choice_type', 'checkbox');
+    $this->addOption('choice_position', 'last');
     
     $this->addOption('row_number_enable', true);
     $this->addOption('row_number_start', 1);
@@ -186,28 +188,25 @@ class sfUoWidgetTable extends sfUoWidget
         $result = $this->renderContentTag('td', $position) . $result;
       }
 
-      if ($this->getOption('checkbox_enable'))
+      if ($this->getOption('choice_enable'))
       {
-        $checkbox = $this->renderContentTag(
+        $choice = $this->renderContentTag(
           'td', 
-          $this->renderTag(
-            'input', 
-            array('type'=>'checkbox', 'class'=>'checkbox', 'name' => $this->getOption('checkbox_name').'['.$this->getId($key, $data).']')
-          )
+          '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$this->getId($key, $data).']'.'" />'
         );
 
-        switch ($this->getOption('checkbox_position'))
+        switch ($this->getOption('choice_position'))
         {
           case 'first':
-            $result = $checkbox.$result;
+            $result = $choice.$result;
             break;
 
           case 'last':
-            $result .= $checkbox;
+            $result .= $choice;
             break;
 
           default:
-            throw new Exception ('invalid value for "checkbox_position" option');
+            throw new Exception ('invalid value for "choice_position" option');
         }
       }
     }
