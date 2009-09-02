@@ -23,26 +23,6 @@ class sfUoWidgetTable extends sfUoWidget
     return count($this->getOption('data'));
   }
   
-  *  * choice_enable:                 Enable or not the choice in each row
-   *  * choice_name:                   Choice input name
-   *  * choice_type:                   Choice type ("checkbox" or "radio")
-   *  * choice_position:               Checkbox position ("first" or "last")
-   *  * row_number_enable:             Enable or not a number in each row
-   *  * row_number_start:              Row number start
-   *  * row_classname_enable:          Enable or not the class in each row
-   *  * row_classname_odd:             Row odd classname
-   *  * row_classname_even:            Row even classname
-   *  * data:                          Data to inject in the table
-   *  * no_data_message:               Message to display when data is empty
-   *  * row_template_name:             Row template name
-   *  * row_template_extra_vars:       Row template extra vars
-   *  * header_template_name:          Header template name
-   *  * header_template_extra_vars:    Header template extra vars
-   *  * footer_template_name:          Footer template name
-   *  * footer_template_extra_vars:    Footer template extra vars
-  
-  
-  
   /**
    * Configures the current widget.
    *
