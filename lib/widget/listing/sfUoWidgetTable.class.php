@@ -117,7 +117,7 @@ class sfUoWidgetTable extends sfUoWidget
     $dataHeader          = $this->getOption('data_header');
     $data                = $this->getOption('data');
 
-    if ((!is_array($data) || !$this->getNbData()) && !(is_array($dataHeader) && count($dataHeader)))
+    if (!$this->getNbData() && !(is_array($dataHeader) && count($dataHeader)))
     {
       return $this->renderContentTag('p', $this->__($this->getOption('no_data_message')), array('class' => $this->getOption('no_data_classname')));
     }
