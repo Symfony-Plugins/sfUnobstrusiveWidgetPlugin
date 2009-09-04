@@ -144,7 +144,7 @@ class sfUoWidgetTable extends sfUoWidget
    */
   protected function getHeader()
   {
-    $dataHeader = $this->getOption('data_footer');
+    $dataHeader = $this->getOption('data_header');
     if (!count($dataHeader) && !$this->getOption('header_template_name'))
     {
       return '';
