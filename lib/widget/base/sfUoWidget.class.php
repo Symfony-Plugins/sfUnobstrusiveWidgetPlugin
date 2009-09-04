@@ -466,7 +466,9 @@ abstract class sfUoWidget extends sfWidgetForm
     {
       return $this->getI18n()->__($message, $options, $this->getOption('i18n_catalogue')); 
     }
-
-    return $message; 
+    else
+    {
+      return strtr($message, $options);
+    }
   }
 }
