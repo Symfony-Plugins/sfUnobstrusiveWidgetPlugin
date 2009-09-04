@@ -227,14 +227,14 @@ class sfUoWidgetTable extends sfUoWidget
         $vars['subject']     = $value;
         $vars['odd']         = $odd = !$odd;
         $vars['number']      = $number;
-      
+
         $result .= $this->getRow(
           $this->getOption('row_template_name'),
           $vars,
           $this->getOption('row_classname_enable'),
           $odd, 
           $number, 
-          '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$this->getId($key, $data).']'.'" />',
+          '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$this->getKeyValue($key, $data).']'.'" />',
           'td'
         );
         $number ++;
@@ -367,5 +367,10 @@ class sfUoWidgetTable extends sfUoWidget
         }
       }
     }
+  }
+  
+  protected function getKeyValue($key, $object)
+  {
+    return $key;
   }
 }
