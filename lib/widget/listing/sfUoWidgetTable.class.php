@@ -234,7 +234,7 @@ class sfUoWidgetTable extends sfUoWidget
           $this->getOption('row_classname_enable'),
           $odd, 
           $number, 
-          '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$this->getKeyValue($key, $data).']'.'" />',
+          '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$this->getKeyValue($key, $value).']'.'" />',
           'td'
         );
         $number ++;
