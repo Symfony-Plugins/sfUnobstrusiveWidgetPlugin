@@ -105,7 +105,7 @@ class sfUoWidgetTable extends sfUoWidget
     $this->addOption('footer_template_name', null);
     $this->addOption('footer_template_extra_vars', array());
     
-    this->setAttribute('class', 'table_results');
+    $this->setAttribute('class', 'table_results');
   }
   
   /**
