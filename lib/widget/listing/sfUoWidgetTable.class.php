@@ -104,6 +104,8 @@ class sfUoWidgetTable extends sfUoWidget
 
     $this->addOption('footer_template_name', null);
     $this->addOption('footer_template_extra_vars', array());
+    
+    this->setAttribute('class', 'table_results');
   }
   
   /**
@@ -113,7 +115,6 @@ class sfUoWidgetTable extends sfUoWidget
    */
   protected function doRender()
   {
-    $attributes['class'] = 'table_results';
     $dataHeader          = $this->getOption('data_header');
     $data                = $this->getOption('data');
 
@@ -130,7 +131,7 @@ class sfUoWidgetTable extends sfUoWidget
 
     if (!empty($result))
     {
-      $result = $this->renderContentTag('table', $result, array_merge($this->getAttributes(), $attributes));
+      $result = $this->renderContentTag('table', $result, $this->getAttributes());
     }
 
 
