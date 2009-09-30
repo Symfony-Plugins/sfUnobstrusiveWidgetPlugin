@@ -159,8 +159,8 @@ abstract class sfUoWidget extends sfWidgetForm
       {
         $template = $this->getConfigManager()->getTransformerTemplate($jsAdapter, $jsSelector, $transformer);
         $result[] = sprintf(
-          $template, 
-          $id, 
+          $template,
+          $id,
           sfUoStringHelper::camelizeLcFirst($jsSelector.'_'.$transformer),
           isset($config[$transformer]) ? sfUoStringHelper::getJavascriptConfiguration($config[$transformer]) : ''
         );
@@ -168,6 +168,39 @@ abstract class sfUoWidget extends sfWidgetForm
     }
 
     return empty($result) ? '' : $this->renderContentTag('script', implode("\n", $result), array('type'=>'text/javascript'));
+  }
+
+  /**
+   * Adds a value in an array defined in an option.
+   *
+   * @param string $option The option name
+   * @param mixed  $value  The value to store in the option array
+   * @param string $key    The key at where the value has to be located
+   */
+  public function optionConcatValue($option, $value, $key = null)
+  {
+    $array = $this->getOption($option);
+
+    if (!is_array($array))
+    {
+      throw new InvalidArgumentException(sprintf('Option "%s" must be an array', $option));
+    }
+
+    if ($key && array_key_exists($key, $array))
+    {
+      throw new InvalidArgumentException(sprintf('Key "%s" already exists in "%s" option array', $key, $option));
+    }
+
+    if ($key)
+    {
+      $array[$key] = $value;
+    }
+    else
+    {
+      $array[] = $value;
+    }
+
+    $this->setOption($option, $array);
   }
 
   /**
@@ -285,7 +318,7 @@ abstract class sfUoWidget extends sfWidgetForm
     $this->addOption('js_config', array());
     $this->addOption('js_adapter', null);
     $this->addOption('js_lazy', null);
-    
+
     $this->addOption('lazy_i18n', true);
     $this->addOption('i18n_catalogue', 'messages');
 
@@ -391,80 +424,80 @@ abstract class sfUoWidget extends sfWidgetForm
     return $attributes;
   }
 
-  /** 
-   * Returns an i18n object 
-   * 
-   * @return sfI18n or equivalent 
-   */ 
+  /**
+   * Returns an i18n object
+   *
+   * @return sfI18n or equivalent
+   */
   protected function getI18n()
   {
     return $this->getOption('i18n') ? $this->getOption('i18n') : $this->getContext()->getI18n();
   }
 
-  /** 
-   * Returns a controller object 
-   * 
-   * @return sfWebController or equivalent 
-   */ 
+  /**
+   * Returns a controller object
+   *
+   * @return sfWebController or equivalent
+   */
   protected function getController()
   {
     return $this->getOption('controller') ? $this->getOption('controller') : $this->getContext()->getController();
   }
 
-  /** 
-   * Returns a loader object 
-   * 
-   * @return sfUoWidgetBaseLoader or equivalent 
-   */ 
+  /**
+   * Returns a loader object
+   *
+   * @return sfUoWidgetBaseLoader or equivalent
+   */
   protected function getLoader()
   {
     return $this->getOption('loader') ? $this->getOption('loader') : sfUoWidgetHelper::getLoader();
   }
 
-  /** 
-   * Returns a loader object 
-   * 
-   * @return sfUoWidgetBaseLoader or equivalent 
-   */ 
+  /**
+   * Returns a loader object
+   *
+   * @return sfUoWidgetBaseLoader or equivalent
+   */
   protected function getConfigManager()
   {
     return $this->getOption('config_manager') ? $this->getOption('config_manager') : sfUoWidgetHelper::getConfigManager();
   }
-  
-  /** 
-   * Returns a user object 
-   * 
-   * @return sfUser or equivalent 
-   */ 
+
+  /**
+   * Returns a user object
+   *
+   * @return sfUser or equivalent
+   */
   protected function getUser()
   {
     return $this->getOption('user') ? $this->getOption('user') : $this->getContext()->getUser();
   }
-  
-  /** 
-   * Returns a context object 
-   * 
-   * @return sfContext or equivalent 
-   */ 
+
+  /**
+   * Returns a context object
+   *
+   * @return sfContext or equivalent
+   */
   protected function getContext()
   {
     return $this->getOption('context') ? $this->getOption('context') : sfContext::getInstance();
   }
-  
-  /** 
-   * Returns the i18n version of the string 
-   * if i18n is activated, or the string itself otherwise 
-   * 
-   * @param string $message 
-   * @param array $option 
+
+  /**
+   * Returns the i18n version of the string
+   * if i18n is activated, or the string itself otherwise
    *
-   * @return string 
-   */ 
+   * @param string $message
+   * @param array $option
+   *
+   * @return string
+   */
   protected function __($message, $options = array())
   {
-    if (sfConfig::get('sf_i18n') && $this->getOption('lazy_i18n')) 
+    if (sfConfig::get('sf_i18n') && $this->getOption('lazy_i18n'))
     {
-      return $this->getI18n()->__($message, $options, $this->getOption('i18n_catalogue')); 
+      return $this->getI18n()->__($message, $options, $this->getOption('i18n_catalogue'));
     }
     else
     {
