@@ -228,6 +228,7 @@ class sfUoWidgetTable extends sfUoWidget
         $vars['subject']     = $value;
         $vars['odd']         = $odd = !$odd;
         $vars['number']      = $number;
+        $keyValue            = $this->getKeyValue($key, $value);
 
         $result .= $this->getRow(
           $this->getOption('row_template_name'),
@@ -235,7 +236,7 @@ class sfUoWidgetTable extends sfUoWidget
           $this->getOption('row_classname_enable'),
           $odd, 
           $number, 
-          '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$this->getKeyValue($key, $value).']'.'" />',
+          '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$keyValue.']'.'" value="'.$keyValue.'" />',
           'td'
         );
         $number ++;
