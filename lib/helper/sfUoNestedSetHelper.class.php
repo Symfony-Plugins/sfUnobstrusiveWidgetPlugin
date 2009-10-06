@@ -95,73 +95,37 @@ class sfUoNestedSetHelper
    */
   public function parse($objects)
   {
-    $scopeMethod  = $this->getScopeMethod();
-    $choices      = array();
-    foreach ($objects as $object)
-    {
-      $choices[$object->$scopeMethod()][] = $object;
-    }
-    
-    $results = array();
-    foreach ($choices as $values)
-    {
-      $excludes = array();
-      $results += $this->recursiveParse($values, $excludes);
-    }
-    return $results;
+    $arrayParser = new sfUoNestedSetArrayHelper();
+    return $arrayParser->parse($this->getCollectionAsArray($objects));
   }
   
   /**
-   * Parse recursive.
+   * Transform an object collection in an array collection
    *
-   * @param array $objects     An array of objects
-   * @param array $excludes    An array of objects value that allreay parsed
-   * @param integer $options   Parent tree left value
-   * @param integer $options   Parent tree right value
-   *
-   * @return boolean
+   * @return array
    */
-  protected function recursiveParse(array $objects, &$excludes, $parentTreeLeft = null, $parentTreeRight = null)
+  protected function getCollectionAsArray($objects)
   {
-    $result          = array();
-    
+    $scopeMethod     = $this->getScopeMethod();
     $valueMethod     = $this->getValueMethod();
     $contentMethod   = $this->getContentMethod();
     $treeLeftMethod  = $this->getTreeLeftMethod();
     $treeRightMethod = $this->getTreeRightMethod();
     $atributesMethod = $this->getAttributesMethod();
-
+    
+    $results = array();
     foreach ($objects as $object)
     {
-      if (count($excludes) == count($objects))
-      {
-        break;
-      }
-    
-      $id           = $object->$valueMethod();
-      $label        = $object->$contentMethod();
-      $treeLeft     = $object->$treeLeftMethod();
-      $treeRight    = $object->$treeRightMethod();
-      $attributes   = empty($atributesMethod) ? array() : $object->$atributesMethod();
-      
-      if (
-        ((is_null($parentTreeLeft) && is_null($parentTreeRight)) 
-        || ($treeLeft>$parentTreeLeft && $treeRight<$parentTreeRight))
-        && !in_array($id, $excludes)
-      )
-      {
-        $result[$id]['label']       = $label;
-        $result[$id]['attributes']  = $attributes;
-        
-        $excludes[] = $id;
-        $diff       = $treeRight - $treeLeft;
-        if ($diff > 1)
-        {
-          $result[$id]['contents']  = $this->recursiveParse($objects, $excludes, $treeLeft, $treeRight);
-        }
-      }
+      $results[] = array(
+        'id'         => $object->$valueMethod(),
+        'label'      => $object->$contentMethod(),
+        'scope'      => $object->$scopeMethod(),
+        'lft'        => $object->$treeLeftMethod(),
+        'rgt'        => $object->$treeRightMethod(),
+        'attributes' => empty($atributesMethod) ? array() : $object->$atributesMethod(),
+      );
     }
-
-    return $result;
+    
+    return $results;
   }
 }

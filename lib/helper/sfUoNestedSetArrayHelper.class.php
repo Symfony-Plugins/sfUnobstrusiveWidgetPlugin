@@ -24,8 +24,8 @@ class sfUoNestedSetArrayHelper
     $treeLeftKey      = 'lft',
     $treeRightKey     = 'rgt',
     $valueKey         = 'id',
-    $contentKey       = 'name',
-    $attributesKey    = '',
+    $contentKey       = 'label',
+    $attributesKey    = 'attributes',
     $_sortCallback    = null;
 
   /**
@@ -107,6 +107,11 @@ class sfUoNestedSetArrayHelper
    */
   public function parse($data)
   {
+    if (is_null($data))
+    {
+      return array();
+    }
+  
     $choices = array();
     foreach ($data as $element)
     {
@@ -121,12 +126,12 @@ class sfUoNestedSetArrayHelper
     }
 
     $results = array();
-
     foreach ($choices as $set)
     {
       $excludes = array();
       $results += $this->recursiveParse($set, $excludes);
     }
+
     return $results;
   }
   
@@ -155,7 +160,7 @@ class sfUoNestedSetArrayHelper
       $label        = $dataRow[$this->contentKey];
       $treeLeft     = $dataRow[$this->treeLeftKey];
       $treeRight    = $dataRow[$this->treeRightKey];
-      $attributes   = empty($this->attributesKey) ? array() : $dataRow[$this->attributesKey];
+      $attributes   = isset($dataRow[$this->attributesKey]) ? $dataRow[$this->attributesKey] : array();
 
       if (
         ((is_null($parentTreeLeft) && is_null($parentTreeRight)) 
@@ -163,9 +168,9 @@ class sfUoNestedSetArrayHelper
         && !in_array($id, $excludes)
       )
       {
-        $result[$id]['id']       = $id;
-        $result[$id]['label']       = $label;
-        $result[$id]['attributes']  = $attributes;
+        $result[$id]['id']         = $id;
+        $result[$id]['label']      = $label;
+        $result[$id]['attributes'] = $attributes;
         
         $excludes[] = $id;
         $diff       = $treeRight - $treeLeft;
