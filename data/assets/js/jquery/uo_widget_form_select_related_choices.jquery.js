@@ -49,8 +49,12 @@
     {
       var value = this.element.val();
     
-      $('option', this.relatedSelect).hide();
-      $('option[value=""]', this.relatedSelect).show();
+      $('option', this.relatedSelect)
+        .hide()
+        .attr('disabled', 'disabled');
+      $('option[value=""]', this.relatedSelect)
+        .show()
+        .removeAttr('disabled');
       $('option:selected', this.relatedSelect).removeAttr('selected');
 
       if ('' != value)
@@ -60,7 +64,9 @@
           value = this.options.class_prefix + value;
         }
 
-        $('option.' + value, this.relatedSelect).show();
+        $('option.' + value, this.relatedSelect)
+          .show()
+          .removeAttr('disabled');
         $('option.' + value + '[value="' + this.relatedSelectValue + '"]', this.relatedSelect).attr('selected', 'selected');
       }
     },
