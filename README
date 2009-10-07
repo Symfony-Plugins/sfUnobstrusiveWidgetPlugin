@@ -9,7 +9,7 @@ Installation
 
   * Install the plugin
 
-        $ symfony plugin:install sfFormExtraPlugin
+        $ symfony plugin:install sfUnobstrusiveWidgetPlugin
 
   * Publish assets
 
