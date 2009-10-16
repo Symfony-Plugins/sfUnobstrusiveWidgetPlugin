@@ -93,7 +93,7 @@ class sfUoWidgetFormSelect extends sfUoWidget
     {
       if (is_array($option) && !array_key_exists('label', $option))
       {
-        $options[] = $this->renderContentTag('optgroup', implode("\n", $this->getOptionsForSelect($this->__($value), $option)), array('label' => self::escapeOnce($key)));
+        $options[] = $this->renderContentTag('optgroup', implode("\n", $this->getOptionsForSelect($value, $option)), array('label' => self::escapeOnce($key)));
       }
       else
       {
