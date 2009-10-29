@@ -66,6 +66,7 @@ adapters:
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/pengo_works/auto_complete/jquery.autocomplete.js
           css_files:
             - /sfUnobstrusiveWidgetPlugin/vendor/jquery/pengo_works/auto_complete/jquery.autocomplete.css
+          template: window_onload
       uo_widget_form_input_text_many:
         ajax_search:
           js_files:
@@ -144,7 +145,7 @@ adapters:
              - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_auto_check.jquery.js
           compatibilities:
             - treeview
-          
+
 themes:
   redmond:
     css_files:
