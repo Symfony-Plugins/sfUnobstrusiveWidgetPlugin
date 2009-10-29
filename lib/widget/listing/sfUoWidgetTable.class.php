@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -15,14 +15,33 @@
  * @package    symfony
  * @subpackage sfUnobstrusiveWidgetPlugin
  * @author     François Béliveau  <francois.beliveau@my-labz.com>
+ * @author     Hugo Hamon <webmaster@apprendre-php.com>
  */
-class sfUoWidgetTable extends sfUoWidget
+class sfUoWidgetTable extends sfUoWidget implements Countable
 {
+  /**
+   * Countable interface implementation
+   *
+   * @see Countable
+   * @see getNbData
+   *
+   * @return integer
+   */
+  public function count()
+  {
+    return $this->getNbData();
+  }
+
+  /**
+   * Returns the number of data that feed the widget.
+   *
+   * @return integer
+   */
   public function getNbData()
   {
     return count($this->getOption('data'));
   }
-  
+
   /**
    * Configures the current widget.
    *
@@ -31,7 +50,7 @@ class sfUoWidgetTable extends sfUoWidget
    *  * data:                                    Data to inject in the table body
    *  * data_header:                             Data to inject in the table header
    *  * data_footer:                             Data to inject in the table footer
-   *  * 
+   *  *
    *  * no_data_message:                         Message to display when data is empty
    *  * no_data_classname:                       CSS classname added to no data message container
    *  *
@@ -48,7 +67,7 @@ class sfUoWidgetTable extends sfUoWidget
    *  * row_number_header:                       Content of the row number header, "#" by default
    *  * row_number_footer:                       Content of the row number footer, "&nbsp;" by default
    *  * row_number_classname:                    CSS classname added to row number column, "number" by default
-   *  * 
+   *  *
    *  * row_classname_enable:                    Enable or not the class in each row, true by default
    *  * row_classname_odd:                       CSS classname added to each odd row, "odd" by default
    *  * row_classname_even:                      CSS classname added to each even row, "even" by default
@@ -85,7 +104,7 @@ class sfUoWidgetTable extends sfUoWidget
     $this->addOption('choice_header', '&nbsp;');
     $this->addOption('choice_footer', '&nbsp;');
     $this->addOption('choice_classname', 'choice');
-    
+
     $this->addOption('row_number_enable', false);
     $this->addOption('row_number_start', 1);
     $this->addOption('row_number_header', '#');
@@ -95,7 +114,7 @@ class sfUoWidgetTable extends sfUoWidget
     $this->addOption('row_classname_enable', true);
     $this->addOption('row_classname_odd', 'odd');
     $this->addOption('row_classname_even', 'even');
-    
+
     $this->addOption('row_template_name', null);
     $this->addOption('row_template_extra_vars', array());
 
@@ -104,10 +123,10 @@ class sfUoWidgetTable extends sfUoWidget
 
     $this->addOption('footer_template_name', null);
     $this->addOption('footer_template_extra_vars', array());
-    
+
     $this->setAttribute('class', 'table_results');
   }
-  
+
   /**
    * @return string An HTML tag string
    *
@@ -137,7 +156,7 @@ class sfUoWidgetTable extends sfUoWidget
 
     return $result;
   }
-  
+
   /**
    * Return the header content
    *
@@ -150,28 +169,28 @@ class sfUoWidgetTable extends sfUoWidget
     {
       return '';
     }
-    
+
     $vars         = $this->getOption('header_template_extra_vars');
     $vars['data'] = $dataHeader;
-    
+
     $result = $this->getRow(
-      $this->getOption('header_template_name'), 
-      $vars, 
+      $this->getOption('header_template_name'),
+      $vars,
       false,
-      false, 
-      $this->getOption('row_number_header'), 
+      false,
+      $this->getOption('row_number_header'),
       $this->getOption('choice_header'),
       'th'
     );
-    
+
     if (!empty($result))
     {
       $result = $this->renderContentTag('thead', $result);
     }
-    
+
     return $result;
   }
-  
+
   /**
    * Return the footer content
    *
@@ -184,28 +203,28 @@ class sfUoWidgetTable extends sfUoWidget
     {
       return '';
     }
-    
+
     $vars         = $this->getOption('footer_template_extra_vars');
     $vars['data'] = $dataFooter;
-    
+
     $result = $this->getRow(
-      $this->getOption('footer_template_name'), 
-      $vars, 
+      $this->getOption('footer_template_name'),
+      $vars,
       false,
-      false, 
-      $this->getOption('row_number_footer'), 
+      false,
+      $this->getOption('row_number_footer'),
       $this->getOption('choice_footer'),
       'th'
     );
-    
+
     if (!empty($result))
     {
       $result = $this->renderContentTag('tfoot', $result);
     }
-    
+
     return $result;
   }
-  
+
   /**
    * Return the body content
    *
@@ -234,8 +253,8 @@ class sfUoWidgetTable extends sfUoWidget
           $this->getOption('row_template_name'),
           $vars,
           $this->getOption('row_classname_enable'),
-          $odd, 
-          $number, 
+          $odd,
+          $number,
           '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$keyValue.']'.'" value="'.$keyValue.'" />',
           'td'
         );
@@ -246,9 +265,9 @@ class sfUoWidgetTable extends sfUoWidget
     {
       $colspan  = $this->getOption('dataHeader') ? count($this->getOption('dataHeader')) : 1;
       $result  .= $this->renderContentTag(
-        'tr', 
+        'tr',
         $this->renderContentTag(
-          'td', 
+          'td',
           $this->__($this->getOption('no_data_message')), array('class' => $this->getOption('no_data_classname'), 'colspan' => $colspan)
         )
       );
@@ -264,7 +283,7 @@ class sfUoWidgetTable extends sfUoWidget
 
   /*
    * Return a row
-   * 
+   *
    * @param string $template
    * @param array $templateVars
    * @param boolean $oddable
@@ -303,8 +322,8 @@ class sfUoWidgetTable extends sfUoWidget
     }
 
     return $this->renderContentTag(
-      'tr', 
-      $result, 
+      'tr',
+      $result,
       $oddable ? array('class' => $odd ? $this->getOption('row_classname_odd') : $this->getOption('row_classname_even')) : array()
     );
   }
@@ -341,7 +360,7 @@ class sfUoWidgetTable extends sfUoWidget
 
     return $view->render();
   }
- 
+
   /**
    * Gets the JavaScript selector.
    *
@@ -370,7 +389,7 @@ class sfUoWidgetTable extends sfUoWidget
       }
     }
   }
-  
+
   protected function getKeyValue($key, $object)
   {
     return $key;

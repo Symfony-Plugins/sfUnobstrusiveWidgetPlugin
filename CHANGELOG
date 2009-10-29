@@ -1,6 +1,7 @@
 v 1.1.1 - 
 --------------------
 
+ * Hugo Hamon        : implemented Countable interface on sfUoWidgetTable objects
  * Francois Béliveau : fixed callback in swfupload transformer
  * Francois Béliveau : fixed js config helper
  * Francois Béliveau : added multiselect transformer for select many form widget
