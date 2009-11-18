@@ -123,7 +123,7 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
   
     if (is_array($values) && array_key_exists($fieldName, $values) && !empty($values[$fieldName]))
     {
-      if (!$this->isAuthenticated())
+      if (!$this->isAuthenticated() || !method_exists($this->getUser(), $method))
       {
         return false;
       }
@@ -156,7 +156,7 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
     }
   
     $isSuperAdminMethod = $this->getOption('is_super_admin_method');
-    return $this->getUser()->$isSuperAdminMethod();
+    return method_exists($this->getUser(), $isSuperAdminMethod) ? $this->getUser()->$isSuperAdminMethod() : false;
   }
   
   /**
@@ -167,6 +167,6 @@ class sfUoWidgetAdminMenu extends sfUoWidgetMenu
   protected function isAuthenticated()
   {
     $isAuthenticatedMethod = $this->getOption('is_authenticated_method');
-    return $this->getUser()->$isAuthenticatedMethod();
+    return method_exists($this->getUser(), $isAuthenticatedMethod) ? $this->getUser()->$isAuthenticatedMethod() : false;
   }
 }
