@@ -27,11 +27,11 @@ dev:
 ### create widget
 
 $tinyMce1 = new sfUoWidgetFormTextarea(array(
-    'js_transformer' => 'tiny_mce_1')
-  )
-);
+  'js_transformer' => 'tiny_mce',
+  'js_config' => sfConfig::get('app_tiny_mce_my_config_1'),
+));
 
 $tinyMce2 = new sfUoWidgetFormTextarea(array(
-    'js_transformer' => 'tiny_mce_2')
-  )
-);
+  'js_transformer' => 'tiny_mce',
+  'js_config' => sfConfig::get('app_tiny_mce_my_config_2'),
+));
