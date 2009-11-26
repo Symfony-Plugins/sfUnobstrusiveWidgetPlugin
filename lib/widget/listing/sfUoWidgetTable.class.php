@@ -61,6 +61,8 @@ class sfUoWidgetTable extends sfUoWidget implements Countable
    *  * choice_header:                           Content of the choice header, "&nbsp;" by default
    *  * choice_footer:                           Content of the choice footer, "&nbsp;" by default
    *  * choice_classname:                        CSS classname added to choice column, "choice" by default
+   *  * choice_allow_empty:                      Whether or not to display the checkbox if its value is empty, "true" by default
+   *  * choice_empty_value:                      Default value to use to replace the checkbox if its corresponding value is empty, "&nbsp;" by default
    *  *
    *  * row_number_enable:                       Enable or not a number in each row, false by default
    *  * row_number_start:                        Row number start value
