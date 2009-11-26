@@ -60,13 +60,47 @@
         <name>symfony</name>
         <channel>pear.symfony-project.com</channel>
         <min>1.1.0</min>
-        <max>1.3.0</max>
-        <exclude>1.3.0</exclude>
+        <max>1.5.0</max>
+        <exclude>1.5.0</exclude>
       </package>
     </required>
   </dependencies>
   <phprelease></phprelease>
   <changelog>
+    <release>
+      <version>
+        <release>1.1.1</release>
+        <api>1.1.1</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2009-11-26</date>
+      <license>MIT</license>
+      <notes>
+       * Hugo Hamon        : implemented Countable interface on sfUoWidgetTable objects
+       * Francois Béliveau : fixed callback in swfupload transformer
+       * Francois Béliveau : fixed js config helper
+       * Francois Béliveau : added multiselect transformer for select many form widget
+       * Francois Béliveau : added "input text many" widget transformer ajax search transformer
+       * Francois Béliveau : make jquery "double_list" transformer compatible with jQuery UI
+       * Francois Béliveau : fixed warning in sfUoWidgetFormDate when no transformer sets
+       * Francois Béliveau : make jquery "asm" transformer compatible with jQuery UI
+       * Francois Béliveau : added more unit tests
+       * Karim Tache       : fixed bug when merging html attributes for items (sfUoWidgetList)
+       * Karim Tache       : added is_array test on item values (sfUoWidgetMenu)
+       * Karim Tache       : fixed doc
+       * Francois Béliveau : added "button_set" transformer for select widgets
+       * Francois Béliveau : fixed "drop_line" menu widget transformer
+       * Francois Béliveau : added "related_choice" transformer for select
+       * Francois Béliveau : added i18n support to sfUoWidgetFormDate
+       * François Béliveau : added color widget
+       * François Béliveau : added table widget
+       * François Béliveau : fixed documentations
+      </notes>
+    </release>
     <release>
       <version>
         <release>1.1.0</release>

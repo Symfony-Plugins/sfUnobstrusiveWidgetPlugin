@@ -1,4 +1,4 @@
-v 1.1.1 - 
+v 1.1.1 - 2009-11-26
 --------------------
 
  * Hugo Hamon        : implemented Countable interface on sfUoWidgetTable objects
@@ -18,6 +18,8 @@ v 1.1.1 -
  * Francois Béliveau : added "related_choice" transformer for select
  * Francois Béliveau : added i18n support to sfUoWidgetFormDate
  * François Béliveau : added color widget
+ * François Béliveau : added table widget
+ * François Béliveau : fixed documentations
 
 v 1.1.0 - 2009-05-25
 --------------------
