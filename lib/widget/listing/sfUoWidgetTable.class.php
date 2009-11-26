@@ -104,6 +104,8 @@ class sfUoWidgetTable extends sfUoWidget implements Countable
     $this->addOption('choice_header', '&nbsp;');
     $this->addOption('choice_footer', '&nbsp;');
     $this->addOption('choice_classname', 'choice');
+    $this->addOption('choice_allow_empty', true);
+    $this->addOption('choice_empty_value', '&nbsp;');
 
     $this->addOption('row_number_enable', false);
     $this->addOption('row_number_start', 1);
@@ -255,7 +257,7 @@ class sfUoWidgetTable extends sfUoWidget implements Countable
           $this->getOption('row_classname_enable'),
           $odd,
           $number,
-          '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$keyValue.']'.'" value="'.$keyValue.'" />',
+          $this->renderChoiceContentTag($keyValue),
           'td'
         );
         $number ++;
@@ -326,6 +328,22 @@ class sfUoWidgetTable extends sfUoWidget implements Countable
       $result,
       $oddable ? array('class' => $odd ? $this->getOption('row_classname_odd') : $this->getOption('row_classname_even')) : array()
     );
+  }
+
+  /**
+   * Returns the checkbox input for batch actions.
+   *
+   * @param string $keyValue
+   * @return string
+   */
+  protected function renderChoiceContentTag($keyValue)
+  {
+    if (!$this->getOption('choice_allow_empty') && empty($keyValue))
+    {
+      return $this->getOption('choice_empty_value');
+    }
+
+    return '<input type="'.$this->getOption('choice_type').'" class="'.$this->getOption('choice_type').'" name="'.$this->getOption('choice_name').'['.$keyValue.']'.'" value="'.$keyValue.'" />';
   }
 
   /**
