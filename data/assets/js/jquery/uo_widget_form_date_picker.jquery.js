@@ -60,7 +60,7 @@
         $widget.removeClass('uo_widget_form_date_picker');
         $widget.addClass('uo_widget_form_date_picker_ON');
         $('#' + $baseId).datepicker(getConfiguration());
-        if ($('#' + $baseId).attr('disabled'))
+        if ($widget.attr('disabled'))
         {
           $('#' + $baseId.replace('_from', '_to')).datepicker('disable');
         }
@@ -70,7 +70,7 @@
           $rangeWidget.removeClass('uo_widget_form_date_picker');
           $rangeWidget.addClass('uo_widget_form_date_picker_ON');
           $('#' + $baseId.replace('_from', '_to')).datepicker(getConfiguration());
-          if ($('#' + $baseId.replace('_from', '_to')).attr('disabled'))
+          if ($rangeWidget.attr('disabled'))
           {
             $('#' + $baseId.replace('_from', '_to')).datepicker('disable');
           }
