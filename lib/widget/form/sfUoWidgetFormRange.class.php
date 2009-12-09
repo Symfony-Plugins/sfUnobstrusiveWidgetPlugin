@@ -51,14 +51,19 @@ class sfUoWidgetFormRange extends sfUoWidget
     $value  = $this->getRenderValue();
     $values = array_merge(array('from' => '', 'to' => '', 'is_empty' => ''), is_array($value) ? $value : array());
     
-    $widgetFrom = $this->getOption('from');
-    $widgetTo   = $this->getOption('to');
-    $jsLazyFrom = $widgetFrom->isLazy();
-    $jsLazyTo   = $widgetTo->isLazy();
+    $widgetFrom       = $this->getOption('from');
+    $widgetTo         = $this->getOption('to');
+    $isWidgetFromIsUo = is_subclass_of($widgetFrom, 'sfUoWidget');
+    $isWidgetToIsUo   = is_subclass_of($widgetFrom, 'sfUoWidget');
+    $jsLazyFrom       = $isWidgetFromIsUo ? $widgetFrom->isLazy() : false;
+    $jsLazyTo         = $isWidgetToIsUo ? $widgetTo->isLazy() : false;
 
-    if ($jsLazyFrom || $jsLazyTo)
+    if ($jsLazyFrom)
     {
       $widgetFrom->setOption('js_lazy', false);
+    }
+    if ($jsLazyTo)
+    {
       $widgetTo->setOption('js_lazy', false);
     }
 
@@ -68,11 +73,14 @@ class sfUoWidgetFormRange extends sfUoWidget
     ));
 
     $config = '';
-    if ($jsLazyFrom || $jsLazyTo)
+    if ($jsLazyFrom)
     {
       $widgetFrom->setOption('js_lazy', $jsLazyFrom);
-      $widgetTo->setOption('js_lazy', $jsLazyTo);
       $config .= $widgetFrom->getJsConfig($this->generateId($name.'[from]'));
+    }
+    if ($jsLazyTo)
+    {
+      $widgetTo->setOption('js_lazy', $jsLazyTo);
       $config .= $widgetTo->getJsConfig($this->generateId($name.'[to]'));
     }
 
