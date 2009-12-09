@@ -14,6 +14,16 @@ class sfUoWidgetPluginUnpublishTask extends sfBaseTask
    */
   protected function configure()
   {
+    $this->pluginPath     = realpath(sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.$this->pluginName);
+    $this->pluginWebPath  = sfConfig::get('sf_web_dir').DIRECTORY_SEPARATOR.$this->pluginName;
+    $this->pluginDataPath = realpath($this->pluginPath.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'assets');
+  
+    if ($this->isVersion('1.1'))
+    {
+      // hack for symfony 1.1
+      sfSimpleAutoload::getInstance()->addDirectory($this->pluginPath);
+    }
+  
     $this->namespace            = 'uo-widget';
     $this->name                 = 'unpublish';
     $this->briefDescription     = '"sfUnobstrusiveWidgetPlugin" unpublish assets task';
@@ -35,10 +45,6 @@ EOF;
    */
   protected function execute($arguments = array(), $options = array())
   {
-    $this->pluginPath     = realpath(sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.$this->pluginName);
-    $this->pluginWebPath  = sfConfig::get('sf_web_dir').DIRECTORY_SEPARATOR.$this->pluginName;
-    $this->pluginDataPath = realpath($this->pluginPath.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'assets');
-
     if (file_exists($this->pluginWebPath))
     {
       $this->logSection($this->pluginName, 'Remove published assets');
@@ -79,5 +85,10 @@ EOF;
     }
 
     return unlink($filepath);
+  }
+  
+  protected function isVersion($version)
+  {
+    return (defined('SYMFONY_VERSION') && substr(SYMFONY_VERSION, 0, strlen($version)) == $version);
   }
 }

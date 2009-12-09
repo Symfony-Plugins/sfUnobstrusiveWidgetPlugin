@@ -8,6 +8,8 @@ class sfUoWidgetPluginPublishTask extends sfUoWidgetPluginUnpublishTask
    */
   protected function configure()
   {
+    parent::configure();
+  
     $this->namespace            = 'uo-widget';
     $this->name                 = 'publish';
     $this->briefDescription     = '"sfUnobstrusiveWidgetPlugin" publish assets task';
@@ -50,13 +52,26 @@ EOF;
         {
           $filesystem->mkdirs(dirname($target), 0777);
         }
-        $filesystem->relativeSymlink($file, str_replace($this->pluginDataPath, $this->pluginWebPath, $file), true);
+        $this->relativeSymlink($filesystem, $file, str_replace($this->pluginDataPath, $this->pluginWebPath, $file), true);
       }
     }
     else
     {
       $this->logSection($this->pluginName, 'Publish default assets');
-      $filesystem->relativeSymlink($this->pluginDataPath, $this->pluginWebPath, true);
+      $this->relativeSymlink($filesystem, $this->pluginDataPath, $this->pluginWebPath, true);
+    }
+  }
+  
+  protected function relativeSymlink(sfFilesystem $filesystem, $originDir, $targetDir, $copyOnWindows = false)
+  {
+    if ($this->isVersion('1.1'))
+    {
+      // for symfony 1.1
+      return $filesystem->symlink($originDir, $targetDir, $copyOnWindows);
+    }
+    else
+    {
+      return $filesystem->relativeSymlink($originDir, $targetDir, $copyOnWindows);
     }
   }
 }
