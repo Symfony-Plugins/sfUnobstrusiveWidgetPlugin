@@ -7,7 +7,7 @@
 
 #### select mode
 
-$datePicker = sfUoWidgetFormDate(array(
+$datePicker = new sfUoWidgetFormDate(array(
   'can_be_empty' => false,
   'js_transformer' => 'picker',
 ));
@@ -15,7 +15,7 @@ $datePicker = sfUoWidgetFormDate(array(
 
 #### input text mode
 
-$datePicker = sfUoWidgetFormDate(array(
+$datePicker = new sfUoWidgetFormDate(array(
   'year_as_text'  => true,
   'month_as_text' => true,
   'day_as_text'   => true,
