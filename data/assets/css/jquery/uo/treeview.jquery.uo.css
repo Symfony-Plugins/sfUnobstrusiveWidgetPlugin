@@ -37,7 +37,7 @@ li.uo-treeview-node
 }
 .uo-treeview .uo-treeview-node > span.uo-treeview-title
 {
-	background-image: url(../images/directory.png);
+	background-image: url(images/directory.png);
 	background-position: 1px 0px;
 	background-repeat: no-repeat;
 	padding-top: 1px;
@@ -58,7 +58,7 @@ li.uo-treeview-node
 }
 .uo-treeview .uo-treeview-list > span.uo-treeview-title
 {
-	background-image: url(../images/file.png);
+	background-image: url(images/file.png);
 	background-repeat: no-repeat;
 	padding-top: 1px;
 	padding-bottom: 4px;
@@ -67,7 +67,7 @@ li.uo-treeview-node
 }
 .uo-treeview .uo-treeview-expanded > span.uo-treeview-title
 {
-	background-image: url(../images/folder_open.png);
+	background-image: url(images/folder_open.png);
 	background-repeat: no-repeat;
 	background-position: 1px top;
 }
@@ -114,16 +114,4 @@ li.uo-treeview-node
 li.ui-draggable-dragging span.uo-treeview-expand-control
 {
 	display: none;
-}
-.uo-treeview .uo-treeview-list.php > span.uo-treeview-title
-{
-	background-image: url(../images/php.png);
-}
-.uo-treeview .uo-treeview-list.html > span.uo-treeview-title
-{
-	background-image: url(../images/html.png);
-}
-.uo-treeview .uo-treeview-list.url > span.uo-treeview-title
-{
-	background-image: url(../images/url.png);
 }
