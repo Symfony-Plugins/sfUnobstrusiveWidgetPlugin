@@ -92,6 +92,12 @@ class sfUoStringHelper
    */
   protected static function getJavascriptConfigurationValue($v)
   {
+    if (is_object($v))
+    {
+      // try to transform object to string
+      $v = (string)$v;
+    }
+  
     switch (true)
     {
       case is_array($v):
