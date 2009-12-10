@@ -8,7 +8,7 @@ adapters:
 
     templates:
       default: 'jQuery("#%1$s").%2$s({ %3$s });'
-      window_onload: jQuery(document).ready(function(){ jQuery("#%1$s").%2$s({ %3$s }); });
+      window_onload: 'jQuery(document).ready(function(){ jQuery("#%1$s").%2$s({ %3$s }); });'
 
     packages:
       uo_widget_containers_list:
@@ -145,6 +145,24 @@ adapters:
              - /sfUnobstrusiveWidgetPlugin/js/jquery/uo_widget_list_auto_check.jquery.js
           compatibilities:
             - treeview
+  
+  # beta
+  jquery.uo:
+    theme: redmond
+
+    templates:
+      default: 'jQuery("#%1$s").%2$s({ %3$s });'
+      window_onload: 'jQuery(document).ready(function(){ jQuery("#%1$s").%2$s({ %3$s }); });'
+      treeview: 'jQuery("#%1$s").uoTreeview({ %3$s });'
+      
+    packages:
+      treeview:
+        template: treeview
+        js_files:
+          - /sfUnobstrusiveWidgetPlugin/js/jquery/ui/fix/droppable.jquery.ui.fix.js
+          - /sfUnobstrusiveWidgetPlugin/js/jquery/uo/treeview.jquery.uo.js
+        css_files:
+          - /sfUnobstrusiveWidgetPlugin/css/jquery/uo/treeview.jquery.uo.css
 
 themes:
   redmond:

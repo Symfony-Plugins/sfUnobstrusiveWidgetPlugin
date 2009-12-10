@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <package name="treeview.jquery.uo">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/ui/fix/droppable.jquery.ui.fix</javascript>
+    <javascript>js/jquery/uo/treeview.jquery.uo</javascript>
+    <stylesheet>css/jquery/uo/treeview.jquery.uo</stylesheet>
+  </package>
+
+</dynamics>

@@ -254,7 +254,7 @@ class sfUoWidgetConfigManager implements ArrayAccess
     }
     catch(Exception $e)
     {
-      throw $e;
+      return $this->getSelectorConfiguration($adapter, $tranformer);
     }
     
     if (!array_key_exists($tranformer, $config))
