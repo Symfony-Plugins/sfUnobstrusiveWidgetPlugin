@@ -34,6 +34,8 @@ class sfUoWidgetContainersList extends sfUoWidgetList
    * Available options:
    *
    *  * title_type:            The html title element to use to generate each container's title ("h3" by default)
+   *  * class_title:           The title's classname ("uo_widget_containers_list_title" by default)
+   *  * class_container:   The container's classname ("uo_widget_containers_list_content" by default)
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
@@ -45,12 +47,14 @@ class sfUoWidgetContainersList extends sfUoWidgetList
     parent::configure($options, $attributes);
 
     $this->addOption('title_type', 'h3');
+    $this->addOption('class_title', 'uo_widget_containers_list_title');
+    $this->addOption('class_container', 'uo_widget_containers_list_content');
   }
 
   protected function getItemContent($key, $value)
   {
-    $result  = $this->renderContentTag($this->getOption('title_type'), $key, array('class' => 'uo_widget_containers_list_title'));
-    $result .= $this->renderContentTag('div', $value, array('class' => 'uo_widget_containers_list_content'));
+    $result  = $this->renderContentTag($this->getOption('title_type'), $key, array('class' => $this->getOption('class_title')));
+    $result .= $this->renderContentTag('div', $value, array('class' => $this->getOption('class_container')));
     
     return $result;
   }
