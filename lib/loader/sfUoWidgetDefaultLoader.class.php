@@ -88,6 +88,26 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
     return $content;
   }
   
+  public function initJavascripts()
+  {
+    $this->javascripts = array();
+  }
+  
+  public function initStylesheets()
+  {
+    $this->stylesheets = array();
+  }
+  
+  public function getJavascripts()
+  {
+    return $this->javascripts;
+  }
+  
+  public function getStylesheets()
+  {
+    return $this->stylesheets;
+  }
+  
   protected function addStylesheets(array $stylesheets)
   {
     foreach($stylesheets as $stylesheet)

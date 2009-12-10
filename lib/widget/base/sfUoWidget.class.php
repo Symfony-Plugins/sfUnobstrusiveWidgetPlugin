@@ -212,6 +212,24 @@ abstract class sfUoWidget extends sfWidgetForm
   {
     return $id;
   }
+  
+  /**
+   * Returns a loader object
+   *
+   * @return sfUoWidgetBaseLoader or equivalent
+   */
+  public function getLoader()
+  {
+    return $this->getOption('loader') ? $this->getOption('loader') : sfUoWidgetHelper::getLoader();
+  }
+  
+  /**
+   * Load assets to response
+   */
+  public function loadAssets()
+  {
+    $this->getLoader()->loadTransformers($this->getJsAdapter(), $this->getJsSelector(), $this->getJsTransformers());
+  }
 
   /**
    * @return string An HTML tag string
@@ -219,14 +237,6 @@ abstract class sfUoWidget extends sfWidgetForm
    * @see render()
    */
   abstract protected function doRender();
-
-  /**
-   * Load assets to response
-   */
-  protected function loadAssets()
-  {
-    $this->getLoader()->loadTransformers($this->getJsAdapter(), $this->getJsSelector(), $this->getJsTransformers());
-  }
 
   /**
     * @param  string $value        The name
@@ -442,16 +452,6 @@ abstract class sfUoWidget extends sfWidgetForm
   protected function getController()
   {
     return $this->getOption('controller') ? $this->getOption('controller') : $this->getContext()->getController();
-  }
-
-  /**
-   * Returns a loader object
-   *
-   * @return sfUoWidgetBaseLoader or equivalent
-   */
-  protected function getLoader()
-  {
-    return $this->getOption('loader') ? $this->getOption('loader') : sfUoWidgetHelper::getLoader();
   }
 
   /**
