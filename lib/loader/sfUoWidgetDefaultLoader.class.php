@@ -92,7 +92,14 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
   {
     foreach($stylesheets as $stylesheet)
     {
-      $this->addStylesheet($stylesheet);
+      if (is_array($stylesheet))
+      {
+        $this->addStylesheets($stylesheet);
+      }
+      else
+      {
+        $this->addStylesheet($stylesheet);
+      }
     }
   }
   
@@ -113,7 +120,14 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
   {
     foreach($javascripts as $javascript)
     {
-      $this->addJavascript($javascript);
+      if (is_array($javascript))
+      {
+        $this->addJavascripts($javascript);
+      }
+      else
+      {
+        $this->addJavascript($javascript);
+      }
     }
   }
   
