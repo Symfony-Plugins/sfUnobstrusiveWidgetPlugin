@@ -66,7 +66,6 @@ EOF;
   {
     if ($this->isVersion('1.1'))
     {
-      // for symfony 1.1
       return $filesystem->symlink($originDir, $targetDir, $copyOnWindows);
     }
     else

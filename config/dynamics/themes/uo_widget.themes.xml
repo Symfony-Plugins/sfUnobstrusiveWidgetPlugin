@@ -3,22 +3,22 @@
 
   <package name="uo_widget_theme.redmond">
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/css/themes</path>
-    <stylesheet image_path_prefix="/sfUnobstrusiveWidgetPlugin/css/themes/redmond/">redmond/jquery-ui-1.7.1.custom</stylesheet>
+    <stylesheet image_path_prefix="/sfUnobstrusiveWidgetPlugin/css/themes/redmond/">redmond/jquery-ui-1.7.2</stylesheet>
   </package>
   
   <package name="uo_widget_theme.smoothness">
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/css/themes</path>
-    <stylesheet image_path_prefix="/sfUnobstrusiveWidgetPlugin/css/themes/smoothness/">smoothness/jquery-ui-1.7.1.custom</stylesheet>
+    <stylesheet image_path_prefix="/sfUnobstrusiveWidgetPlugin/css/themes/smoothness/">smoothness/jquery-ui-1.7.2</stylesheet>
   </package>
   
   <package name="uo_widget_theme.ui-lightness">
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/css/themes</path>
-    <stylesheet image_path_prefix="/sfUnobstrusiveWidgetPlugin/css/themes/ui-lightness/">ui-lightness/jquery-ui-1.7.1.custom</stylesheet>
+    <stylesheet image_path_prefix="/sfUnobstrusiveWidgetPlugin/css/themes/ui-lightness/">ui-lightness/jquery-ui-1.7.2</stylesheet>
   </package>
   
   <package name="uo_widget_theme.ui-darkness">
     <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets/css/themes</path>
-    <stylesheet image_path_prefix="/sfUnobstrusiveWidgetPlugin/css/themes/ui-darkness/">ui-darkness/jquery-ui-1.7.1.custom</stylesheet>
+    <stylesheet image_path_prefix="/sfUnobstrusiveWidgetPlugin/css/themes/ui-darkness/">ui-darkness/jquery-ui-1.7.2</stylesheet>
   </package>
 
 </dynamics>

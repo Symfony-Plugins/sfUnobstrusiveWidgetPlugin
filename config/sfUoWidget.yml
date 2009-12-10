@@ -149,13 +149,13 @@ adapters:
 themes:
   redmond:
     css_files:
-      - /sfUnobstrusiveWidgetPlugin/css/themes/redmond/jquery-ui-1.7.1.custom.css
+      - /sfUnobstrusiveWidgetPlugin/css/themes/redmond/jquery-ui-1.7.2.css
   smoothness:
     css_files:
-      - /sfUnobstrusiveWidgetPlugin/css/themes/smoothness/jquery-ui-1.7.1.custom.css
+      - /sfUnobstrusiveWidgetPlugin/css/themes/smoothness/jquery-ui-1.7.2.css
   ui-darkness:
     css_files:
-      - /sfUnobstrusiveWidgetPlugin/css/themes/ui-darkness/jquery-ui-1.7.1.custom.css
+      - /sfUnobstrusiveWidgetPlugin/css/themes/ui-darkness/jquery-ui-1.7.2.css
   ui-lightness:
     css_files:
-      - /sfUnobstrusiveWidgetPlugin/css/themes/ui-lightness/jquery-ui-1.7.1.custom.css
+      - /sfUnobstrusiveWidgetPlugin/css/themes/ui-lightness/jquery-ui-1.7.2.css
