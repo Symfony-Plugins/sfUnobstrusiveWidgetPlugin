@@ -138,8 +138,8 @@ class sfUoWidgetTable extends sfUoWidget implements Countable
    */
   protected function doRender()
   {
-    $dataHeader          = $this->getOption('data_header');
-    $data                = $this->getOption('data');
+    $dataHeader = $this->getOption('data_header');
+    $data       = $this->getOption('data');
 
     if (!$this->getNbData() && !(is_array($dataHeader) && count($dataHeader)))
     {
@@ -242,9 +242,10 @@ class sfUoWidgetTable extends sfUoWidget implements Countable
 
     if ($this->getNbData())
     {
-      $odd = false;
-      $vars                = $this->getOption('row_template_extra_vars');
-      $vars['data']        = $data;
+      $odd          = false;
+      $vars         = $this->getOption('row_template_extra_vars');
+      $vars['data'] = $data;
+
       foreach ($data as $key => $value)
       {
         $vars['subject_key'] = $key;
@@ -267,8 +268,13 @@ class sfUoWidgetTable extends sfUoWidget implements Countable
     }
     else
     {
-      $colspan  = $this->getOption('dataHeader') ? count($this->getOption('dataHeader')) : 1;
-      $result  .= $this->renderContentTag(
+      $colspan = $this->getOption('data_header') ? count($this->getOption('data_header')) : 1;
+      if ($this->getOption('choice_enable'))
+      {
+        $colspan++;
+      }
+
+      $result .= $this->renderContentTag(
         'tr',
         $this->renderContentTag(
           'td',
