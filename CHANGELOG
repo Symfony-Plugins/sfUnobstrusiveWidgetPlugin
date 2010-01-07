@@ -1,3 +1,10 @@
+v 1.1.2 - 
+--------------------
+
+ * François Béliveau : fixed sfUoWidgetTable no data rendering
+ * François Béliveau : added an experimental adapter "jquery.uo" with a treeview JS transformer
+ * Romain Dorgueil   : added relative_url_root setting usage in default loader
+
 v 1.1.1 - 2009-11-26
 --------------------
 
