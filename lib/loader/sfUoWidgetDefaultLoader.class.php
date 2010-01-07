@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -18,22 +18,27 @@
  */
 class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
 {
-  CONST TEMPLATE_JAVASCRIPT = '<script type="text/javascript" src="%1$s"></script>';
-  CONST TEMPLATE_STYLESHEET = '<link rel="stylesheet" type="text/css" media="%1$s" href="%2$s" />';
-  
+  CONST TEMPLATE_JAVASCRIPT = '<script type="text/javascript" src="%s"></script>';
+ 	CONST TEMPLATE_STYLESHEET = '<link rel="stylesheet" type="text/css" media="%s" href="%s" />';
+
   protected
-    $stylesheets   = array(),
-    $javascripts   = array();
-  
+    $stylesheets = array(),
+    $javascripts = array(),
+    $request     = null;
+
   /**
    * Constructor
    */
   public function __construct(sfUoWidgetConfigManager $configManager)
   {
     parent::__construct($configManager);
-    $this->configManager->getContext()->getEventDispatcher()->connect('response.filter_content', array($this, 'filterResponseContent'));
+
+    $context       = $this->configManager->getContext();
+    $this->request = $context->getRequest();
+
+    $context->getEventDispatcher()->connect('response.filter_content', array($this, 'filterResponseContent'));
   }
-  
+
   public function loadTheme($theme)
   {
     try
@@ -56,7 +61,7 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
     {
       throw $e;
     }
-    
+
     parent::loadTransformers($jsAdapter, $jsSelector, $jsTransformers);
   }
 
@@ -73,7 +78,7 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
       throw $e;
     }
   }
-  
+
   public function filterResponseContent(sfEvent $event, $content)
   {
     if (false !== ($pos = strpos($content, '</head>')))
@@ -87,27 +92,27 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
     }
     return $content;
   }
-  
+
   public function initJavascripts()
   {
     $this->javascripts = array();
   }
-  
+
   public function initStylesheets()
   {
     $this->stylesheets = array();
   }
-  
+
   public function getJavascripts()
   {
     return $this->javascripts;
   }
-  
+
   public function getStylesheets()
   {
     return $this->stylesheets;
   }
-  
+
   protected function addStylesheets(array $stylesheets)
   {
     foreach($stylesheets as $stylesheet)
@@ -122,20 +127,20 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
       }
     }
   }
-  
+
   protected function addStylesheet($stylesheet, $media = 'all')
   {
     if (!array_key_exists($media, $this->stylesheets))
     {
       $this->stylesheets[$media] = array();
     }
-    
+
     if (!in_array($stylesheet, $this->stylesheets[$media]))
     {
       $this->stylesheets[$media][] = $stylesheet;
     }
   }
-  
+
   protected function addJavascripts(array $javascripts)
   {
     foreach($javascripts as $javascript)
@@ -150,7 +155,7 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
       }
     }
   }
-  
+
   protected function addJavascript($javascript)
   {
     if (!in_array($javascript, $this->javascripts))
@@ -158,24 +163,24 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
       $this->javascripts[] = $javascript;
     }
   }
-  
+
   protected function getAssetsAsHtml()
   {
     $assets = array();
 
     foreach ($this->javascripts as $javascript)
     {
-      $assets[] = sprintf(self::TEMPLATE_JAVASCRIPT, $javascript);
+      $assets[] = sprintf(self::TEMPLATE_JAVASCRIPT, $this->request->getRelativeUrlRoot().$javascript);
     }
-    
-    foreach ($this->stylesheets as $media=>$stylesheets)
+
+    foreach ($this->stylesheets as $media => $stylesheets)
     {
       foreach ($stylesheets as $stylesheet)
       {
-        $assets[] = sprintf(self::TEMPLATE_STYLESHEET, $media, $stylesheet);
+        $assets[] = sprintf(self::TEMPLATE_STYLESHEET, $media, $this->request->getRelativeUrlRoot().$stylesheet); 
       }
     }
-    
+
     return implode("\n", $assets);
   }
 }
