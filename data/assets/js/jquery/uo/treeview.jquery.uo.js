@@ -324,6 +324,11 @@
         $('.' + this.options.class_selected, this.element).removeClass(this.options.class_selected);
       }
       span.addClass(this.options.class_selected);
+      
+      if (this.options.select_callback)
+      {
+        this.options.select_callback(this);
+      }
     },
     
     _show : function(el)
@@ -788,6 +793,7 @@
       class_expand: 'uo-treeview-expand',
       class_expand_control: 'uo-treeview-expand-control',
       // ui-icon-folder-collapsed, ui-icon-folder-open, ui-icon-document
+      
       // expand / collapse
       expand_enabled: true,
       expand: false, // if not expand enabled all node will be expand
@@ -802,18 +808,24 @@
       collapse_effect_options : {},
       collapse_speed : 500,
       collapse_callback : false,
+      
       // select
       select_enabled: true,
       select_event: 'click',
       select_multiple: false,
       select_multiple_key: 'ctrlKey',
+      select_callback: false,
+      
       //fix
       fix_ie_drag: true,
+      
       // events
       events: ['click', 'dblclick', 'mousedown', 'mouseup', 'mouseenter', 'mouseleave'],
+      
       // ajax
       ajax_message_loading: 'Loading...',
       json : null,
+      
       // drag options: object or array of object
       drag_enabled: true,
       drag_events: ['start', 'drag', 'stop'],
@@ -825,6 +837,7 @@
         revert: 'invalid',
         distance: 2
       },
+      
       // drop options: object or array of object
       drop_enabled: true,
       drop_events: ['activate', 'deactivate', 'stop', 'over', 'out', 'drop', 'overtop', 'overbottom', 'overright', 'overleft', 'overcenter', 'outtop', 'outbottom', 'outright', 'outleft', 'outcenter'],
