@@ -44,10 +44,15 @@ abstract class sfUoWidget extends sfWidgetForm
    *
    * @return boolean
    */
-  public function hasJsTransformer()
+  public function hasJsTransformer($transformer = null)
   {
-    $transformer = $this->getOption('js_transformer');
-    return !empty($transformer);
+    $transformers = $this->getJsTransformers();
+    if (is_null($transformer))
+    {
+      return !empty($transformers);
+    }
+  
+    return in_array($transformer, $transformers);
   }
 
   /**
