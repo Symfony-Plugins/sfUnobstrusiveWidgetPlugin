@@ -1,11 +1,14 @@
-/*
- * Unobstrusive treeview widget for jQuery UI
- * Base on the excellent work of Titkov Anton, ElSoft company (http://elsoft.tomsk.ru)
+/**
+ * jQuery UI treeview.
  *
- * Copyright (c) 2009 François béliveau (http://my-labz.com)
- * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+ * Based on the excellent work of Titkov Anton, ElSoft company (http://elsoft.tomsk.ru)
  *
- * Version 0.1.0
+ * @licence     Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses
+ * @author      François Béliveau <francois.beliveau@my-labz.com>
+ * @package     unobstrusive.widget
+ * @version     0.10
+ * @depends :
+ *              - ui.core.js (version 1.7.2)
  */
 ;(function($)
 {
@@ -779,7 +782,7 @@
 
   $.extend($.uo.uoTreeview,
   {
-    version: '0.1.0',
+    version: '0.10',
     defaults:
     {
       // classname

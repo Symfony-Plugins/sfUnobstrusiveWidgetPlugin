@@ -154,15 +154,22 @@ adapters:
       default: 'jQuery("#%1$s").%2$s({ %3$s });'
       window_onload: 'jQuery(document).ready(function(){ jQuery("#%1$s").%2$s({ %3$s }); });'
       treeview: 'jQuery("#%1$s").uoTreeview({ %3$s });'
+      spinner: 'jQuery("#%1$s").uoSpinner({ %3$s });'
       
     packages:
       treeview:
         template: treeview
         js_files:
           - /sfUnobstrusiveWidgetPlugin/js/jquery/ui/fix/droppable.jquery.ui.fix.js
-          - /sfUnobstrusiveWidgetPlugin/js/jquery/uo/treeview.jquery.uo.js
+          - /sfUnobstrusiveWidgetPlugin/js/jquery/uo/widget.treeview.jquery.uo.js
         css_files:
-          - /sfUnobstrusiveWidgetPlugin/css/jquery/uo/treeview.jquery.uo.css
+          - /sfUnobstrusiveWidgetPlugin/css/jquery/uo/widget.treeview.jquery.uo.css
+      spinner:
+        template: spinner
+        js_files:
+          - /sfUnobstrusiveWidgetPlugin/js/jquery/uo/widget.spinner.jquery.uo.js
+        css_files:
+          - /sfUnobstrusiveWidgetPlugin/css/jquery/uo/widget.spinner.jquery.uo.css
 
 themes:
   redmond:

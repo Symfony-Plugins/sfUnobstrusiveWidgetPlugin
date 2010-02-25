@@ -6,8 +6,8 @@
  *
  * @licence     Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses
  * @author      François Béliveau <francois.beliveau@my-labz.com>
- * @package     unobstrusive
- * @version     0.1
+ * @package     unobstrusive.widget
+ * @version     0.10
  * @depends :
  *              - ui.core.js (version 1.7.2)
  */
@@ -475,7 +475,7 @@
   });
 
   $.extend($.uo.uoMask, {
-    version: "0.1",
+    version: "0.10",
     getter: "value formatted",
     defaults: {
       mask: '',

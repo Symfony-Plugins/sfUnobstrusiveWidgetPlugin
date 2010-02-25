@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<dynamics>
+
+  <package name="spinner.jquery.uo">
+    <require>uo_widget.base.jquery</require>
+    <path priority="low">%sf_plugins_dir%/sfUnobstrusiveWidgetPlugin/data/assets</path>
+    <javascript>js/jquery/uo/widget.spinner.jquery.uo</javascript>
+    <stylesheet>css/jquery/uo/widget.spinner.jquery.uo</stylesheet>
+  </package>
+
+</dynamics>
