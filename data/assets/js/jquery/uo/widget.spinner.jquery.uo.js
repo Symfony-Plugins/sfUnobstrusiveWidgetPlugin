@@ -107,6 +107,11 @@
         hoverDelayCallback,
         hovered, inKeyDown, inSpecialKey, inMouseDown; // current state booleans
 
+      if (input.width() < 1)
+      {
+        input.css('width', '');
+      }
+        
       // apply className before doing any calculations because it could affect them
       if (className)
       {
@@ -465,7 +470,7 @@
         return false;
       }
       
-      if (!this.options.displayOn)
+      if (!this.options.displayBtn)
       {
         buttons.hide();
       }
@@ -579,6 +584,11 @@
       if (options.mouseWheel)
       {
         input.bind(mouseWheelEventName + eventNamespace, self._mouseWheel);
+      }
+      
+      if (!options.displayBtn)
+      {
+        this.options.width = 0;
       }
     },
 
@@ -847,7 +857,7 @@
       increment:      'slow',
       className:      null,
 
-      displayOn:      true,
+      displayBtn:     true,
       showOn:         'always',
       width:          16,
       upIconClass:    "ui-icon-triangle-1-n",
