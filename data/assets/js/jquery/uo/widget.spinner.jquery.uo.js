@@ -847,7 +847,7 @@
       increment:      'slow',
       className:      null,
 
-      displayOn:      false,
+      displayOn:      true,
       showOn:         'always',
       width:          16,
       upIconClass:    "ui-icon-triangle-1-n",
