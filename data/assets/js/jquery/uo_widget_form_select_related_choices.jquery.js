@@ -15,13 +15,13 @@
       {
         return false;
       }
-      
       this.element.removeClass('uo_widget_form_select_related_choices');
       this.element.addClass('uo_widget_form_select_related_choices_ON');
 
       this.id                 = this.element.attr('id');
       this.relatedSelect      = $(this.options.related_select);
       this.relatedSelectValue = this.relatedSelect.val();
+      this.originalRelatedSelect = this.relatedSelect.children('option').clone();
 
       // register events
       this._registerEvents();
@@ -48,27 +48,11 @@
     _updateRelatedChoices: function()
     {
       var value = this.element.val();
-    
-      $('option', this.relatedSelect)
-        .hide()
-        .attr('disabled', 'disabled');
-      $('option[value=""]', this.relatedSelect)
-        .show()
-        .removeAttr('disabled');
-      $('option:selected', this.relatedSelect).removeAttr('selected');
-
-      if ('' != value)
-      {
-        if (undefined != this.options.class_prefix)
-        {
-          value = this.options.class_prefix + value;
-        }
-
-        $('option.' + value, this.relatedSelect)
-          .show()
-          .removeAttr('disabled');
-        $('option.' + value + '[value="' + this.relatedSelectValue + '"]', this.relatedSelect).attr('selected', 'selected');
-      }
+      this.relatedSelect.children('option').remove();
+      // @TODO check if the first value is empty
+      this.relatedSelect.append(this.originalRelatedSelect.filter('option[value=""]'));
+      this.relatedSelect.append(this.originalRelatedSelect.filter('option.'+value));
+      this.relatedSelect.filter('option[value=""]').attr('selected', 'selected');
     },
     
     _registerEvents: function(elements)
