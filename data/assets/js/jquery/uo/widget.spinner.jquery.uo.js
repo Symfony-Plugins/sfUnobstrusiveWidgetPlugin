@@ -93,7 +93,7 @@
         wrapper       = self.wrapper = input
                                         .css({
                                           width: (self.oWidth = (box ? input.width() : input.outerWidth())) - buttonWidth,
-                                          marginRight: rightMargin + buttonWidth, textAlign: 'right'
+                                          marginRight: rightMargin + buttonWidth
                                         })
                                         .after('<span class="ui-spinner ui-widget"></span>').next(),
         btnContainer  = self.btnContainer = $(
