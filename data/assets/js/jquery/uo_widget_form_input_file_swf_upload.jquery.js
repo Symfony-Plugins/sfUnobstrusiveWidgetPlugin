@@ -100,7 +100,9 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
           $widget         = newWidget;
           $widgetFileName = $('#'+$widgetId);
 
-          $swfUpload = new SWFUpload(config);
+          $(document).ready(function(){
+            $swfUpload = new SWFUpload(config);
+          });
           uo_widget_form_input_file_swf_upload_count++;
         }
         else
@@ -215,7 +217,7 @@ var uo_widget_form_input_file_swf_upload_count  = 0;
        */
       function fileDialogStart()
       {
-      	$swfUpload.cancelUpload();
+        $swfUpload.cancelUpload();
         
         if (typeof(handlers.file_dialog_start_handler) == 'function')
         {
