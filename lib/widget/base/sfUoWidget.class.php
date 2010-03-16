@@ -172,7 +172,7 @@ abstract class sfUoWidget extends sfWidgetForm
       }
     }
 
-    return empty($result) ? '' : $this->renderContentTag('script', implode("\n", $result), array('type'=>'text/javascript'));
+    return empty($result) ? '' : sprintf('<script type="text/javascript">%s</script>', implode("\n", $result));
   }
 
   /**
