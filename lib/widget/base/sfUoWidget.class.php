@@ -509,4 +509,16 @@ abstract class sfUoWidget extends sfWidgetForm
       return strtr($message, $options);
     }
   }
+
+  /**
+   * Converts an array of attributes to its HTML representation.
+   *
+   * @param  array  $attributes An array of attributes
+   *
+   * @return string The HTML representation of the HTML attribute array.
+   */
+  public function attributesToHtml($attributes)
+  {
+    return implode('', array_map(array($this, 'attributesToHtmlCallback'), array_keys($attributes), array_values($attributes)));
+  }
 }
