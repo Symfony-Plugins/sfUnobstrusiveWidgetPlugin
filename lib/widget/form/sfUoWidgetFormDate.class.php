@@ -127,7 +127,7 @@ class sfUoWidgetFormDate extends sfUoWidget
     $format = explode('%', $this->getOption('format'));
     for ($i = count($format)-1; $i>=0; $i--)
     {
-      if (!empty($format[$i]))
+      if (in_array($format[$i], array('day', 'month', 'year')))
       {
         return $format[$i];
       }
