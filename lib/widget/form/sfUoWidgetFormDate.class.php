@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -52,7 +52,7 @@ class sfUoWidgetFormDate extends sfUoWidget
    *  * days:           An array of days for the day select tag (optional)
    *  * can_be_empty:   Whether the widget accept an empty value (true by default)
    *  * empty_values:   An array of values to use for the empty value (empty string for year, month, and day by default)
-   
+
    *
    * @param array $options     An array of options
    * @param array $attributes  An array of default HTML attributes
@@ -62,7 +62,7 @@ class sfUoWidgetFormDate extends sfUoWidget
   protected function configure($options = array(), $attributes = array())
   {
     parent::configure($options, $attributes);
-    
+
     $this->addOption('year_as_text', false);
     $this->addOption('month_as_text', false);
     $this->addOption('day_as_text', false);
@@ -70,23 +70,23 @@ class sfUoWidgetFormDate extends sfUoWidget
     $this->addOption('minute_as_text', false);
     $this->addOption('seconde_as_text', false);
     $this->addOption('can_be_empty', true);
-    $this->addOption('empty_values', array('year' => '', 'month' => '', 'day' => '', 'hour' => '', 'minute' => '', 'seconde' => ''));    
+    $this->addOption('empty_values', array('year' => '', 'month' => '', 'day' => '', 'hour' => '', 'minute' => '', 'seconde' => ''));
     $this->addOption('month_format', 'number');
-    
+
     $culture     = isset($this->options['culture']) ? $this->options['culture'] : $this->getUser()->getCulture();
     $monthFormat = isset($this->options['month_format']) ? $this->options['month_format'] : 'name';
     $months      = isset($this->options['months']) ? $this->options['months'] : parent::generateTwoCharsRange(1, 12);
-    
+
     $this->addOption('format', $this->getDateFormat($culture));
     $this->addOption('days', parent::generateTwoCharsRange(1, 31));
     $this->addOption('months', $this->getMonthFormat($culture, $monthFormat, $months));
     $years = range(date('Y') - 5, date('Y') + 5);
     $this->addOption('years', array_combine($years, $years));
-    
+
     $this->addOption('hours', parent::generateTwoCharsRange(0, 23));
     $this->addOption('minutes', parent::generateTwoCharsRange(0, 59));
     $this->addOption('secondes', parent::generateTwoCharsRange(0, 59));
-    
+
     $this->addOption('year_attributes', array('class' => 'year'));
     $this->addOption('month_attributes', array('class' => 'month'));
     $this->addOption('day_attributes', array('class' => 'day'));
@@ -94,7 +94,7 @@ class sfUoWidgetFormDate extends sfUoWidget
     $this->addOption('minute_attributes', array('class' => 'minute'));
     $this->addOption('seconde_attributes', array('class' => 'seconde'));
   }
-  
+
   /**
    * @return string An HTML tag string
    *
@@ -106,14 +106,14 @@ class sfUoWidgetFormDate extends sfUoWidget
     $value        = $this->getValue($this->getRenderValue());
     $date         = array();
     $keys         = array('day', 'month', 'year', 'hour', 'minute', 'seconde');
-    
+
     foreach ($keys as $key)
     {
       $date['%'.$key.'%'] = $this->getWidget(
-        $this->getRenderName(), 
-        $key, 
-        array_merge($this->getRenderAttributes(), $this->getOption($key.'_attributes'), array()), 
-        $value, 
+        $this->getRenderName(),
+        $key,
+        array_merge($this->getRenderAttributes(), $this->getOption($key.'_attributes'), array()),
+        $value,
         $lastSelect
       );
     }
@@ -124,7 +124,7 @@ class sfUoWidgetFormDate extends sfUoWidget
   protected function getWidget($name, $key, $attributes, $value, $lastSelect)
   {
     $emptyValues = $this->getOption('empty_values');
-    
+
     if ($key != $lastSelect)
     {
       $class                = str_replace($this->getJsClass(), '', isset($attributes['class']) ? $attributes['class'] : null);
@@ -178,10 +178,10 @@ class sfUoWidgetFormDate extends sfUoWidget
       else
       {
         $result = array(
-          'year'    => date('Y', $value), 
-          'month'   => date('n', $value), 
+          'year'    => date('Y', $value),
+          'month'   => date('n', $value),
           'day'     => date('j', $value),
-          'hour'    => (int)date('h', $value),
+          'hour'    => (int)date('H', $value),
           'minute'  => (int)date('i', $value),
           'seconde' => (int)date('s', $value),
         );
@@ -190,7 +190,7 @@ class sfUoWidgetFormDate extends sfUoWidget
 
     return $result;
   }
-  
+
   /**
    * Gets the JavaScript selector.
    *
@@ -200,7 +200,7 @@ class sfUoWidgetFormDate extends sfUoWidget
   {
     return 'uo_widget_form_date';
   }
-  
+
   protected function getMonthFormat($culture, $monthFormat, array $months)
   {
     switch ($monthFormat)
