@@ -181,7 +181,7 @@ class sfUoWidgetFormDate extends sfUoWidget
           'year'    => date('Y', $value), 
           'month'   => date('n', $value), 
           'day'     => date('j', $value),
-          'hour'    => date('h', $value),
+          'hour'    => (int)date('h', $value),
           'minute'  => (int)date('i', $value),
           'seconde' => (int)date('s', $value),
         );
