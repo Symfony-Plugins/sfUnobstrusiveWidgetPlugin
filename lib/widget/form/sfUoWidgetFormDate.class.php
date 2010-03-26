@@ -19,9 +19,12 @@ class sfUoWidgetFormDate extends sfUoWidget
 {
   static protected
     $textSize = array(
-      'day'   => 2,
-      'month' => 2,
-      'year'  => 4,
+      'day'     => 2,
+      'month'   => 2,
+      'year'    => 4,
+      'hour'    => 2,
+      'minute'  => 2,
+      'seconde' => 2,
     );
 
   /**
@@ -63,8 +66,11 @@ class sfUoWidgetFormDate extends sfUoWidget
     $this->addOption('year_as_text', false);
     $this->addOption('month_as_text', false);
     $this->addOption('day_as_text', false);
+    $this->addOption('hour_as_text', false);
+    $this->addOption('minute_as_text', false);
+    $this->addOption('seconde_as_text', false);
     $this->addOption('can_be_empty', true);
-    $this->addOption('empty_values', array('year' => '', 'month' => '', 'day' => ''));    
+    $this->addOption('empty_values', array('year' => '', 'month' => '', 'day' => '', 'hour' => '', 'minute' => '', 'seconde' => ''));    
     $this->addOption('month_format', 'number');
     
     $culture     = isset($this->options['culture']) ? $this->options['culture'] : $this->getUser()->getCulture();
@@ -76,6 +82,17 @@ class sfUoWidgetFormDate extends sfUoWidget
     $this->addOption('months', $this->getMonthFormat($culture, $monthFormat, $months));
     $years = range(date('Y') - 5, date('Y') + 5);
     $this->addOption('years', array_combine($years, $years));
+    
+    $this->addOption('hours', parent::generateTwoCharsRange(0, 23));
+    $this->addOption('minutes', parent::generateTwoCharsRange(0, 59));
+    $this->addOption('secondes', parent::generateTwoCharsRange(0, 59));
+    
+    $this->addOption('year_attributes', array('class' => 'year'));
+    $this->addOption('month_attributes', array('class' => 'month'));
+    $this->addOption('day_attributes', array('class' => 'day'));
+    $this->addOption('hour_attributes', array('class' => 'hour'));
+    $this->addOption('minute_attributes', array('class' => 'minute'));
+    $this->addOption('seconde_attributes', array('class' => 'seconde'));
   }
   
   /**
@@ -88,11 +105,17 @@ class sfUoWidgetFormDate extends sfUoWidget
     $lastSelect   = $this->getLastSelectName();
     $value        = $this->getValue($this->getRenderValue());
     $date         = array();
-    $keys         = array('day', 'month', 'year');
+    $keys         = array('day', 'month', 'year', 'hour', 'minute', 'seconde');
     
     foreach ($keys as $key)
     {
-      $date['%'.$key.'%'] = $this->getWidget($this->getRenderName(), $key, $this->getRenderAttributes(), $value, $lastSelect);
+      $date['%'.$key.'%'] = $this->getWidget(
+        $this->getRenderName(), 
+        $key, 
+        array_merge($this->getRenderAttributes(), $this->getOption($key.'_attributes'), array()), 
+        $value, 
+        $lastSelect
+      );
     }
 
     return strtr($this->getOption('format'), $date);
@@ -109,7 +132,8 @@ class sfUoWidgetFormDate extends sfUoWidget
     }
     $attributes = $this->addAttribute($attributes, 'class', $key);
 
-    $choices = $this->getOption('can_be_empty') ? array('' => $emptyValues[$key]) + $this->getOption($key.'s') : $this->getOption($key.'s');
+    $emptyValue = isset($emptyValues[$key]) ? $emptyValues[$key] : '';
+    $choices    = $this->getOption('can_be_empty') ? array('' => $emptyValue) + $this->getOption($key.'s') : $this->getOption($key.'s');
     if ($this->getOption($key.'_as_text'))
     {
       $widget  = new sfWidgetFormInput(array(), array_merge($attributes, array('maxlength'=>self::$textSize[$key], 'size'=>self::$textSize[$key])));
@@ -139,7 +163,7 @@ class sfUoWidgetFormDate extends sfUoWidget
   protected function getValue($value)
   {
     // convert value to an array
-    $default = array('year' => null, 'month' => null, 'day' => null);
+    $default = array('year' => null, 'month' => null, 'day' => null, 'hour' => null, 'minute' => null, 'seconde' => null);
     if (is_array($value))
     {
       $result = array_merge($default, $value);
@@ -153,7 +177,14 @@ class sfUoWidgetFormDate extends sfUoWidget
       }
       else
       {
-        $result = array('year' => date('Y', $value), 'month' => date('n', $value), 'day' => date('j', $value));
+        $result = array(
+          'year'    => date('Y', $value), 
+          'month'   => date('n', $value), 
+          'day'     => date('j', $value),
+          'hour'    => date('h', $value),
+          'minute'  => (int)date('i', $value),
+          'seconde' => (int)date('s', $value),
+        );
       }
     }
 
