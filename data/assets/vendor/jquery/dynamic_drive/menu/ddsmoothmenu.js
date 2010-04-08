@@ -5,7 +5,7 @@
 var ddsmoothmenu={
 
 //Specify full URL to down and right arrow images (23 is padding-right added to top level LIs with drop downs):
-arrowimages: {down:['downarrowclass', '/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_dropdown/down.gif', 23], right:['rightarrowclass', '/sf_unobstrusive_widget/images/default/uo_widget_list_dropdown/right.gif']},
+arrowimages: {down:['downarrowclass', '/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_dropdown/down.gif', 23], right:['rightarrowclass', '/sfUnobstrusiveWidgetPlugin/images/default/uo_widget_list_dropdown/right.gif']},
 
 transition: {overtime:300, outtime:300}, //duration of slide in/ out animation, in milliseconds
 shadow: {enabled:true, offsetx:3, offsety:3},
