@@ -6,7 +6,7 @@
 Since plugin use CSS, javascripts, images and SWF assets, you need to publish them. The easiest way to do that is to use uo_widget:publish task:
 
   [bash]
-  php symfony uo_widget:publish
+  php symfony uo-widget:publish
   
 This task will remove all sfUnobstrusiveWidgetPlugin published assets and recreate them.
 
