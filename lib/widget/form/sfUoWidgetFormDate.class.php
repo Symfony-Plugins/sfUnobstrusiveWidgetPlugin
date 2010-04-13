@@ -1,19 +1,11 @@
 <?php
 
-/*
- * This file is part of the symfony package.
- * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
- * sfUoWidgetFormDate represents a date widget.
+ * sfUoWidgetFormDate
  *
- * @package    symfony
- * @subpackage sfUnobstrusiveWidgetPlugin
- * @author     François Béliveau <francois.beliveau@my-labz.com>
+ * @package    sfUnobstrusiveWidgetPlugin
+ * @subpackage lib.widget.form
+ * @author     François Béliveau  <francois.beliveau@my-labz.com>
  */
 class sfUoWidgetFormDate extends sfUoWidget
 {

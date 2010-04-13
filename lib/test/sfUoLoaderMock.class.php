@@ -1,19 +1,11 @@
 <?php
 
-/*
- * This file is part of the symfony package.
- * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
  * Loader mock.
  *
  * @package    sfUnobstrusiveWidgetPlugin
- * @subpackage test
- * @author     François Béliveau
+ * @subpackage lib.test
+ * @author     François Béliveau  <francois.beliveau@my-labz.com>
  */
 class sfUoLoaderMock
 {

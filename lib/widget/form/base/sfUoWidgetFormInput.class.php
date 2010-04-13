@@ -1,20 +1,11 @@
 <?php
 
-/*
- * This file is part of the symfony package.
- * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
- * sfUoWidgetFormInput represents an HTML input tag.
+ * Base class for all unobstrusive widget form.
  *
- * @package    symfony
- * @subpackage widget
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfWidgetFormInput.class.php 9046 2008-05-19 08:13:51Z FabianLange $
+ * @package    sfUnobstrusiveWidgetPlugin
+ * @subpackage lib.widget.form.base
+ * @author     François Béliveau  <francois.beliveau@my-labz.com>
  */
 class sfUoWidgetFormInput extends sfUoWidget
 {

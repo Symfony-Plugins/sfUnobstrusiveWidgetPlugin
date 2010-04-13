@@ -1,19 +1,10 @@
 <?php
 
-/*
- * This file is part of the symfony package.
- * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
- * sfUoAdminMenuConfigManager
- * Config manager for admin menu widget.
+ * sfDynamicPlugin assets loader for sfUnobstrusiveWidgetPlugin.
  *
- * @package    symfony
- * @subpackage sfUnobstrusiveWidgetPlugin
+ * @package    sfUnobstrusiveWidgetPlugin
+ * @subpackage lib.manager
  * @author     François Béliveau  <francois.beliveau@my-labz.com>
  */
 class sfUoAdminMenuConfigManager implements ArrayAccess

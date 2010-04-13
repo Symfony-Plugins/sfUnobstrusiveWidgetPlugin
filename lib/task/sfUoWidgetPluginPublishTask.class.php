@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * sfUoWidgetPluginPublishTask
+ *
+ * @package    sfUnobstrusiveWidgetPlugin
+ * @subpackage lib.task
+ * @author     François Béliveau  <francois.beliveau@my-labz.com>
+ */
 class sfUoWidgetPluginPublishTask extends sfUoWidgetPluginUnpublishTask
 {
   /**
@@ -9,7 +17,7 @@ class sfUoWidgetPluginPublishTask extends sfUoWidgetPluginUnpublishTask
   protected function configure()
   {
     parent::configure();
-  
+
     $this->namespace            = 'uo-widget';
     $this->name                 = 'publish';
     $this->briefDescription     = '"sfUnobstrusiveWidgetPlugin" publish assets task';
@@ -61,7 +69,7 @@ EOF;
       $this->relativeSymlink($filesystem, $this->pluginDataPath, $this->pluginWebPath, true);
     }
   }
-  
+
   protected function relativeSymlink(sfFilesystem $filesystem, $originDir, $targetDir, $copyOnWindows = false)
   {
     if ($this->isVersion('1.1'))
