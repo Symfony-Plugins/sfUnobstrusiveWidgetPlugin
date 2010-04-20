@@ -27,16 +27,16 @@ class sfUoWidgetPager extends sfUoWidget
     $this->addRequiredOption('route');
     $this->addOption('page_name', 'page');
     $this->addOption('max_link_count', 5);
-    
+
     $this->addOption('selected_class', 'selected');
     $this->addOption('template_link', '<a href="%url%">%page%</a>');
     $this->addOption('template_current', '<strong>%page%</strong>');
-    
+
     $this->addOption('template_first_enabled', '<a href="%url%">&lt;&lt;</a>');
     $this->addOption('template_first_disabled', '&lt;&lt;');
     $this->addOption('template_previous_enabled', '<a href="%url%">&lt;</a>');
     $this->addOption('template_previous_disabled', '&lt;');
-    
+
     $this->addOption('template_last_enabled', '<a href="%url%">&gt;&gt;</a>');
     $this->addOption('template_last_disabled', '&gt;&gt;');
     $this->addOption('template_next_enabled', '<a href="%url%">&gt;</a>');
@@ -44,7 +44,7 @@ class sfUoWidgetPager extends sfUoWidget
 
     parent::configure($options, $attributes);
   }
-  
+
   /**
    * @return string An HTML tag string
    * @see  render()
@@ -54,7 +54,12 @@ class sfUoWidgetPager extends sfUoWidget
   {
     $pager  = $this->getOption('pager');
     $result = '';
-    
+
+    if (!$pager->haveToPaginate())
+    {
+      return $result;
+    }
+
     if ($pager->isFirstPage())
     {
       $content    = strtr($this->getOption('template_first_disabled'), array(
@@ -72,7 +77,7 @@ class sfUoWidgetPager extends sfUoWidget
       ));
       $result    .= sprintf('<li>%s</li>', $content);
     }
-    
+
     if ($pager->getPage() == $pager->getPreviousPage())
     {
       $content    = strtr($this->getOption('template_previous_disabled'), array(
@@ -102,7 +107,7 @@ class sfUoWidgetPager extends sfUoWidget
       else
       {
         $content = strtr($this->getOption('template_link'), array(
-          '%page%' => $page, 
+          '%page%' => $page,
           '%url%'  => $this->getController()->genUrl(array(
             'sf_route'                    => $this->getOption('route'),
             $this->getOption('page_name') => $page,
@@ -112,7 +117,7 @@ class sfUoWidgetPager extends sfUoWidget
 
       $result .= sprintf('<li%s>%s</li>', $attributes, $content);
     }
-    
+
     if ($pager->getPage() == $pager->getNextPage())
     {
       $content    = strtr($this->getOption('template_next_disabled'), array(
@@ -130,7 +135,7 @@ class sfUoWidgetPager extends sfUoWidget
       ));
       $result    .= sprintf('<li>%s</li>', $content);
     }
-    
+
     if ($pager->isLastPage())
     {
       $content    = strtr($this->getOption('template_last_disabled'), array(
