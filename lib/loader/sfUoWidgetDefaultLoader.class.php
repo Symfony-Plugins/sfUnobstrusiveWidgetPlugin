@@ -74,7 +74,7 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
   {
     if (false !== ($pos = strpos($content, '</head>')))
     {
-      $html = $this->getAssetsAsHtml();
+      $html = $this->getAssetsAsHtml($content);
 
       if ($html)
       {
@@ -155,20 +155,30 @@ class sfUoWidgetDefaultLoader extends sfUoWidgetBaseLoader
     }
   }
 
-  protected function getAssetsAsHtml()
+  protected function getAssetsAsHtml($content)
   {
     $assets = array();
 
     foreach ($this->javascripts as $javascript)
     {
-      $assets[] = sprintf(self::TEMPLATE_JAVASCRIPT, $this->request->getRelativeUrlRoot().$javascript);
+      $js = $this->request->getRelativeUrlRoot().$javascript;
+
+      if (false === strpos($js, $content))
+      {
+        $assets[] = sprintf(self::TEMPLATE_JAVASCRIPT, $js);
+      }
     }
 
     foreach ($this->stylesheets as $media => $stylesheets)
     {
       foreach ($stylesheets as $stylesheet)
       {
-        $assets[] = sprintf(self::TEMPLATE_STYLESHEET, $media, $this->request->getRelativeUrlRoot().$stylesheet); 
+        $css = $this->request->getRelativeUrlRoot().$stylesheet;
+
+        if (false === strpos($css, $content))
+        {
+          $assets[] = sprintf(self::TEMPLATE_STYLESHEET, $media, $css);
+        }
       }
     }
 
