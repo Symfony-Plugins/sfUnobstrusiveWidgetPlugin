@@ -153,7 +153,7 @@
       /**
        * Prepare to show a date picker linked to 3 controls
        */
-      function readLinked()
+      function readLinked(input, inst)
       {
         var objects = false;
         var minDate = null;
@@ -166,7 +166,7 @@
         {
           objects = $rangeWidgets;
         }
-
+        
         if (objects)
         {
           $(this).val(objects.month.val() + '/' + objects.day.val() + '/' + objects.year.val());
@@ -189,6 +189,20 @@
             }
           }
         }
+        
+        if (inst.settings.maxDate && !maxDate)
+        {
+          maxDate = inst.settings.maxDate;
+        }
+        if (inst.settings.minDate && !minDate)
+        {
+          minDate = inst.settings.minDate;
+        }
+        
+        if (minDate > maxDate)
+        {
+          minDate = maxDate;
+        }
 
         return { minDate: minDate, maxDate: maxDate };
       }
@@ -196,7 +210,7 @@
       /**
        * Update 3 controls to match a date picker selection
        */
-      function updateLinked(date)
+      function updateLinked(dateText, inst)
       {
         var objects = false;
         if ($(this).attr('id') == $baseId)
@@ -225,9 +239,9 @@
             offsetForYear = lastYear.length;
           }
 
-          objects.month.val(date.substring(indexForMonth, indexForMonth+2));
-          objects.day.val(date.substring(indexForDay, indexForDay+2));
-          objects.year.val(date.substring(indexForYear, indexForYear+offsetForYear));
+          objects.month.val(dateText.substring(indexForMonth, indexForMonth+2));
+          objects.day.val(dateText.substring(indexForDay, indexForDay+2));
+          objects.year.val(dateText.substring(indexForYear, indexForYear+offsetForYear));
         }
       }
 
