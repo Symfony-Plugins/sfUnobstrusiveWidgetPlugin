@@ -25,22 +25,30 @@
       var json              = this.options.json ? this.options.json : this._getJSON(this.element);
       var ul                = this._createBrunch(json).addClass(this.options.class_root);
       var id                = this.element.attr('id');
-      
+
       if (id)
       {
         ul.attr('id', id);
       }
-      
+
       $('ul', ul).hide();
       this.element.replaceWith(ul);
       this.element = ul;
       ul.data('tree', this);
-      
+
       this._setNodeEvents(this.element);
-      (this.options.expand && $('li', this.element).each(function() { if ($(this).is(self.options.expand || !self.options.expand_enabled)) self.expand(this); }));
+      (this.options.expand && $('li', this.element).each(
+        function()
+        {
+          if ($(this).is(self.options.expand || !self.options.expand_enabled))
+          {
+            self.expand(this);
+          }
+        }
+      ));
       (this.options.hidden &&	this.element.hide());
     },
-    
+
     _applyFix: function()
     {
       if (this.options.fix_ie_drag && $.ui.draggable && !$.ui.draggable.prototype.__mouseCapture)
@@ -55,22 +63,22 @@
         }
       }
     },
-    
+
     after: function(json, node)
     {
       return this._change(json, node, 'after');
     },
-    
+
     before: function(json, node)
     {
       return this._change(json, node, 'before');
     },
-    
+
     append: function(json, node)
     {
       return this._change(json, node, 'append');
     },
-    
+
     remove: function(node)
     {
       if (this.dragging && this.dragging[0] == this._getLI(node)[0])
@@ -79,7 +87,7 @@
       }
       else this._remove(node);
     },
-    
+
     title: function(node, title)
     {
       if (title)
@@ -91,7 +99,7 @@
         this._getTitle(node);
       }
     },
-    
+
     _remove: function(node)
     {
       var ul = this._getLI(node).parent('ul');
@@ -104,7 +112,7 @@
         this._getLI(node).remove();
       }
     },
-    
+
     getJSON: function(node)
     {
       if (node == undefined)
@@ -117,7 +125,7 @@
       }
       return this._getJSON(node);
     },
-    
+
     getSelect: function()
     {
       var select = $('.' + this.options.class_selected, this.element);
@@ -127,7 +135,7 @@
       }
       else return null;
     },
-    
+
     nodeName: function(node)
     {
       return (node.length ? node.attr('nodeName') : $(node).attr('nodeName')).toLowerCase();
@@ -137,31 +145,31 @@
     {
       return this._select(node, multiselect, null);
     },
-    
+
     isNode : function(node)
     {
       var li = this._getLI(node);
       return (li.hasClass(this.options.class_node));
     },
-    
+
     isList : function(node)
     {
       var li = this._getLI(node);
       return (li.hasClass(this.options.class_item));
     },
-    
+
     isExpand : function(node)
     {
       var li = this._getLI(node);
       return (li.hasClass(this.options.class_expanded));
     },
-    
+
     isCollapse : function(node)
     {
       var li = this._getLI(node);
       return (!li.hasClass(this.options.class_expanded));
     },
-    
+
     expand : function(node)
     {
       var self = this;
@@ -174,7 +182,7 @@
         $('ul>li', li).html("<div class=\"loading\">" + this.options.ajax_message_loading + "</div>");
         var child_ul = $('ul', li);
         $.ajax({
-          url: url, 
+          url: url,
           success: function(data)
           {
             child_ul.empty();
@@ -227,7 +235,7 @@
       }
       return true;
     },
-    
+
     collapse : function(node)
     {
       var li = this._getLI(node);
@@ -246,7 +254,7 @@
       }
       return true;
     },
-    
+
     toggle : function(node)
     {
       var li = this._getLI(node);
@@ -254,15 +262,15 @@
       {
         return false;
       }
-      
+
       if (this.isExpand(li))
       {
         return this.collapse(li);
       }
-      
+
       return this.expand(li);
     },
-    
+
     _setNodeType : function(node, type)
     {
       var li          = this._getLI(node);
@@ -274,7 +282,7 @@
         li.addClass(addClass);
       }
     },
-    
+
     _change : function(json, node, changeMode)
     {
       var li = this._createBrunch(json);
@@ -300,7 +308,7 @@
         case 'after':
           node.after(li);
           break;
-        case 'append': 
+        case 'append':
           var ul = this._getUL(node);
           if (!ul.length)
           {
@@ -310,11 +318,11 @@
           break;
         default: ;
       }
-      
+
       this._setNodeEvents(li);
       return li;
     },
-    
+
     _select : function(node, multiselect, event)
     {
       var span = this._getSPAN(node);
@@ -327,13 +335,13 @@
         $('.' + this.options.class_selected, this.element).removeClass(this.options.class_selected);
       }
       span.addClass(this.options.class_selected);
-      
+
       if (this.options.select_callback)
       {
         this.options.select_callback(this);
       }
     },
-    
+
     _show : function(el)
     {
       if ($.effects)
@@ -345,7 +353,7 @@
         el.show(this.options.expand_speed, this.options.expand_callback);
       }
     },
-    
+
     _hide : function(el)
     {
       if ($.effects)
@@ -357,7 +365,7 @@
         el.hide(this.options.collapse_speed, this.options.collapse_callback);
       }
     },
-    
+
     _getUL : function(node)
     {
       node = node.length ? node : $(node);
@@ -369,10 +377,10 @@
       {
         return $('>ul', node);
       }
-      
+
       return node;
     },
-    
+
     _getLI : function(node)
     {
       node = node.length ? node : $(node);
@@ -384,10 +392,10 @@
       {
         return node.parent();
       }
-      
+
       return node;
     },
-    
+
     _getSPAN : function(node)
     {
       node = node.length ? node : $(node);
@@ -399,10 +407,10 @@
       {
         return $('span.' + this.options.class_title + ':eq(0)', node.parent());
       }
-      
+
       return node;
     },
-    
+
     _ui : function(ui, el)
     {
       ui = ui ? ui : {};
@@ -419,7 +427,7 @@
         sender : ui.draggable ? ui.draggable.data('tree') : null
       };
     },
-    
+
     _createBrunch : function(json)
     {
       if (typeof(json) == 'string')
@@ -430,7 +438,7 @@
       $('>ul', $('.' + this.options.class_expand, brunch)).show();
       return brunch;
     },
-    
+
     // select all child elements of parent by selector in the tree. Need for mulpiple draggable and droppable rules
     _getAllElements : function(parent, selector)
     {
@@ -447,7 +455,7 @@
         }
       });
     },
-    
+
     // select all child elements of parent by options[n].element in the tree and exclude from result elements for other options. Need for mulpiple draggable and droppable rules
     _getElements : function(parent, options, n)
     {
@@ -462,7 +470,7 @@
       }
       return elements;
     },
-    
+
     _createDDNodeOptions : function(options, type)
     {
       var self        = this;
@@ -475,7 +483,7 @@
           {
             return false;
           }
-          
+
           if (event.type == 'dragstart')
           {
             tree.dragging = tree._getLI(this);
@@ -490,7 +498,7 @@
         }
       }
       var ddEvents = (type == 'drag' ? this.options.drag_events : (type == 'drop' ? this.options.drop_events : []));
-      
+
       for (var i = 0; i < ddEvents.length; i++)
       {
         var event = ddEvents[i];
@@ -517,12 +525,12 @@
           {
             return d.is(accept);
           };
-          
+
           return function(el)
           {
             var el_tree   = $(el).data('tree');
             var from_self = el_tree ? el_tree.element[0] == tree.element[0] : false;
-            
+
             if (from_self && !tree.options.drop_accept_from_self)
             {
               return false;
@@ -562,7 +570,7 @@
       }
       return result;
     },
-    
+
     // bind events and make droppable and draggable elements in brunch el
     _setNodeEvents : function(el)
     {
@@ -597,7 +605,7 @@
       }
 
       var span = $('span.' + this.options.class_title, el);
-      
+
       // !!! not sure about that
       /*var events      = $(this.options.events).not(this.options.select_event, this.options.expand_event, this.options.collapse_event);
       var createEvent = function(eventName)
@@ -635,7 +643,7 @@
           (this.options.collapse_event && span.bind(this.options.collapse_event, function(event) { return self.collapse(this); }));
         }
       }
-      
+
       if (this.options.select_enabled)
       {
         (this.options.select_event && span.bind(this.options.select_event, function(event) { return self._select(this, self.options.select_multiple_key ? event[self.options.select_multiple_key] : true, event); }));
@@ -643,12 +651,12 @@
         (this.options.createbrunch && this._trigger('createbrunch', null, this._ui({}, this._getLI(el))));
       }
     },
-    
+
     _evalJSON: function(json)
     {
       return eval('(' + json + ')');
     },
-    
+
     _getTitle : function(node)
     {
       var title = $('>span.' + this.options.class_title, node);
@@ -666,12 +674,12 @@
 
       return $.trim(html.replace(/\n/g, '').replace(/<a[^>]*>/gi, '').replace(/<\/a>/gi, ''));
     },
-    
+
     _setTitle: function(node, title)
     {
       this._getSPAN(node).html(title);
     },
-    
+
     _getJSON: function(node, its_child)
     {
       var json = '';
@@ -680,7 +688,7 @@
       {
         json = '{';
         var title = this._getTitle(node);
-        json += "'title' : '" + title + "'";
+        json += "'title' : '" + title.replace(/'/gi, "\\'") + "'";
         var id = node.attr('id');
         if (id) json += ", 'id' : '" + id + "'";
         var className = $.trim(node.attr('className').replace(/ui-[^\s]*/gim, ''));
@@ -692,7 +700,7 @@
         if (url.length) json += ", 'url' : '" + url.attr('href') + "'";
         var expand = node.hasClass('.' + this.options.class_expanded);
         json += ", 'expand' : '" + expand + "'";
-        
+
       }
       else if (nodeName == 'ul')
       {
@@ -706,7 +714,7 @@
         {
           json += this._getJSON($(child.get(i)), true);
           if (++i != child.length)
-          { 
+          {
             json += ',';
           }
         }
@@ -721,7 +729,7 @@
       {
         return this._createUL(obj);
       }
-      
+
       var html = '<li ';
       if (obj.id)
       {
@@ -759,7 +767,7 @@
       html += '</li>';
       return html;
     },
-    
+
     _createUL: function(obj)
     {
       var html = '<ul>';
@@ -777,7 +785,7 @@
       html += '</ul>';
       return html;
     }
-    
+
   });
 
   $.extend($.uo.uoTreeview,
@@ -796,7 +804,7 @@
       class_expand: 'uo-treeview-expand',
       class_expand_control: 'uo-treeview-expand-control',
       // ui-icon-folder-collapsed, ui-icon-folder-open, ui-icon-document
-      
+
       // expand / collapse
       expand_enabled: true,
       expand: false, // if not expand enabled all node will be expand
@@ -811,24 +819,24 @@
       collapse_effect_options : {},
       collapse_speed : 500,
       collapse_callback : false,
-      
+
       // select
       select_enabled: true,
       select_event: 'click',
       select_multiple: false,
       select_multiple_key: 'ctrlKey',
       select_callback: false,
-      
+
       //fix
       fix_ie_drag: true,
-      
+
       // events
       events: ['click', 'dblclick', 'mousedown', 'mouseup', 'mouseenter', 'mouseleave'],
-      
+
       // ajax
       ajax_message_loading: 'Loading...',
       json : null,
-      
+
       // drag options: object or array of object
       drag_enabled: true,
       drag_events: ['start', 'drag', 'stop'],
@@ -840,7 +848,7 @@
         revert: 'invalid',
         distance: 2
       },
-      
+
       // drop options: object or array of object
       drop_enabled: true,
       drop_events: ['activate', 'deactivate', 'stop', 'over', 'out', 'drop', 'overtop', 'overbottom', 'overright', 'overleft', 'overcenter', 'outtop', 'outbottom', 'outright', 'outleft', 'outcenter'],
