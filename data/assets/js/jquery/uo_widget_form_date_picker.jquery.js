@@ -152,6 +152,7 @@
 
       /**
        * Prepare to show a date picker linked to 3 controls
+       * beforeshow
        */
       function readLinked(input, inst)
       {
@@ -169,7 +170,30 @@
         
         if (objects)
         {
-          $(this).val(objects.month.val() + '/' + objects.day.val() + '/' + objects.year.val());
+          var
+              currentDay   = objects.day.val(),
+              currentMonth = objects.month.val(),
+              currentYear  = objects.year.val();
+
+            if (!currentDay)
+            {
+              currentDay = $('option[value!=""]:first', '#jst_registration_born_at_day').attr('value');
+            }
+            
+            if (!currentMonth)
+            {
+              currentMonth = $('option[value!=""]:first', '#jst_registration_born_at_month').attr('value');
+            }
+            
+            if (!currentYear)
+            {
+              currentYear = $('option[value!=""]:first', '#jst_registration_born_at_year').attr('value');
+            }
+
+          if (currentDay && currentMonth && currentYear)
+          {
+            $(input).datepicker('setDate', new Date(currentYear, currentMonth -1, currentDay));
+          }
 
           if ($('option', objects.year).length > 0)
           {
@@ -224,24 +248,9 @@
 
         if (objects)
         {
-          indexForDay   = $.datepicker._defaults.dateFormat.indexOf('dd');
-          indexForMonth = $.datepicker._defaults.dateFormat.indexOf('mm');
-          indexForYear  = $.datepicker._defaults.dateFormat.indexOf('yy');
-
-          var offsetForYear;
-          if (objects.year.attr('maxlength'))
-          {
-            offsetForYear = objects.year.attr('maxlength');
-          }
-          else
-          {
-            var lastYear = objects.year.find('option:last').attr('value');
-            offsetForYear = lastYear.length;
-          }
-
-          objects.month.val(dateText.substring(indexForMonth, indexForMonth+2));
-          objects.day.val(dateText.substring(indexForDay, indexForDay+2));
-          objects.year.val(dateText.substring(indexForYear, indexForYear+offsetForYear));
+          objects.month.val(inst.selectedMonth + 1);
+          objects.day.val(inst.selectedDay);
+          objects.year.val(inst.selectedYear);
         }
       }
 
@@ -261,8 +270,8 @@
         {
           objects = $rangeWidgets;
         }
-
-        $('#'+baseId).val(objects.month.val() + '/' + objects.day.val() + '/' + objects.year.val());
+        
+        $(input).datepicker('setDate', new Date(objects.year.val(), objects.month.val() -1, objects.day.val()));
       }
 
       /**
